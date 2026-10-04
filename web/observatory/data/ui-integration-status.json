@@ -1,0 +1,11 @@
+{
+  "state": "checked_with_limits",
+  "count": 136,
+  "scope": "整站35项及模式入口101项工程检查通过；独立终验待进行，详见本轮整合记录。",
+  "full_site": "engineering_passed_independent_review_pending",
+  "model_visual_review": "checked_views_passed",
+  "partial_visual_review": "checked_views_passed",
+  "human_review": "pending",
+  "club_trial": "pending",
+  "textbook_comparison": "pending"
+}

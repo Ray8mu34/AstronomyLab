@@ -1,0 +1,48 @@
+[
+  {
+    "source": "assets/01/v02/hl-tau.jpg",
+    "output": "media/hl-tau.jpg",
+    "sha256": "e6e6b4c6eaa787b296d6f0256af7b75e3a9a348174a869fffb871a13d5069696"
+  },
+  {
+    "source": "assets/01/v02/kirkwood-gaps.png",
+    "output": "media/kirkwood-gaps.png",
+    "sha256": "dd8986b2b5b9ebbcd043d12bdc96bf6d514aca83719be2aace3f59419b403731"
+  },
+  {
+    "source": "assets/01/v02/pluto-enhanced.jpg",
+    "output": "media/pluto-enhanced.jpg",
+    "sha256": "4302e1bf7c633290d2545c83d9abd000f5ce223e7fa85c11130725d729ef8e9e"
+  },
+  {
+    "source": "course/01-solar-system/lesson.md",
+    "source_sha256": "d2e41055c8c94da5429b75e68ad364b0871026940de687cfa19a8f8180b9486b",
+    "html_source_sha256": "8c1077af34dbae53a537616aba860f8d9dfce578abf93cb3466dd3a84bf34517",
+    "output": "reading/01.html",
+    "sha256": "5b2e54c2c568623cfb1eca0e024083f1051cb42e7fefefd8aec3885d2792965c",
+    "adaptation": "Only local image/link paths adapted; original article body preserved."
+  },
+  {
+    "source": "assets/02/v02/planet-properties.png",
+    "output": "media/planet-properties.png",
+    "sha256": "d4d370578ce81d3e6ec35a3ee4087b52fa43aa062caa0023e627046f068e2640"
+  },
+  {
+    "source": "assets/02/v02/uranus-nircam.png",
+    "output": "media/uranus-nircam.png",
+    "sha256": "e5f7a1a0e10a6e6c769b40ecbb2f4dd78ea2ada65f2e96efd69c113ea29f52a7"
+  },
+  {
+    "source": "assets/02/v02/titan-radar.jpg",
+    "output": "media/titan-radar.jpg",
+    "sha256": "09c192cdaabdd158497759d0082a90c506ba1993f20a551422cf2f28cc1aa2b3"
+  },
+  {
+    "source": "course/02-planet-comparisons/lesson.md",
+    "source_sha256": "f34c6e092fdf98f2d4205a458fc463b5bfa87d0d63133f651433888fe45c8c84",
+    "html_source_sha256": "a465583c33953ff7a30b860ae314df5052624ce966bdd98f514e93e304aa2042",
+    "output": "reading/02.html",
+    "sha256": "e4675c86904b0d27bd589e230673f37b31786c68bdeef0b4e4564b01cb9eba41",
+    "adaptation": "Only local image/link paths adapted; original article body preserved."
+  }
+]

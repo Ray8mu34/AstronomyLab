@@ -1,0 +1,92 @@
+[
+  {
+    "source": "web/solar-system/vendor/three.module.js",
+    "output": "vendor/three.module.js",
+    "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a",
+    "kind": "Three.js 0.180.0, MIT; existing verified local package"
+  },
+  {
+    "source": "web/solar-system/vendor/three.core.js",
+    "output": "vendor/three.core.js",
+    "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20",
+    "kind": "Three.js 0.180.0, MIT; existing verified local package"
+  },
+  {
+    "source": "web/solar-system/vendor/OrbitControls.js",
+    "output": "vendor/OrbitControls.js",
+    "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c",
+    "kind": "Three.js 0.180.0, MIT; existing verified local package"
+  },
+  {
+    "source": "web/solar-system/vendor/LICENSE",
+    "output": "vendor/LICENSE",
+    "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+    "kind": "Three.js 0.180.0, MIT; existing verified local package"
+  },
+  {
+    "source": "web/solar-system/textures/earth_daymap.jpg",
+    "output": "textures/earth_daymap.jpg",
+    "sha256": "767ee1dc6eb3802699bfccf6f264880f8acd0b80de3191cd24984fe279b07b7c",
+    "kind": "Solar System Scope/INOVE, CC BY 4.0; existing local texture"
+  },
+  {
+    "source": "web/solar-system/textures/moon.jpg",
+    "output": "textures/moon.jpg",
+    "sha256": "2764ba6535ea0481a062846ee033cc7a909dae05b31a8fd13f3e98f3a7fd92bd",
+    "kind": "Solar System Scope/INOVE, CC BY 4.0; existing local texture"
+  },
+  {
+    "source": "assets/03/v02/moon-phases.png",
+    "output": "media/moon-phases.png",
+    "sha256": "68f64b3e71071593ecee3d64a82bdf9a277827683bd0ccf8b2e7c9d1c5b58cd7",
+    "kind": "Original course image, attribution kept in reading caption"
+  },
+  {
+    "source": "assets/03/v02/daytime-moon.jpg",
+    "output": "media/daytime-moon.jpg",
+    "sha256": "959e0f7a6d603d9f3b00df797c20400d927292e9d32786542d1d750600ec9d7d",
+    "kind": "Original course image, attribution kept in reading caption"
+  },
+  {
+    "source": "assets/03/v02/moon-near-far-comparison.jpg",
+    "output": "media/moon-near-far-comparison.jpg",
+    "sha256": "5f9acea27493b7f78988a740b3b325276d6745554f2401fd4f1a504a45fd039f",
+    "kind": "Original course image, attribution kept in reading caption"
+  },
+  {
+    "source": "course/03-moon/lesson.md",
+    "source_sha256": "41cc6ca795611a0fc8f31a43f4aa6e29f7a866c55b73605ed4a48c8f9ae10571",
+    "html_source": "build/articles/L03.html",
+    "html_source_sha256": "2812e1069efeb2f5a91ad6312b2e60fdff2d2efe316a6e398b9d58a429329bbe",
+    "output": "reading/03.html",
+    "sha256": "69cb2e745ec31cd144c1125d3ac4e7dc7b508269e5df607c61e41bdb30e72bf7",
+    "kind": "Complete article; only image and link destinations adapted"
+  },
+  {
+    "source": "assets/04/v02/eclipse-types.jpeg",
+    "output": "media/eclipse-types.jpeg",
+    "sha256": "da97a32aa36fd2b8f3777751c42aad1bc21babc0d57356a50bf93bdb9e2941b8",
+    "kind": "Original course image, attribution kept in reading caption"
+  },
+  {
+    "source": "assets/04/v02/venus-transit.jpg",
+    "output": "media/venus-transit.jpg",
+    "sha256": "8fca643548d7bf1089e29f351428bf7a92a157588bf5a203a51eaf457e6e099c",
+    "kind": "Original course image, attribution kept in reading caption"
+  },
+  {
+    "source": "assets/04/v02/mars-oppositions.jpg",
+    "output": "media/mars-oppositions.jpg",
+    "sha256": "deb5223f6f7dbc40c9bf3e2bee1f2fd3924d0116c21f835caf9fb7f92fe8c219",
+    "kind": "Original course image, attribution kept in reading caption"
+  },
+  {
+    "source": "course/04-eclipses-and-alignments/lesson.md",
+    "source_sha256": "94a8252adce2faf1ff1fd9a539d3df2217ae9d6483846e1c4ac98c1e7290644d",
+    "html_source": "build/articles/L04.html",
+    "html_source_sha256": "51e9254a2ebc55d88da5002ac940e85fd74de1f50a4c55dc943895ec9226adbe",
+    "output": "reading/04.html",
+    "sha256": "3248864effb93ddaf156b564663e88d563b09d23a99c88262956c3e6098e9490",
+    "kind": "Complete article; only image and link destinations adapted"
+  }
+]

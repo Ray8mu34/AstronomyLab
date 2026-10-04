@@ -1,0 +1,74 @@
+[
+  {
+    "名称": "水星",
+    "English_name": "Mercury",
+    "volume_equivalent_mean_radius_km": "2439.4",
+    "mass_10^24_kg": "0.330103",
+    "bulk_density_g_cm3": "5.4289",
+    "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "checked_date": "2026-10-02"
+  },
+  {
+    "名称": "金星",
+    "English_name": "Venus",
+    "volume_equivalent_mean_radius_km": "6051.8",
+    "mass_10^24_kg": "4.86731",
+    "bulk_density_g_cm3": "5.243",
+    "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "checked_date": "2026-10-02"
+  },
+  {
+    "名称": "地球",
+    "English_name": "Earth",
+    "volume_equivalent_mean_radius_km": "6371.0084",
+    "mass_10^24_kg": "5.97217",
+    "bulk_density_g_cm3": "5.5134",
+    "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "checked_date": "2026-10-02"
+  },
+  {
+    "名称": "火星",
+    "English_name": "Mars",
+    "volume_equivalent_mean_radius_km": "3389.5",
+    "mass_10^24_kg": "0.641691",
+    "bulk_density_g_cm3": "3.934",
+    "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "checked_date": "2026-10-02"
+  },
+  {
+    "名称": "木星",
+    "English_name": "Jupiter",
+    "volume_equivalent_mean_radius_km": "69911",
+    "mass_10^24_kg": "1898.125",
+    "bulk_density_g_cm3": "1.3262",
+    "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "checked_date": "2026-10-02"
+  },
+  {
+    "名称": "土星",
+    "English_name": "Saturn",
+    "volume_equivalent_mean_radius_km": "58232",
+    "mass_10^24_kg": "568.317",
+    "bulk_density_g_cm3": "0.6871",
+    "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "checked_date": "2026-10-02"
+  },
+  {
+    "名称": "天王星",
+    "English_name": "Uranus",
+    "volume_equivalent_mean_radius_km": "25362",
+    "mass_10^24_kg": "86.8099",
+    "bulk_density_g_cm3": "1.27",
+    "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "checked_date": "2026-10-02"
+  },
+  {
+    "名称": "海王星",
+    "English_name": "Neptune",
+    "volume_equivalent_mean_radius_km": "24622",
+    "mass_10^24_kg": "102.4092",
+    "bulk_density_g_cm3": "1.638",
+    "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "checked_date": "2026-10-02"
+  }
+]

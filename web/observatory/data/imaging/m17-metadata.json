@@ -1,0 +1,147 @@
+{
+  "object": "M17",
+  "institution": "NASA/ESA Hubble Space Telescope; ESA/Hubble education dataset",
+  "accessed": "2026-10-03",
+  "source_page": "https://esahubble.org/projects/fits_liberator/m17data/",
+  "representation": "已校准、拼接的真实单通道教育 FITS；不是未经校准探测器原始帧；不是成品RGB拆分",
+  "processing": "主HDU -32 float FITS→BSCALE/BZERO→5×5均值320×320→垂直翻转→little-endian Float32。无拉伸。",
+  "units": "BUNIT缺失，沿用FITS源数值；不宣称绝对线通量。PHOTFLAM/EXPTIME是原头字段，拼接归一未独立核实。",
+  "coordinate_limit": "三通道所读CRVAL/CRPIX/CD头字段相同；教育拼接组在共同像素网格展示，精密星表/天测配准及拼接后WCS未独立验证。",
+  "channels": [
+    {
+      "code": "502",
+      "line": "[O III]",
+      "url": "https://esahubble.org/static/projects/fits_liberator/datasets/m17/502nmos.zip",
+      "zip_sha256": "d5e5d3f76cedcc5c9940590cc7b61a58248c469e06048ca1ea33124500c0831c",
+      "fits_sha256": "33caefd99400ad43498af06f2eef640eb8b4aab1797635b7c0443ab43b09eb58",
+      "derived_sha256": "18ec42a1b2a0d7afd4702d82dae2a9c3f01e1d58b389562d500861a5605800bc",
+      "header": {
+        "TELESCOP": "HST",
+        "INSTRUME": "WFPC2",
+        "FILTNAM1": "F502N",
+        "DATE-OBS": "1999-05-30",
+        "TIME-OBS": "14:49:13",
+        "EXPTIME": 4300.0,
+        "EQUINOX": 2000.0,
+        "BUNIT": null,
+        "PHOTFLAM": 3.026661e-16,
+        "PHOTPLAM": 5012.911,
+        "CRVAL1": 275.181121931,
+        "CRVAL2": -16.1470455186,
+        "CRPIX1": 386.5,
+        "CRPIX2": 396.0,
+        "CD1_1": 2.76148e-05,
+        "CD1_2": -1.15452e-06,
+        "CD2_1": -1.1534e-06,
+        "CD2_2": -2.76415e-05,
+        "BIASCORR": "COMPLETE",
+        "DARKCORR": "COMPLETE",
+        "FLATCORR": "COMPLETE",
+        "TARGNAME": "M17"
+      },
+      "original_shape": [
+        1600,
+        1600
+      ],
+      "derived_shape": [
+        320,
+        320
+      ],
+      "min": -66.81285858154297,
+      "max": 1919.2457275390625,
+      "positive_p995": 526.597412109375,
+      "mean_original": 126.00224407956992,
+      "mean_derived": 126.00224304199219
+    },
+    {
+      "code": "656",
+      "line": "Hα",
+      "url": "https://esahubble.org/static/projects/fits_liberator/datasets/m17/656nmos.zip",
+      "zip_sha256": "7fd89aee1c64a90ba5c2256edb658862f569d0e14c51377dbff557350dfc261e",
+      "fits_sha256": "d7d790b0f0a540273ba94a863f8698f980d86a9202c8dc27dae0f55749b41286",
+      "derived_sha256": "cf5130bb2ad97c179feaf3191c2db51e1bf35249e6063c6fbb73628f8aa5d1d2",
+      "header": {
+        "TELESCOP": "HST",
+        "INSTRUME": "WFPC2",
+        "FILTNAM1": "F656N",
+        "DATE-OBS": "1999-05-30",
+        "TIME-OBS": "12:57:13",
+        "EXPTIME": 2600.0,
+        "EQUINOX": 2000.0,
+        "BUNIT": null,
+        "PHOTFLAM": 2.989231e-16,
+        "PHOTPLAM": 6563.584,
+        "CRVAL1": 275.181121931,
+        "CRVAL2": -16.1470455186,
+        "CRPIX1": 386.5,
+        "CRPIX2": 396.0,
+        "CD1_1": 2.76148e-05,
+        "CD1_2": -1.15452e-06,
+        "CD2_1": -1.1534e-06,
+        "CD2_2": -2.76415e-05,
+        "BIASCORR": "COMPLETE",
+        "DARKCORR": "COMPLETE",
+        "FLATCORR": "COMPLETE",
+        "TARGNAME": "M17"
+      },
+      "original_shape": [
+        1600,
+        1600
+      ],
+      "derived_shape": [
+        320,
+        320
+      ],
+      "min": -115.95527648925781,
+      "max": 1158.3455810546875,
+      "positive_p995": 985.24267578125,
+      "mean_original": 255.65706209173896,
+      "mean_derived": 255.65707397460938
+    },
+    {
+      "code": "673",
+      "line": "[S II]",
+      "url": "https://esahubble.org/static/projects/fits_liberator/datasets/m17/673nmos.zip",
+      "zip_sha256": "7b14205863b19df0a950834fcdd8494cb1adac7b91fb57a65c2ff44f2f6c3e4b",
+      "fits_sha256": "ba78fdd4b26a88a5ecf265b210ae038968bd731bb7cfe726c72294b98501c851",
+      "derived_sha256": "782cafb154161b80d438bec7e795b9b56e5cf7265821831dca48d4635c7a3f55",
+      "header": {
+        "TELESCOP": "HST",
+        "INSTRUME": "WFPC2",
+        "FILTNAM1": "F673N",
+        "DATE-OBS": "1999-05-29",
+        "TIME-OBS": "15:58:13",
+        "EXPTIME": 5200.0,
+        "EQUINOX": 2000.0,
+        "BUNIT": null,
+        "PHOTFLAM": 6.045454e-17,
+        "PHOTPLAM": 6732.239,
+        "CRVAL1": 275.181121931,
+        "CRVAL2": -16.1470455186,
+        "CRPIX1": 386.5,
+        "CRPIX2": 396.0,
+        "CD1_1": 2.76148e-05,
+        "CD1_2": -1.15452e-06,
+        "CD2_1": -1.1534e-06,
+        "CD2_2": -2.76415e-05,
+        "BIASCORR": "COMPLETE",
+        "DARKCORR": "COMPLETE",
+        "FLATCORR": "COMPLETE",
+        "TARGNAME": "M17"
+      },
+      "original_shape": [
+        1600,
+        1600
+      ],
+      "derived_shape": [
+        320,
+        320
+      ],
+      "min": 0.0,
+      "max": 4162.2314453125,
+      "positive_p995": 274.68121337890625,
+      "mean_original": 78.98106705019056,
+      "mean_derived": 78.98106384277344
+    }
+  ]
+}

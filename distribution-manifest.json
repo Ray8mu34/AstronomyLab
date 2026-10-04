@@ -1,0 +1,1531 @@
+{
+  "generated_at": "2026-10-04T07:11:03.066Z",
+  "scope": "Independent runtime/source distribution; original exam, teacher/private QA/key files excluded.",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "bytes": 8
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "5024cbbb0a21cdc87f43598b6b598300b1a9bb4c2063d6048e5e6ab4f00a8d44",
+      "bytes": 184
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "1e4c05148586f0725c4fce5eb8cf60b5a4f5ebac420c4383223632f11bf6b893",
+      "bytes": 1240
+    },
+    {
+      "path": "assets/01/v02/hl-tau.jpg",
+      "sha256": "e6e6b4c6eaa787b296d6f0256af7b75e3a9a348174a869fffb871a13d5069696",
+      "bytes": 247756
+    },
+    {
+      "path": "assets/01/v02/kirkwood-gaps.png",
+      "sha256": "dd8986b2b5b9ebbcd043d12bdc96bf6d514aca83719be2aace3f59419b403731",
+      "bytes": 15974
+    },
+    {
+      "path": "assets/01/v02/pluto-enhanced.jpg",
+      "sha256": "4302e1bf7c633290d2545c83d9abd000f5ce223e7fa85c11130725d729ef8e9e",
+      "bytes": 289906
+    },
+    {
+      "path": "assets/02/v02/planet-properties.png",
+      "sha256": "d4d370578ce81d3e6ec35a3ee4087b52fa43aa062caa0023e627046f068e2640",
+      "bytes": 116718
+    },
+    {
+      "path": "assets/02/v02/planet-properties.svg",
+      "sha256": "02ef5a39ad4407a744b70381197fb7115ee801091fe338093f215d09d63e4809",
+      "bytes": 117769
+    },
+    {
+      "path": "assets/02/v02/titan-radar.jpg",
+      "sha256": "09c192cdaabdd158497759d0082a90c506ba1993f20a551422cf2f28cc1aa2b3",
+      "bytes": 753768
+    },
+    {
+      "path": "assets/02/v02/uranus-nircam.png",
+      "sha256": "e5f7a1a0e10a6e6c769b40ecbb2f4dd78ea2ada65f2e96efd69c113ea29f52a7",
+      "bytes": 2449044
+    },
+    {
+      "path": "assets/03/v02/daytime-moon.jpg",
+      "sha256": "959e0f7a6d603d9f3b00df797c20400d927292e9d32786542d1d750600ec9d7d",
+      "bytes": 99547
+    },
+    {
+      "path": "assets/03/v02/moon-near-far-comparison.jpg",
+      "sha256": "5f9acea27493b7f78988a740b3b325276d6745554f2401fd4f1a504a45fd039f",
+      "bytes": 341077
+    },
+    {
+      "path": "assets/03/v02/moon-phases.png",
+      "sha256": "68f64b3e71071593ecee3d64a82bdf9a277827683bd0ccf8b2e7c9d1c5b58cd7",
+      "bytes": 188816
+    },
+    {
+      "path": "assets/04/v02/eclipse-types.jpeg",
+      "sha256": "da97a32aa36fd2b8f3777751c42aad1bc21babc0d57356a50bf93bdb9e2941b8",
+      "bytes": 67351
+    },
+    {
+      "path": "assets/04/v02/mars-oppositions.jpg",
+      "sha256": "deb5223f6f7dbc40c9bf3e2bee1f2fd3924d0116c21f835caf9fb7f92fe8c219",
+      "bytes": 1132945
+    },
+    {
+      "path": "assets/04/v02/venus-transit.jpg",
+      "sha256": "8fca643548d7bf1089e29f351428bf7a92a157588bf5a203a51eaf457e6e099c",
+      "bytes": 1304938
+    },
+    {
+      "path": "assets/05/v02/calendar-fit.png",
+      "sha256": "7fa2f6b254bc72485cd1284265148a08aad101b253c41d7a4dc500535b4a0b95",
+      "bytes": 195364
+    },
+    {
+      "path": "assets/05/v02/calendar-fit.svg",
+      "sha256": "32c4ef2506bd2c1ca186bfedfcf7e697cf8bff566dca61f88c6ce475829fc91a",
+      "bytes": 31219
+    },
+    {
+      "path": "assets/05/v02/draw-batch-A.py",
+      "sha256": "0e695852b7f94e6e5a81c59c8c00c32522f36f67dac97c3dcce0bd38e2413ab4",
+      "bytes": 8050
+    },
+    {
+      "path": "assets/05/v02/solstice-earth.png",
+      "sha256": "080ecf31bbf31ef1a4bf2c2e7b13577cecad81e7555b2857481ca7e6d6fe3246",
+      "bytes": 250097
+    },
+    {
+      "path": "assets/05/v02/sun-paths.png",
+      "sha256": "3c34281d266a3af3f78a7a14934c565a87a9ba08ab71ae841572c69c7031b5e1",
+      "bytes": 176907
+    },
+    {
+      "path": "assets/05/v02/sun-paths.svg",
+      "sha256": "bd9b9ced57d3a7f2383834feeb5878aadd95916e814c4e8ab04109bd8bf9ec0a",
+      "bytes": 20864
+    },
+    {
+      "path": "assets/06/oae-taurus.png",
+      "sha256": "e3d15cc8509f3201bca93033482b1e4ffda0d1b02f8deb7969669d7a2a8e24e7",
+      "bytes": 110135
+    },
+    {
+      "path": "assets/06/oae-ursa-major.png",
+      "sha256": "85bb7f463d6805b770be3f2b6a2efe6e07cdc78411372b65213f5af9298a73af",
+      "bytes": 143672
+    },
+    {
+      "path": "assets/06/v02/gaia-colour.png",
+      "sha256": "123c34b98fefb0484c79d2aa32643315c83a12211d4a48320e745ddc06248ec2",
+      "bytes": 2836415
+    },
+    {
+      "path": "assets/06/v02/parallax.png",
+      "sha256": "f45c5a3880f83150e5b4fdba2641140722581f4c7d61b6027527b490f824b3f4",
+      "bytes": 148050
+    },
+    {
+      "path": "assets/06/v02/parallax.svg",
+      "sha256": "de63a3c75d9daedde6411ceab085fdb1057088991396d01dc04cd16270373af3",
+      "bytes": 23006
+    },
+    {
+      "path": "assets/06/v02/star-altitudes.png",
+      "sha256": "f109940f96e84fde8583b7131c6ddb5fd4adea996d0d3bd8b99e2300e28a1c09",
+      "bytes": 194170
+    },
+    {
+      "path": "assets/06/v02/star-altitudes.svg",
+      "sha256": "ad96f491c0b00c04949d803da3dd4025495ac93f5e7fb9bfa9e4a167ae40a41e",
+      "bytes": 22736
+    },
+    {
+      "path": "assets/07/v02/four-circles.png",
+      "sha256": "e8b877b2231b7dad2b18bc49252c307dbc833370cce50fa2afaa1ebe7ff4fd10",
+      "bytes": 148238
+    },
+    {
+      "path": "assets/07/v02/four-circles.svg",
+      "sha256": "bbd1632a43ff95317428a3e19baa1a0d71215894b6c73ef8dba7f6f70685643c",
+      "bytes": 24939
+    },
+    {
+      "path": "assets/07/v02/jianyi-model.jpg",
+      "sha256": "d6a38fc6e6556bd52f8d6883b5fecde0849615d8ee5b8fd154418b2bc2c3f2b5",
+      "bytes": 19285
+    },
+    {
+      "path": "assets/07/v02/precession-nutation.png",
+      "sha256": "b07fa7719f43f795c7e2080704f3b7791dc3a6b2093d47d1e0b7e3c10a99f472",
+      "bytes": 183048
+    },
+    {
+      "path": "assets/07/v02/precession-nutation.svg",
+      "sha256": "4eb4c207398b04dfdfbeb0d58827154fa78bccd68e0bbc3c67608cd39ae96944",
+      "bytes": 33964
+    },
+    {
+      "path": "assets/07/v02/quadrant.jpg",
+      "sha256": "230b7479983dd07121fad100f7e4dfc0803c45d387b152afde6c1ce93126919c",
+      "bytes": 21536
+    },
+    {
+      "path": "assets/07/v02/shadow-angle.png",
+      "sha256": "a562bbde7b223c2d97c9ac146f8ed23d22e802aea1545289f50583773b8c43d1",
+      "bytes": 136583
+    },
+    {
+      "path": "assets/07/v02/shadow-angle.svg",
+      "sha256": "3961bf25dda00c5813619769ec282026885ef08c205704a91d5c6e5b6d3053d1",
+      "bytes": 20970
+    },
+    {
+      "path": "assets/08/v02/airglow.jpg",
+      "sha256": "057a97942e23635f30ff36bc9bc448e6cc2064b515e0432000c8a75ee64e60e2",
+      "bytes": 2201007
+    },
+    {
+      "path": "assets/08/v02/airmass-extinction.png",
+      "sha256": "d09277fc2f63b1401cad7f9ffa31d0db75cb87459fd51936cf221ba632d5f162",
+      "bytes": 165195
+    },
+    {
+      "path": "assets/08/v02/airmass-extinction.svg",
+      "sha256": "beeadfa75e9e9c378210ef6339fb227905169a101fe4d5ba883e6cc76abf861f",
+      "bytes": 38839
+    },
+    {
+      "path": "assets/08/v02/background-contrast.png",
+      "sha256": "ceb628f3f3955ace85df33399d71aecc7f3a3c32e69d13a13852e32eeea6aeb7",
+      "bytes": 116323
+    },
+    {
+      "path": "assets/08/v02/background-contrast.svg",
+      "sha256": "71c4ae5b71ae892d465864bd52d95fab5d6d9b14c8961504de6528c67ca32d04",
+      "bytes": 46121
+    },
+    {
+      "path": "assets/08/v02/light-pollution.jpg",
+      "sha256": "bc788c5d8c577e2dd9b3013baeabdd3b230c6fdf1586bf0696c3423d79d838eb",
+      "bytes": 2773796
+    },
+    {
+      "path": "assets/09/newtonian.png",
+      "sha256": "9cf843624bc07e5c5f9362c73930f224c36f1495a6cee9f4e044299cbf017cbc",
+      "bytes": 59492
+    },
+    {
+      "path": "assets/09/newtonian.svg",
+      "sha256": "d4c07523534c034bc67601d5b3dd1822d768fc48d0e356d9a034acfbd9b4fe33",
+      "bytes": 3434
+    },
+    {
+      "path": "assets/09/refractor.png",
+      "sha256": "f14d662a02e6875cca04efec3bb36f2697c6916e4e273b32ff03780f26721d86",
+      "bytes": 64742
+    },
+    {
+      "path": "assets/09/refractor.svg",
+      "sha256": "2a73e5ae6a4e33a590487456390d0ab8b6e3ffd22343914cc82048095747913f",
+      "bytes": 2912
+    },
+    {
+      "path": "assets/09/v02/focal-plane.png",
+      "sha256": "cd8fe0b26b888b29f5c38240b6b1d38243317c957556e53a2af19c85e02d8043",
+      "bytes": 101245
+    },
+    {
+      "path": "assets/09/v02/focal-plane.svg",
+      "sha256": "677507e7a3a2998483fb37c42e2c9182e57196231f7cdb4b9d54b3ce1b48a9b7",
+      "bytes": 8949
+    },
+    {
+      "path": "assets/09/v02/neptune-ao.jpg",
+      "sha256": "99e96891e1749eafc35ffda4cc820af89dbc292cf2d27a74735d311af9a4df0f",
+      "bytes": 176572
+    },
+    {
+      "path": "assets/09/v02/primary-mirror.jpg",
+      "sha256": "a065398199eea72cfe0d959dc2866ec809069d2a008f83aa5341fd3f3e4375c8",
+      "bytes": 268480
+    },
+    {
+      "path": "assets/09/v02/resolution-and-seeing.png",
+      "sha256": "4dd85e3a59252caabf02c4dc9449b4030112566c43532d49e3fb263bd51c96e6",
+      "bytes": 213645
+    },
+    {
+      "path": "assets/09/v02/resolution-and-seeing.svg",
+      "sha256": "030a21a775600362b07c4fffdc1478145c8aa0fc3b40b07d379823ca625ce0d6",
+      "bytes": 41128
+    },
+    {
+      "path": "assets/09/v02/schmidt-cassegrain.png",
+      "sha256": "761e687e0c8143b584d83268297236f2f78f8212b3c257556b86866918ba631d",
+      "bytes": 96434
+    },
+    {
+      "path": "assets/09/v02/schmidt-cassegrain.svg",
+      "sha256": "f7c34b4736e601f1c12cf970b6f567778f28dc862fda8dd8c8bea8dd39cc23c7",
+      "bytes": 45266
+    },
+    {
+      "path": "assets/10/v02/flames-spectra.jpg",
+      "sha256": "c919ca944ab3d9a7cfce1cbc0e89e4d1943dcef935ed23459a57912b60c5ddd4",
+      "bytes": 280116
+    },
+    {
+      "path": "assets/10/v02/magnitude-distance.png",
+      "sha256": "c7d943285434b991a16d07f6dce8fcdd18ab02ec9eea0b3ac62e9f4b11703720",
+      "bytes": 137164
+    },
+    {
+      "path": "assets/10/v02/magnitude-distance.svg",
+      "sha256": "98ab2e873840f3b2e09979954c3252f6623e06bc79c4f28135459abd94e9d6bf",
+      "bytes": 33234
+    },
+    {
+      "path": "assets/10/v02/planck-curves.png",
+      "sha256": "c86c100d5e9ecabf46c825854f87e07a08ff2f181be71bbb6e8d43ffdbb1a8e2",
+      "bytes": 210657
+    },
+    {
+      "path": "assets/10/v02/planck-curves.svg",
+      "sha256": "f8f3aec4a22889ed36be49e0df63c398b26e135c2324fcdc0924dcd10af8fc63",
+      "bytes": 36709
+    },
+    {
+      "path": "assets/11/v02/gaia-hr.jpg",
+      "sha256": "f2e6e8b1dc181cd36a7e43c27ac0ac579ac7e9252f7686ec9d68bf9dac86f341",
+      "bytes": 1533846
+    },
+    {
+      "path": "assets/11/v02/orion.jpg",
+      "sha256": "db35758ed21509a16974d0ad36383ee0dd515c88c806f83fd1a4ad5ad5ae1477",
+      "bytes": 2110438
+    },
+    {
+      "path": "assets/11/v02/ring.jpg",
+      "sha256": "9ff71b3d9cc02a609e60fa8dec55e1803358a033011fbc4a0c8b9f586a46b7b6",
+      "bytes": 3213851
+    },
+    {
+      "path": "assets/12/v02/sgr-a.jpg",
+      "sha256": "372c24c62809ee4455648fc520296d649c5d11751650cce146fb5013a261fd1c",
+      "bytes": 571188
+    },
+    {
+      "path": "assets/12/v02/sn1987a.jpg",
+      "sha256": "2336d87264f3adee960ea2a0d301d60a71fb7ed81ec77e92f0b648a2eebfd4fe",
+      "bytes": 7722867
+    },
+    {
+      "path": "assets/13/v02/firas-spectrum.png",
+      "sha256": "a30a4d8f7f856f164d0650d63b757acc8fbb17bb3dbaa42b5787b4f6ac501890",
+      "bytes": 172827
+    },
+    {
+      "path": "assets/13/v02/firas-spectrum.svg",
+      "sha256": "1236bd26de1da328d3f79bc31058317a62b2ccd36cd871a83eb9e623886bdc9a",
+      "bytes": 98777
+    },
+    {
+      "path": "assets/13/v02/gaia-sky.png",
+      "sha256": "123c34b98fefb0484c79d2aa32643315c83a12211d4a48320e745ddc06248ec2",
+      "bytes": 2836415
+    },
+    {
+      "path": "assets/13/v02/hudf.jpg",
+      "sha256": "e753d42fa9e5aabb807d5dba74b9d88205c4ce007f9c5ad106c0d9cb6f81fc59",
+      "bytes": 9447246
+    },
+    {
+      "path": "assets/13/v02/planck.jpg",
+      "sha256": "75a2ecdd593ccaf092ffe7a594c5283fd6d6529ed084d063956deb8859ed4448",
+      "bytes": 2373272
+    },
+    {
+      "path": "assets/14/crab.jpg",
+      "sha256": "9b9162b9a679c04fe9224dd3338691fa1eb56599e111ebd750f6eafe9d028bdc",
+      "bytes": 451157
+    },
+    {
+      "path": "assets/14/v02/crab.jpg",
+      "sha256": "43b4ea82bbb50686697634e7cc212e06b0f501d26a9ce2ec5619504840ea4345",
+      "bytes": 6486246
+    },
+    {
+      "path": "assets/14/v02/horsehead-ir.jpg",
+      "sha256": "3dae8324d6dcb13f0af75cc59b5441262658f4d3e7228eca77bcb26f100cccc8",
+      "bytes": 2481793
+    },
+    {
+      "path": "assets/14/v02/horsehead-optical.jpg",
+      "sha256": "164a91b31eb37ddd79f55ff77e63f5745351c8c98d2cfb6ebef2ba6cd5193843",
+      "bytes": 6986232
+    },
+    {
+      "path": "assets/14/v02/m17-sho.jpg",
+      "sha256": "3f9f6b6bcdf92ff2a72f8720287053bcbc950cb8ff0a139343e44307052d948c",
+      "bytes": 1063572
+    },
+    {
+      "path": "assets/14/v02/m33.jpg",
+      "sha256": "24b3d51ec8f2d1ad998bb5bb6f83111f251df0b64b21bcaafd1c2213a5d00853",
+      "bytes": 3788911
+    },
+    {
+      "path": "assets/15/v02/crs21-landing.jpg",
+      "sha256": "998ed6fdc9ca3be424961c1633d46d1feae1f3c133e914df2e4f932325edd1c5",
+      "bytes": 247589
+    },
+    {
+      "path": "assets/15/v02/orbit-energy.png",
+      "sha256": "b7f0b3a84890f29054d6c5002dfe18be683047da709e18378e23e8587d580a3a",
+      "bytes": 171381
+    },
+    {
+      "path": "assets/15/v02/orbit-energy.svg",
+      "sha256": "c6bf62a849e874632c981432d28f60c9763ff05bda3be235235490a26749eaef",
+      "bytes": 24143
+    },
+    {
+      "path": "assets/15/v02/reentry-heating.png",
+      "sha256": "bda4d971b2d1658b3bb54cd56ed0b2ef63ff9cb3646ab16daeff28b8e5220b83",
+      "bytes": 1119097
+    },
+    {
+      "path": "assets/15/v02/rocket-equation.gif",
+      "sha256": "54d10e9c9f21c11c110eb902341db5ecda3e95c451e8b0f9f6dbad2dd0c8b847",
+      "bytes": 41780
+    },
+    {
+      "path": "assets/16/v02/distance-ladder.png",
+      "sha256": "20d7cfd5c497650192de8bc0350864ec0a24ff71dad8e23afab0ab7b58015f99",
+      "bytes": 5821130
+    },
+    {
+      "path": "assets/16/v02/s2-orbit.png",
+      "sha256": "6b139d72a3a13bba8be9d3e0952502c5e2c11c7ae8d7ee8ad788f8f65b007563",
+      "bytes": 1059336
+    },
+    {
+      "path": "assets/16/v02/tycho-peak.jpg",
+      "sha256": "82492726fe9e779a8432e5374d11839853fc6574f81c70483a27180a1b2dafca",
+      "bytes": 407264
+    },
+    {
+      "path": "assets/ARTICLE_ASSETS.csv",
+      "sha256": "d1f04fc627c044a569b67ccf28fb12402c5051a1348a520ea914286481a851c4",
+      "bytes": 36042
+    },
+    {
+      "path": "assets/v02-batch-A-ASSETS.csv",
+      "sha256": "7a363ff2e470454b63589e96829fa01b39426b0b6aafa55bec1685841cd2eecc",
+      "bytes": 7966
+    },
+    {
+      "path": "assets/v02-batch-A-SOURCES.md",
+      "sha256": "dec9a6f0c2f2813ce261e1bae78929269ef88ca253b89ed8cf699ce2b09a548e",
+      "bytes": 24316
+    },
+    {
+      "path": "assets/v02-batch-B-ASSETS.csv",
+      "sha256": "95628fa3d34f193533284be2d9a532e6bc432db3d3d469dc42acb4577c6978e3",
+      "bytes": 12229
+    },
+    {
+      "path": "assets/v02-batch-B-SOURCES.md",
+      "sha256": "c2f28b27147cedd834e8b789f2753818346ba8b253a55ca4e44801e296c6b9cc",
+      "bytes": 13834
+    },
+    {
+      "path": "assets/v02-batch-C-ASSETS.csv",
+      "sha256": "3b403528fb03ac8050345972eac203f56728c4a79144e4cca9a271eaa37837cb",
+      "bytes": 4825
+    },
+    {
+      "path": "assets/v02-batch-C-SOURCES.md",
+      "sha256": "2de45a9b8721dfd341cf46dce62d30a884e0063317c7041df4f0a1d3961d7ac3",
+      "bytes": 27887
+    },
+    {
+      "path": "assets/v02-batch-D-ASSETS.csv",
+      "sha256": "c9928991cdb4a3ccdf65658b68c86d2fdf1c6bf2cd7d18b4baa565421479bcff",
+      "bytes": 6206
+    },
+    {
+      "path": "assets/v02-batch-D-SOURCES.md",
+      "sha256": "0d5005814cfa5e7190d7696c19004ecc354851f04068af232926166ec30a55cb",
+      "bytes": 14307
+    },
+    {
+      "path": "assets/v02-first4-ASSETS.csv",
+      "sha256": "c6d39e322ad1b8fc7721455611b7e57acf3c0cfc19eaa7049498a52046a7bf0a",
+      "bytes": 5506
+    },
+    {
+      "path": "assets/v02-first4-SOURCES.md",
+      "sha256": "53a37684041f24c795347555a9e2168978cba062c91173fca4d23c096479870a",
+      "bytes": 10332
+    },
+    {
+      "path": "assets/v02-reference/SOURCES-pro-01-04.md",
+      "sha256": "40b7f3cbd16ab0a0cc4c75f855e559bb3313930c8c48b74a5cc6376ac2a57101",
+      "bytes": 24808
+    },
+    {
+      "path": "build/articles/article-reading.css",
+      "sha256": "18cb827429e0d5c467bfa235dcc1dcb086943ff198837da65790cacc33a38d8a",
+      "bytes": 3209
+    },
+    {
+      "path": "build/articles/index.html",
+      "sha256": "b0586544c6f4efe8b8c8e2a933da5ef3f4e8bf1d5f31f1d19976058ca5094194",
+      "bytes": 3481
+    },
+    {
+      "path": "build/articles/L01.html",
+      "sha256": "8c1077af34dbae53a537616aba860f8d9dfce578abf93cb3466dd3a84bf34517",
+      "bytes": 33527
+    },
+    {
+      "path": "build/articles/L02.html",
+      "sha256": "a465583c33953ff7a30b860ae314df5052624ce966bdd98f514e93e304aa2042",
+      "bytes": 38478
+    },
+    {
+      "path": "build/articles/L03.html",
+      "sha256": "2812e1069efeb2f5a91ad6312b2e60fdff2d2efe316a6e398b9d58a429329bbe",
+      "bytes": 35890
+    },
+    {
+      "path": "build/articles/L04.html",
+      "sha256": "51e9254a2ebc55d88da5002ac940e85fd74de1f50a4c55dc943895ec9226adbe",
+      "bytes": 36371
+    },
+    {
+      "path": "build/articles/L05.html",
+      "sha256": "93dafb3fecf804f5feb103021070644abc1416bc3069d39ebb2a9d2961ffc603",
+      "bytes": 29328
+    },
+    {
+      "path": "build/articles/L06.html",
+      "sha256": "8d1a81c11c0109e97573c77fc7c07355f44b05b4a959688e89e14f33c9feb487",
+      "bytes": 33984
+    },
+    {
+      "path": "build/articles/L07.html",
+      "sha256": "32de699fe179e4b753c532e2b6dcf2f2230b9d39734694a4492b4d693fb45b37",
+      "bytes": 32743
+    },
+    {
+      "path": "build/articles/L08.html",
+      "sha256": "0c072f1db080fb3bbe23dc4edddeed9011a601548deda818a0177a986216be92",
+      "bytes": 32087
+    },
+    {
+      "path": "build/articles/L09.html",
+      "sha256": "d60569987a1d217180eeeeb1c1a2ded6f34b48d3333ef2a43d192fd68007d219",
+      "bytes": 35565
+    },
+    {
+      "path": "build/articles/L10.html",
+      "sha256": "728f55d46e3592846c69fd50ed73c9d2d94b61360411145dbe75cb9be349079d",
+      "bytes": 38252
+    },
+    {
+      "path": "build/articles/L11.html",
+      "sha256": "5c5b4268e5c5c4e2f7237d9e7b45788f13d3a7c04bf04e4061f3eaa7d4dd85dc",
+      "bytes": 34215
+    },
+    {
+      "path": "build/articles/L12.html",
+      "sha256": "f4d0b4580f2bbcec36a27781e9a79325594ea1ff6b5a44a3bda98f98210b10fe",
+      "bytes": 36769
+    },
+    {
+      "path": "build/articles/L13.html",
+      "sha256": "1b1a653436f1d6e33958cb4900abb0e4afaaf637c4955ae52f681edd46ffd5e3",
+      "bytes": 34452
+    },
+    {
+      "path": "build/articles/L14.html",
+      "sha256": "e10e2bd5158efee220da09820cf6245bcf2411fbdf1422711b78547984cf0213",
+      "bytes": 31947
+    },
+    {
+      "path": "build/articles/L15.html",
+      "sha256": "86bef6ff10564f6eff58f84ec1a92064f945ff859844c2ae380840a29881673d",
+      "bytes": 38173
+    },
+    {
+      "path": "build/articles/L16.html",
+      "sha256": "435c17758f6e9027607474447fc33bc8d944d607d8f8075c537e2541a8b4b91f",
+      "bytes": 36826
+    },
+    {
+      "path": "build/articles/linked/assets/v02-batch-A-SOURCES.html",
+      "sha256": "0c4c4dbcb3b37bac3282a9019c5e8874ae662395b1976881fe375b169c5a6025",
+      "bytes": 30330
+    },
+    {
+      "path": "build/articles/linked/assets/v02-batch-B-SOURCES.html",
+      "sha256": "35a7ca28d61281225063e57dbd1d90d33ed403f1bc889710ed0153a938fef8dc",
+      "bytes": 19053
+    },
+    {
+      "path": "build/articles/linked/assets/v02-batch-C-SOURCES.html",
+      "sha256": "2cbe2e4b30b6803c0c563c8562022eda74ea38ca98bf058329306a1783dafe0a",
+      "bytes": 42818
+    },
+    {
+      "path": "build/articles/linked/assets/v02-batch-D-SOURCES.html",
+      "sha256": "f8204a2521ab4f868514f45b6f291e7e81ab796f8eb3e4e4ccba75f12757836e",
+      "bytes": 19109
+    },
+    {
+      "path": "build/articles/linked/assets/v02-first4-SOURCES.html",
+      "sha256": "248f35db07b0ad95360e58f0d1d354d9fb49328c3226ca986c03bd44c31d90c3",
+      "bytes": 17187
+    },
+    {
+      "path": "build/articles/linked/assets/v02-reference/SOURCES-pro-01-04.html",
+      "sha256": "2e0a5018e806932c0ee678da198506418249cddb2b7c7e05847bcd23f6d82a45",
+      "bytes": 45844
+    },
+    {
+      "path": "course/01-solar-system/lesson.md",
+      "sha256": "d2e41055c8c94da5429b75e68ad364b0871026940de687cfa19a8f8180b9486b",
+      "bytes": 26454
+    },
+    {
+      "path": "course/02-planet-comparisons/lesson.md",
+      "sha256": "f34c6e092fdf98f2d4205a458fc463b5bfa87d0d63133f651433888fe45c8c84",
+      "bytes": 27643
+    },
+    {
+      "path": "course/03-moon/lesson.md",
+      "sha256": "41cc6ca795611a0fc8f31a43f4aa6e29f7a866c55b73605ed4a48c8f9ae10571",
+      "bytes": 27287
+    },
+    {
+      "path": "course/04-eclipses-and-alignments/lesson.md",
+      "sha256": "94a8252adce2faf1ff1fd9a539d3df2217ae9d6483846e1c4ac98c1e7290644d",
+      "bytes": 27535
+    },
+    {
+      "path": "course/05-calendars/lesson.md",
+      "sha256": "debfebbd14f7e0a71ff92452c558f4158bb6eb1a66e8da4f387c0ddaf6182ab0",
+      "bytes": 21771
+    },
+    {
+      "path": "course/06-sky-maps/lesson.md",
+      "sha256": "f6062da47a0f4226a805063720b3c8174061fdf7542c8fa66f280af556eeb5f4",
+      "bytes": 23615
+    },
+    {
+      "path": "course/07-reference-circles/lesson.md",
+      "sha256": "7c57c22d03828cb0a66236701871eb5150557c4f80c09e953983198151346069",
+      "bytes": 23446
+    },
+    {
+      "path": "course/08-observing/lesson.md",
+      "sha256": "d02544505df6f62e1085ec1f5955bd1cf30cdc8aa0fec5c068d6cbaec1df89ab",
+      "bytes": 22868
+    },
+    {
+      "path": "course/09-telescopes/lesson.md",
+      "sha256": "2c94bc0e74c47f6f4b102ca4683c042d497d582f91e6571efd657cc3c4e8eb8f",
+      "bytes": 24456
+    },
+    {
+      "path": "course/10-starlight/lesson.md",
+      "sha256": "045bdf724d042fce2a31cd87e5eb725d0374062fb49f0e5fcd4f54b785f1fb95",
+      "bytes": 24047
+    },
+    {
+      "path": "course/11-stellar-evolution/lesson.md",
+      "sha256": "7ce9b041a1c8b9846df526edc84ffa3185ad1eea9031f323d718b3db54e068d8",
+      "bytes": 23455
+    },
+    {
+      "path": "course/12-gravity-and-supernovae/lesson.md",
+      "sha256": "53fb5988a6bd5a2c25c3ce465d394ecb047b954f9e4c3aa44f8f9ce56da2d482",
+      "bytes": 23508
+    },
+    {
+      "path": "course/13-galaxies-and-cmb/lesson.md",
+      "sha256": "97e600abb6738f3c6f5711e4ef501104b5cce8b68015aabc630be622bc62d24e",
+      "bytes": 24865
+    },
+    {
+      "path": "course/14-astronomical-images/lesson.md",
+      "sha256": "d3e685b8b5e455b4cece5a8ecd6a9b7915307f59cdd22d7d770c257177877458",
+      "bytes": 24635
+    },
+    {
+      "path": "course/15-news-and-explanation/lesson.md",
+      "sha256": "7b6a9609ed16c50426f38c7569bb168a8dcd518ab18ca0e91f08432580bf993d",
+      "bytes": 24919
+    },
+    {
+      "path": "course/16-integration/lesson.md",
+      "sha256": "8b0043083f4d3f4a2a8fa26f815cce158750774aa58c55beaad569c2c76c0957",
+      "bytes": 24012
+    },
+    {
+      "path": "docs/DEPLOYMENT.md",
+      "sha256": "ae9910d438d831732cb190f210ffecbfa837bb13a2e1ced7a26d43eb9af92490",
+      "bytes": 2324
+    },
+    {
+      "path": "package.json",
+      "sha256": "262a7077cce5ad21f5638f90141f9a5fa6250ddeec500c16a59e0c6d477b6a69",
+      "bytes": 360
+    },
+    {
+      "path": "README.md",
+      "sha256": "c0e208ab117dc57b5bb0ecc9398efea5f97a36e5320cb5b2e5f0e820ce92cee7",
+      "bytes": 1771
+    },
+    {
+      "path": "THIRD_PARTY.md",
+      "sha256": "fb5fe8c7d877af2dff0597d00477b13f26186875b5cf68502978dac930ce14fa",
+      "bytes": 848
+    },
+    {
+      "path": "tools/article-reading.css",
+      "sha256": "18cb827429e0d5c467bfa235dcc1dcb086943ff198837da65790cacc33a38d8a",
+      "bytes": 3209
+    },
+    {
+      "path": "tools/build-articles-v02.py",
+      "sha256": "273504fc58340cf026ebc01ce59cecdba119cf0d08b9a26c7c4d9c80d11cdc6a",
+      "bytes": 26879
+    },
+    {
+      "path": "web/earth-moon/app.js",
+      "sha256": "43ee8c8ce88772eaf36787a80b245709f357d23bd673be894411a0ae8ee874bf",
+      "bytes": 35208
+    },
+    {
+      "path": "web/earth-moon/content.js",
+      "sha256": "ca2eb7e4bc0ecae849094193988ddd19c62ed897c80ecbc9484f005c389b6b13",
+      "bytes": 5187
+    },
+    {
+      "path": "web/earth-moon/data/resources.json",
+      "sha256": "18689a5538c18fd68a03e6782769b8ac84407a475f62e0b2b3cf2978df683c43",
+      "bytes": 4128
+    },
+    {
+      "path": "web/earth-moon/index.html",
+      "sha256": "fe59ff87dac3b2cf603eb507a803f138d42efa385bbb8363570079f52725618a",
+      "bytes": 11079
+    },
+    {
+      "path": "web/earth-moon/media/daytime-moon.jpg",
+      "sha256": "959e0f7a6d603d9f3b00df797c20400d927292e9d32786542d1d750600ec9d7d",
+      "bytes": 99547
+    },
+    {
+      "path": "web/earth-moon/media/eclipse-types.jpeg",
+      "sha256": "da97a32aa36fd2b8f3777751c42aad1bc21babc0d57356a50bf93bdb9e2941b8",
+      "bytes": 67351
+    },
+    {
+      "path": "web/earth-moon/media/mars-oppositions.jpg",
+      "sha256": "deb5223f6f7dbc40c9bf3e2bee1f2fd3924d0116c21f835caf9fb7f92fe8c219",
+      "bytes": 1132945
+    },
+    {
+      "path": "web/earth-moon/media/moon-near-far-comparison.jpg",
+      "sha256": "5f9acea27493b7f78988a740b3b325276d6745554f2401fd4f1a504a45fd039f",
+      "bytes": 341077
+    },
+    {
+      "path": "web/earth-moon/media/moon-phases.png",
+      "sha256": "68f64b3e71071593ecee3d64a82bdf9a277827683bd0ccf8b2e7c9d1c5b58cd7",
+      "bytes": 188816
+    },
+    {
+      "path": "web/earth-moon/media/venus-transit.jpg",
+      "sha256": "8fca643548d7bf1089e29f351428bf7a92a157588bf5a203a51eaf457e6e099c",
+      "bytes": 1304938
+    },
+    {
+      "path": "web/earth-moon/physics.mjs",
+      "sha256": "ef55855f6dab85125f3b347c91ede8eca6a7a32f2ce692a3b4e0ba46cbfe6a13",
+      "bytes": 5710
+    },
+    {
+      "path": "web/earth-moon/reading/03.html",
+      "sha256": "69cb2e745ec31cd144c1125d3ac4e7dc7b508269e5df607c61e41bdb30e72bf7",
+      "bytes": 33975
+    },
+    {
+      "path": "web/earth-moon/reading/04.html",
+      "sha256": "3248864effb93ddaf156b564663e88d563b09d23a99c88262956c3e6098e9490",
+      "bytes": 34735
+    },
+    {
+      "path": "web/earth-moon/references.html",
+      "sha256": "192aea5fb9bc490c4e8269f36f258dfe3ef96491e1ca8ad69344d2e6dc94e7a5",
+      "bytes": 11472
+    },
+    {
+      "path": "web/earth-moon/SOURCES.md",
+      "sha256": "40eefa205797e32ecf457c781b3c56ea63a55d6e4bb5d26e80cd5e40a65d156f",
+      "bytes": 7816
+    },
+    {
+      "path": "web/earth-moon/style.css",
+      "sha256": "a795b879fbc8b2d91b823ed99f5da33697443425bb7e2fb885daf45bf446b880",
+      "bytes": 25798
+    },
+    {
+      "path": "web/earth-moon/textures/earth_daymap.jpg",
+      "sha256": "767ee1dc6eb3802699bfccf6f264880f8acd0b80de3191cd24984fe279b07b7c",
+      "bytes": 463087
+    },
+    {
+      "path": "web/earth-moon/textures/moon.jpg",
+      "sha256": "2764ba6535ea0481a062846ee033cc7a909dae05b31a8fd13f3e98f3a7fd92bd",
+      "bytes": 1053869
+    },
+    {
+      "path": "web/earth-moon/vendor/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "web/earth-moon/vendor/OrbitControls.js",
+      "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c",
+      "bytes": 38703
+    },
+    {
+      "path": "web/earth-moon/vendor/three.core.js",
+      "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20",
+      "bytes": 1403455
+    },
+    {
+      "path": "web/earth-moon/vendor/three.module.js",
+      "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a",
+      "bytes": 603113
+    },
+    {
+      "path": "web/observatory/app.js",
+      "sha256": "c88a977cc77825814ced862bff51f87f9f738dc47f46278f05488a07c828d379",
+      "bytes": 17105
+    },
+    {
+      "path": "web/observatory/data/catalog-manifest.json",
+      "sha256": "e3d47854869270457a98ee42bd8da76bf83e5f978ada644a4b5d5f2b4c340748",
+      "bytes": 6145
+    },
+    {
+      "path": "web/observatory/data/catalog.json",
+      "sha256": "cb7bc241a17207c8b3459ae71f45b36d2420cd5232a4da849a25a0afcc4f5669",
+      "bytes": 80140
+    },
+    {
+      "path": "web/observatory/data/galaxy/2mass-allsky.jpg",
+      "sha256": "1593543cc21e8a038eadb776774c17c43b75cd7734b9803f50e6035380b8ea32",
+      "bytes": 1365854
+    },
+    {
+      "path": "web/observatory/data/galaxy/firas_monopole_spec_v1.txt",
+      "sha256": "df793c3dca09ebfa7dbc5aa0ec1951daa8884431bc30eff28a710d7516cf50fa",
+      "bytes": 2388
+    },
+    {
+      "path": "web/observatory/data/galaxy/manifest.json",
+      "sha256": "7cc7837c26737cffb243dff18bee020d5697a8652b954122c0952406d3b4f835",
+      "bytes": 3556
+    },
+    {
+      "path": "web/observatory/data/galaxy/planck-equirectangular.jpg",
+      "sha256": "575d06b6596b1cfb6a9b02e87a936f5ee8fbe80b64aab10d80dbf9c700108634",
+      "bytes": 870613
+    },
+    {
+      "path": "web/observatory/data/imaging/502-linear.f32",
+      "sha256": "18ec42a1b2a0d7afd4702d82dae2a9c3f01e1d58b389562d500861a5605800bc",
+      "bytes": 409600
+    },
+    {
+      "path": "web/observatory/data/imaging/656-linear.f32",
+      "sha256": "cf5130bb2ad97c179feaf3191c2db51e1bf35249e6063c6fbb73628f8aa5d1d2",
+      "bytes": 409600
+    },
+    {
+      "path": "web/observatory/data/imaging/673-linear.f32",
+      "sha256": "782cafb154161b80d438bec7e795b9b56e5cf7265821831dca48d4635c7a3f55",
+      "bytes": 409600
+    },
+    {
+      "path": "web/observatory/data/imaging/m17-metadata.json",
+      "sha256": "a266890caab1e5389dcccb4dde7832e663bd0906fa8e8b3ced271219c9969486",
+      "bytes": 5176
+    },
+    {
+      "path": "web/observatory/data/imaging/prepare-m17.py",
+      "sha256": "c46053a05bc5b306be9f11a104a04462968d0d152f69b25f4a894bca942ee5fc",
+      "bytes": 3768
+    },
+    {
+      "path": "web/observatory/data/light/browser-smoke.mjs",
+      "sha256": "78030cd53fe1e32b9190d9611504205024f5ce0e165c0b969b976b1c16d1ed3c",
+      "bytes": 5245
+    },
+    {
+      "path": "web/observatory/data/light/check-models.mjs",
+      "sha256": "4984c4bb5d4011eb593b53d6655ef88f50c32f77b08f7e920e2596655a640d3c",
+      "bytes": 5951
+    },
+    {
+      "path": "web/observatory/data/measure/parameters.json",
+      "sha256": "050eea89dcdc37e68bb4886e7155df5a521125990bbbd7f0014d4d90099cb941",
+      "bytes": 1328
+    },
+    {
+      "path": "web/observatory/data/optics/browser-smoke.mjs",
+      "sha256": "d8d91ef91bbfe50e01f9a68fd4941e2057d69c9a49ce6ea91038a075d9185174",
+      "bytes": 3853
+    },
+    {
+      "path": "web/observatory/data/optics/reference-build.py",
+      "sha256": "fbc6469053660168963b5841e9464691527eab04e171d1891cbf5c3a87d6b6a5",
+      "bytes": 1097
+    },
+    {
+      "path": "web/observatory/data/optics/verify.mjs",
+      "sha256": "68be455158e93c2ac4f7474047100d5abc39e941ffc939ac9a5a9a24fe06902c",
+      "bytes": 2822
+    },
+    {
+      "path": "web/observatory/data/orbits/parameters.json",
+      "sha256": "638ce930cfd11b6674c614bfd536dbdf7d2b5e2664ed5807102e4d18a765aa11",
+      "bytes": 915
+    },
+    {
+      "path": "web/observatory/data/sky/aldebaran-identification.txt",
+      "sha256": "b9daec9bf07af47ab44f58c4a68452e049129edaf60cbc3a6b8e853c7466cb09",
+      "bytes": 31743
+    },
+    {
+      "path": "web/observatory/data/sky/check-browser.mjs",
+      "sha256": "7fbe58199848da7148198dd120948e45c3352ca40c2ae0d059e81a8c606ed2de",
+      "bytes": 6623
+    },
+    {
+      "path": "web/observatory/data/sky/check-math.mjs",
+      "sha256": "d1d9ef032fdfd23cd1921ea38c359cc4b135202ac18db7214a169196690c6af7",
+      "bytes": 3661
+    },
+    {
+      "path": "web/observatory/data/sky/hip1-ReadMe.txt",
+      "sha256": "7a7d54903d16460a76c240f07c41b019d57becfd27b5dfa2908e828f52f90c27",
+      "bytes": 69036
+    },
+    {
+      "path": "web/observatory/data/sky/hip2-ReadMe.txt",
+      "sha256": "6c017925d658447d40983da3b459ba16bf9789c8f7573e263952c75692622499",
+      "bytes": 10375
+    },
+    {
+      "path": "web/observatory/data/sky/hip2-subset.tsv",
+      "sha256": "3d4db99d0fc65e11fbb3cd8b5cacdb196912a95efe6720a7c731c0b723b69a86",
+      "bytes": 3290
+    },
+    {
+      "path": "web/observatory/data/sky/prepare.mjs",
+      "sha256": "ae8e89467713da8819b8a33a9d94649816a904713e13d567244b00e802ceb4cc",
+      "bytes": 2129
+    },
+    {
+      "path": "web/observatory/data/sky/stars.json",
+      "sha256": "101d5a5f1de76c1ae2eb6628045be775d8c3f0274c4f69680bad46b339896a70",
+      "bytes": 4855
+    },
+    {
+      "path": "web/observatory/data/stars/prepare.py",
+      "sha256": "aa80d8eac18756756a09e077b68454242827e31ab9fe0cb8e4ed9f586e076027",
+      "bytes": 2885
+    },
+    {
+      "path": "web/observatory/data/stars/tracks.json",
+      "sha256": "387734c08c7ddbd657d1edcc410679ef756a2843e81ffb6f14b4122e9da122cf",
+      "bytes": 989006
+    },
+    {
+      "path": "web/observatory/data/ui-integration-status.json",
+      "sha256": "75a174968b5d5d6424c075896a51727e77d2fe41c5027fb991a31128666350a9",
+      "bytes": 439
+    },
+    {
+      "path": "web/observatory/data/verification-summary.json",
+      "sha256": "a3bc361442c889809185ffbb9db3624440849c5c8a86cb11663ac728ff912f69",
+      "bytes": 4732
+    },
+    {
+      "path": "web/observatory/index.html",
+      "sha256": "95e59ecb747bbd79bf13dc82c60e0d913fee5c3820acfc6ff51961cbc121097f",
+      "bytes": 905
+    },
+    {
+      "path": "web/observatory/modules/alignments-physics.mjs",
+      "sha256": "1609aa5a0c2df3cd7b29e6f912a3bf6da68cff9b76b5aead925889564268ec18",
+      "bytes": 1808
+    },
+    {
+      "path": "web/observatory/modules/alignments-pilot.css",
+      "sha256": "5de2c5b2a7cd2c03edf9ab018085a3b82c87bef3da0c6e7eab0ea9865f6cb945",
+      "bytes": 5179
+    },
+    {
+      "path": "web/observatory/modules/alignments.js",
+      "sha256": "bc3de95464e96fc4545440cc996679b65ba98f3427a3aa4c626ef4fd50698d8d",
+      "bytes": 17957
+    },
+    {
+      "path": "web/observatory/modules/galaxy-physics.mjs",
+      "sha256": "7960d690aaf17ea24a51fe3c2dc1a27000b838addcd00a8b51d4b07bf6e059ce",
+      "bytes": 2796
+    },
+    {
+      "path": "web/observatory/modules/galaxy-pilot.css",
+      "sha256": "ea760c207bca60463f2c51ed7ca3faafc00b78f76bf3b5b5548597de8a06d9f1",
+      "bytes": 5394
+    },
+    {
+      "path": "web/observatory/modules/galaxy.js",
+      "sha256": "5d32d2fb95281e4f70af6f767585dfb01ba779a3101e118fd346a0b63c8f93f7",
+      "bytes": 38614
+    },
+    {
+      "path": "web/observatory/modules/imaging-physics.mjs",
+      "sha256": "ec09fa4f6b40e8ab2f9f802d127fb75d82af5395c1772dbec9ef6cdaf0dc2295",
+      "bytes": 3344
+    },
+    {
+      "path": "web/observatory/modules/imaging-pilot.css",
+      "sha256": "722c94d745098bb2ce83d2a5cfe9d6761db08ef0b28c33f7e803f2ec8258f736",
+      "bytes": 5469
+    },
+    {
+      "path": "web/observatory/modules/imaging.js",
+      "sha256": "4d5f10236490e059f63220d3e4591b86b14d37227e4836710337580544d6cf47",
+      "bytes": 26183
+    },
+    {
+      "path": "web/observatory/modules/landing-staging-lab.css",
+      "sha256": "051269a56e1d7be0a657c69c8128e58591053bafa34b702ad5693b3c7360a3b2",
+      "bytes": 7790
+    },
+    {
+      "path": "web/observatory/modules/landing-staging-lab.js",
+      "sha256": "549ea39592447b1fdf09de1660305f05adffe80f7b952b252acf9405f18c54bd",
+      "bytes": 23886
+    },
+    {
+      "path": "web/observatory/modules/landing-staging-physics.mjs",
+      "sha256": "d55c65ebe055636eb4470a1b0fb4f87b503662695181afea170d233d6d6341c1",
+      "bytes": 8517
+    },
+    {
+      "path": "web/observatory/modules/light-physics.mjs",
+      "sha256": "b387214038b3f6ac6c2f4f4f88882fc45db107e2afeaba46b466e98cb8d32d10",
+      "bytes": 3384
+    },
+    {
+      "path": "web/observatory/modules/light-pilot.css",
+      "sha256": "1450247f92b80316c1ceb28a05e4a54b516ef9cd8abce1785474c7cac570281e",
+      "bytes": 5351
+    },
+    {
+      "path": "web/observatory/modules/light-teaching.mjs",
+      "sha256": "1ef3d94402304ec518079adb5f8ce4dd71b409b6a7ab174efeb62f2266fd3ceb",
+      "bytes": 1186
+    },
+    {
+      "path": "web/observatory/modules/light.js",
+      "sha256": "58bf23513a8f6761ce2ec05e27e3b212f0e246ea96abd9f44b3fc93684cb9977",
+      "bytes": 26420
+    },
+    {
+      "path": "web/observatory/modules/measure-physics.mjs",
+      "sha256": "ebb98c3e4a343ea14f826b31d7b93460070715d44162c6d1f224fbf5709b4381",
+      "bytes": 1421
+    },
+    {
+      "path": "web/observatory/modules/measure-pilot.css",
+      "sha256": "b9b4a9c11e318c40b0bac58bc62bf4a151d6722b67eb774c111aa73fa728be1c",
+      "bytes": 4618
+    },
+    {
+      "path": "web/observatory/modules/measure.js",
+      "sha256": "922bf3e2ca03150f1b0f1e6cc76b5a0968a0bd6677a5ec2fcfeab2eb1ef124bf",
+      "bytes": 32218
+    },
+    {
+      "path": "web/observatory/modules/optics-physics.mjs",
+      "sha256": "c9f7f29d3fcc2d29ba705b73662fa1e58124140f3370be4864f20be5f0e76aa6",
+      "bytes": 5339
+    },
+    {
+      "path": "web/observatory/modules/optics-pilot.css",
+      "sha256": "e103e0dae60c4d3158ac5c322cacc9056c3f88ad42e715ff839bcb824386df51",
+      "bytes": 13865
+    },
+    {
+      "path": "web/observatory/modules/optics.js",
+      "sha256": "4f9bdf37d7f8cd7d62ceb3f14359b3548c2713efdd6f01ecb4c7427279659e16",
+      "bytes": 29454
+    },
+    {
+      "path": "web/observatory/modules/orbit-conics-physics.mjs",
+      "sha256": "1379b38ed3f1bf06b4fc5d3b19d0b86a201af5324f0be39c4f5086dfb974c288",
+      "bytes": 4419
+    },
+    {
+      "path": "web/observatory/modules/orbit-conics.css",
+      "sha256": "636fff3512aad93f0d3f3b69e187c6f8f43c3a0614e705853e137e502198d19b",
+      "bytes": 4603
+    },
+    {
+      "path": "web/observatory/modules/orbit-conics.js",
+      "sha256": "51a55084085fc6c8895fc2b066ca22955975458dd5c9e3129f67b5a40614a99f",
+      "bytes": 16763
+    },
+    {
+      "path": "web/observatory/modules/orbits-physics.mjs",
+      "sha256": "b51114d9751744ac5b1b92f7368b59f3eab13314a81d9400995c17e436aa085e",
+      "bytes": 3762
+    },
+    {
+      "path": "web/observatory/modules/orbits-pilot.css",
+      "sha256": "8250e05fbb0ef0b6d4e7f99bbc4d58e867d52317c94597865cab410310745f95",
+      "bytes": 5562
+    },
+    {
+      "path": "web/observatory/modules/orbits.js",
+      "sha256": "87e41e0ff3c6b66aa29228a58297820ddd8ef620fa5f1b41ce7b0091087b2161",
+      "bytes": 30415
+    },
+    {
+      "path": "web/observatory/modules/sky-demo-geometry.mjs",
+      "sha256": "44b8a21fedfe40e6d5adcd92eabce13b5a7e2cb53f6cc2068e1752b61a3762b6",
+      "bytes": 2201
+    },
+    {
+      "path": "web/observatory/modules/sky-motion-labels.js",
+      "sha256": "6e5a74e6ed502878bfc13d4af6db452e496d2374c0d23cc2362ad69e170b1f53",
+      "bytes": 1719
+    },
+    {
+      "path": "web/observatory/modules/sky-motion-physics.mjs",
+      "sha256": "3a388e78dbd154e71d52f58dcbbbb66c2a41faa4547d3a5c321a1cff29f14da8",
+      "bytes": 2061
+    },
+    {
+      "path": "web/observatory/modules/sky-motion-renderer.js",
+      "sha256": "b8548ed492c8cb599cb43eeca3792a0bf8a021e52fac22bf882c7f92e54940e6",
+      "bytes": 10717
+    },
+    {
+      "path": "web/observatory/modules/sky-physics.mjs",
+      "sha256": "5a9f57ba14149975bc338893e845e65ac9a948ebe329ab2a51507de4d85d1918",
+      "bytes": 4157
+    },
+    {
+      "path": "web/observatory/modules/sky-pilot.css",
+      "sha256": "de5908f00e5e6bc47241c6a4556f41b0a1fd3e371ef92faaccd9ac4bda5c7937",
+      "bytes": 10947
+    },
+    {
+      "path": "web/observatory/modules/sky.js",
+      "sha256": "a14ae004f35bdd71d184514c4e8a92e3f8757d26f7a3f791dc412679d8018514",
+      "bytes": 62639
+    },
+    {
+      "path": "web/observatory/modules/stars-hr-renderer.js",
+      "sha256": "ec573a66a4426cce878e229408843ce4c9584b64eb546cdaea8990cfd6aa2cf1",
+      "bytes": 4890
+    },
+    {
+      "path": "web/observatory/modules/stars-hr.mjs",
+      "sha256": "84bff5534cdae7fcd9be292f3187461a22b23a0f7c962d4982c29c41be1de87f",
+      "bytes": 2729
+    },
+    {
+      "path": "web/observatory/modules/stars-light-focus.css",
+      "sha256": "8be42df6d0d74558ae8ba5ebbe882aac4aad9ef90c775c973ead4e84aacd465f",
+      "bytes": 4321
+    },
+    {
+      "path": "web/observatory/modules/stars-light-focus.mjs",
+      "sha256": "7510e4511c5f0d6aff82dcb6ec6c43abda269ede65091d1d718c6fc802993d70",
+      "bytes": 2045
+    },
+    {
+      "path": "web/observatory/modules/stars-physics.mjs",
+      "sha256": "551319ab8e141a7f8a124f37a6eceea5952e767362410cc19c637f053e0202b4",
+      "bytes": 3172
+    },
+    {
+      "path": "web/observatory/modules/stars-pilot.css",
+      "sha256": "1669a59fc74f3a2a7ab92e9e950a95dfcbe146a4d487cd20d7f45c9873552f55",
+      "bytes": 13622
+    },
+    {
+      "path": "web/observatory/modules/stars-structure.js",
+      "sha256": "8d75748fdd06c3b518fec0dc31c05228b0c546cad232768df74c154d75113166",
+      "bytes": 4122
+    },
+    {
+      "path": "web/observatory/modules/stars-teaching.mjs",
+      "sha256": "b105f805b95b967d4d49718117e4b5289a078b36ee1c71ac281e210249df35e5",
+      "bytes": 1381
+    },
+    {
+      "path": "web/observatory/modules/stars.js",
+      "sha256": "bb910803c332aecfa1bb293b52950b1312e7788f163b77bc4f1986c0ad1be0ba",
+      "bytes": 43210
+    },
+    {
+      "path": "web/observatory/navigation.css",
+      "sha256": "2332f3091788f5d65947f5aace8ee72cefec4c1059b166257e3fa348690e9093",
+      "bytes": 4301
+    },
+    {
+      "path": "web/observatory/README.md",
+      "sha256": "660f889074c19c2447ff3c46727b7fe2c54ebacce47984ba17a4cbb310cf980a",
+      "bytes": 375
+    },
+    {
+      "path": "web/observatory/server.mjs",
+      "sha256": "8350213ebb1dc34b0f984c12692360dd5fce1d29bbce87a166428766d1eb81aa",
+      "bytes": 5930
+    },
+    {
+      "path": "web/observatory/shared/course-map.css",
+      "sha256": "910bb7cfd81434217b20d5addb92667b2fea05142bc6eb3ad6ac0d95c0eedefa",
+      "bytes": 5801
+    },
+    {
+      "path": "web/observatory/shared/course-map.js",
+      "sha256": "d32db2b50c452f028068bc141e881c8ca5afe6d64c5dbd06b1fe95d5ab42d16c",
+      "bytes": 7826
+    },
+    {
+      "path": "web/observatory/shared/editorial-labs.js",
+      "sha256": "4eadc0067d2ba4d1d9b7fb121e94c9758a0390b649c427aac8ffbecf7741ec14",
+      "bytes": 6301
+    },
+    {
+      "path": "web/observatory/shared/editorial.css",
+      "sha256": "999ff688d88d0a702c71ae13dba140e23cc5d390d527c7e761acba58cd465f7d",
+      "bytes": 63600
+    },
+    {
+      "path": "web/observatory/shared/editorial.js",
+      "sha256": "8ee5a983a952578a65d895fa0fe7b7fd2c8b789768bd1f12b5a6bb0cfd52f53f",
+      "bytes": 12087
+    },
+    {
+      "path": "web/observatory/shared/lab.js",
+      "sha256": "389a62349375473cc51d2008b9a90f833cce8261467129ed7865d913e871d28f",
+      "bytes": 5421
+    },
+    {
+      "path": "web/observatory/shared/mode-entry.js",
+      "sha256": "29d97d8a92c49b10505353d6c538b01b4af061a281622b79525ca8322acecd93",
+      "bytes": 2061
+    },
+    {
+      "path": "web/observatory/shared/navigation.js",
+      "sha256": "579423fab6e291c426f86d0c7866fdbb72bba9bd6fbcc4c609cd3fc6cedda466",
+      "bytes": 1971
+    },
+    {
+      "path": "web/observatory/site.css",
+      "sha256": "844d62f624742a5c7290c0c07f51c365bc5f4e39993fcfaed37ab338fe46da69",
+      "bytes": 17874
+    },
+    {
+      "path": "web/observatory/sources/alignments.md",
+      "sha256": "e44eec2aa3b9a20ca515402e847aa569f55866ee3d0730c9c6ad061c1331d420",
+      "bytes": 2349
+    },
+    {
+      "path": "web/observatory/sources/galaxy.md",
+      "sha256": "df742b213052c134662650b5c2f84d1a4cfe5c56570e3870b6e889bb52c2b894",
+      "bytes": 6788
+    },
+    {
+      "path": "web/observatory/sources/imaging.md",
+      "sha256": "3efc4abefc4a794385f1a4d8193295408b4b77dbc3f6db976e72766f3692db09",
+      "bytes": 4885
+    },
+    {
+      "path": "web/observatory/sources/landing-staging-sources.md",
+      "sha256": "3a362287bead67792aeeb1036d0f64219d7e94a64b981cf142d547e0f7237bc3",
+      "bytes": 6409
+    },
+    {
+      "path": "web/observatory/sources/light.md",
+      "sha256": "5f5572201daa2e8c663c77be360882bbe7640e26e7f88689a13a83b87613a8e1",
+      "bytes": 4120
+    },
+    {
+      "path": "web/observatory/sources/measure.md",
+      "sha256": "bdb6bb769d430c4276095823438a65e6c5f8e037c0fbb9c2a33572efab294174",
+      "bytes": 5263
+    },
+    {
+      "path": "web/observatory/sources/optics.md",
+      "sha256": "ab6ead1073fe73893b375f051bb64e57c86519e4950cebb5615ebef290533979",
+      "bytes": 8317
+    },
+    {
+      "path": "web/observatory/sources/orbit-conics.md",
+      "sha256": "45c4d156b00b77f429b56cd2caf884bc526e95d50b7b41125e2fe8197551a4be",
+      "bytes": 5700
+    },
+    {
+      "path": "web/observatory/sources/orbits-measure-browser-checks.mjs",
+      "sha256": "332a37eeea9ee28634bf451069a8e633273a5c21e0be7f3c6c4524e77b85e8b4",
+      "bytes": 7491
+    },
+    {
+      "path": "web/observatory/sources/orbits-measure-checks.mjs",
+      "sha256": "b8b13643b30a7f6f56eda3ee0480e9dc2112cb06e07106547c0cfa0e3cdbbbd8",
+      "bytes": 5202
+    },
+    {
+      "path": "web/observatory/sources/orbits.md",
+      "sha256": "1f77842f58bfbaf66a4dc0fd4d1af796fa85ec74c32ca1aa1ce33905b19426d3",
+      "bytes": 5239
+    },
+    {
+      "path": "web/observatory/sources/sky-motion.md",
+      "sha256": "e59f93c13c6614156424403e6397eacc5b19f62351e9169e5c9f5ba0ce89a82c",
+      "bytes": 4500
+    },
+    {
+      "path": "web/observatory/sources/sky.md",
+      "sha256": "3dc41cec4059b96db89277ff30b0bd16de4381a76ad11157ca5be178156f7c28",
+      "bytes": 9368
+    },
+    {
+      "path": "web/observatory/sources/stars-browser-checks.mjs",
+      "sha256": "4bb3807d4341a5ba34b47b5734430c754c5992946955d549093a195db55956c4",
+      "bytes": 4477
+    },
+    {
+      "path": "web/observatory/sources/stars-checks.mjs",
+      "sha256": "5f7ce1d99284361ae59d51b9e71ebc5c009ed9d8ac8e9c3cb411f8fe0f32fdba",
+      "bytes": 3088
+    },
+    {
+      "path": "web/observatory/sources/stars.md",
+      "sha256": "0e1719b493483e361dcb938bdb3eee9965b1f548a2c332943e65656c777aeecd",
+      "bytes": 10787
+    },
+    {
+      "path": "web/observatory/tools/prepare-catalog.py",
+      "sha256": "4782b8572548ba79c8fba7359a7532fec37407030b5955a9629eac34e81de824",
+      "bytes": 4395
+    },
+    {
+      "path": "web/solar-system/app.js",
+      "sha256": "a92cab9e9b6595fa4d3de5acc7140f189337db9d671190340c421229c88078e1",
+      "bytes": 43247
+    },
+    {
+      "path": "web/solar-system/content.js",
+      "sha256": "305c830975c12f81bbfb31a9ca253ce182f387f399e5d2636926c24f9f9a7c82",
+      "bytes": 24555
+    },
+    {
+      "path": "web/solar-system/data/orbits.json",
+      "sha256": "1c0353a4b868b0ce8b3eb38de4e959b5d4930b86d61dbe1e9135dfc2b0ad81e2",
+      "bytes": 3151
+    },
+    {
+      "path": "web/solar-system/data/physical.json",
+      "sha256": "bb3fbb9836606ffac509e1456ba8a5baffbf8a5fa2e9768c46f123ddf92a66fd",
+      "bytes": 2336
+    },
+    {
+      "path": "web/solar-system/data/reading-manifest.json",
+      "sha256": "8e1fb468221e985c4c306910e629b707ede3045777fe636e7fd9629a8f167a27",
+      "bytes": 2023
+    },
+    {
+      "path": "web/solar-system/data/resources.json",
+      "sha256": "99684e450028afbb9888adf00b74e3f70f0f82938c338dddcf574e74860dc079",
+      "bytes": 10906
+    },
+    {
+      "path": "web/solar-system/index.html",
+      "sha256": "1e5ed822573aa98dae7f5a415301c6038d0cb7941f74538a048c823d10f83750",
+      "bytes": 8728
+    },
+    {
+      "path": "web/solar-system/media/hl-tau.jpg",
+      "sha256": "e6e6b4c6eaa787b296d6f0256af7b75e3a9a348174a869fffb871a13d5069696",
+      "bytes": 247756
+    },
+    {
+      "path": "web/solar-system/media/kirkwood-gaps.png",
+      "sha256": "dd8986b2b5b9ebbcd043d12bdc96bf6d514aca83719be2aace3f59419b403731",
+      "bytes": 15974
+    },
+    {
+      "path": "web/solar-system/media/planet-properties.png",
+      "sha256": "d4d370578ce81d3e6ec35a3ee4087b52fa43aa062caa0023e627046f068e2640",
+      "bytes": 116718
+    },
+    {
+      "path": "web/solar-system/media/pluto-enhanced.jpg",
+      "sha256": "4302e1bf7c633290d2545c83d9abd000f5ce223e7fa85c11130725d729ef8e9e",
+      "bytes": 289906
+    },
+    {
+      "path": "web/solar-system/media/titan-radar.jpg",
+      "sha256": "09c192cdaabdd158497759d0082a90c506ba1993f20a551422cf2f28cc1aa2b3",
+      "bytes": 753768
+    },
+    {
+      "path": "web/solar-system/media/uranus-nircam.png",
+      "sha256": "e5f7a1a0e10a6e6c769b40ecbb2f4dd78ea2ada65f2e96efd69c113ea29f52a7",
+      "bytes": 2449044
+    },
+    {
+      "path": "web/solar-system/physics.mjs",
+      "sha256": "ff0f7f138152025887d75c0a83f7fe541d1a068caa0c87bce6f76aed792ae1b8",
+      "bytes": 1895
+    },
+    {
+      "path": "web/solar-system/reading/01.html",
+      "sha256": "5b2e54c2c568623cfb1eca0e024083f1051cb42e7fefefd8aec3885d2792965c",
+      "bytes": 32016
+    },
+    {
+      "path": "web/solar-system/reading/02.html",
+      "sha256": "e4675c86904b0d27bd589e230673f37b31786c68bdeef0b4e4564b01cb9eba41",
+      "bytes": 36673
+    },
+    {
+      "path": "web/solar-system/references.html",
+      "sha256": "15bd37ab9b7d749b7dac3689834b6eecf166764d66891df20527eae6ec86580e",
+      "bytes": 11590
+    },
+    {
+      "path": "web/solar-system/SOURCES.md",
+      "sha256": "ad041b63593482a1804e875538acf16d52b25897ba27bc432c09bc749c8bf66b",
+      "bytes": 7398
+    },
+    {
+      "path": "web/solar-system/style.css",
+      "sha256": "3050da121c8397e68372d507beafc36c83ecfbea1ace4cdafe5bfd83bd3ff0fd",
+      "bytes": 32093
+    },
+    {
+      "path": "web/solar-system/textures/earth_clouds.jpg",
+      "sha256": "fffd7f68d41b37274822150e54a6ef605af1d3ec35624d9f628c3b896bfa42ed",
+      "bytes": 965676
+    },
+    {
+      "path": "web/solar-system/textures/earth_daymap.jpg",
+      "sha256": "767ee1dc6eb3802699bfccf6f264880f8acd0b80de3191cd24984fe279b07b7c",
+      "bytes": 463087
+    },
+    {
+      "path": "web/solar-system/textures/jupiter.jpg",
+      "sha256": "b0f04d005350252636b0e3396fc592548cbd9e9126b269d32d5c6abd4b0e4f2b",
+      "bytes": 498976
+    },
+    {
+      "path": "web/solar-system/textures/mars.jpg",
+      "sha256": "2d187f3e77a98eaa8cea5f4cc722f633c122ef170b9e94ace6b5fb6cbc3f8e01",
+      "bytes": 750547
+    },
+    {
+      "path": "web/solar-system/textures/mercury.jpg",
+      "sha256": "5a5c80607f643496bac9a631e71957def35ed788895f18b678ac849c2b38e48a",
+      "bytes": 872555
+    },
+    {
+      "path": "web/solar-system/textures/moon.jpg",
+      "sha256": "2764ba6535ea0481a062846ee033cc7a909dae05b31a8fd13f3e98f3a7fd92bd",
+      "bytes": 1053869
+    },
+    {
+      "path": "web/solar-system/textures/neptune.jpg",
+      "sha256": "cb42ea82709741d28b0af44d8b283cbc6dbd0c521a7f0e1e1e010ade00977df6",
+      "bytes": 241580
+    },
+    {
+      "path": "web/solar-system/textures/saturn.jpg",
+      "sha256": "54a900ca9bf7ab62e70f862852759abdf342e6d6436a95a2fe9ebdb6bcd3bbac",
+      "bytes": 199916
+    },
+    {
+      "path": "web/solar-system/textures/saturn_ring_alpha.png",
+      "sha256": "4b0644b2f3ef259fd0bfaedd9dc52f9e7d9738f65f50363e8c4dd19f650d7334",
+      "bytes": 12119
+    },
+    {
+      "path": "web/solar-system/textures/sun.jpg",
+      "sha256": "ff0f076ba65e03b5ab518451bc96699325be38e3ccbdd5869ee1c00f3a0c8816",
+      "bytes": 822427
+    },
+    {
+      "path": "web/solar-system/textures/uranus.jpg",
+      "sha256": "d15239d46f82d3ea13d2b260b5b29b2a382f42f2916dae0694d0387b1204a09d",
+      "bytes": 77751
+    },
+    {
+      "path": "web/solar-system/textures/venus_atmosphere.jpg",
+      "sha256": "225012ad4911730605c4e189ca2a3bf674fce50cc48aab4102b936b47d6991ac",
+      "bytes": 229696
+    },
+    {
+      "path": "web/solar-system/textures/venus_surface.jpg",
+      "sha256": "dbe5db1c794a8ab4cbf7dd6bf193540c400fc833ce1e6cc399318aa68026278b",
+      "bytes": 885075
+    },
+    {
+      "path": "web/solar-system/vendor/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081
+    },
+    {
+      "path": "web/solar-system/vendor/OrbitControls.js",
+      "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c",
+      "bytes": 38703
+    },
+    {
+      "path": "web/solar-system/vendor/three.core.js",
+      "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20",
+      "bytes": 1403455
+    },
+    {
+      "path": "web/solar-system/vendor/three.module.js",
+      "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a",
+      "bytes": 603113
+    }
+  ]
+}

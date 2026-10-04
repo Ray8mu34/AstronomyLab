@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {EARTH,orbitState,trajectory,hohmann,transferPoint,staging,landing} from '../modules/orbits-physics.mjs';
+import {CONSTANTS,shadowHeight,dynamicalMass,s2Mass,distanceModulus,parallaxDistance,scalePropagation} from '../modules/measure-physics.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),out=[];
+const near=(a,b,t=1e-8)=>assert(Math.abs(a-b)<=t,`${a} != ${b} ±${t}`);
+function check(name,fn){fn();out.push({name,state:'passed'});}
+check('200 km圆轨道独立基准与轨道分类',()=>{const r=6571,mu=398600.435507,q=orbitState(200,Math.sqrt(mu/r));near(q.vc,7.788487911,1e-6);assert.equal(q.kind,'圆轨道');near(q.peri,r,1e-8);near(q.escape/q.vc,Math.SQRT2,1e-13);assert(q.period>5200&&q.period<5400);assert.equal(orbitState(200,0).kind,'落回地表');assert.equal(orbitState(200,q.vc*1.1).kind,'束缚椭圆');assert.equal(orbitState(200,q.escape).kind,'逃逸轨道');});
+check('独立解析圆轨道与RK4闭合/能量守恒',()=>{const q=orbitState(200,0),v=q.vc,tr=trajectory(200,v);assert(!tr.impact);const last=tr.points.at(-1);near(last.x,q.r,1e-5);near(last.y,0,1e-5);for(const p of tr.points){near(p.r,q.r,1e-5);near(p.v*p.v/2-EARTH.mu/p.r,-EARTH.mu/(2*q.r),1e-8);}});
+check('径向落回终止在地表，逃逸轨迹明确截断',()=>{const tr=trajectory(200,0);assert(tr.impact);near(tr.points.at(-1).r,6371,1e-8);assert(tr.points.every(p=>p.r>=6371-1e-8));const escape=trajectory(200,12);assert(!escape.impact);assert(escape.truncated);});
+check('霍曼转移解析端点、相等轨道零Δv与量级',()=>{const q=hohmann(200,35786);assert(q.dv>3.8&&q.dv<4.1);assert(q.seconds/3600>5&&q.seconds/3600<5.5);near(transferPoint(200,35786,0)[0],6571);near(transferPoint(200,35786,1)[0],-(6371+35786));near(transferPoint(200,35786,1)[1],0,1e-8);near(hohmann(200,200).dv,0);const mid=transferPoint(200,35786,.5);assert(mid[0]<0,'按时间过半时已过几何象限');});
+check('分级与储备代价按独立质量账计算',()=>{const q=staging();near(q.dv1,3*Math.log(120/40));near(q.dv2,3*Math.log(30/5));near(q.unseparated,3*Math.log(120/15));assert(q.gain>0);assert(staging({reserve:5}).total<q.total);near(staging({dry1:0,prop1:80,dry2:3,prop2:25,payload:2,ve:3}).gain,0,1e-12);});
+check('着陆推力边界：相等重量、停距与触地速率',()=>{near(landing(125,50,1+10/EARTH.g0).stopDistance,125);near(landing(125,50,1+10/EARTH.g0).impactSpeed,0,1e-6);assert.equal(landing(125,50,1).status,'不能减小下降速度');near(landing(125,50,1).impactSpeed,50);assert(landing(125,50,.5).impactSpeed>50);assert(landing(125,50,3).stopHeight>0);});
+check('月面测高几何与误差导数独立检查',()=>{near(shadowHeight(10,10).height,1.7632698070846498,1e-12);near(shadowHeight(10,45).height,10,1e-12);const q=shadowHeight(10,10,.5,.5),e=1e-5,derivative=(shadowHeight(10,10+e).height-shadowHeight(10,10-e).height)/(2*e);near(q.sigma,Math.hypot(Math.tan(Math.PI/18)*.5,derivative*.5),1e-9);});
+check('木卫一动力学质量、a³/P²误差与单位',()=>{const q=dynamicalMass(421800000,1.769138*86400,.01,.001);assert(q.mass>1.89e27&&q.mass<1.91e27);assert(q.mu>1.26e17&&q.mu<1.28e17);near(dynamicalMass(421800000*1.1,1.769138*86400).mass/q.mass,1.331,1e-12);near(dynamicalMass(421800000,1.769138*86400*2).mass/q.mass,.25,1e-12);near(q.relative,Math.hypot(.03,.002),1e-14);});
+check('S2圆整输入与太阳质量单位、距离三次方',()=>{const q=s2Mass(125,8000,16);near(q.aAU,1000);near(q.solar,3906250,200);near(s2Mass(125,8800,16).solar/q.solar,1.331,1e-12);near(s2Mass(125,8000,16,.01,.02,.03).relative,Math.sqrt(.03**2+.06**2+.06**2),1e-14);});
+check('距离模数10 pc定义、消光方向、视差半摆幅',()=>{near(distanceModulus(0,0,0).distance,10);near(distanceModulus(5,0,0).distance,100);near(parallaxDistance(100).distance,10);assert(distanceModulus(18,-5,.5).distance<distanceModulus(18,-5,0).distance);near(distanceModulus(18,-5,0,.1).relative,Math.log(10)*.1/5,1e-14);});
+check('距离共同标尺传递',()=>{const q=scalePropagation(1.1);near(q.radius,1.1);near(q.luminosity,1.21);near(q.mass,1.331);});
+const codeHashes={};for(const file of ['modules/orbits.js','modules/orbits-physics.mjs','modules/measure.js','modules/measure-physics.mjs'])codeHashes[file]=createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex');
+const evidence={checked_at:new Date().toISOString(),state:'passed',checks:out,code_sha256:codeHashes,scope:'Independent numerical/unit/limit checks only; browser and visual review separately recorded.',model_visual_review:'pending',human_scientific_review:'pending',real_trial:'pending'};
+for(const slug of ['orbits','measure'])fs.writeFileSync(path.join(root,'data',slug,'model-checks.json'),JSON.stringify(evidence,null,2)+'\n');
+console.log(JSON.stringify({state:evidence.state,count:out.length,results:{circular_km_s:orbitState(200,0).vc,hohmann_dv:hohmann(200,35786).dv,io_mass:dynamicalMass(421800000,1.769138*86400).mass,s2_solar_mass:s2Mass(125,8000,16).solar}},null,2));

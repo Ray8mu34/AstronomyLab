@@ -1,0 +1,136 @@
+{
+  "catalog_sha256": "cb7bc241a17207c8b3459ae71f45b36d2420cd5232a4da849a25a0afcc4f5669",
+  "sources": {
+    "assets/ARTICLE_ASSETS.csv": "d1f04fc627c044a569b67ccf28fb12402c5051a1348a520ea914286481a851c4"
+  },
+  "articles": [
+    {
+      "number": 1,
+      "title": "太阳系不是一串名字",
+      "source": "course/01-solar-system/lesson.md",
+      "source_sha256": "d2e41055c8c94da5429b75e68ad364b0871026940de687cfa19a8f8180b9486b",
+      "html_sha256": "8c1077af34dbae53a537616aba860f8d9dfce578abf93cb3466dd3a84bf34517",
+      "han_characters": 6874
+    },
+    {
+      "number": 2,
+      "title": "八颗行星的不同命运",
+      "source": "course/02-planet-comparisons/lesson.md",
+      "source_sha256": "f34c6e092fdf98f2d4205a458fc463b5bfa87d0d63133f651433888fe45c8c84",
+      "html_sha256": "a465583c33953ff7a30b860ae314df5052624ce966bdd98f514e93e304aa2042",
+      "han_characters": 6958
+    },
+    {
+      "number": 3,
+      "title": "月亮的几种时间",
+      "source": "course/03-moon/lesson.md",
+      "source_sha256": "41cc6ca795611a0fc8f31a43f4aa6e29f7a866c55b73605ed4a48c8f9ae10571",
+      "html_sha256": "2812e1069efeb2f5a91ad6312b2e60fdff2d2efe316a6e398b9d58a429329bbe",
+      "han_characters": 6963
+    },
+    {
+      "number": 4,
+      "title": "从影子到行星的相位",
+      "source": "course/04-eclipses-and-alignments/lesson.md",
+      "source_sha256": "94a8252adce2faf1ff1fd9a539d3df2217ae9d6483846e1c4ac98c1e7290644d",
+      "html_sha256": "51e9254a2ebc55d88da5002ac940e85fd74de1f50a4c55dc943895ec9226adbe",
+      "han_characters": 7048
+    },
+    {
+      "number": 5,
+      "title": "把天空装进日历：一年、一月与七月流火",
+      "source": "course/05-calendars/lesson.md",
+      "source_sha256": "debfebbd14f7e0a71ff92452c558f4158bb6eb1a66e8da4f387c0ddaf6182ab0",
+      "html_sha256": "93dafb3fecf804f5feb103021070644abc1416bc3069d39ebb2a9d2961ffc603",
+      "han_characters": 6026
+    },
+    {
+      "number": 6,
+      "title": "星图画的是什么：从北斗七星到三维银河",
+      "source": "course/06-sky-maps/lesson.md",
+      "source_sha256": "f6062da47a0f4226a805063720b3c8174061fdf7542c8fa66f280af556eeb5f4",
+      "html_sha256": "8d1a81c11c0109e97573c77fc7c07355f44b05b4a959688e89e14f33c9feb487",
+      "han_characters": 6469
+    },
+    {
+      "number": 7,
+      "title": "给天空建立骨架：参照平面、地轴与古人的测量",
+      "source": "course/07-reference-circles/lesson.md",
+      "source_sha256": "7c57c22d03828cb0a66236701871eb5150557c4f80c09e953983198151346069",
+      "html_sha256": "32de699fe179e4b753c532e2b6dcf2f2230b9d39734694a4492b4d693fb45b37",
+      "han_characters": 6489
+    },
+    {
+      "number": 8,
+      "title": "看见星光以前：一夜观测中的大气、背景与眼睛",
+      "source": "course/08-observing/lesson.md",
+      "source_sha256": "d02544505df6f62e1085ec1f5955bd1cf30cdc8aa0fec5c068d6cbaec1df89ab",
+      "html_sha256": "0c072f1db080fb3bbe23dc4edddeed9011a601548deda818a0177a986216be92",
+      "han_characters": 6345
+    },
+    {
+      "number": 9,
+      "title": "望远镜怎样把星光变成细节",
+      "source": "course/09-telescopes/lesson.md",
+      "source_sha256": "2c94bc0e74c47f6f4b102ca4683c042d497d582f91e6571efd657cc3c4e8eb8f",
+      "html_sha256": "d60569987a1d217180eeeeb1c1a2ded6f34b48d3333ef2a43d192fd68007d219",
+      "han_characters": 6695
+    },
+    {
+      "number": 10,
+      "title": "一束星光里藏着什么：亮度、温度、元素与运动",
+      "source": "course/10-starlight/lesson.md",
+      "source_sha256": "045bdf724d042fce2a31cd87e5eb725d0374062fb49f0e5fcd4f54b785f1fb95",
+      "html_sha256": "728f55d46e3592846c69fd50ed73c9d2d94b61360411145dbe75cb9be349079d",
+      "han_characters": 6517
+    },
+    {
+      "number": 11,
+      "title": "恒星为什么能活几十亿年，又为什么一定会改变",
+      "source": "course/11-stellar-evolution/lesson.md",
+      "source_sha256": "7ce9b041a1c8b9846df526edc84ffa3185ad1eea9031f323d718b3db54e068d8",
+      "html_sha256": "5c5b4268e5c5c4e2f7237d9e7b45788f13d3a7c04bf04e4061f3eaa7d4dd85dc",
+      "han_characters": 6388
+    },
+    {
+      "number": 12,
+      "title": "引力的边界，为什么也通向最明亮的爆发",
+      "source": "course/12-gravity-and-supernovae/lesson.md",
+      "source_sha256": "53fb5988a6bd5a2c25c3ce465d394ecb047b954f9e4c3aa44f8f9ce56da2d482",
+      "html_sha256": "f4d0b4580f2bbcec36a27781e9a79325594ea1ff6b5a44a3bda98f98210b10fe",
+      "han_characters": 6411
+    },
+    {
+      "number": 13,
+      "title": "从银河的一条亮带，读到宇宙的早期光",
+      "source": "course/13-galaxies-and-cmb/lesson.md",
+      "source_sha256": "97e600abb6738f3c6f5711e4ef501104b5cce8b68015aabc630be622bc62d24e",
+      "html_sha256": "1b1a653436f1d6e33958cb4900abb0e4afaaf637c4955ae52f681edd46ffd5e3",
+      "han_characters": 6884
+    },
+    {
+      "number": 14,
+      "title": "一张天文照片里，究竟有什么",
+      "source": "course/14-astronomical-images/lesson.md",
+      "source_sha256": "d3e685b8b5e455b4cece5a8ecd6a9b7915307f59cdd22d7d770c257177877458",
+      "html_sha256": "e10e2bd5158efee220da09820cf6245bcf2411fbdf1422711b78547984cf0213",
+      "han_characters": 6474
+    },
+    {
+      "number": 15,
+      "title": "一枚火箭回来之后：读懂航天与天文新闻",
+      "source": "course/15-news-and-explanation/lesson.md",
+      "source_sha256": "7b6a9609ed16c50426f38c7569bb168a8dcd518ab18ca0e91f08432580bf993d",
+      "html_sha256": "86bef6ff10564f6eff58f84ec1a92064f945ff859844c2ae380840a29881673d",
+      "han_characters": 6563
+    },
+    {
+      "number": 16,
+      "title": "从一夜的星光，走到宇宙的尺度与历史",
+      "source": "course/16-integration/lesson.md",
+      "source_sha256": "8b0043083f4d3f4a2a8fa26f815cce158750774aa58c55beaad569c2c76c0957",
+      "html_sha256": "435c17758f6e9027607474447fc33bc8d944d607d8f8075c537e2541a8b4b91f",
+      "han_characters": 6427
+    }
+  ]
+}

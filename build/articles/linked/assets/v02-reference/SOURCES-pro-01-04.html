@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.12" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>本轮实际核验补记（2026-10-02—03）</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../../../article-reading.css" />
+</head>
+<body>
+<nav class="reading-nav" aria-label="阅读导航"><a href="../../../index.html">十六篇文章</a><span>离线阅读预览 · 工程生成，不代表审校通过</span></nav>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">目录</h2>
+<ul>
+<li><a href="#本轮实际核验补记2026-10-0203" id="toc-本轮实际核验补记2026-10-0203">本轮实际核验补记（2026-10-02—03）</a></li>
+<li><a href="#科学来源与使用范围" id="toc-科学来源与使用范围">科学来源与使用范围</a>
+<ul>
+<li><a href="#nasaabout-the-planets" id="toc-nasaabout-the-planets">01 · NASA｜About the Planets</a></li>
+<li><a href="#nasasun-facts" id="toc-nasasun-facts">02 · NASA｜Sun Facts</a></li>
+<li><a href="#nasajupiter-facts" id="toc-nasajupiter-facts">03 · NASA｜Jupiter Facts</a></li>
+<li><a href="#nasa-imagine-the-universewhite-dwarf-stars" id="toc-nasa-imagine-the-universewhite-dwarf-stars">04 · NASA Imagine the Universe｜White Dwarf Stars</a></li>
+<li><a href="#nasawhat-is-a-barycenter" id="toc-nasawhat-is-a-barycenter">05 · NASA｜What Is a Barycenter?</a></li>
+<li><a href="#nasasolar-system-facts" id="toc-nasasolar-system-facts">06 · NASA｜Solar System Facts</a></li>
+<li><a href="#jpl-solar-system-dynamicsplanetary-physical-parameters" id="toc-jpl-solar-system-dynamicsplanetary-physical-parameters">07 · JPL Solar System Dynamics｜Planetary Physical Parameters</a></li>
+<li><a href="#jpl-solar-system-dynamicsastrodynamic-parameters" id="toc-jpl-solar-system-dynamicsastrodynamic-parameters">08 · JPL Solar System Dynamics｜Astrodynamic Parameters</a></li>
+<li><a href="#eso-almaalma-image-of-the-protoplanetary-disc-around-hl-tauri" id="toc-eso-almaalma-image-of-the-protoplanetary-disc-around-hl-tauri">09 · ESO / ALMA｜ALMA image of the protoplanetary disc around HL Tauri</a></li>
+<li><a href="#nasaa-frosty-landmark-for-planet-and-comet-formation" id="toc-nasaa-frosty-landmark-for-planet-and-comet-formation">10 · NASA｜A Frosty Landmark for Planet and Comet Formation</a></li>
+<li><a href="#nasaspace-snow-visible-in-bright-baby-solar-system" id="toc-nasaspace-snow-visible-in-bright-baby-solar-system">11 · NASA｜Space Snow Visible in Bright Baby Solar System</a></li>
+<li><a href="#nasahow-do-planets-formaccretion-model" id="toc-nasahow-do-planets-formaccretion-model">12 · NASA｜How Do Planets Form?；Accretion Model</a></li>
+<li><a href="#nasagas-giant" id="toc-nasagas-giant">13 · NASA｜Gas Giant</a></li>
+<li><a href="#nasaasteroid-facts" id="toc-nasaasteroid-facts">14 · NASA｜Asteroid Facts</a></li>
+<li><a href="#jpl-solar-system-dynamicskirkwood-gaps" id="toc-jpl-solar-system-dynamicskirkwood-gaps">15 · JPL Solar System Dynamics｜Kirkwood Gaps</a></li>
+<li><a href="#nasaceres-factsdawn-at-ceres" id="toc-nasaceres-factsdawn-at-ceres">16 · NASA｜Ceres Facts；Dawn at Ceres</a></li>
+<li><a href="#nasawhat-is-a-planet" id="toc-nasawhat-is-a-planet">17 · NASA｜What Is a Planet?</a></li>
+<li><a href="#iau2006-general-assembly-resolutions-b5-and-b6" id="toc-iau2006-general-assembly-resolutions-b5-and-b6">18 · IAU｜2006 General Assembly Resolutions B5 and B6</a></li>
+<li><a href="#nasapluto-facts" id="toc-nasapluto-facts">19 · NASA｜Pluto Facts</a></li>
+<li><a href="#nasakuiper-belt-facts" id="toc-nasakuiper-belt-facts">20 · NASA｜Kuiper Belt Facts</a></li>
+<li><a href="#nasacomet-facts" id="toc-nasacomet-facts">21 · NASA｜Comet Facts</a></li>
+<li><a href="#nasaoort-cloud-facts" id="toc-nasaoort-cloud-facts">22 · NASA｜Oort Cloud Facts</a></li>
+<li><a href="#nasaorbits-and-keplers-laws" id="toc-nasaorbits-and-keplers-laws">23 · NASA｜Orbits and Kepler’s Laws</a></li>
+<li><a href="#nasameteors-and-meteorites-facts" id="toc-nasameteors-and-meteorites-facts">24 · NASA｜Meteors and Meteorites Facts</a></li>
+<li><a href="#nasamercury-facts" id="toc-nasamercury-facts">25 · NASA｜Mercury Facts</a></li>
+<li><a href="#esa-bepicolombobackground-science" id="toc-esa-bepicolombobackground-science">26 · ESA BepiColombo｜Background Science</a></li>
+<li><a href="#nasavenus-facts" id="toc-nasavenus-facts">27 · NASA｜Venus Facts</a></li>
+<li><a href="#nasathe-causes-of-climate-changegreenhouse-effect" id="toc-nasathe-causes-of-climate-changegreenhouse-effect">28 · NASA｜The Causes of Climate Change：Greenhouse Effect</a></li>
+<li><a href="#nasamars-facts" id="toc-nasamars-facts">29 · NASA｜Mars Facts</a></li>
+<li><a href="#nasa-svs-mavenis-this-how-mars-lost-its-atmosphere" id="toc-nasa-svs-mavenis-this-how-mars-lost-its-atmosphere">30 · NASA SVS / MAVEN｜Is This How Mars Lost Its Atmosphere?</a></li>
+<li><a href="#nasajupiter-facts-1" id="toc-nasajupiter-facts-1">31 · NASA｜Jupiter Facts</a></li>
+<li><a href="#juno-southwest-research-institutejupiters-dilute-core" id="toc-juno-southwest-research-institutejupiters-dilute-core">32 · Juno / Southwest Research Institute｜Jupiter’s Dilute Core</a></li>
+<li><a href="#nasasaturn-facts" id="toc-nasasaturn-facts">33 · NASA｜Saturn Facts</a></li>
+<li><a href="#nasauranus-facts" id="toc-nasauranus-facts">34 · NASA｜Uranus Facts</a></li>
+<li><a href="#nasaneptune-facts" id="toc-nasaneptune-facts">35 · NASA｜Neptune Facts</a></li>
+<li><a href="#nasa-nssdcaplanetary-fact-sheet-metric" id="toc-nasa-nssdcaplanetary-fact-sheet-metric">36 · NASA NSSDCA｜Planetary Fact Sheet – Metric</a></li>
+<li><a href="#catling-kastingescape-of-atmospheres-to-space第5章" id="toc-catling-kastingescape-of-atmospheres-to-space第5章">37 · Catling &amp; Kasting｜Escape of Atmospheres to Space，第5章</a></li>
+<li><a href="#fraknoi-morrison-wolffastronomy-2e7.2" id="toc-fraknoi-morrison-wolffastronomy-2e7.2">38 · Fraknoi, Morrison &amp; Wolff｜Astronomy 2e，7.2</a></li>
+<li><a href="#nasaearth-facts" id="toc-nasaearth-facts">39 · NASA｜Earth Facts</a></li>
+<li><a href="#correia-laskarthe-four-final-rotation-states-of-venus" id="toc-correia-laskarthe-four-final-rotation-states-of-venus">40 · Correia &amp; Laskar｜The Four Final Rotation States of Venus</a></li>
+<li><a href="#nasa-cassinititan-science" id="toc-nasa-cassinititan-science">41 · NASA Cassini｜Titan Science</a></li>
+<li><a href="#nasaenceladus" id="toc-nasaenceladus">42 · NASA｜Enceladus</a></li>
+<li><a href="#nasamoon-facts" id="toc-nasamoon-facts">43 · NASA｜Moon Facts</a></li>
+<li><a href="#nasamoon-phases" id="toc-nasamoon-phases">44 · NASA｜Moon Phases</a></li>
+<li><a href="#nasamoonlight" id="toc-nasamoonlight">45 · NASA｜Moonlight</a></li>
+<li><a href="#nasa-eclipse-web-sitethe-moons-orbit-and-phases" id="toc-nasa-eclipse-web-sitethe-moons-orbit-and-phases">46 · NASA Eclipse Web Site｜The Moon’s Orbit and Phases</a></li>
+<li><a href="#nasatides" id="toc-nasatides">47 · NASA｜Tides</a></li>
+<li><a href="#noaatidal-variations-the-influence-of-position-and-distance" id="toc-noaatidal-variations-the-influence-of-position-and-distance">48 · NOAA｜Tidal Variations – The Influence of Position and Distance</a></li>
+<li><a href="#nasatidal-locking" id="toc-nasatidal-locking">49 · NASA｜Tidal Locking</a></li>
+<li><a href="#nasa-svsmoon-phase-and-libration-2026" id="toc-nasa-svsmoon-phase-and-libration-2026">50 · NASA SVS｜Moon Phase and Libration, 2026</a></li>
+<li><a href="#nasa-jplthe-apollo-experiment-that-keeps-on-giving" id="toc-nasa-jplthe-apollo-experiment-that-keeps-on-giving">51 · NASA JPL｜The Apollo Experiment That Keeps on Giving</a></li>
+<li><a href="#nasaweather-on-the-moon" id="toc-nasaweather-on-the-moon">52 · NASA｜Weather on the Moon</a></li>
+<li><a href="#nasamoon-formation" id="toc-nasamoon-formation">53 · NASA｜Moon Formation</a></li>
+<li><a href="#lroclunar-far-side-mosaic" id="toc-lroclunar-far-side-mosaic">54 · LROC｜Lunar Far Side Mosaic</a></li>
+<li><a href="#nasamoon-water-and-ices" id="toc-nasamoon-water-and-ices">55 · NASA｜Moon Water and Ices</a></li>
+<li><a href="#nasa-nssdcamoon-fact-sheet" id="toc-nasa-nssdcamoon-fact-sheet">56 · NASA NSSDCA｜Moon Fact Sheet</a></li>
+<li><a href="#us-naval-observatoryphases-of-the-moon-and-percent-illuminated" id="toc-us-naval-observatoryphases-of-the-moon-and-percent-illuminated">57 · US Naval Observatory｜Phases of the Moon and Percent Illuminated</a></li>
+<li><a href="#nasamoon-viewing-tips" id="toc-nasamoon-viewing-tips">58 · NASA｜Moon Viewing Tips</a></li>
+<li><a href="#nasaeclipsesthe-moon" id="toc-nasaeclipsesthe-moon">59 · NASA｜Eclipses：The Moon</a></li>
+<li><a href="#nasatypes-of-eclipses" id="toc-nasatypes-of-eclipses">60 · NASA｜Types of Eclipses</a></li>
+<li><a href="#nasa-eclipse-web-siteperiodicity-of-solar-eclipses" id="toc-nasa-eclipse-web-siteperiodicity-of-solar-eclipses">61 · NASA Eclipse Web Site｜Periodicity of Solar Eclipses</a></li>
+<li><a href="#nasa-eclipse-web-sitesaros-periodicity" id="toc-nasa-eclipse-web-sitesaros-periodicity">62 · NASA Eclipse Web Site｜Saros Periodicity</a></li>
+<li><a href="#nasa-eclipse-web-sitemercury-transit-catalog" id="toc-nasa-eclipse-web-sitemercury-transit-catalog">63 · NASA Eclipse Web Site｜Mercury Transit Catalog</a></li>
+<li><a href="#nasa-eclipse-web-sitevenus-transit-catalog" id="toc-nasa-eclipse-web-sitevenus-transit-catalog">64 · NASA Eclipse Web Site｜Venus Transit Catalog</a></li>
+<li><a href="#royal-belgian-institute-for-space-aeronomyvenus-phases" id="toc-royal-belgian-institute-for-space-aeronomyvenus-phases">65 · Royal Belgian Institute for Space Aeronomy｜Venus Phases</a></li>
+<li><a href="#nasagalileos-phases-of-venus-and-other-planets" id="toc-nasagalileos-phases-of-venus-and-other-planets">66 · NASA｜Galileo’s Phases of Venus and Other Planets</a></li>
+<li><a href="#nasa-jplwhats-up-february-2025" id="toc-nasa-jplwhats-up-february-2025">67 · NASA JPL｜What’s Up: February 2025</a></li>
+<li><a href="#nasa-hubblemars-oppositions-2016-and-2018" id="toc-nasa-hubblemars-oppositions-2016-and-2018">68 · NASA Hubble｜Mars Oppositions 2016 and 2018</a></li>
+<li><a href="#nasa-hubblerelative-positions-and-sizes-for-19952007-mars-oppositions" id="toc-nasa-hubblerelative-positions-and-sizes-for-19952007-mars-oppositions">69 · NASA Hubble｜Relative Positions and Sizes for 1995–2007 Mars Oppositions</a></li>
+<li><a href="#nasa-nssdcamars-fact-sheet" id="toc-nasa-nssdcamars-fact-sheet">70 · NASA NSSDCA｜Mars Fact Sheet</a></li>
+<li><a href="#nasa-american-astronomical-societysolar-viewing-safety" id="toc-nasa-american-astronomical-societysolar-viewing-safety">71 · NASA / American Astronomical Society｜Solar Viewing Safety</a></li>
+<li><a href="#nasahow-we-find-and-characterize-exoplanets" id="toc-nasahow-we-find-and-characterize-exoplanets">72 · NASA｜How We Find and Characterize Exoplanets</a></li>
+<li><a href="#museo-galileophases-of-venus" id="toc-museo-galileophases-of-venus">73 · Museo Galileo｜Phases of Venus</a></li>
+<li><a href="#andrew-vanderburgtransit-light-curve-tutorial" id="toc-andrew-vanderburgtransit-light-curve-tutorial">74 · Andrew Vanderburg｜Transit Light Curve Tutorial</a></li>
+<li><a href="#fraknoi-morrison-wolffastronomy-2e11.3" id="toc-fraknoi-morrison-wolffastronomy-2e11.3">75 · Fraknoi, Morrison &amp; Wolff｜Astronomy 2e，11.3</a></li>
+</ul></li>
+</ul>
+</nav>
+<blockquote>
+<p>状态说明：以下为用户提供的Pro范例原始来源索引，已完整阅读并保留编号。其原文检索日期不代表Codex已逐项重新核验。当前轮实际核验及支持边界见<a href="/sources">独立复核记录</a>；新增本地图片记录见<a href="../v02-first4-SOURCES.html">01—04素材来源</a>。</p>
+</blockquote>
+<section id="本轮实际核验补记2026-10-0203" class="level2">
+<h2>本轮实际核验补记（2026-10-02—03）</h2>
+<p>独立模型复核已经逐项检查 75 个编号所含的 93 个去重 URL：92 个读取到相关内容，1 个 PMC 全文仍受验证码阻塞。按原索引直接支持范围判断，66 项支持所用范围，9 项部分支持；这不是人工科学审校通过。下面是主编辑继续实际打开原页后的补指，原有条目和编号保留。</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>编号</th>
+<th>补指与使用边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s03</td>
+<td>巨行星组成由该页支持；热辐射与可见光反射的区分是基础辐射物理解释，不把这一页当完整光谱推导。</td>
+</tr>
+<tr>
+<td>s20</td>
+<td>NASA 柯伊伯带页支持正文的基础描述；补充 PMC 研究全文未读，不引用其具体混沌动力学推导。</td>
+</tr>
+<tr>
+<td>s32</td>
+<td>模糊核心图版的简短说明需与 s03 的引力观测背景和 s38 的分异/压缩机制合读，不称单张图像直接剖开内部。</td>
+</tr>
+<tr>
+<td>s45</td>
+<td>地照的两次反射链由 s44 页面 Earthshine 节直接支持；地球/月球视直径比由 s07 参数推算。</td>
+</tr>
+<tr>
+<td>s49</td>
+<td>能量耗散与同步由锁定页支持；角动量交换交叉指 s51 测距说明。圆轨道角动量、速度和能量趋势为作者明确假设下的推导。</td>
+</tr>
+<tr>
+<td>s50</td>
+<td>累计约 59% 补<a href="https://svs.gsfc.nasa.gov/10836/">SVS Moon Wobble</a>；纬度天平动与约 6.68° 夹角补<a href="https://svs.gsfc.nasa.gov/5199/">SVS Libration in Latitude</a>。均已实际阅读。动画科学可视化与拍摄录像分开。</td>
+</tr>
+<tr>
+<td>s59</td>
+<td>月食期间大气弯折、散射、过滤太阳光的机制补<a href="https://science.nasa.gov/solar-system/moon/super-blood-moon-your-questions-answered/">NASA 2021 专题的 Why does the Moon turn red 节</a>。只用于该机制，不移用其 2021 天象时刻为当前预报。</td>
+</tr>
+<tr>
+<td>s65</td>
+<td>比利时机构页混写最大距角与最亮，不能继承该等同关系。最大距角近半相；最亮弯月实例由 s67 支持。正文未采用错误等同。</td>
+</tr>
+<tr>
+<td>s72</td>
+<td>凌星假阳性与后续核验补<a href="https://www.jpl.nasa.gov/news/kepler-gets-a-little-help-from-its-friends/">JPL Kepler Gets a Little Help From Its Friends</a>，实际读了食双星、背景混光、后随观测段。只引用辨识机制，不把 2013 候选数、运行时态或确认阈值当今天的统一标准。</td>
+</tr>
+</tbody>
+</table>
+<p>NASA Venus Facts 的“日出到日落 117 日”、Moon Phases 的纬度天平动简化、旧 ESA 页的动态资料等不作为整页背书；具体范围见独立报告。</p>
+</section>
+<section id="科学来源与使用范围" class="level1">
+<h1>科学来源与使用范围</h1>
+<p>资料检索日期：2026-10-02。编号与四篇正文中的链接对应。这里区分三种内容：原试卷和原课程方案只用于确定每篇的知识起点；外部科学事实以所列机构、研究者或作者资料为依据；比例换算、圆轨道近似、角速度关系及叙述组织由本稿自行展开。它们不是《今日天文》的翻译、节选或逐章改写；该书的具体版本与正文未提供，因此本包没有编造其页码或章节引用。</p>
+<p>条目说明的是实际使用范围，不表示来源页面上所有表述均被整体背书。机构科普页也可能保留过时统计或过度简化；本文不引用卫星总数、任务未来时态等无关动态信息。编号对应主题入口，因此少数条目指向同一网页；这不是75篇互不重复的文献。模型解释与间接证据在正文中有相应限定。</p>
+<p>原材料：用户提供的《2026面试试题.pdf》p.1题2、3、8；p.2题18；p.4题25。原方案《天协新人天文学共同基础_课程与教材方案.pdf》p.7–11用于确认01–04讲主题。试卷标明不对外分享，故本包不附试卷全文，也不以练习形式复刻原题。</p>
+<p><a id="s01"></a></p>
+<section id="nasaabout-the-planets" class="level2">
+<h2>01 · NASA｜About the Planets</h2>
+<p><a href="https://science.nasa.gov/solar-system/planets/">原始来源</a>。八行星名单与类地、气巨星、冰巨星分组。只使用稳定的类别事实，不使用页面中的动态天体数量。</p>
+<p><a id="s02"></a></p>
+</section>
+<section id="nasasun-facts" class="level2">
+<h2>02 · NASA｜Sun Facts</h2>
+<p><a href="https://science.nasa.gov/sun/facts/">原始来源</a>。太阳的尺寸、质量占比与当前核心氢聚变。文中的一厘米地球模型和光行时为自行比例计算。</p>
+<p><a id="s03"></a></p>
+</section>
+<section id="nasajupiter-facts" class="level2">
+<h2>03 · NASA｜Jupiter Facts</h2>
+<p><a href="https://science.nasa.gov/jupiter/jupiter-facts/">原始来源</a>。巨行星组成、内部物态及热环境；“行星也有热辐射”不等于“在可见光中主要自行发光”。</p>
+<p><a id="s04"></a></p>
+</section>
+<section id="nasa-imagine-the-universewhite-dwarf-stars" class="level2">
+<h2>04 · NASA Imagine the Universe｜White Dwarf Stars</h2>
+<p><a href="https://imagine.gsfc.nasa.gov/science/objects/dwarfs2.html">原始来源</a>。通常白矮星的遗迹与冷却图景。正文只说不靠持续的核心氢聚变，并未宣称任何白矮星绝无核燃烧。</p>
+<p><a id="s05"></a></p>
+</section>
+<section id="nasawhat-is-a-barycenter" class="level2">
+<h2>05 · NASA｜What Is a Barycenter?</h2>
+<p><a href="https://spaceplace.nasa.gov/barycenter/">原始来源</a>。质心、太阳与行星的共同运动。补充：<a href="https://science.nasa.gov/learn/basics-of-space-flight/chapter3-3/">NASA Gravity &amp; Mechanics</a>。</p>
+<p><a id="s06"></a></p>
+</section>
+<section id="nasasolar-system-facts" class="level2">
+<h2>06 · NASA｜Solar System Facts</h2>
+<p><a href="https://science.nasa.gov/solar-system/solar-system-facts/">原始来源</a>。太阳系组成、形成概貌、银河系中的位置及日球层背景。日球层顶与引力束缚范围在正文中明确分开。</p>
+<p><a id="s07"></a></p>
+</section>
+<section id="jpl-solar-system-dynamicsplanetary-physical-parameters" class="level2">
+<h2>07 · JPL Solar System Dynamics｜Planetary Physical Parameters</h2>
+<p><a href="https://ssd.jpl.nasa.gov/planets/phys_par.html">原始来源</a>。质量、体积等效平均半径、平均密度、周期与重力参数。平均半径的定义见表下 Column Descriptions。太阳距离补参照第36项。</p>
+<p><a id="s08"></a></p>
+</section>
+<section id="jpl-solar-system-dynamicsastrodynamic-parameters" class="level2">
+<h2>08 · JPL Solar System Dynamics｜Astrodynamic Parameters</h2>
+<p><a href="https://ssd.jpl.nasa.gov/astro_par.html">原始来源</a>。AU 与光速等常数。本文光行时、尺度模型和影锥量级为依据这些常数及天体尺寸所做的简化计算。</p>
+<p><a id="s09"></a></p>
+</section>
+<section id="eso-almaalma-image-of-the-protoplanetary-disc-around-hl-tauri" class="level2">
+<h2>09 · ESO / ALMA｜ALMA image of the protoplanetary disc around HL Tauri</h2>
+<p><a href="https://www.eso.org/public/images/eso1436a/">原始来源</a>。HL Tau 毫米波观测的图像性质、波段与署名。配套新闻：<a href="https://www.eso.org/public/news/eso1436/">ESO 1436</a>。环隙不等于逐一确认的行星。</p>
+<p><a id="s10"></a></p>
+</section>
+<section id="nasaa-frosty-landmark-for-planet-and-comet-formation" class="level2">
+<h2>10 · NASA｜A Frosty Landmark for Planet and Comet Formation</h2>
+<p><a href="https://science.nasa.gov/universe/exoplanets/a-frosty-landmark-for-planet-and-comet-formation/">原始来源</a>。不同挥发物的雪线与形成条件；不把某种雪线固定为太阳系恒久不变的分界。</p>
+<p><a id="s11"></a></p>
+</section>
+<section id="nasaspace-snow-visible-in-bright-baby-solar-system" class="level2">
+<h2>11 · NASA｜Space Snow Visible in Bright Baby Solar System</h2>
+<p><a href="https://science.nasa.gov/universe/exoplanets/space-snow-visible-in-bright-baby-solar-system/">原始来源</a>。年轻恒星盘中水雪线可随环境变化，支持雪线是温度条件而非实体围栏。</p>
+<p><a id="s12"></a></p>
+</section>
+<section id="nasahow-do-planets-formaccretion-model" class="level2">
+<h2>12 · NASA｜How Do Planets Form?；Accretion Model</h2>
+<p><a href="https://science.nasa.gov/exoplanets/how-do-planets-form/">原始来源</a>。颗粒到微行星、行星胚胎与形成时间竞争。补充：<a href="https://science.nasa.gov/asset/hubble/accretion-model-of-planet-formation/">吸积模型可视化</a>、<a href="https://science.nasa.gov/missions/hubble/hubble-finds-a-planet-forming-in-an-unconventional-way/">不同形成机制的研究背景</a>。</p>
+<p><a id="s13"></a></p>
+</section>
+<section id="nasagas-giant" class="level2">
+<h2>13 · NASA｜Gas Giant</h2>
+<p><a href="https://science.nasa.gov/exoplanets/gas-giant/">原始来源</a>。盘相互作用、迁移与其他行星系统。补充：<a href="https://science.nasa.gov/universe/exoplanets/dance-of-the-sub-neptunes-a-planetary-system-in-resonance/">共振与迁移研究</a>。具体迁移历史并非都已确定。</p>
+<p><a id="s14"></a></p>
+</section>
+<section id="nasaasteroid-facts" class="level2">
+<h2>14 · NASA｜Asteroid Facts</h2>
+<p><a href="https://science.nasa.gov/solar-system/asteroids/facts/">原始来源</a>。主小行星带、形成遗存、碰撞与木星扰动；不把整体起源写成单一大行星爆炸。</p>
+<p><a id="s15"></a></p>
+</section>
+<section id="jpl-solar-system-dynamicskirkwood-gaps" class="level2">
+<h2>15 · JPL Solar System Dynamics｜Kirkwood Gaps</h2>
+<p><a href="https://ssd.jpl.nasa.gov/diagrams/mb_hist.html">原始来源</a>。主带半长轴分布与木星平均运动共振。空隙主要指轨道参数分布，不能把图当作实际空间中完全空的圆环。</p>
+<p><a id="s16"></a></p>
+</section>
+<section id="nasaceres-factsdawn-at-ceres" class="level2">
+<h2>16 · NASA｜Ceres Facts；Dawn at Ceres</h2>
+<p><a href="https://science.nasa.gov/dwarf-planets/ceres/facts/">原始来源</a>。谷神星的位置、矮行星身份与内部/表面线索。补充：<a href="https://science.nasa.gov/mission/dawn/science/ceres/">Dawn任务科学结果</a>。未继承不确定水总量估计。</p>
+<p><a id="s17"></a></p>
+</section>
+<section id="nasawhat-is-a-planet" class="level2">
+<h2>17 · NASA｜What Is a Planet?</h2>
+<p><a href="https://science.nasa.gov/solar-system/planets/what-is-a-planet/">原始来源</a>。行星定义的背景与太阳系类别。正式条文以第18项为准。</p>
+<p><a id="s18"></a></p>
+</section>
+<section id="iau2006-general-assembly-resolutions-b5-and-b6" class="level2">
+<h2>18 · IAU｜2006 General Assembly Resolutions B5 and B6</h2>
+<p><a href="https://iauarchive.eso.org/static/resolutions/Resolution_GA26-5-6.pdf">原始来源</a>。太阳系行星、矮行星定义以及冥王星分类决议。正文对“清空邻域”的解释是动力学层面的说明，并非逐字翻译定义全文。</p>
+<p><a id="s19"></a></p>
+</section>
+<section id="nasapluto-facts" class="level2">
+<h2>19 · NASA｜Pluto Facts</h2>
+<p><a href="https://science.nasa.gov/dwarf-planets/pluto/facts/">原始来源</a>。新视野号飞掠、冥王星地貌与分类。</p>
+<p><a id="s20"></a></p>
+</section>
+<section id="nasakuiper-belt-facts" class="level2">
+<h2>20 · NASA｜Kuiper Belt Facts</h2>
+<p><a href="https://science.nasa.gov/solar-system/kuiper-belt/facts/">原始来源</a>。柯伊伯带主要区域、共振成员及冥王星与海王星3∶2关系。补充原始研究：<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9169662/">Pluto near the edge of chaos</a>。</p>
+<p><a id="s21"></a></p>
+</section>
+<section id="nasacomet-facts" class="level2">
+<h2>21 · NASA｜Comet Facts</h2>
+<p><a href="https://science.nasa.gov/solar-system/comets/facts/">原始来源</a>。彗发、尘埃尾与离子尾；尾方向不简单等于运动反方向。</p>
+<p><a id="s22"></a></p>
+</section>
+<section id="nasaoort-cloud-facts" class="level2">
+<h2>22 · NASA｜Oort Cloud Facts</h2>
+<p><a href="https://science.nasa.gov/solar-system/oort-cloud/facts/">原始来源</a>。奥尔特云的假说性质、量级及长周期彗星关联。没有整体直接影像；范围存在模型依赖。</p>
+<p><a id="s23"></a></p>
+</section>
+<section id="nasaorbits-and-keplers-laws" class="level2">
+<h2>23 · NASA｜Orbits and Kepler’s Laws</h2>
+<p><a href="https://science.nasa.gov/solar-system/orbits-and-keplers-laws/">原始来源</a>。开普勒定律、椭圆轨道、轨道大小与周期。圆轨道速度、会合周期和正文数例为自行展开的基础物理推导。</p>
+<p><a id="s24"></a></p>
+</section>
+<section id="nasameteors-and-meteorites-facts" class="level2">
+<h2>24 · NASA｜Meteors and Meteorites Facts</h2>
+<p><a href="https://science.nasa.gov/solar-system/meteors-meteorites/facts/">原始来源</a>。流星体、流星、陨石与流星雨母体关联。未纳入当年流星雨日期预测。</p>
+<p><a id="s25"></a></p>
+</section>
+<section id="nasamercury-facts" class="level2">
+<h2>25 · NASA｜Mercury Facts</h2>
+<p><a href="https://science.nasa.gov/mercury/facts/">原始来源</a>。水星表面、内部、稀薄外逸层与3∶2自旋—轨道关系。</p>
+<p><a id="s26"></a></p>
+</section>
+<section id="esa-bepicolombobackground-science" class="level2">
+<h2>26 · ESA BepiColombo｜Background Science</h2>
+<p><a href="https://sci.esa.int/web/bepicolombo/-/34369-background-science">原始来源</a>。水星富金属内部及自压缩修正后的密度比较。使用机制与相对关系；现代平均密度数值采用JPL第7项，避免混用不同年代精度。</p>
+<p><a id="s27"></a></p>
+</section>
+<section id="nasavenus-facts" class="level2">
+<h2>27 · NASA｜Venus Facts</h2>
+<p><a href="https://science.nasa.gov/venus/venus-facts/">原始来源</a>。金星大气、温度、气压、反射、自转与太阳日。正文不沿用“距地球最近”的无时间条件说法。补充：<a href="https://openstax.org/books/astronomy-2e/pages/10-3-the-massive-atmosphere-of-venus">OpenStax 金星大气</a>。</p>
+<p><a id="s28"></a></p>
+</section>
+<section id="nasathe-causes-of-climate-changegreenhouse-effect" class="level2">
+<h2>28 · NASA｜The Causes of Climate Change：Greenhouse Effect</h2>
+<p><a href="https://science.nasa.gov/climate-change/causes/">原始来源</a>。此处仅引用自然温室效应的红外吸收、再辐射与散热机制。补充：<a href="https://science.nasa.gov/climate-change/faq/what-is-the-greenhouse-effect/">温室效应FAQ</a>。不以玻璃温室类比代替物理机制。</p>
+<p><a id="s29"></a></p>
+</section>
+<section id="nasamars-facts" class="level2">
+<h2>29 · NASA｜Mars Facts</h2>
+<p><a href="https://science.nasa.gov/mars/facts/">原始来源</a>。火星表面颜色、水活动地质证据及大气概貌。</p>
+<p><a id="s30"></a></p>
+</section>
+<section id="nasa-svs-mavenis-this-how-mars-lost-its-atmosphere" class="level2">
+<h2>30 · NASA SVS / MAVEN｜Is This How Mars Lost Its Atmosphere?</h2>
+<p><a href="https://svs.gsfc.nasa.gov/14846/">原始来源</a>。大气溅射、太阳活动与逃逸。只讨论已获得的科学结果，不把MAVEN写成仍在执行任务；<a href="https://science.nasa.gov/mission/maven/">NASA任务页</a>用于核对任务状态。</p>
+<p><a id="s31"></a></p>
+</section>
+<section id="nasajupiter-facts-1" class="level2">
+<h2>31 · NASA｜Jupiter Facts</h2>
+<p><a href="https://science.nasa.gov/jupiter/jupiter-facts/">原始来源</a>。木星氢氦组成、金属氢、无通常固体表面等。第3项与此为同一来源，按主题重复编号，来源预算不按两个网页计算。</p>
+<p><a id="s32"></a></p>
+</section>
+<section id="juno-southwest-research-institutejupiters-dilute-core" class="level2">
+<h2>32 · Juno / Southwest Research Institute｜Jupiter’s Dilute Core</h2>
+<p><a href="https://www.missionjuno.swri.edu/science-findings/jupiters-dilute-core">原始来源</a>。引力测量与稀释核心模型。用“支持的图景”而不是“拍到的核心”。</p>
+<p><a id="s33"></a></p>
+</section>
+<section id="nasasaturn-facts" class="level2">
+<h2>33 · NASA｜Saturn Facts</h2>
+<p><a href="https://science.nasa.gov/saturn/facts/">原始来源</a>。土星组成、环与表面参考的区别。不固定卫星总数。</p>
+<p><a id="s34"></a></p>
+</section>
+<section id="nasauranus-facts" class="level2">
+<h2>34 · NASA｜Uranus Facts</h2>
+<p><a href="https://science.nasa.gov/uranus/facts/">原始来源</a>。轴倾、冰巨星属性与极端季节；碰撞来源仅作候选解释。</p>
+<p><a id="s35"></a></p>
+</section>
+<section id="nasaneptune-facts" class="level2">
+<h2>35 · NASA｜Neptune Facts</h2>
+<p><a href="https://science.nasa.gov/neptune/neptune-facts/">原始来源</a>。海王星组成、大气与行星家族。未把旧增强色照片当作严格人眼颜色标准。</p>
+<p><a id="s36"></a></p>
+</section>
+<section id="nasa-nssdcaplanetary-fact-sheet-metric" class="level2">
+<h2>36 · NASA NSSDCA｜Planetary Fact Sheet – Metric</h2>
+<p><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/">原始来源</a>。近似轨道距离、轴倾、带符号自转周期与太阳日。该表混列不同时间参数时需看栏目，正文平均半径采用第7项。卫星数量不引用。</p>
+<p><a id="s37"></a></p>
+</section>
+<section id="catling-kastingescape-of-atmospheres-to-space第5章" class="level2">
+<h2>37 · Catling &amp; Kasting｜Escape of Atmospheres to Space，第5章</h2>
+<p><a href="https://geosci.uchicago.edu/~kite/doc/Catling_and_Kasting_ch_5.pdf">原始来源</a>。作者教材章节的公开学术副本。仅用于热逃逸、速度分布、上层大气与非热过程的机制，不声称整章已译写，不随包再分发PDF。</p>
+<p><a id="s38"></a></p>
+</section>
+<section id="fraknoi-morrison-wolffastronomy-2e7.2" class="level2">
+<h2>38 · Fraknoi, Morrison &amp; Wolff｜Astronomy 2e，7.2</h2>
+<p><a href="https://openstax.org/books/astronomy-2e/pages/7-2-composition-and-structure-of-planets">原始来源</a>。分异、材料和内部结构。补充：<a href="https://openstax.org/books/astronomy-2e/pages/8-1-the-global-perspective">8.1 地球整体与内部</a>。这是OpenStax原作，不是《今日天文》。</p>
+<p><a id="s39"></a></p>
+</section>
+<section id="nasaearth-facts" class="level2">
+<h2>39 · NASA｜Earth Facts</h2>
+<p><a href="https://science.nasa.gov/earth/facts/">原始来源</a>。地球海洋、岩石表面、大气与环境。地球—金星—火星对照是本稿综合组织，并非某一网页的章节改写。</p>
+<p><a id="s40"></a></p>
+</section>
+<section id="correia-laskarthe-four-final-rotation-states-of-venus" class="level2">
+<h2>40 · Correia &amp; Laskar｜The Four Final Rotation States of Venus</h2>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/11459048/">原始来源</a>。金星自转演化研究；<a href="https://ntrs.nasa.gov/citations/19800037581">大气潮汐原始研究摘要</a>。用于说明候选物理机制，未宣称唯一形成史已确定。</p>
+<p><a id="s41"></a></p>
+</section>
+<section id="nasa-cassinititan-science" class="level2">
+<h2>41 · NASA Cassini｜Titan Science</h2>
+<p><a href="https://science.nasa.gov/mission/cassini/science/titan/">原始来源</a>。土卫六浓厚大气、液态甲烷/乙烷湖海与降雨。未把液态水内部海洋的推断写成已直接拍到。</p>
+<p><a id="s42"></a></p>
+</section>
+<section id="nasaenceladus" class="level2">
+<h2>42 · NASA｜Enceladus</h2>
+<p><a href="https://science.nasa.gov/saturn/moons/enceladus/">原始来源</a>。冰粒气体喷流与内部液态海洋线索。液态环境不等于生命证据。</p>
+<p><a id="s43"></a></p>
+</section>
+<section id="nasamoon-facts" class="level2">
+<h2>43 · NASA｜Moon Facts</h2>
+<p><a href="https://science.nasa.gov/moon/facts/">原始来源</a>。月海、高地、撞击和月球概貌。</p>
+<p><a id="s44"></a></p>
+</section>
+<section id="nasamoon-phases" class="level2">
+<h2>44 · NASA｜Moon Phases</h2>
+<p><a href="https://science.nasa.gov/moon/moon-phases/">原始来源</a>。月相的照明几何、可见时段、地照和朝向。升落时间只是理想化近似，不是本地观测预报。</p>
+<p><a id="s45"></a></p>
+</section>
+<section id="nasamoonlight" class="level2">
+<h2>45 · NASA｜Moonlight</h2>
+<p><a href="https://science.nasa.gov/moon/moonlight/">原始来源</a>。月面反射、地照与反照率概念。地球/月球视大小比由参数自行计算。</p>
+<p><a id="s46"></a></p>
+</section>
+<section id="nasa-eclipse-web-sitethe-moons-orbit-and-phases" class="level2">
+<h2>46 · NASA Eclipse Web Site｜The Moon’s Orbit and Phases</h2>
+<p><a href="https://eclipse.gsfc.nasa.gov/SEhelp/moonorbit.html">原始来源</a>。恒星月、朔望月、轨道不匀速及月长变化。补充：<a href="https://eclipse.gsfc.nasa.gov/phase/phasecat.html">月相目录</a>。</p>
+<p><a id="s47"></a></p>
+</section>
+<section id="nasatides" class="level2">
+<h2>47 · NASA｜Tides</h2>
+<p><a href="https://science.nasa.gov/moon/tides/">原始来源</a>。潮汐的差异引力、地月相互作用。正文用地心随动参照说明两侧相对加速度，未把平衡隆起当实际潮位图。</p>
+<p><a id="s48"></a></p>
+</section>
+<section id="noaatidal-variations-the-influence-of-position-and-distance" class="level2">
+<h2>48 · NOAA｜Tidal Variations – The Influence of Position and Distance</h2>
+<p><a href="https://oceanservice.noaa.gov/education/tutorial_tides/tides06_variations.html">原始来源</a>。大潮、小潮与日月作用组合。太阳/月球潮汐量级与海洋实际响应需分开。</p>
+<p><a id="s49"></a></p>
+</section>
+<section id="nasatidal-locking" class="level2">
+<h2>49 · NASA｜Tidal Locking</h2>
+<p><a href="https://science.nasa.gov/moon/tidal-locking/">原始来源</a>。同步自转、形变、耗散与长期地月演化。正文明确区分轨道角动量增大与轨道速度减小。</p>
+<p><a id="s50"></a></p>
+</section>
+<section id="nasa-svsmoon-phase-and-libration-2026" class="level2">
+<h2>50 · NASA SVS｜Moon Phase and Libration, 2026</h2>
+<p><a href="https://svs.gsfc.nasa.gov/5587/">原始来源</a>。基于月面及轨道数据制作的2026年月相与天平动可视化，非连续实拍。经纬度天平动与视直径变化。补充：<a href="https://science.nasa.gov/moon/moon-phases/">Moon Phases第44项</a>。</p>
+<p><a id="s51"></a></p>
+</section>
+<section id="nasa-jplthe-apollo-experiment-that-keeps-on-giving" class="level2">
+<h2>51 · NASA JPL｜The Apollo Experiment That Keeps on Giving</h2>
+<p><a href="https://www.jpl.nasa.gov/news/the-apollo-experiment-that-keeps-on-giving/">原始来源</a>。激光测距与当前月球远离速率约3.8厘米/年。补充：<a href="https://eclipse.gsfc.nasa.gov/SEhelp/ApolloLaser.html">NASA测距说明</a>、<a href="https://ilrs.gsfc.nasa.gov/science/scienceContributions/lunar.html">ILRS月球测距</a>。</p>
+<p><a id="s52"></a></p>
+</section>
+<section id="nasaweather-on-the-moon" class="level2">
+<h2>52 · NASA｜Weather on the Moon</h2>
+<p><a href="https://science.nasa.gov/moon/weather-on-the-moon/">原始来源</a>。月面昼夜与极区温度环境。未把近侧/远侧当昼面/夜面。</p>
+<p><a id="s53"></a></p>
+</section>
+<section id="nasamoon-formation" class="level2">
+<h2>53 · NASA｜Moon Formation</h2>
+<p><a href="https://science.nasa.gov/moon/formation/">原始来源</a>。大碰撞图景、样品约束、不同形成模型及近远侧地质差别。仅使用机制与证据概述，不继承页面中可能滞后的未来任务表述或精确地壳厚度估计。</p>
+<p><a id="s54"></a></p>
+</section>
+<section id="lroclunar-far-side-mosaic" class="level2">
+<h2>54 · LROC｜Lunar Far Side Mosaic</h2>
+<p><a href="https://lroc.im-ldi.com/visit/exhibits/2/gallery/90">原始来源</a>。LROC月球远侧拼接影像及其真实观测来源。与一帧直接全貌摄影、艺术想象不同。</p>
+<p><a id="s55"></a></p>
+</section>
+<section id="nasamoon-water-and-ices" class="level2">
+<h2>55 · NASA｜Moon Water and Ices</h2>
+<p><a href="https://science.nasa.gov/moon/moon-water-and-ices/">原始来源</a>。极区永久阴影与水冰环境。本文未给出水冰资源总量，也未把“有冰”写成可立即利用。</p>
+<p><a id="s56"></a></p>
+</section>
+<section id="nasa-nssdcamoon-fact-sheet" class="level2">
+<h2>56 · NASA NSSDCA｜Moon Fact Sheet</h2>
+<p><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html">原始来源</a>。月球尺寸、轨道、轴倾角与地月距离。轨道相对黄道约5.1°，赤道相对轨道约6.7°不可混用。</p>
+<p><a id="s57"></a></p>
+</section>
+<section id="us-naval-observatoryphases-of-the-moon-and-percent-illuminated" class="level2">
+<h2>57 · US Naval Observatory｜Phases of the Moon and Percent Illuminated</h2>
+<p><a href="https://aa.usno.navy.mil/faq/moon_phases">原始来源</a>。受光圆面比例和月相的参照定义。正文的余弦公式是明确条件下的球面投影几何关系，并非逐字抄自此页。</p>
+<p><a id="s58"></a></p>
+</section>
+<section id="nasamoon-viewing-tips" class="level2">
+<h2>58 · NASA｜Moon Viewing Tips</h2>
+<p><a href="https://science.nasa.gov/moon/viewing-tips/">原始来源</a>。晨昏线附近长影与月面地形观察。没有据此组织读者自行观日。</p>
+<p><a id="s59"></a></p>
+</section>
+<section id="nasaeclipsesthe-moon" class="level2">
+<h2>59 · NASA｜Eclipses：The Moon</h2>
+<p><a href="https://science.nasa.gov/moon/eclipses/">原始来源</a>。月食、地球影区、红色照明与日月食区别。</p>
+<p><a id="s60"></a></p>
+</section>
+<section id="nasatypes-of-eclipses" class="level2">
+<h2>60 · NASA｜Types of Eclipses</h2>
+<p><a href="https://science.nasa.gov/eclipses/types/">原始来源</a>。日全、偏、环、全环食及对应的影区。</p>
+<p><a id="s61"></a></p>
+</section>
+<section id="nasa-eclipse-web-siteperiodicity-of-solar-eclipses" class="level2">
+<h2>61 · NASA Eclipse Web Site｜Periodicity of Solar Eclipses</h2>
+<p><a href="https://eclipse.gsfc.nasa.gov/SEsaros/SEperiodicity.html">原始来源</a>。交点、食季与约173日间隔。轨道背景参见第46项。</p>
+<p><a id="s62"></a></p>
+</section>
+<section id="nasa-eclipse-web-sitesaros-periodicity" class="level2">
+<h2>62 · NASA Eclipse Web Site｜Saros Periodicity</h2>
+<p><a href="https://eclipse.gsfc.nasa.gov/SEsaros/SEperiodicity.html">原始来源</a>。223朔望月、242交点月、239近点月及18年11日8小时近似。与第61项为同一来源，按主题编号。</p>
+<p><a id="s63"></a></p>
+</section>
+<section id="nasa-eclipse-web-sitemercury-transit-catalog" class="level2">
+<h2>63 · NASA Eclipse Web Site｜Mercury Transit Catalog</h2>
+<p><a href="https://eclipse.gsfc.nasa.gov/transit/catalog/MercuryCatalog.html">原始来源</a>。从地球看水星凌日的几何与记录。没有引用旧主页里已经过时的历史发生总次数。</p>
+<p><a id="s64"></a></p>
+</section>
+<section id="nasa-eclipse-web-sitevenus-transit-catalog" class="level2">
+<h2>64 · NASA Eclipse Web Site｜Venus Transit Catalog</h2>
+<p><a href="https://eclipse.gsfc.nasa.gov/transit/catalog/VenusCatalog.html">原始来源</a>。金星凌日、2004/2012配对与周期。倾角背景：<a href="https://eclipse.gsfc.nasa.gov/OH/transit12.html">2012 Transit of Venus</a>。</p>
+<p><a id="s65"></a></p>
+</section>
+<section id="royal-belgian-institute-for-space-aeronomyvenus-phases" class="level2">
+<h2>65 · Royal Belgian Institute for Space Aeronomy｜Venus Phases</h2>
+<p><a href="https://www.aeronomie.be/en/encyclopedia/venus-phases-not-line-geocentric-model">原始来源</a>。金星相位、视大小和常规满相观测条件。最大距角公式为正文圆轨道几何推导；数值参照第7、36项。</p>
+<p><a id="s66"></a></p>
+</section>
+<section id="nasagalileos-phases-of-venus-and-other-planets" class="level2">
+<h2>66 · NASA｜Galileo’s Phases of Venus and Other Planets</h2>
+<p><a href="https://science.nasa.gov/resource/galileos-phases-of-venus-and-other-planets/">原始来源</a>。历史观测记录图与金星相位。完整模型比较另参照第73项，避免将单项证据过度解释。</p>
+<p><a id="s67"></a></p>
+</section>
+<section id="nasa-jplwhats-up-february-2025" class="level2">
+<h2>67 · NASA JPL｜What’s Up: February 2025</h2>
+<p><a href="https://www.jpl.nasa.gov/videos/whats-up-february-2025/">原始来源</a>。金星在弯月阶段接近明亮状态的具体观测解释。作为历史实例使用，不是2026年观测预报。</p>
+<p><a id="s68"></a></p>
+</section>
+<section id="nasa-hubblemars-oppositions-2016-and-2018" class="level2">
+<h2>68 · NASA Hubble｜Mars Oppositions 2016 and 2018</h2>
+<p><a href="https://science.nasa.gov/asset/hubble/mars-oppositions-2016-and-2018/">原始来源</a>。冲日几何、地火周期与约26个月间隔。视逆行部分为同一轨道模型的解释性展开。</p>
+<p><a id="s69"></a></p>
+</section>
+<section id="nasa-hubblerelative-positions-and-sizes-for-19952007-mars-oppositions" class="level2">
+<h2>69 · NASA Hubble｜Relative Positions and Sizes for 1995–2007 Mars Oppositions</h2>
+<p><a href="https://science.nasa.gov/asset/hubble/relative-positions-and-sizes-for-1995-2007-mars-oppositions/">原始来源</a>。不同次冲日的视大小差别、最近距离与冲日非同一时刻。补充：<a href="https://svs.gsfc.nasa.gov/4465/">NASA SVS 2016 Mars Opposition</a>。</p>
+<p><a id="s70"></a></p>
+</section>
+<section id="nasa-nssdcamars-fact-sheet" class="level2">
+<h2>70 · NASA NSSDCA｜Mars Fact Sheet</h2>
+<p><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">原始来源</a>。火星可达视直径的量级。与月球角直径比较用同一角单位，拒绝“火星大如满月”式照片尺度混淆。</p>
+<p><a id="s71"></a></p>
+</section>
+<section id="nasa-american-astronomical-societysolar-viewing-safety" class="level2">
+<h2>71 · NASA / American Astronomical Society｜Solar Viewing Safety</h2>
+<p><a href="https://science.nasa.gov/eclipses/safety/">原始来源</a>。观日与光学系统防护；补充：<a href="https://eclipse.aas.org/eye-safety">AAS Eye Safety</a>。本文不是太阳观测设备操作手册，不取代有经验成员现场检查。</p>
+<p><a id="s72"></a></p>
+</section>
+<section id="nasahow-we-find-and-characterize-exoplanets" class="level2">
+<h2>72 · NASA｜How We Find and Characterize Exoplanets</h2>
+<p><a href="https://science.nasa.gov/exoplanets/how-we-find-and-characterize/">原始来源</a>。凌星法的基本测量与行星确认背景。未引用会不断增长的发现总数。</p>
+<p><a id="s73"></a></p>
+</section>
+<section id="museo-galileophases-of-venus" class="level2">
+<h2>73 · Museo Galileo｜Phases of Venus</h2>
+<p><a href="https://catalogue.museogalileo.it/indepth/PhasesVenus.html">原始来源</a>。金星相位对托勒密布局的约束及第谷体系仍可兼容。补充：<a href="https://galileo.library.rice.edu/sci/clavius.html">Rice Galileo Project — Clavius</a>。</p>
+<p><a id="s74"></a></p>
+</section>
+<section id="andrew-vanderburgtransit-light-curve-tutorial" class="level2">
+<h2>74 · Andrew Vanderburg｜Transit Light Curve Tutorial</h2>
+<p><a href="https://avanderburg.github.io/tutorial/tutorial.html">原始来源</a>。作者的凌星光变说明：深度与半径比平方、恒星大小。补充：<a href="https://science.nasa.gov/citizen-science/exoplanet-watch/exoplanet-watch-glossary/">NASA Exoplanet Watch术语表</a>。</p>
+<p><a id="s75"></a></p>
+</section>
+<section id="fraknoi-morrison-wolffastronomy-2e11.3" class="level2">
+<h2>75 · Fraknoi, Morrison &amp; Wolff｜Astronomy 2e，11.3</h2>
+<p><a href="https://openstax.org/books/astronomy-2e/pages/11-3-atmospheres-of-the-giant-planets">原始来源</a>。巨行星大气光谱、甲烷和氨的可见特征、氢氦主要组成；用于说明观测特征强弱与元素/分子丰度不直接等同。</p>
+</section>
+</section>
+</body>
+</html>

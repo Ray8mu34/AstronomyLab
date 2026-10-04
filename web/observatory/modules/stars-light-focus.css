@@ -1,0 +1,52 @@
+.light-pilot .c-focus,.stars-pilot .c-focus{width:min(1200px,96vw);max-width:96vw;height:auto;max-height:94dvh;padding:14px 17px;border:1px solid var(--line);background:var(--bg);color:var(--text);overflow:auto}
+.light-pilot .c-focus::backdrop,.stars-pilot .c-focus::backdrop{background:#000d}
+.light-pilot .c-focus-head,.stars-pilot .c-focus-head{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.light-pilot .c-focus-head h2,.stars-pilot .c-focus-head h2{font-size:21px;margin:0;line-height:1.5}
+.light-pilot .c-focus-head button,.stars-pilot .c-focus-head button{white-space:nowrap;padding:5px 9px;font-size:13px}
+.light-pilot .c-focus-note,.stars-pilot .c-focus-note{font-size:12px;color:var(--muted);margin:5px 0 12px;line-height:1.6}
+.light-pilot .light-focus-button,.stars-pilot .stars-focus-button{margin-left:auto;padding:5px 9px;font-size:12px}
+.stars-pilot .c-focus .stars-detailed{margin-bottom:0}
+@media(max-width:700px){
+ .light-pilot .c-focus,.stars-pilot .c-focus{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;padding:10px 12px}
+ .light-pilot .c-focus-head h2,.stars-pilot .c-focus-head h2{font-size:16px}
+ .light-pilot .c-focus-head button,.stars-pilot .c-focus-head button{font-size:12px;padding:4px 7px}
+ .light-pilot .c-focus-note,.stars-pilot .c-focus-note{font-size:11px;margin:5px 0 8px}
+ .light-pilot .c-focus #light-plot{height:195px}
+ .light-pilot .c-focus .legend{font-size:11px}
+ .stars-pilot .c-focus .scene-host,.stars-pilot .c-focus .plot-canvas{height:205px}
+ .stars-pilot .c-focus .stars-model-note{font-size:10px;margin:4px 0}
+ .light-pilot .c-focus .control,.stars-pilot .c-focus .control{font-size:12px;margin-bottom:6px}
+ .light-pilot .c-focus .control small,.stars-pilot .c-focus .control small{font-size:10px}
+ .light-pilot .c-focus .light-band-note{font-size:11px;padding:4px 8px}
+}
+
+.editorial #lab-mount.stars-pilot .c-focus .stars-visuals>.stars-view-tools{order:-1}
+.editorial #lab-mount.stars-pilot .c-focus .stars-visuals>.stars-views{order:0}
+.editorial #lab-mount.stars-pilot .c-focus .stars-visuals>.stars-controls{order:1}
+.editorial #lab-mount.stars-pilot .c-focus .stars-visuals>[data-selection]{order:2}
+.editorial #lab-mount.stars-pilot .c-focus .stars-visuals>[data-metrics]{order:3}
+.editorial #lab-mount.stars-pilot .c-focus .stars-visuals>[data-comparison]{order:4}
+.editorial #lab-mount.stars-pilot .c-focus .stars-visuals>.stars-detailed{order:5}
+
+/* Stars retain the same diagram-led layout inside the live focus dialog. */
+.editorial #lab-mount.stars-pilot .c-focus .stars-workbench{display:flex;flex-direction:column;gap:12px}
+.editorial #lab-mount.stars-pilot .c-focus .stars-visuals{display:flex;width:100%}
+.editorial #lab-mount.stars-pilot .c-focus .stars-controls{order:-1;display:grid;grid-template-columns:minmax(180px,.75fr) minmax(220px,1fr) minmax(0,1.7fr);gap:6px 16px}
+.editorial #lab-mount.stars-pilot .c-focus [data-controls]{display:contents}
+.editorial #lab-mount.stars-pilot .c-focus .stars-views :is(.plot-canvas,.scene-host){height:370px;aspect-ratio:auto}
+.editorial #lab-mount.stars-pilot[data-mode=hr] .c-focus .stars-chart-panel canvas{height:440px}
+.editorial #lab-mount.stars-pilot .c-focus .stars-views{order:0}
+.editorial #lab-mount.stars-pilot .c-focus [data-metrics]{order:1}
+.editorial #lab-mount.stars-pilot .c-focus [data-comparison]{order:2}
+@media(max-width:700px){
+ .editorial #lab-mount.stars-pilot .c-focus .stars-controls{display:grid;grid-template-columns:minmax(0,1fr);padding:0;gap:6px}
+ .editorial #lab-mount.stars-pilot .c-focus .stars-presets{display:flex;flex-wrap:wrap;gap:6px}
+ .editorial #lab-mount.stars-pilot .c-focus .stars-presets button{flex:none;font-size:13px;min-height:44px;padding:5px 8px}
+ .editorial #lab-mount.stars-pilot .c-focus .stars-views :is(.plot-canvas,.scene-host){height:340px;aspect-ratio:auto}
+ .editorial #lab-mount.stars-pilot[data-mode=hr] .c-focus .stars-chart-panel canvas{height:420px}
+ .editorial #lab-mount.stars-pilot .c-focus .stars-view-tools{order:0}
+ .editorial #lab-mount.stars-pilot .c-focus .stars-views{order:1}
+ .editorial #lab-mount.stars-pilot .c-focus .stars-controls{order:-1}
+ .editorial #lab-mount.stars-pilot .c-focus [data-metrics]{order:2}
+ .editorial #lab-mount.stars-pilot .c-focus [data-comparison]{order:3}
+}

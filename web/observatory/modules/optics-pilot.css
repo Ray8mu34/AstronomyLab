@@ -1,0 +1,167 @@
+/* Optics pilot only. The host adjustments expire when this module leaves the route. */
+#app:has(.optics-pilot){padding-top:18px}
+#app:has(.optics-pilot)>.breadcrumb{margin-bottom:4px}
+#app:has(.optics-pilot)>h1{font-size:32px;line-height:1.35;margin:5px 0 7px}
+#app:has(.optics-pilot)>.page-lead{font-size:13px;line-height:1.6;margin:0 0 12px}
+.optics-pilot{--optics-paper:#eef3f3;--optics-ink:#233640;--optics-divider:#c4d0d2;margin-top:8px}
+.optics-pilot button,.optics-pilot summary{font-size:13px;line-height:1.45}
+.optics-pilot [hidden]{display:none!important}
+.optics-pilot h2,.optics-pilot h3{font-family:"Microsoft YaHei","PingFang SC",sans-serif}
+.optics-pilot .optics-tasks{display:flex;gap:0;border-bottom:1px solid var(--line)}
+.optics-pilot .optics-tasks button{flex:1;padding:9px 8px;border:0;border-bottom:3px solid transparent;border-radius:0;background:transparent;color:var(--muted);font-size:14px}
+.optics-pilot .optics-tasks button.active{border-bottom-color:var(--gold);color:var(--gold);background:#ebc77e08}
+.optics-pilot .optics-guide{padding:12px 0 13px}
+.optics-pilot .optics-guide h2{font-size:18px;line-height:1.5;margin:0 0 4px;color:var(--text);font-weight:500}
+.optics-pilot .optics-guide p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}
+.optics-pilot .optics-workspace{display:grid;grid-template-columns:minmax(0,1fr) 276px;border:1px solid var(--line);border-radius:9px;overflow:hidden;align-items:start;background:#080d15}
+.optics-pilot .optics-observation{min-width:0}
+.optics-pilot .optics-stage{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);min-width:0;overflow:hidden}
+.optics-pilot .optics-stage>section{min-width:0}
+.optics-pilot .optics-stage h3{font-size:12px;line-height:1.5;margin:0;color:var(--teal);font-weight:400}
+.optics-pilot .optics-view-head{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:9px 12px}
+.optics-pilot .optics-view-head button{padding:4px 7px;border-color:#33434f;background:transparent;font-size:11px;white-space:nowrap}
+.optics-pilot .optics-image-view>h3,.optics-pilot .optics-profile-view>h3{height:37px;padding:10px 12px}
+.optics-pilot .scene-host{height:286px}
+.optics-pilot .optics-image-view{border-left:1px solid var(--line);position:relative}
+.optics-pilot .optics-enlarge{position:absolute;right:10px;top:7px;padding:4px 7px;font-size:11px;background:#0b1420e8;z-index:1}
+.optics-pilot .optics-image-view canvas{height:286px}
+.optics-pilot .optics-profile-view{display:none}
+.optics-pilot .optics-profile-view canvas{height:286px}
+.optics-pilot[data-task=resolution] .optics-stage{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+.optics-pilot[data-task=resolution] .optics-ray-view,.optics-pilot[data-task=sampling] .optics-ray-view{display:none}
+.optics-pilot[data-task=resolution] .optics-profile-view{display:block;border-left:1px solid var(--line)}
+.optics-pilot[data-task=resolution] .optics-image-view,.optics-pilot[data-task=sampling] .optics-image-view{border-left:0}
+.optics-pilot[data-task=sampling] .optics-stage{grid-template-columns:1fr}
+.optics-pilot .optics-outcomes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.optics-pilot .optics-outcomes>div{padding:10px 14px;min-width:0;border-right:1px solid var(--line)}
+.optics-pilot .optics-outcomes>div:last-child{border-right:0}
+.optics-pilot[data-task=imaging] .optics-outcomes{grid-template-columns:repeat(2,minmax(0,1fr))}
+.optics-pilot .optics-outcomes small{display:block;font-size:11px;line-height:1.5}
+.optics-pilot .optics-outcomes strong{display:block;font-size:20px;line-height:1.4;margin-top:3px;color:var(--gold);font-weight:400;font-variant-numeric:tabular-nums}
+.optics-pilot .optics-runtime-warning{font-size:12px;line-height:1.5;margin:0;padding:7px 12px;color:var(--gold);border-top:1px solid var(--line)}
+.optics-pilot .optics-controls{min-width:0;min-height:394px;background:var(--optics-paper);color:var(--optics-ink);padding:15px 16px;align-self:stretch;color-scheme:light;border-left:1px solid var(--line)}
+.optics-pilot .optics-controls>h3{font-size:15px;font-weight:600;margin:0 0 12px;line-height:1.5}
+.optics-pilot .optics-controls button,.optics-pilot .optics-controls select{border-color:var(--optics-divider);background:#fff;color:var(--optics-ink)}
+.optics-pilot .optics-controls button:hover,.optics-pilot .optics-controls button.active{border-color:#a3762b;color:#775313;background:#fff8e9}
+.optics-pilot .optics-controls button:focus-visible,.optics-pilot .optics-controls select:focus-visible,.optics-pilot .optics-controls summary:focus-visible{outline-color:#2a777b}
+.optics-pilot .optics-types{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:14px}
+.optics-pilot .optics-types button{padding:6px 4px;font-size:12px}
+.optics-pilot .optics-types button:last-child{grid-column:1 / -1}
+.optics-pilot .optics-primary,.optics-pilot .optics-secondary{display:grid;gap:13px}
+.optics-pilot .control>span{display:flex;justify-content:space-between;gap:6px;align-items:baseline;line-height:1.6;margin-bottom:3px;font-size:13px}
+.optics-pilot .optics-control-reading{white-space:nowrap;color:#634818;font-variant-numeric:tabular-nums}
+.optics-pilot input[type=range]{display:block;height:25px;margin:0;accent-color:#987029}
+.optics-pilot select{width:100%;padding:7px 5px;font-size:12px}
+.optics-pilot .optics-presets{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 10px}
+.optics-pilot .optics-presets button{padding:7px 8px}
+.optics-pilot [data-preset=diffraction],.optics-pilot [data-preset=atmosphere],.optics-pilot [data-preset=undersample]{display:none}
+.optics-pilot[data-task=resolution] [data-preset=diffraction],.optics-pilot[data-task=resolution] [data-preset=atmosphere],.optics-pilot[data-task=sampling] [data-preset=undersample]{display:block}
+.optics-pilot[data-task=sampling][data-view=eyepiece] [data-preset=undersample]{display:none}
+.optics-pilot .optics-profile-toggle{display:none}
+.optics-pilot .optics-parameters{border-top:1px solid var(--optics-divider);margin-top:10px}
+.optics-pilot .optics-parameters>summary{padding:9px 0;cursor:pointer}
+.optics-pilot .optics-parameters[open] .optics-secondary{padding:8px 0}
+.optics-pilot .optics-controls .note{color:#4e6570;font-size:11px;line-height:1.65}
+.optics-pilot .optics-explanation{border-top:1px solid var(--line);margin:15px 0 0}
+.optics-pilot .optics-explanation>summary{font-size:14px;line-height:1.6;padding:12px 0;cursor:pointer;color:var(--teal)}
+.optics-pilot .optics-explanation-body{padding:0 2px 16px}
+.optics-pilot .optics-explanation .legend{padding:4px 0;font-size:12px}
+.optics-pilot .optics-explanation .metrics{margin:16px 0}
+.optics-pilot .optics-explanation figure{margin:0}
+@media(max-width:900px){
+ .optics-pilot .optics-workspace{grid-template-columns:minmax(0,1fr) 244px}
+ .optics-pilot .optics-controls{padding:12px}
+ .optics-pilot .optics-stage{grid-template-columns:1fr}
+ .optics-pilot[data-task=imaging] .optics-image-view{display:none}
+ .optics-pilot[data-task=resolution] .optics-stage{grid-template-columns:1fr}
+ .optics-pilot[data-task=resolution] .optics-profile-view{display:none}
+}
+@media(max-width:700px){
+ #app:has(.optics-pilot){padding:12px 14px 40px}
+ #app:has(.optics-pilot)>.breadcrumb{font-size:11px;margin:0 0 3px}
+ #app:has(.optics-pilot)>h1{font-size:25px;line-height:1.35;margin:3px 0 5px}
+ #app:has(.optics-pilot)>.page-lead{font-size:12px;line-height:1.5;margin:0 0 8px}
+ .optics-pilot{margin-top:4px}
+ .optics-pilot .optics-tasks button{font-size:13px;padding:8px 3px}
+ .optics-pilot .optics-guide{padding:9px 0 10px}
+ .optics-pilot .optics-guide h2{font-size:16px;line-height:1.45;margin-bottom:4px}
+ .optics-pilot .optics-guide p{font-size:12px;line-height:1.5}
+ .optics-pilot .optics-workspace{display:flex;flex-direction:column}
+ .optics-pilot .optics-observation,.optics-pilot .optics-controls{width:100%}
+ .optics-pilot .optics-stage{display:block}
+ .optics-pilot[data-task=imaging] .optics-image-view{display:block;border:0;border-top:1px solid var(--line)}
+ .optics-pilot .optics-view-head{padding:7px 10px}
+ .optics-pilot .optics-stage h3{font-size:11px}
+ .optics-pilot .scene-host{height:177px}
+ .optics-pilot .optics-image-view>h3{height:27px;padding:6px 10px}
+ .optics-pilot .optics-image-view canvas{height:177px}
+ .optics-pilot[data-task=imaging] .optics-image-view>h3{display:none}
+ .optics-pilot[data-task=imaging] .optics-image-view canvas{height:153px}
+ .optics-pilot[data-task=resolution] .optics-profile-view{display:none}
+ .optics-pilot[data-task=resolution][data-profile-open=true] .optics-profile-view{display:block;border-left:0;border-top:1px solid var(--line)}
+ .optics-pilot .optics-profile-view canvas{height:210px}
+ .optics-pilot .optics-outcomes>div{padding:8px 9px}
+ .optics-pilot .optics-outcomes small{font-size:10px;line-height:1.4}
+ .optics-pilot .optics-outcomes strong{font-size:17px;line-height:1.35;margin-top:3px}
+ .optics-pilot .optics-controls{border-left:0;border-top:1px solid var(--line);padding:10px 12px;min-height:0}
+ .optics-pilot .optics-controls>h3{display:none}
+ .optics-pilot .optics-types{display:flex;gap:5px;margin-bottom:8px}
+ .optics-pilot .optics-types button{flex:1;padding:6px 3px;font-size:11px;white-space:nowrap}
+ .optics-pilot .optics-primary{gap:7px}
+ .optics-pilot .optics-presets{margin:9px 0 0;gap:6px}
+ .optics-pilot .optics-presets button{font-size:12px;padding:6px 9px}
+ .optics-pilot .optics-parameters{margin-top:8px}
+ .optics-pilot .optics-parameters>summary{padding:7px 0;font-size:12px}
+ .optics-pilot[data-task=resolution] .optics-profile-toggle{display:block;margin-top:8px;font-size:12px;padding:5px 8px}
+ .optics-pilot .optics-explanation{margin-top:10px}
+}
+
+/* The same live image, controls and readouts move into this optional focus view. */
+body:has(.optics-focus[open]){overflow:hidden}
+.optics-pilot .optics-focus{width:min(980px,calc(100vw - 28px));max-width:none;max-height:calc(100dvh - 28px);padding:12px;border:1px solid #4b6474;border-radius:10px;background:#080d15;color:var(--text);overflow:auto}
+.optics-pilot .optics-focus::backdrop{background:#02070de8}
+.optics-pilot .optics-focus-head{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:2;background:#080d15}
+.optics-pilot .optics-focus-head h2{font-size:18px;line-height:1.5;margin:0;font-weight:500}
+.optics-pilot .optics-focus-head button{font-size:12px;padding:6px 9px;white-space:nowrap;border-color:var(--teal)}
+.optics-pilot .optics-focus-intro{font-size:12px;line-height:1.5;margin:5px 0 7px;color:var(--muted)}
+.optics-pilot .optics-focus-switch{display:flex;gap:7px;margin-bottom:8px}
+.optics-pilot .optics-focus-switch button{font-size:12px;padding:6px 12px}
+.optics-pilot .optics-focus-content{display:grid;grid-template-columns:minmax(0,1fr) 260px;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.optics-pilot .optics-focus-visual{min-width:0}
+.optics-pilot .optics-focus[open] .optics-image-view{display:block;border:0}
+.optics-pilot .optics-focus .optics-image-view>h3,.optics-pilot .optics-focus .optics-enlarge{display:none}
+.optics-pilot .optics-focus .optics-image-view canvas{height:350px}
+.optics-pilot .optics-focus-controls{min-height:0;padding:14px}
+.optics-pilot .optics-focus-note{font-size:12px;line-height:1.5;margin:8px 0 0;color:var(--muted)}
+@media(max-width:700px){
+ .optics-pilot .optics-enlarge{top:5px;right:8px}
+ .optics-pilot .optics-focus{width:calc(100vw - 20px);max-height:calc(100dvh - 20px);padding:10px}
+ .optics-pilot .optics-focus-head{gap:8px}
+ .optics-pilot .optics-focus-head h2{font-size:16px}
+ .optics-pilot .optics-focus-head button{font-size:11px;padding:6px 8px}
+ .optics-pilot .optics-focus-content{display:flex;flex-direction:column}
+ .optics-pilot .optics-focus .optics-image-view canvas{height:280px}
+ .optics-pilot .optics-focus-controls{padding:10px 12px}
+}
+
+/* Shared title/action row: every scientific surface starts on the same grid line. */
+.optics-pilot .optics-stage{align-items:start}
+.optics-pilot .optics-stage>.optics-image-view,
+.optics-pilot .optics-stage>.optics-profile-view,
+.optics-pilot .optics-stage>.optics-ray-view{grid-template-rows:64px auto}
+.optics-pilot .optics-stage .optics-view-head{height:64px;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;padding:8px 10px;margin:0}
+.optics-pilot .optics-stage .optics-view-head h3{margin:0;padding:0;height:auto}
+.optics-pilot .optics-stage .optics-enlarge{position:static;margin:0;white-space:nowrap}
+.optics-pilot .optics-axis-note{color:#9bb0c2;font-size:11px;line-height:1.5}
+.editorial #lab-mount .optics-pilot .optics-stage .optics-view-head{height:66px;padding:0;gap:10px;margin:0;min-height:0}
+.editorial #lab-mount .optics-pilot .optics-stage .optics-view-head h3{font-size:14px;margin:0;line-height:1.6;color:var(--text)}
+.editorial #lab-mount .optics-pilot .optics-stage .optics-enlarge{margin:0;padding:6px 8px;min-height:38px;font-size:13px}
+.editorial #lab-mount .optics-pilot .optics-axis-note{font-size:11px;color:var(--muted);max-width:80px;text-align:right}
+.editorial #lab-mount .optics-pilot .optics-stage :is(.scene-host,[data-image],[data-profile]){height:340px;aspect-ratio:auto}
+.optics-pilot .optics-focus .optics-image-view>.optics-view-head{display:none}
+@media(max-width:700px){
+ .editorial #lab-mount .optics-pilot .optics-stage .optics-view-head{height:58px;gap:8px}
+ .editorial #lab-mount .optics-pilot .optics-stage :is(.scene-host,[data-image]){height:230px}
+ .editorial #lab-mount .optics-pilot .optics-stage [data-profile]{height:270px}
+ .optics-pilot .optics-stage .optics-view-head h3{display:block}
+}

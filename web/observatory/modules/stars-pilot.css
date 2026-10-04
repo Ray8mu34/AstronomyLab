@@ -1,0 +1,161 @@
+.stars-pilot{min-width:0}
+.stars-pilot [hidden]{display:none!important}
+.stars-pilot .lab-tabs{display:flex;gap:6px;margin:0 0 10px;flex-wrap:wrap}
+.stars-pilot .lab-tabs button{flex:1;padding:7px 8px;font-size:14px;white-space:nowrap}
+.stars-pilot .stars-question{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:5px 0 9px;margin-bottom:10px}
+.stars-pilot .stars-question h2{font-size:21px;margin:0;line-height:1.45}
+.stars-pilot .stars-question details{max-width:400px;font-size:13px;color:var(--muted)}
+.stars-pilot summary{cursor:pointer;line-height:1.65}
+.stars-pilot details p{margin:7px 0;line-height:1.7}
+.stars-pilot .stars-workbench{display:grid;grid-template-columns:minmax(0,1fr) 286px;gap:16px;align-items:start}
+.stars-pilot .stars-visuals{min-width:0;display:flex;flex-direction:column}
+.stars-pilot .stars-views{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stars-pilot .viz-panel{border:1px solid var(--line);border-radius:0;min-width:0;overflow:hidden}
+.stars-pilot .panel-title{font-family:inherit;font-size:12px;padding:7px 9px;margin:0;line-height:1.55;min-height:34px}
+.stars-pilot .scene-host{height:220px;width:100%}
+.stars-pilot .plot-canvas{height:220px;display:block;width:100%}
+.stars-pilot .legend{font-size:11px;line-height:1.6;padding:5px 9px;margin:0;min-height:46px}
+.stars-pilot .stars-view-tools{display:none;gap:5px;margin:0 0 7px;justify-content:flex-end}
+.stars-pilot .stars-view-tools button{padding:4px 8px;font-size:12px}
+.stars-pilot .stars-mobile-view{display:none}
+.stars-pilot .metrics{display:flex;flex-wrap:wrap;gap:0;background:transparent;margin:0 0 8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);order:-1}
+.stars-pilot .metrics>div{flex:1;min-width:115px;padding:7px 9px;background:transparent;border-right:1px solid var(--line)}
+.stars-pilot .metrics small{font-size:11px;display:block;margin-bottom:2px}
+.stars-pilot .metrics strong{font-family:inherit;font-size:16px;color:var(--text);font-weight:500;line-height:1.45;display:block}
+.stars-pilot .metrics>div:first-child strong{font-size:21px;color:var(--gold)}
+.stars-pilot .stars-compare{font-size:12px;color:var(--teal);line-height:1.6;margin:6px 0;min-height:20px}
+.stars-pilot .stars-controls{border-left:2px solid var(--line);padding-left:13px;min-width:0}
+.stars-pilot .control{display:grid;grid-template-columns:1fr auto;gap:3px 8px;margin:0 0 8px;padding:0;font-size:13px;line-height:1.5;min-width:0}
+.stars-pilot .control input[type=range],.stars-pilot .control select{grid-column:1/-1}
+.stars-pilot .control output{font-variant-numeric:tabular-nums;color:var(--gold)}
+.stars-pilot input[type=range]{height:21px;margin:0}
+.stars-pilot .stars-check{font-size:13px;display:flex;gap:6px;align-items:center;line-height:1.5;margin:7px 0}
+.stars-pilot .stars-presets,.stars-pilot .stars-actions{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0}
+.stars-pilot .stars-presets button,.stars-pilot .stars-actions button{padding:5px 7px;min-height:32px;font-size:12px}
+.stars-pilot .stars-advanced{margin-top:7px;padding-top:7px;border-top:1px solid var(--line);font-size:13px}
+.stars-pilot .stars-advanced>div{padding-top:9px}
+.stars-pilot .stars-feedback{font-size:12px;line-height:1.6;color:var(--muted);min-height:20px;margin:6px 0}
+.stars-pilot .stars-detailed{font-size:13px;margin:9px 0;border-top:1px solid var(--line);padding-top:7px}
+.stars-pilot .stars-detailed .metrics strong{font-size:14px;color:var(--text)}
+.stars-pilot .stars-explanation{margin-top:15px;padding-top:9px;border-top:1px solid var(--line)}
+.stars-pilot .stars-explanation .lab-copy{margin-top:12px}
+.stars-pilot .stars-links{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:13px;font-size:13px}
+.stars-pilot .stars-model-note{font-size:11px;line-height:1.65;margin:7px 0;color:var(--muted)}
+.stars-pilot .stars-focus-bar{display:flex;float:right;position:relative;z-index:1;margin-top:7px}
+.stars-pilot .stars-question{padding-right:108px}
+.stars-pilot .stars-question details{margin-left:auto}
+@media(max-width:700px){
+ .stars-pilot .lab-tabs{display:grid;grid-template-columns:1fr 1fr}
+ .stars-pilot .stars-question{display:block;padding-top:2px;padding-right:0}
+ .stars-pilot .stars-question h2{font-size:18px}
+ .stars-pilot .stars-question details{margin-top:4px;margin-right:108px}
+ .stars-pilot .stars-workbench{display:flex;flex-direction:column;gap:9px}
+ .stars-pilot .stars-visuals,.stars-pilot .stars-controls{width:100%}
+ .stars-pilot .stars-view-tools{display:flex;justify-content:flex-start}
+ .stars-pilot .stars-focus-bar{margin-top:55px}
+ .stars-pilot .stars-visuals>.metrics{order:0;margin-top:7px;margin-bottom:0}
+ .stars-pilot .stars-mobile-view{display:inline-block}
+ .stars-pilot .stars-views{display:block}
+ .stars-pilot[data-view=scene] .stars-chart-panel{display:none}
+ .stars-pilot[data-view=chart] .stars-scene-panel{display:none}
+ .stars-pilot .scene-host,.stars-pilot .plot-canvas{height:215px}
+ .stars-pilot .metrics>div{min-width:90px;flex-basis:30%;padding:6px 7px}
+ .stars-pilot .metrics strong{font-size:14px;overflow-wrap:anywhere}
+ .stars-pilot .metrics>div:first-child strong{font-size:17px}
+ .stars-pilot .stars-controls{padding-left:9px;display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+ .stars-pilot [data-controls]{display:contents}
+ .stars-pilot [data-controls]>.stars-presets,.stars-pilot [data-controls]>.stars-check,.stars-pilot [data-controls]>.stars-advanced,.stars-pilot [data-controls]>.stars-model-note,.stars-pilot .stars-actions,.stars-pilot .stars-feedback{grid-column:1/-1}
+ .stars-pilot .stars-compare{font-size:11px}
+ .stars-pilot .legend{min-height:0}
+}
+
+/* Read the graph first; the small set of live choices immediately follows it. */
+.editorial #lab-mount.stars-pilot .stars-visuals>.stars-view-tools{order:-1}
+.editorial #lab-mount.stars-pilot .stars-visuals>.stars-views{order:0}
+.editorial #lab-mount.stars-pilot .stars-visuals>.stars-controls{order:1;margin-top:4px}
+.editorial #lab-mount.stars-pilot .stars-visuals>[data-selection]{order:2}
+.editorial #lab-mount.stars-pilot .stars-visuals>[data-metrics]{order:3}
+.editorial #lab-mount.stars-pilot .stars-visuals>[data-comparison]{order:4}
+.editorial #lab-mount.stars-pilot .stars-visuals>.stars-detailed{order:5}
+
+/* Diagram-led stellar lesson. All overrides stay inside this module. */
+.stars-pilot .stars-start h2{font-size:22px;font-weight:500;margin:0 0 5px;line-height:1.5}
+.stars-pilot .stars-start p{font-size:15px;line-height:1.8;color:var(--muted);margin:0 0 20px;max-width:900px}
+.stars-pilot .stars-management{font-size:13px}
+.stars-pilot .stars-management summary{cursor:pointer}
+.stars-pilot .stars-selection{font-size:16px;line-height:1.85;margin:10px 0;max-width:900px}
+.stars-pilot[data-mode=hr] .stars-scene-panel{display:none!important}
+.stars-pilot[data-mode=hr] .stars-view-tools{display:none!important}
+.stars-pilot[data-mode=hr] .stars-views{display:block}
+.editorial #lab-mount.stars-pilot .experiment-modes{margin-bottom:20px;gap:8px 25px;padding-right:100px}
+.editorial #lab-mount.stars-pilot .experiment-focus{right:0;margin-top:-66px}
+.editorial #lab-mount.stars-pilot .stars-workbench{display:flex;flex-direction:column;gap:12px;width:100%}
+.editorial #lab-mount.stars-pilot .stars-visuals{display:flex;width:100%;min-width:0}
+.editorial #lab-mount.stars-pilot .stars-controls{order:-1;width:100%;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;display:block}
+.editorial #lab-mount.stars-pilot [data-controls]{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(220px,1fr) minmax(0,1.5fr);gap:8px 20px;align-items:center}
+.editorial #lab-mount.stars-pilot .control{font-size:14px;line-height:1.6;margin:0;min-width:0}
+.editorial #lab-mount.stars-pilot .control select{margin:3px 0 0;font-size:14px;padding:6px;min-height:38px}
+.editorial #lab-mount.stars-pilot .stars-presets{margin:0;gap:6px;align-items:center}
+.editorial #lab-mount.stars-pilot .stars-presets button{font-size:13px;line-height:1.5;min-height:38px;padding:5px 8px}
+.editorial #lab-mount.stars-pilot [data-controls]>.stars-advanced{grid-column:1/-1;margin:0;padding:3px 0;border:0;font-size:13px}
+.editorial #lab-mount.stars-pilot .stars-advanced summary,
+.editorial #lab-mount.stars-pilot .stars-management summary{min-height:30px;font-size:13px;line-height:1.8}
+.editorial #lab-mount.stars-pilot .stars-management{margin:0;border:0;padding:0;display:inline-block}
+.editorial #lab-mount.stars-pilot .stars-management .stars-actions{margin:6px 0}
+.editorial #lab-mount.stars-pilot .stars-feedback{margin:4px 0 0;font-size:12px;min-height:0}
+.editorial #lab-mount.stars-pilot .stars-model-note{font-size:12px;line-height:1.6;margin:0}
+.editorial #lab-mount.stars-pilot .stars-views{gap:22px;width:100%;grid-template-columns:1fr 1fr}
+.editorial #lab-mount.stars-pilot[data-mode=evolution] .stars-views{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr)}
+.editorial #lab-mount.stars-pilot[data-mode=evolution] .stars-chart-panel{order:-1}
+.editorial #lab-mount.stars-pilot .panel-title{font-size:15px;min-height:30px;margin:0 0 8px;padding:0}
+.editorial #lab-mount.stars-pilot .stars-views :is(.plot-canvas,.scene-host){height:400px;aspect-ratio:auto;width:100%;display:block}
+.editorial #lab-mount.stars-pilot[data-mode=hr] .stars-chart-panel canvas{height:500px;aspect-ratio:auto}
+.editorial #lab-mount.stars-pilot .legend{font-size:13px;line-height:1.7;padding:9px 0;min-height:0}
+.editorial #lab-mount.stars-pilot .stars-visuals>.metrics{order:0;display:flex;gap:20px;padding:12px 0}
+.editorial #lab-mount.stars-pilot .metrics>div{padding:0;border:0;min-width:110px}
+.editorial #lab-mount.stars-pilot .metrics strong{font-size:21px;color:var(--text)}
+.editorial #lab-mount.stars-pilot .stars-detailed{order:3;margin:10px 0 0;padding:8px 0}
+.editorial #lab-mount.stars-pilot .stars-compare{order:2;margin:0;font-size:13px}
+.editorial #lab-mount.stars-pilot .stars-view-tools{margin:0 0 8px}
+.editorial #lab-mount.stars-pilot .stars-question{padding:0}
+.editorial #lab-mount.stars-pilot .stars-controls{display:grid;grid-template-columns:minmax(180px,.75fr) minmax(240px,1fr) minmax(0,1.7fr);gap:5px 20px}
+.editorial #lab-mount.stars-pilot [data-controls]{display:contents}
+.editorial #lab-mount.stars-pilot[data-mode=evolution] [data-controls]>.stars-presets,
+.editorial #lab-mount.stars-pilot[data-mode=ia] [data-controls]>.stars-presets{grid-column:3;grid-row:1}
+.editorial #lab-mount.stars-pilot [data-controls]>.stars-advanced{grid-column:1;grid-row:2}
+.editorial #lab-mount.stars-pilot .stars-management{grid-column:2;grid-row:2;align-self:start}
+.editorial #lab-mount.stars-pilot .stars-feedback{grid-column:1/-1}
+.editorial #lab-mount.stars-pilot[data-mode=hr] .stars-management{grid-column:1}
+.editorial #lab-mount.stars-pilot[data-mode=pulsar] .stars-presets{grid-column:1/-1;grid-row:2}
+.editorial #lab-mount.stars-pilot[data-mode=pulsar] .stars-advanced,
+.editorial #lab-mount.stars-pilot[data-mode=pulsar] .stars-management{grid-row:3}
+.editorial #lab-mount.stars-pilot[data-mode=collapse] [data-controls]>.stars-presets{grid-column:3}
+.editorial #lab-mount.stars-pilot[data-mode=collapse] .stars-check{grid-column:2}
+.editorial #lab-mount.stars-pilot[data-mode=collapse] .stars-advanced,
+.editorial #lab-mount.stars-pilot[data-mode=collapse] .stars-management{grid-row:auto}
+@media(max-width:900px){
+ .editorial #lab-mount.stars-pilot .stars-controls{grid-template-columns:1fr 1fr}
+ .editorial #lab-mount.stars-pilot [data-controls]>.stars-presets{grid-column:1/-1!important;grid-row:auto!important}
+ .editorial #lab-mount.stars-pilot [data-controls]>.stars-advanced,.editorial #lab-mount.stars-pilot .stars-management{grid-row:auto!important}
+}
+@media(max-width:700px){
+ .editorial #lab-mount.stars-pilot .experiment-modes{padding-right:0;gap:3px 20px;margin-bottom:14px;flex-wrap:nowrap;overflow-x:auto;max-width:100%}
+ .editorial #lab-mount.stars-pilot .experiment-modes button{flex-shrink:0;white-space:nowrap}
+ .editorial #app:has(#lab-mount.stars-pilot)>h1{font-size:29px;line-height:1.4;margin-bottom:20px}
+ .editorial #lab-mount.stars-pilot .experiment-modes button{font-size:14px;min-height:42px}
+ .editorial #lab-mount.stars-pilot .experiment-focus{position:static;display:flex;justify-content:flex-end;margin:0 0 8px}
+ .stars-pilot .stars-start h2{font-size:19px}
+ .stars-pilot .stars-start p{font-size:14px;margin-bottom:12px;line-height:1.75}
+ .editorial #lab-mount.stars-pilot .stars-controls{grid-template-columns:minmax(0,1fr);gap:9px}
+ .editorial #lab-mount.stars-pilot .stars-management,.editorial #lab-mount.stars-pilot [data-controls]>*{grid-column:1!important;grid-row:auto!important}
+ .editorial #lab-mount.stars-pilot [data-controls]>.stars-presets{grid-column:auto}
+ .editorial #lab-mount.stars-pilot .stars-presets button{min-height:44px;font-size:13px;white-space:normal}
+ .editorial #lab-mount.stars-pilot .stars-controls{padding:8px 0}
+ .editorial #lab-mount.stars-pilot .stars-views{display:block}
+ .editorial #lab-mount.stars-pilot .stars-views :is(.plot-canvas,.scene-host){height:340px;aspect-ratio:auto}
+ .editorial #lab-mount.stars-pilot[data-mode=hr] .stars-chart-panel canvas{height:420px}
+ .editorial #lab-mount.stars-pilot .stars-selection{font-size:14px;line-height:1.8}
+ .editorial #lab-mount.stars-pilot .metrics>div{min-width:105px;flex-basis:40%}
+ .editorial #lab-mount.stars-pilot .metrics strong{font-size:17px}
+ .editorial #lab-mount.stars-pilot .stars-view-tools button{min-height:44px;font-size:14px}
+}

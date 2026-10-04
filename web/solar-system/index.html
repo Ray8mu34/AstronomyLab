@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b10">
+  <title>太阳系 · 一张正在运动的地图</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="太阳系沙盘首页"><svg viewBox="0 0 36 36" aria-hidden="true"><ellipse cx="18" cy="18" rx="16" ry="6" transform="rotate(-32 18 18)"/><circle cx="18" cy="18" r="5"/><circle cx="30" cy="10" r="2"/></svg><span>天文知识地图<small>从试卷讲起的天文学知识入门</small></span></a>
+    <nav class="modes" aria-label="地图视图">
+      <button data-mode="explore" aria-pressed="true">宇宙沙盘</button>
+      <button data-mode="distance" aria-pressed="false">轨道距离</button>
+      <button data-mode="sizes" aria-pressed="false">尺寸比较</button>
+      <button data-mode="compare" aria-pressed="false">同指标比较</button>
+      <button data-mode="axes" aria-pressed="false">自转轴</button>
+    </nav>
+    <button id="sources-open" class="text-button">资料与图注 <span>↗</span></button>
+  </header>
+
+  <section class="experiment-bar" aria-label="当前观察与主控">
+    <div class="experiment-prompt"><strong id="experiment-question">同一个太阳系，为什么需要三种比例？</strong><p id="observation-hint">试试轨道距离，再回到沙盘；看地球轨道所在的小区域。</p></div>
+    <div class="experiment-actions"><div id="presets" class="presets" aria-label="观察预设"></div><button id="hint-toggle" aria-expanded="true" aria-controls="observation-hint">收起提示</button><button id="reset-experiment">重置本视图</button></div>
+    <div id="comparison-controls" class="comparison-controls" hidden><label>共同指标 <select id="comparison-metric"><option value="radius">平均半径</option><option value="mass">质量</option><option value="density">平均密度</option></select></label><label>横轴 <select id="comparison-scale"><option value="linear">线性刻度</option><option value="log">对数刻度</option></select></label></div>
+    <div id="notice" class="notice" role="status" hidden></div>
+  </section>
+  <section class="planet-rail" aria-label="太阳系成员">
+    <span class="rail-intro">固定参照<br><strong>地球 = 1</strong></span>
+    <div id="planet-buttons" class="planet-buttons"></div>
+    <div class="beyond"><button data-topic="asteroids">主小行星带 <span>↗</span></button><button data-topic="kuiper">柯伊伯带与远方 <span>↗</span></button></div>
+  </section>
+  <footer class="timebar">
+    <div class="time-controls"><button id="play" aria-label="暂停公转演示" aria-pressed="true">Ⅱ</button><label>近似位置 / UTC <input type="date" id="date" min="2000-01-01" max="2049-12-31" value="2026-10-03"></label></div>
+    <details class="layer-details"><summary>图层与演示说明</summary><div class="layer-controls"><label><input id="orbits-toggle" type="checkbox" checked>轨道线</label><label><input id="belts-toggle" type="checkbox" checked>小天体带</label><label class="speed-label">时间流速 <select id="speed"><option value="1">1 日 / 秒</option><option value="10" selected>10 日 / 秒</option><option value="60">60 日 / 秒</option></select></label><span>自转同速慢放，不表示真实周期。</span></div></details>
+  </footer>
+
+  <main class="workspace">
+    <section class="universe" aria-label="可交互太阳系三维地图">
+      <div id="stage" tabindex="0" role="region" aria-label="拖动旋转，滚轮缩放，点击天体查看；也可用下方行星按钮"></div>
+      <div id="labels" aria-hidden="false"></div>
+      <section id="comparison-view" class="comparison-view" aria-label="八行星共同指标比较" hidden><div class="comparison-heading"><strong id="comparison-title"></strong><span id="comparison-unit"></span></div><div id="comparison-axis" class="comparison-axis" aria-hidden="true"></div><div id="comparison-rows" class="comparison-rows"></div><p id="comparison-caption" class="comparison-caption"></p></section>
+      <section id="axes-view" class="axes-view" aria-label="固定参照的自转轴对照" hidden><div class="axis-reference"><strong>↑ 公转角动量正向</strong><span>每颗行星均从自己的轨道北侧看：公转 ↺</span></div><div id="axis-grid" class="axis-grid"></div><details class="axis-notes"><summary>轴的方向、观察位置与真实周期</summary><p>金色箭头是按右手定则定义的自转角动量正向；灰色竖线是各自公转轨道面的正向法线。倾角取 0–180°，超过 90° 即逆行。此处将各轨道法线对齐作比较，省略实际轨道倾角与极轴方位，并非从同一真实观测位置拍到的画面。</p><p>所有球体等大，轴方位为教学示意。几何箭头决定顺逆行；恒星自转周期只报告时长的绝对值。沙盘球面同速慢放，不能据动画推读真实周期，巨行星还存在差异自转。</p></details></section>
+      <div class="scene-heading">
+        <div class="eyebrow"><span class="tiny-line"></span> 知识地图 01 / 太阳系</div>
+        <h1>一张正在<br>运动的地图<span>。</span></h1>
+        <p>八颗行星只是入口。<br>空间里，藏着它们共同的起源与不同的命运。</p>
+      </div>
+      <div class="view-tools" aria-label="视角控制">
+        <button id="home-view" title="返回整体视角" aria-label="返回整体视角">⌂</button>
+        <button id="top-view" title="从黄道北侧俯视" aria-label="从黄道北侧俯视">俯视</button>
+        <button id="fullscreen" title="全屏" aria-label="切换全屏">⛶</button>
+      </div>
+      <div class="scene-bottom">
+        <div class="legend-line"><span class="live-dot"></span><span id="scale-label">距离压缩 · 天体放大</span><button id="model-open" title="查看缩放与模型说明" aria-label="查看缩放与模型说明">ⓘ</button></div>
+        <p id="scene-hint">拖动旋转 · 滚轮缩放 · 点选行星靠近观察</p>
+        <p id="reference-readout" class="reference-readout">固定参照：地球平均半径 6,371.0084 km · 1 AU 光行时约 8 分 19 秒</p>
+      </div>
+      <div id="loading" class="loading"><span></span><p>让太阳系进入视野</p><small id="loading-status">正在载入本地贴图…</small></div>
+    </section>
+
+    <aside class="reading-panel" aria-label="所选天体介绍">
+      <div class="panel-top"><span id="object-type">一个恒星系统</span><button id="clear-selection" aria-label="返回太阳系介绍" hidden>返回全景 ↗</button></div>
+      <div id="object-header"></div>
+      <div id="object-metrics" class="metrics"></div>
+      <div class="article-tabs" role="tablist" aria-label="天体介绍内容">
+        <button id="tab-overview" role="tab" aria-selected="true" aria-controls="object-content" data-tab="overview">概览</button>
+        <button id="tab-deep" role="tab" aria-selected="false" aria-controls="object-content" data-tab="deep">深入一层</button>
+        <button id="tab-data" role="tab" aria-selected="false" aria-controls="object-content" data-tab="data">参数与尺度</button>
+      </div>
+      <button id="reading-toggle" class="reading-toggle" aria-expanded="false" aria-controls="solar-reading">展开阅读 ↓</button>
+      <div class="panel-footer"><span>让一个知识点，点亮一片区域。</span><button id="reading-open">阅读全文 ↗</button></div>
+    </aside>
+  </main>
+
+  <section id="solar-reading" class="solar-reading" aria-labelledby="current-reading-title" hidden>
+    <div class="solar-reading-inner">
+      <div class="solar-reading-head"><h2 id="current-reading-title" tabindex="-1"></h2><button id="reading-collapse">收起说明 ↑</button></div>
+      <div id="object-content" class="object-content" role="tabpanel" aria-labelledby="tab-overview"></div>
+    </div>
+  </section>
+
+
+  <dialog id="info-dialog" class="info-dialog"><div class="dialog-head"><span id="dialog-kicker">地图说明</span><button class="dialog-close" aria-label="关闭说明">×</button></div><div id="dialog-content"></div></dialog>
+  <noscript><p class="noscript">请启用 JavaScript 以旋转太阳系。完整文章仍可在课程目录的 lesson.md 中阅读。</p></noscript>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

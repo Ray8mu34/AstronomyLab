@@ -1,0 +1,63 @@
+.measure-pilot [hidden]{display:none!important}
+.measure-pilot .lab-tabs{margin:8px 0 12px;gap:6px}
+.measure-pilot .lab-tabs button{font-size:13px;padding:8px 10px}
+.measure-pilot .measure-guide h2{font-size:22px;color:var(--gold);margin:0 0 5px;line-height:1.5}
+.measure-pilot .measure-guide p{font-size:13px;color:var(--muted);margin:0 0 14px;line-height:1.7}
+.measure-pilot .measure-workspace{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(270px,.9fr);gap:18px;margin:0}
+.measure-pilot .measure-workspace>*{min-width:0}
+.measure-pilot .scene-host{height:195px}
+.measure-pilot .measure-shadow{height:195px;background:#101b26;touch-action:none}
+.measure-pilot .measure-shadow svg{display:block;width:100%;height:100%;color:#dfebf4}
+.measure-pilot .measure-shadow text{fill:#dfebf4;font:23px "Microsoft YaHei",sans-serif}
+.measure-pilot .measure-shadow text.measure-svg-note{fill:#aabcca;font-size:17px}
+.measure-pilot #measure-geometry svg{width:100%;max-width:850px;height:170px;display:block}
+.measure-pilot #measure-geometry text{fill:#dfebf4;font:19px "Microsoft YaHei",sans-serif}
+.measure-pilot [data-shadow-handle]{cursor:ew-resize;outline:none}
+.measure-pilot [data-shadow-handle]:focus circle{stroke:#fff;stroke-width:4}
+.measure-pilot .panel-title{padding:10px 14px;font-size:13px}
+.measure-pilot .measure-outcomes{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.measure-pilot .measure-outcomes>div{padding:11px 14px}
+.measure-pilot .measure-outcomes small{display:block;font-size:12px}
+.measure-pilot .measure-outcomes strong{display:block;font-size:19px;font-weight:400;color:var(--gold);margin-top:5px;overflow-wrap:anywhere}
+.measure-pilot .measure-error-parts{grid-column:1/-1;font-size:12px;color:var(--muted);line-height:1.7;border-top:1px solid var(--line);margin:0;padding:8px 14px}
+.measure-pilot .lab-controls{border:0;border-radius:0;padding:3px 0;gap:14px}
+.measure-pilot .control>span{display:flex;gap:10px;justify-content:space-between;line-height:1.6}
+.measure-pilot .control output{color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.measure-pilot input[type=range]{min-height:24px;margin:7px 0 0}
+.measure-pilot details{border-top:1px solid var(--line);padding-top:10px}
+.measure-pilot details summary{font-size:13px;color:var(--teal);cursor:pointer;line-height:1.8}
+.measure-pilot details .control{margin-top:12px}
+.measure-pilot .button-row{margin:10px 0;gap:7px}
+.measure-pilot .button-row button{font-size:12px;padding:7px 10px;min-height:34px}
+.measure-pilot .measure-feedback{font-size:12px;color:var(--teal);line-height:1.7;margin:8px 0}
+.measure-pilot .measure-comparison{border-left:2px solid var(--gold);padding:3px 10px;background:#10202a}
+.measure-pilot .measure-comparison p{font-size:12px;line-height:1.7;margin:5px 0;overflow-wrap:anywhere}
+.measure-pilot .legend{padding:9px 0;font-size:12px}
+.measure-pilot .measure-analysis{margin:4px 0 12px}
+.measure-pilot .measure-analysis .plot-canvas{max-width:900px;height:280px}
+.measure-pilot #measure-ladder{padding:12px;min-height:195px}
+.measure-pilot #measure-ladder p{margin:5px 0;line-height:1.65}
+.measure-pilot #measure-ladder>div{gap:8px!important}
+.measure-pilot .measure-chain{margin:0;padding-left:22px;font-size:13px;color:var(--teal)}
+.measure-pilot .measure-chain li{padding:5px 0 8px;line-height:1.6}
+.measure-pilot .measure-chain strong{display:block;font-weight:400;color:var(--text)}
+.measure-pilot .measure-chain span{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+@media(max-width:700px){
+ .measure-pilot .lab-tabs{flex-wrap:nowrap;gap:4px}
+ .measure-pilot .lab-tabs button{min-width:0;flex:1;font-size:11px;padding:7px 2px}
+ .measure-pilot .measure-guide h2{font-size:20px}
+ .measure-pilot .measure-guide p{font-size:12px;line-height:1.65;margin-bottom:10px}
+ .measure-pilot .measure-workspace{grid-template-columns:minmax(0,1fr);gap:12px}
+ .measure-pilot .measure-shadow{height:190px}
+ .measure-pilot .measure-shadow text{font-size:23px}
+ .measure-pilot .measure-shadow text.measure-svg-note{font-size:17px}
+ .measure-pilot .scene-host{height:190px}
+ .measure-pilot .panel-title{padding:8px 10px;font-size:12px}
+ .measure-pilot .measure-outcomes>div{padding:9px 10px}
+ .measure-pilot .measure-outcomes strong{font-size:17px}
+ .measure-pilot .measure-error-parts{font-size:11px;padding:7px 10px}
+ .measure-pilot .measure-desk .lab-controls{gap:10px}
+ .measure-pilot .control{font-size:12px}
+ .measure-pilot .measure-analysis .metrics{grid-template-columns:1fr 1fr}
+ .measure-pilot .measure-analysis .plot-canvas{height:250px}
+}

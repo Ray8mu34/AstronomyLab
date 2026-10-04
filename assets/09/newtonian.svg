@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600"><rect width="100%" height="100%" fill="white"/>
+<text x="600" y="38" font-family="Microsoft YaHei" font-size="30" fill="#18334c" text-anchor="middle" dominant-baseline="central">牛顿式：主镜汇聚，平副镜把焦点移到侧面</text>
+<line x1="60" y1="350" x2="1030" y2="350" stroke="#aaaaaa" stroke-width="3" stroke-dasharray="10 7"/>
+<line x1="980" y1="210" x2="980" y2="490" stroke="#285d80" stroke-width="10"/>
+<text x="985" y="535" font-family="Microsoft YaHei" font-size="26" fill="#18334c" text-anchor="middle" dominant-baseline="central">凹主镜（简化）</text>
+<line x1="495" y1="295" x2="605" y2="405" stroke="#285d80" stroke-width="9"/>
+<text x="750" y="180" font-family="Microsoft YaHei" font-size="26" fill="#18334c" text-anchor="middle" dominant-baseline="central">45°平副镜</text>
+<line x1="500" y1="100" x2="600" y2="100" stroke="#285d80" stroke-width="8"/>
+<text x="710" y="105" font-family="Microsoft YaHei" font-size="27" fill="#18334c" text-anchor="middle" dominant-baseline="central">目镜</text>
+<line x1="60" y1="230" x2="980" y2="230" stroke="#285d80" stroke-width="3"/>
+<polygon points="980,230 965.2630240959538,236.2306934769384 965.2630240959538,223.7693065230616" fill="#285d80" stroke="#285d80"/>
+<line x1="980" y1="230" x2="518.0" y2="318.0" stroke="#285d80" stroke-width="3"/>
+<polygon points="518.0,318.0 531.3108615928969,309.1218828767163 533.6425379730697,321.3631838726234" fill="#285d80" stroke="#285d80"/>
+<line x1="518.0" y1="318.0" x2="550" y2="150" stroke="#285d80" stroke-width="3"/>
+<polygon points="550,150 553.3631838726234,165.64253797306964 541.1218828767163,163.31086159289686" fill="#285d80" stroke="#285d80"/>
+<line x1="550" y1="150" x2="559.5238095238095" y2="100" stroke="#285d80" stroke-width="3"/>
+<line x1="559.5238095238095" y1="100" x2="559.5238095238095" y2="60" stroke="#285d80" stroke-width="3"/>
+<polygon points="559.5238095238095,60 565.754503000748,74.73697590404616 553.2931160468711,74.73697590404616" fill="#285d80" stroke="#285d80"/>
+<line x1="60" y1="470" x2="980" y2="470" stroke="#285d80" stroke-width="3"/>
+<polygon points="980,470 965.2630240959538,476.2306934769384 965.2630240959538,463.7693065230616" fill="#285d80" stroke="#285d80"/>
+<line x1="980" y1="470" x2="597.0588235294118" y2="397.0588235294118" stroke="#285d80" stroke-width="3"/>
+<polygon points="597.0588235294118,397.0588235294118 612.7013615024815,393.69563965678844 610.3696851223087,405.9369406526955" fill="#285d80" stroke="#285d80"/>
+<line x1="597.0588235294118" y1="397.0588235294118" x2="550" y2="150" stroke="#285d80" stroke-width="3"/>
+<polygon points="550,150 558.8781171232837,163.31086159289686 546.6368161273766,165.64253797306964" fill="#285d80" stroke="#285d80"/>
+<line x1="550" y1="150" x2="540.4761904761905" y2="100" stroke="#285d80" stroke-width="3"/>
+<line x1="540.4761904761905" y1="100" x2="540.4761904761905" y2="60" stroke="#285d80" stroke-width="3"/>
+<polygon points="540.4761904761905,60 546.7068839531289,74.73697590404616 534.245496999252,74.73697590404616" fill="#285d80" stroke="#285d80"/>
+<circle cx="550" cy="150" r="7" fill="#bc3446" stroke="#285d80" stroke-width="3"/>
+<text x="390" y="160" font-family="Microsoft YaHei" font-size="25" fill="#18334c" text-anchor="middle" dominant-baseline="central">侧面焦点</text></svg>

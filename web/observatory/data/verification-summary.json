@@ -1,0 +1,148 @@
+{
+  "state": "passed",
+  "checked_at": "2026-10-03T14:08:22.516Z",
+  "checks": [
+    {
+      "name": "Independent conjunction, tangent maximum elongation and retrograde signs",
+      "state": "passed"
+    },
+    {
+      "name": "Displayed Mars derivative uses the current inclined orbit and node",
+      "state": "passed"
+    },
+    {
+      "name": "Transit full/disjoint/symmetric limits",
+      "state": "passed"
+    },
+    {
+      "name": "Transit overlap checked against independent 250000-cell area sampling",
+      "state": "passed"
+    },
+    {
+      "name": "One homepage links all 11 experiments and 16 complete articles",
+      "state": "passed"
+    },
+    {
+      "name": "Shared navigation and SPA course index",
+      "state": "passed"
+    },
+    {
+      "name": "All 16 full articles, MathML and every embedded local image actually load",
+      "state": "passed"
+    },
+    {
+      "name": "Material filtering, attribution, full-image viewer and original file links",
+      "state": "passed"
+    },
+    {
+      "name": "Padded lecture and lesson query links load the correct 12 optics assets",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated alignments: rendering, all primary experiment tabs, explanations and article links",
+      "state": "passed"
+    },
+    {
+      "name": "390px mobile alignments: actual render and no horizontal overflow",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated sky: rendering, all primary experiment tabs, explanations and article links",
+      "state": "passed"
+    },
+    {
+      "name": "390px mobile sky: actual render and no horizontal overflow",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated optics: rendering, all primary experiment tabs, explanations and article links",
+      "state": "passed"
+    },
+    {
+      "name": "390px mobile optics: actual render and no horizontal overflow",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated light: rendering, all primary experiment tabs, explanations and article links",
+      "state": "passed"
+    },
+    {
+      "name": "390px mobile light: actual render and no horizontal overflow",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated imaging: rendering, all primary experiment tabs, explanations and article links",
+      "state": "passed"
+    },
+    {
+      "name": "390px mobile imaging: actual render and no horizontal overflow",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated galaxy: rendering, all primary experiment tabs, explanations and article links",
+      "state": "passed"
+    },
+    {
+      "name": "390px mobile galaxy: actual render and no horizontal overflow",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated stars: rendering, all primary experiment tabs, explanations and article links",
+      "state": "passed"
+    },
+    {
+      "name": "390px mobile stars: actual render and no horizontal overflow",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated orbits: rendering, all primary experiment tabs, explanations and article links",
+      "state": "passed"
+    },
+    {
+      "name": "390px mobile orbits: actual render and no horizontal overflow",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated measure: rendering, all primary experiment tabs, explanations and article links",
+      "state": "passed"
+    },
+    {
+      "name": "390px mobile measure: actual render and no horizontal overflow",
+      "state": "passed"
+    },
+    {
+      "name": "Integrated alignments tangent phase, retrograde, inclination and no-transit boundary",
+      "state": "passed"
+    },
+    {
+      "name": "Existing solar system under unified origin retains controls and WebGL",
+      "state": "passed"
+    },
+    {
+      "name": "Existing Earth Moon under unified origin retains controls and observer views",
+      "state": "passed"
+    },
+    {
+      "name": "Navigation across existing/new pages, full reader and browser history",
+      "state": "passed"
+    },
+    {
+      "name": "One source/model page with separate pending human/trial/textbook status",
+      "state": "passed"
+    },
+    {
+      "name": "Unified server excludes raw inputs, teacher records, tools and unlisted asset files",
+      "state": "passed"
+    },
+    {
+      "name": "No runtime console/page errors, failed page resources or remote runtime requests",
+      "state": "passed"
+    },
+    {
+      "name": "Original 16 articles/HTMLs and legacy physics/data unchanged; authorized UI changes versioned",
+      "state": "passed"
+    }
+  ],
+  "model_visual_review": "checked_views_passed",
+  "scope": "Historical local engineering evidence; not a new deployment, human review, classroom trial, or textbook verification."
+}

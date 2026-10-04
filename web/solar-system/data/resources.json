@@ -1,0 +1,251 @@
+{
+  "retrieved_at_utc": "2026-10-02T16:57:35.920791+00:00",
+  "three_version": "0.180.0",
+  "texture_source_notes": "Solar System Scope based on NASA data, tuned colors, reconstructed missing parts. Neptune especially is not a calibrated true-color view.",
+  "records": [
+    {
+      "path": "vendor/three.module.js",
+      "url": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+      "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a",
+      "bytes": 603113,
+      "kind": "code"
+    },
+    {
+      "path": "vendor/three.core.js",
+      "url": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.core.js",
+      "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20",
+      "bytes": 1403455,
+      "kind": "code"
+    },
+    {
+      "path": "vendor/OrbitControls.js",
+      "url": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js",
+      "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c",
+      "bytes": 38703,
+      "kind": "code"
+    },
+    {
+      "path": "vendor/LICENSE",
+      "url": "https://cdn.jsdelivr.net/npm/three@0.180.0/LICENSE",
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "bytes": 1081,
+      "kind": "code"
+    },
+    {
+      "path": "textures/mercury.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_mercury.jpg",
+      "sha256": "5a5c80607f643496bac9a631e71957def35ed788895f18b678ac849c2b38e48a",
+      "bytes": 872555,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/venus_atmosphere.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_venus_atmosphere.jpg",
+      "sha256": "225012ad4911730605c4e189ca2a3bf674fce50cc48aab4102b936b47d6991ac",
+      "bytes": 229696,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/venus_surface.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_venus_surface.jpg",
+      "sha256": "dbe5db1c794a8ab4cbf7dd6bf193540c400fc833ce1e6cc399318aa68026278b",
+      "bytes": 885075,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/earth_daymap.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg",
+      "sha256": "767ee1dc6eb3802699bfccf6f264880f8acd0b80de3191cd24984fe279b07b7c",
+      "bytes": 463087,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/earth_clouds.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_earth_clouds.jpg",
+      "sha256": "fffd7f68d41b37274822150e54a6ef605af1d3ec35624d9f628c3b896bfa42ed",
+      "bytes": 965676,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/mars.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_mars.jpg",
+      "sha256": "2d187f3e77a98eaa8cea5f4cc722f633c122ef170b9e94ace6b5fb6cbc3f8e01",
+      "bytes": 750547,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/jupiter.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_jupiter.jpg",
+      "sha256": "b0f04d005350252636b0e3396fc592548cbd9e9126b269d32d5c6abd4b0e4f2b",
+      "bytes": 498976,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/saturn.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_saturn.jpg",
+      "sha256": "54a900ca9bf7ab62e70f862852759abdf342e6d6436a95a2fe9ebdb6bcd3bbac",
+      "bytes": 199916,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/uranus.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_uranus.jpg",
+      "sha256": "d15239d46f82d3ea13d2b260b5b29b2a382f42f2916dae0694d0387b1204a09d",
+      "bytes": 77751,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/neptune.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_neptune.jpg",
+      "sha256": "cb42ea82709741d28b0af44d8b283cbc6dbd0c521a7f0e1e1e010ade00977df6",
+      "bytes": 241580,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/sun.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_sun.jpg",
+      "sha256": "ff0f076ba65e03b5ab518451bc96699325be38e3ccbdd5869ee1c00f3a0c8816",
+      "bytes": 822427,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/moon.jpg",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_moon.jpg",
+      "sha256": "2764ba6535ea0481a062846ee033cc7a909dae05b31a8fd13f3e98f3a7fd92bd",
+      "bytes": 1053869,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "textures/saturn_ring_alpha.png",
+      "url": "https://www.solarsystemscope.com/textures/download/2k_saturn_ring_alpha.png",
+      "sha256": "4b0644b2f3ef259fd0bfaedd9dc52f9e7d9738f65f50363e8c4dd19f650d7334",
+      "bytes": 12119,
+      "kind": "texture",
+      "dimensions": [
+        2048,
+        125
+      ],
+      "credit": "Solar System Scope / INOVE; underlying NASA imagery and elevation data",
+      "license": "CC BY 4.0",
+      "source_page": "https://www.solarsystemscope.com/textures/",
+      "representation": "Adjusted equirectangular rendering texture; some gaps reconstructed, colors enhanced; not a single calibrated photograph"
+    },
+    {
+      "path": "data/source-jpl-orbits.html",
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "sha256": "9f7b30ca81cc548a879565bb3f70e6899a38ff5877cb1ff16bb04892f9c4d742",
+      "bytes": 29585,
+      "kind": "source"
+    },
+    {
+      "path": "data/source-jpl-physical.html",
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+      "bytes": 58244,
+      "kind": "source"
+    },
+    {
+      "path": "data/source-texture-license.html",
+      "url": "https://www.solarsystemscope.com/textures/",
+      "sha256": "c265a1427a9b07effd1cce8a9a0a4ef94de734b5400269c6180d7562508f192a",
+      "bytes": 38687,
+      "kind": "source"
+    }
+  ]
+}

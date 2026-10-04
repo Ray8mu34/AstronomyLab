@@ -1,0 +1,14 @@
+{
+  "name": "astronomy-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node web/observatory/server.mjs",
+    "check": "node --check web/observatory/server.mjs"
+  },
+  "description": "Standalone astronomy teaching laboratory: 16 articles and 11 interactive laboratories."
+}

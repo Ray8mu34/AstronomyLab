@@ -1,0 +1,31 @@
+.global-nav{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px max(24px,4vw);border-bottom:1px solid #263645;min-height:83px;background:#0b1420;position:relative;z-index:1000;font-family:"Microsoft YaHei",sans-serif}.global-nav a{text-decoration:none;color:#dfebf4}.global-nav a:hover{color:#ebc77e}.global-nav .site-brand{display:flex;gap:12px;align-items:center;color:#dfebf4;font-size:17px;font-weight:600}.global-nav .site-brand>span:first-child{font-size:30px;color:#ebc77e}.global-nav .site-brand small{display:block;font-size:9px;letter-spacing:2px;margin-top:4px;font-weight:400;color:#97acbe}.global-nav .global-links{display:flex;align-items:center;gap:24px;font-size:13px}.global-nav .nav-dropdown summary{cursor:pointer;color:#dfebf4}.global-nav .nav-dropdown>div{position:absolute;top:70px;display:grid;grid-template-columns:1fr 1fr;width:330px;padding:15px;background:#0d1926;border:1px solid #263645;border-radius:8px;box-shadow:0 14px 45px #0008;z-index:1200}.global-nav .nav-dropdown a{padding:9px;color:#dfebf4;white-space:normal}.global-nav a:focus-visible,.global-nav summary:focus-visible{outline:2px solid #71c8c7;outline-offset:4px}.integrated-legacy>header{height:55px;min-height:55px;justify-content:flex-end;padding:10px max(24px,4vw);gap:24px}.integrated-legacy>header>.brand{display:none}.integrated-legacy #site-navigation{flex:none}.integrated-legacy .global-nav{width:100%;max-width:none;margin:0;border-radius:0}.integrated-legacy .modes{margin-right:auto}.integrated-legacy .modes button{padding:6px 15px}
+@media(max-width:700px){.global-nav{flex-direction:column;gap:16px;align-items:flex-start;padding:17px 20px}.global-nav .global-links{width:100%;justify-content:space-between;gap:7px;font-size:11px}.global-nav .site-brand{font-size:15px}.global-nav .site-brand small{font-size:8px;letter-spacing:1px}.global-nav .global-links>a{white-space:nowrap}.global-nav .nav-dropdown>div{top:105px;left:20px;width:calc(100% - 40px)}.integrated-legacy>header{padding:10px 16px;height:auto;min-height:49px;align-items:center}.integrated-legacy .modes button{padding:5px 9px;font-size:11px}}
+
+/* Compact shared navigation; experiment-specific controls stay in their header. */
+.global-nav{min-height:62px;padding:10px max(24px,4vw);gap:24px}
+.global-nav .site-brand{gap:9px;white-space:nowrap}
+.global-nav .site-brand>span:first-child{font-size:26px;line-height:1}
+.global-nav .global-links{gap:20px;white-space:nowrap}
+.global-nav .global-links>a[aria-current],.global-nav .nav-dropdown summary.active,.global-nav .nav-dropdown a[aria-current]{color:#ebc77e}
+.global-nav .nav-dropdown{position:relative}
+.global-nav .nav-dropdown summary{padding:8px 0}
+.global-nav .nav-dropdown>div{box-sizing:border-box;top:calc(100% + 10px);right:0;width:320px;padding:10px;gap:2px}
+.global-nav .nav-dropdown a{border-radius:4px;line-height:1.5}
+.global-nav .nav-dropdown a:hover,.global-nav .nav-dropdown a[aria-current]{background:#19303a}
+@media(max-width:1000px){.global-nav{padding:10px 24px;gap:18px}.global-nav .global-links{gap:14px}}
+@media(max-width:700px){
+ .global-nav{min-height:86px;padding:10px 20px;gap:7px}
+ .global-nav .global-links{gap:7px;font-size:11px;line-height:1.5}
+ .global-nav .site-brand{font-size:15px}
+ .global-nav .site-brand>span:first-child{font-size:22px}
+ .global-nav .nav-dropdown{position:static}
+ .global-nav .nav-dropdown summary{padding:5px 0}
+ .global-nav .nav-dropdown>div{top:100%;left:20px;right:20px;width:auto;max-height:70vh;overflow:auto}
+}
+
+/* Shared experiment menu: group the existing eleven entries by the same public themes. */
+.global-nav .nav-dropdown>div{width:440px;grid-template-columns:1fr 1fr;gap:15px 18px;max-height:calc(100vh - 110px);overflow:auto}
+.global-nav .nav-theme{min-width:0}
+.global-nav .nav-theme h2{font-family:"Microsoft YaHei",sans-serif;font-size:10px;font-weight:400;color:#97acbe;margin:4px 9px 5px;letter-spacing:.5px}
+.global-nav .nav-theme>a{display:block;font-size:12px;padding:7px 9px;line-height:1.5;margin:0}
+@media(max-width:700px){.global-nav .nav-dropdown>div{width:auto;gap:13px 10px;max-height:70vh}.global-nav .nav-theme>a{font-size:11px;padding:7px}.global-nav .nav-theme h2{margin-left:7px;font-size:10px}}

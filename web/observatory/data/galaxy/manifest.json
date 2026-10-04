@@ -1,0 +1,72 @@
+{
+  "checked_at": "2026-10-03T03:25:10.907Z",
+  "resources": [
+    {
+      "file": "data/galaxy/2mass-allsky.jpg",
+      "source_page": "https://www.ipac.caltech.edu/2mass/gallery/showcase/allsky/index.html",
+      "source_url": "https://www.ipac.caltech.edu/2mass/gallery/showcase/allsky/Allsky_med.jpg",
+      "representation": "2MASS J/H/Ks point-source-count all-sky Aitoff display; not direct exposures",
+      "dimensions": [
+        2350,
+        1200
+      ],
+      "license": "public domain per 2MASS gallery copyright notice; project acknowledgment required",
+      "credit": "2MASS/J. Carpenter, M. Skrutskie, R. Hurt; UMass & IPAC/Caltech; NASA & NSF",
+      "modifications": "none; official medium-resolution file downloaded",
+      "bytes": 1365854,
+      "sha256": "1593543cc21e8a038eadb776774c17c43b75cd7734b9803f50e6035380b8ea32"
+    },
+    {
+      "file": "data/galaxy/planck-equirectangular.jpg",
+      "source_page": "https://planck.ipac.caltech.edu/image/planck13-002a",
+      "source_url": "https://planck.ipac.caltech.edu/system/avm_image_sqls/binaries/19/huge/planck13-002a.jpg?1366073568=",
+      "representation": "2013 official CMB temperature anisotropy rendered image; foreground-separated, galactic coordinates, equirectangular internal-sky projection",
+      "dimensions": [
+        1500,
+        750
+      ],
+      "license": "retained ESA educational/informational attribution; US Planck site image use policy checked; no commercial-rights conclusion",
+      "credit": "ESA and the Planck Collaboration",
+      "modifications": "original unchanged; runtime geometry UV projection only; no temperature value inferred from RGB",
+      "limits": "No numeric colorbar calibrated; not HEALPix numerical pixel data",
+      "bytes": 870613,
+      "sha256": "575d06b6596b1cfb6a9b02e87a936f5ee8fbe80b64aab10d80dbf9c700108634"
+    },
+    {
+      "file": "data/galaxy/firas_monopole_spec_v1.txt",
+      "source_page": "https://lambda.gsfc.nasa.gov/product/cobe/firas_monopole_spect.html",
+      "source_local": "assets/13/v02/firas_monopole_spec_v1.txt",
+      "representation": "43 published monopole spectrum rows; reconstructed 2.725 K blackbody + residual; not raw detector observations",
+      "units": [
+        "cm^-1",
+        "MJy/sr",
+        "kJy/sr",
+        "kJy/sr",
+        "kJy/sr"
+      ],
+      "rows": 43,
+      "release": "v1 May 2005",
+      "credit": "NASA/LAMBDA; Fixsen et al. 1996; Fixsen & Mather 2002",
+      "license": "public scientific data, retain attribution",
+      "modifications": "byte-for-byte copy of existing original",
+      "bytes": 2388,
+      "sha256": "df793c3dca09ebfa7dbc5aa0ec1951daa8884431bc30eff28a710d7516cf50fa"
+    },
+    {
+      "file": "assets/13/v02/gaia-sky.png",
+      "source_page": "https://www.esa.int/ESA_Multimedia/Images/2020/12/The_colour_of_the_sky_from_Gaia_s_Early_Data_Release_3",
+      "sha256": "123c34b98fefb0484c79d2aa32643315c83a12211d4a48320e745ddc06248ec2",
+      "representation": "Gaia EDR3 all-sky brightness and BP/RP-based colour Hammer projection",
+      "credit": "ESA/Gaia/DPAC; Acknowledgement: A. Moitinho",
+      "license": "CC BY-SA 3.0 IGO",
+      "modifications": "existing original unchanged; linked through assetURL"
+    }
+  ],
+  "code_sha256": {
+    "modules/galaxy.js": "8bbc1a3a85f1d3df35303b3d39f61b32b00951e878f53d71e4adb013b5922118",
+    "modules/galaxy-physics.mjs": "7960d690aaf17ea24a51fe3c2dc1a27000b838addcd00a8b51d4b07bf6e059ce"
+  },
+  "human_review": "pending",
+  "classroom_trial": "pending",
+  "textbook_comparison": "pending"
+}
