@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T07:11:03.066Z",
+  "generated_at": "2026-10-04T07:33:58.697Z",
   "scope": "Independent runtime/source distribution; original exam, teacher/private QA/key files excluded.",
   "files": [
     {
@@ -16,6 +16,16 @@
       "path": "AGENTS.md",
       "sha256": "1e4c05148586f0725c4fce5eb8cf60b5a4f5ebac420c4383223632f11bf6b893",
       "bytes": 1240
+    },
+    {
+      "path": "README.md",
+      "sha256": "601c82bebe4dd2c991d0c85e3399dc11a083452c8a5439cb9863af090f7f6f63",
+      "bytes": 2034
+    },
+    {
+      "path": "THIRD_PARTY.md",
+      "sha256": "fb5fe8c7d877af2dff0597d00477b13f26186875b5cf68502978dac930ce14fa",
+      "bytes": 848
     },
     {
       "path": "assets/01/v02/hl-tau.jpg",
@@ -483,16 +493,6 @@
       "bytes": 24808
     },
     {
-      "path": "build/articles/article-reading.css",
-      "sha256": "18cb827429e0d5c467bfa235dcc1dcb086943ff198837da65790cacc33a38d8a",
-      "bytes": 3209
-    },
-    {
-      "path": "build/articles/index.html",
-      "sha256": "b0586544c6f4efe8b8c8e2a933da5ef3f4e8bf1d5f31f1d19976058ca5094194",
-      "bytes": 3481
-    },
-    {
       "path": "build/articles/L01.html",
       "sha256": "8c1077af34dbae53a537616aba860f8d9dfce578abf93cb3466dd3a84bf34517",
       "bytes": 33527
@@ -571,6 +571,16 @@
       "path": "build/articles/L16.html",
       "sha256": "435c17758f6e9027607474447fc33bc8d944d607d8f8075c537e2541a8b4b91f",
       "bytes": 36826
+    },
+    {
+      "path": "build/articles/article-reading.css",
+      "sha256": "18cb827429e0d5c467bfa235dcc1dcb086943ff198837da65790cacc33a38d8a",
+      "bytes": 3209
+    },
+    {
+      "path": "build/articles/index.html",
+      "sha256": "b0586544c6f4efe8b8c8e2a933da5ef3f4e8bf1d5f31f1d19976058ca5094194",
+      "bytes": 3481
     },
     {
       "path": "build/articles/linked/assets/v02-batch-A-SOURCES.html",
@@ -684,23 +694,18 @@
     },
     {
       "path": "docs/DEPLOYMENT.md",
-      "sha256": "ae9910d438d831732cb190f210ffecbfa837bb13a2e1ced7a26d43eb9af92490",
-      "bytes": 2324
+      "sha256": "7625b6faaae38c606f3627b22c9b11564278e732cd8fd6136828f5b7ac7e89e9",
+      "bytes": 4752
+    },
+    {
+      "path": "docs/TECHNICAL-REPORT.md",
+      "sha256": "031fd494d9eef09c266aee10e0551e54fa330235f8ac94c5ac125acd518e1515",
+      "bytes": 3567
     },
     {
       "path": "package.json",
       "sha256": "262a7077cce5ad21f5638f90141f9a5fa6250ddeec500c16a59e0c6d477b6a69",
       "bytes": 360
-    },
-    {
-      "path": "README.md",
-      "sha256": "c0e208ab117dc57b5bb0ecc9398efea5f97a36e5320cb5b2e5f0e820ce92cee7",
-      "bytes": 1771
-    },
-    {
-      "path": "THIRD_PARTY.md",
-      "sha256": "fb5fe8c7d877af2dff0597d00477b13f26186875b5cf68502978dac930ce14fa",
-      "bytes": 848
     },
     {
       "path": "tools/article-reading.css",
@@ -711,6 +716,11 @@
       "path": "tools/build-articles-v02.py",
       "sha256": "273504fc58340cf026ebc01ce59cecdba119cf0d08b9a26c7c4d9c80d11cdc6a",
       "bytes": 26879
+    },
+    {
+      "path": "web/earth-moon/SOURCES.md",
+      "sha256": "40eefa205797e32ecf457c781b3c56ea63a55d6e4bb5d26e80cd5e40a65d156f",
+      "bytes": 7816
     },
     {
       "path": "web/earth-moon/app.js",
@@ -783,11 +793,6 @@
       "bytes": 11472
     },
     {
-      "path": "web/earth-moon/SOURCES.md",
-      "sha256": "40eefa205797e32ecf457c781b3c56ea63a55d6e4bb5d26e80cd5e40a65d156f",
-      "bytes": 7816
-    },
-    {
       "path": "web/earth-moon/style.css",
       "sha256": "a795b879fbc8b2d91b823ed99f5da33697443425bb7e2fb885daf45bf446b880",
       "bytes": 25798
@@ -821,6 +826,11 @@
       "path": "web/earth-moon/vendor/three.module.js",
       "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a",
       "bytes": 603113
+    },
+    {
+      "path": "web/observatory/README.md",
+      "sha256": "660f889074c19c2447ff3c46727b7fe2c54ebacce47984ba17a4cbb310cf980a",
+      "bytes": 375
     },
     {
       "path": "web/observatory/app.js",
@@ -1208,11 +1218,6 @@
       "bytes": 4301
     },
     {
-      "path": "web/observatory/README.md",
-      "sha256": "660f889074c19c2447ff3c46727b7fe2c54ebacce47984ba17a4cbb310cf980a",
-      "bytes": 375
-    },
-    {
       "path": "web/observatory/server.mjs",
       "sha256": "8350213ebb1dc34b0f984c12692360dd5fce1d29bbce87a166428766d1eb81aa",
       "bytes": 5930
@@ -1348,6 +1353,11 @@
       "bytes": 4395
     },
     {
+      "path": "web/solar-system/SOURCES.md",
+      "sha256": "ad041b63593482a1804e875538acf16d52b25897ba27bc432c09bc749c8bf66b",
+      "bytes": 7398
+    },
+    {
       "path": "web/solar-system/app.js",
       "sha256": "a92cab9e9b6595fa4d3de5acc7140f189337db9d671190340c421229c88078e1",
       "bytes": 43247
@@ -1431,11 +1441,6 @@
       "path": "web/solar-system/references.html",
       "sha256": "15bd37ab9b7d749b7dac3689834b6eecf166764d66891df20527eae6ec86580e",
       "bytes": 11590
-    },
-    {
-      "path": "web/solar-system/SOURCES.md",
-      "sha256": "ad041b63593482a1804e875538acf16d52b25897ba27bc432c09bc749c8bf66b",
-      "bytes": 7398
     },
     {
       "path": "web/solar-system/style.css",

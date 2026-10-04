@@ -2,6 +2,8 @@
 
 独立天文学教学网站：16篇完整文章、11个交互实验室、素材和科学来源导航。与社团官网 WebsiteZJUAAA 分开维护和部署。
 
+在线站点：[lab.zjuaaa.cn](https://lab.zjuaaa.cn/)。2026-10-04 已完成独立部署、HTTPS 和续期模拟验证。技术与性能报告见 [docs/TECHNICAL-REPORT.md](docs/TECHNICAL-REPORT.md)，维护交接见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
+
 ## 运行
 
 需要 Node.js 22。服务没有 npm 运行时依赖，不需要 npm install、数据库、Python 或服务器显卡。
