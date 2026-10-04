@@ -4,9 +4,12 @@ import {editorialLab,editorialLegacy} from './editorial-labs.js';
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function editorialEnabled(){return new URLSearchParams(location.search).get('ui')!=='classic';}
 let originalFooter;
+const footerHTML='<span>天文学共同基础</span><a href="/sources">资料与来源</a><span class="revision-status">持续修订中 · 人工科学审校与真实试讲待进行</span>';
 export function prepareEditorial(){
  document.body.classList.toggle('editorial',editorialEnabled());
- const footer=document.querySelector('.site-footer');originalFooter??=footer?.innerHTML;if(footer&&!editorialEnabled())footer.innerHTML=originalFooter;
+ let footer=document.querySelector('.site-footer');
+ if(!footer&&editorialEnabled()&&document.body.classList.contains('integrated-legacy')){footer=document.createElement('footer');footer.className='site-footer';document.body.append(footer);}
+ originalFooter??=footer?.innerHTML;if(footer)footer.innerHTML=editorialEnabled()?footerHTML:originalFooter;
  if(editorialEnabled()&&!document.getElementById('editorial-style')){const link=document.createElement('link');link.id='editorial-style';link.rel='stylesheet';link.href='/shared/editorial.css';document.head.append(link);}
 }
 function disclosure(label,node,className=''){const d=document.createElement('details');d.className=className;const summary=document.createElement('summary');summary.textContent=label;d.append(summary,node);return d;}
@@ -15,10 +18,16 @@ export function applyEditorial(app,catalog){
  if(!editorialEnabled())return ()=>{};
  const nav=document.querySelector('.global-nav');nav.querySelector('.site-brand>span:first-child')?.remove();
  const map=nav.querySelector('a[href="/"]:not(.site-brand)');if(map)map.textContent='首页';
- const footer=document.querySelector('.site-footer');footer.innerHTML='<span>天文学共同基础</span><a href="/sources">资料与来源</a>';
+ const footer=document.querySelector('.site-footer');footer.innerHTML=footerHTML;
  if(app.dataset.page==='home'){
   app.innerHTML=`<header class="editorial-intro"><p class="section-kicker">天文学共同基础</p><h1>从近处的月亮，<br>看向远处的宇宙。</h1><p class="intro-deck">十六篇文章，十一个实验。<br>从天体怎样运动，到星光如何成为证据。</p><a class="text-link" href="/read/01">开始阅读 →</a></header><section class="editorial-feature"><a class="feature-image" href="/lab/imaging"><img src="/assets/14/v02/m17-sho.jpg" alt="M17星云的窄带赋色图"></a><div class="feature-copy"><p class="section-kicker">图像与观测 · 第14讲</p><h2><a href="/lab/imaging">星云的颜色，<br>从哪里来？</a></h2><p>同一组观测通道，换一种颜色映射。</p><a class="text-link" href="/lab/imaging">打开图像实验 →</a><a class="feature-reading" href="/read/14">读文章：一张天文照片里，究竟有什么</a></div><p class="feature-credit">M17 · ESA / NASA / J. Hester · <a href="https://esahubble.org/images/heic0305a/" target="_blank" rel="noopener">图像来源</a></p></section><section class="editorial-experiments" id="questions"><div class="editorial-section-title"><h2>实验</h2><span>11</span></div><div class="editorial-topic-tabs" role="group" aria-label="实验主题"><button data-filter="all" aria-pressed="true">全部</button>${topics.map(t=>`<button data-filter="${t.key}" aria-pressed="false">${t.name}</button>`).join('')}</div><div class="editorial-lab-list">${labs.map(l=>`<a class="lab-card experiment-row" data-topic="${l.topic}" href="${experimentURL(l.slug,l.slug==='alignments'?'mars':l.slug==='optics'?'resolution':null)}"><span class="directory-number">${l.tag}</span><h3>${l.title}</h3><span class="directory-arrow" aria-hidden="true">↗</span></a>`).join('')}</div></section><section class="editorial-articles" id="articles"><div class="editorial-section-title"><h2>文章</h2><a href="/courses">完整目录 →</a></div><div class="editorial-article-list">${catalog.articles.map(a=>`<a class="course-card" href="/read/${String(a.number).padStart(2,'0')}"><span class="directory-number">${String(a.number).padStart(2,'0')}</span><h3>${escape(a.title)}</h3></a>`).join('')}</div></section>`;
   app.querySelector('.editorial-feature').after(app.querySelector('.editorial-articles'));
+  // Two broad titles need a little orientation; other directory rows already
+  // say what the reader will investigate.
+  for(const [slug,text] of Object.entries({sky:'纬度与季节 · 星图的空间深度 · 两种一天',measure:'月面阴影 · 卫星轨道 · 距离与误差'})){
+   const title=app.querySelector(`.experiment-row[href^="/lab/${slug}"] h3`);if(!title)continue;
+   const help=document.createElement('small');help.className='directory-help';help.textContent=text;title.append(help);
+  }
   app.querySelector('.editorial-intro').insertAdjacentHTML('beforeend','<a class="intro-index" href="#articles">十六讲目录 ↓</a>');
   app.querySelector('.editorial-topic-tabs').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;app.querySelectorAll('[data-filter]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));app.querySelectorAll('.experiment-row').forEach(x=>x.hidden=b.dataset.filter!=='all'&&x.dataset.topic!==b.dataset.filter);});
  }
@@ -36,7 +45,7 @@ export function applyEditorial(app,catalog){
   app.querySelector('h1').textContent='来源与模型';app.querySelector('.page-lead').textContent='每个实验的公式、简化条件与原始资料。';
   const table=app.querySelector('.source-table'),slot=document.createComment('evidence');table.before(slot);slot.replaceWith(disclosure('核验记录与待审事项',table,'source-evidence'));
   app.querySelectorAll('.source-directory-row>p').forEach(p=>p.remove());
-  const rows=app.querySelectorAll('.source-table tr');rows[2].children[0].textContent='此前页面与接口整合';rows[3].children[0].textContent='此前模型视觉复核';
+  const rows=app.querySelectorAll('.source-table tr');rows[2].children[0].textContent='此前页面与接口整合';rows[3].children[0].textContent='此前版本模型视觉复核';
  }
  if(app.dataset.page==='lab'&&location.pathname!=='/lab/imaging')return editorialLab(app);
  if(app.dataset.page==='reading'){
@@ -56,7 +65,9 @@ export function applyEditorial(app,catalog){
  if(location.pathname==='/lab/imaging'){
   const pilot=app.querySelector('.imaging-pilot'),head=pilot.querySelector('.imaging-head');
   app.querySelector('.page-lead').remove();app.querySelector(':scope > h1').textContent='天文图像与色彩';
-  const assistance=document.createElement('div');assistance.className='imaging-assistance';assistance.append(head);
+  head.classList.add('experiment-start');head.setAttribute('data-learning-guide','');head.querySelector('h2').setAttribute('data-learning-question','');head.querySelector('#imaging-guide').setAttribute('data-learning-instruction','');
+  pilot.querySelector('.imaging-workbench').before(head);
+  const assistance=document.createElement('div');assistance.className='imaging-assistance';
   const inspector=pilot.querySelector('[data-inspector]');
   const coordinates=inspector.querySelector('.imaging-coordinates'),coordinateSlot=document.createComment('coordinates');coordinates.before(coordinateSlot);coordinateSlot.replaceWith(disclosure('像素坐标与键盘操作',coordinates,'pixel-coordinates'));
   const hint=inspector.querySelector('small');inspector.querySelector('.pixel-coordinates').append(hint);
@@ -87,7 +98,9 @@ export function applyEditorial(app,catalog){
    if(expose){expose.classList.add('exposure-primary');}
   };
   layoutControls();
-  const observer=new MutationObserver(()=>{if(pilot.querySelector('#imaging-controls > [data-primary-controls] [data-key="white"]'))layoutControls();const note=pilot.querySelector('.imaging-data-note');note.hidden=window.__lab?.state?.dataset==='teaching';});
+  const updateDataNote=()=>{pilot.querySelector('.imaging-data-note').hidden=pilot.querySelector('[data-dataset="teaching"]')?.getAttribute('aria-pressed')==='true';};
+  updateDataNote();
+  const observer=new MutationObserver(()=>{if(pilot.querySelector('#imaging-controls > [data-primary-controls] [data-key="white"]'))layoutControls();updateDataNote();});
   observer.observe(pilot.querySelector('#imaging-controls'),{childList:true,subtree:true});
   // Dialog reuses the existing image/inspector nodes and existing keyboard handlers.
   const adjust=e=>{if(e.target.matches('#imaging-controls > details')&&e.target.open&&!pilot.querySelector('.imaging-focus').open&&innerWidth<701)pilot.querySelector('[data-enlarge]').click();};pilot.addEventListener('toggle',adjust,true);

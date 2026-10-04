@@ -86,7 +86,7 @@ body.editorial{--bg:#f6f5f0;--panel:#f6f5f0;--text:#242724;--muted:#61665f;--lin
 .editorial .imaging-pilot :is(.imaging-more,.imaging-auxiliary){border-top:1px solid var(--line);margin-top:22px;padding-top:12px}
 .editorial .imaging-pilot summary{color:var(--text);font-size:14px;line-height:1.8;padding:8px 0;min-height:42px}
 .editorial .imaging-pilot .imaging-assistance{max-width:860px;padding:20px 0;font-size:14px}
-.editorial .imaging-pilot .imaging-assistance .imaging-head h2{display:none}.editorial .imaging-pilot .imaging-assistance .imaging-head p{font-size:14px}
+.editorial .imaging-pilot .imaging-assistance .imaging-head p{font-size:14px}
 .editorial .imaging-pilot .imaging-inspector :is(small,.imaging-coordinates span){font-size:13px;color:var(--muted)}
 .editorial #imaging-pixel{font-size:14px;color:var(--text)}
 .editorial .imaging-pilot .imaging-actions button{font-size:13px;padding:8px 12px}
@@ -136,6 +136,37 @@ body.editorial{--bg:#f6f5f0;--panel:#f6f5f0;--text:#242724;--muted:#61665f;--lin
  .editorial .imaging-pilot .imaging-focus .imaging-canvases{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){.editorial *{transition:none!important;scroll-behavior:auto!important}}
+/* Starting guidance uses the existing dynamic question and instruction nodes. */
+.editorial :is(.editorial-lab,.imaging-pilot) .experiment-start{display:block;border:0;background:none;max-width:860px;margin:0 0 24px;padding:0;color:var(--text)}
+.editorial :is(.editorial-lab,.imaging-pilot) .experiment-start [data-learning-question]{font:400 23px/1.6 "SimSun",Georgia,serif;color:var(--text);margin:0 0 8px}
+.editorial :is(.editorial-lab,.imaging-pilot) .experiment-start [data-learning-instruction]{font:400 15px/1.85 "Microsoft YaHei","PingFang SC",sans-serif;color:var(--muted);margin:0;max-width:800px;padding:0;border:0}
+.editorial .editorial-lab .experiment-start #sky-instruction{font-size:15px;line-height:1.85;color:var(--muted)}
+.editorial #lab-mount .orbits-pilot[data-mode="orbit"] .orbits-guide.experiment-start{display:block!important}
+.editorial #lab-mount .orbits-pilot:is([data-mode="landing"],[data-mode="staging"]) .orbits-guide.experiment-start{display:none!important}
+.editorial .experiment-row .directory-help{display:block;font:400 13px/1.8 "Microsoft YaHei","PingFang SC",sans-serif;color:var(--muted);margin-top:5px}
+.editorial .site-footer{display:flex;flex-wrap:wrap;gap:14px 28px;line-height:1.8}
+.editorial .site-footer .revision-status{flex-basis:100%}
+.editorial.integrated-legacy>[data-experiment-reading-links]{margin:12px 5vw 0;font-size:14px;gap:4px 28px;color:var(--muted)}
+.editorial.integrated-legacy>[data-experiment-reading-links] [data-reading-return]{color:#326359}
+.editorial.integrated-legacy>[data-experiment-reading-links] [data-full-article-links]{font-size:13px}
+.editorial .article-body .paragraph-experiments{display:flex;flex-wrap:wrap;gap:8px 22px;margin:18px 0 28px;padding:12px 0;border:0;border-top:1px solid var(--line);font-size:14px;line-height:1.8}
+.editorial .article-body .paragraph-experiments a{display:inline-block;max-width:100%;padding:6px 0;min-height:36px;overflow-wrap:anywhere}
+.editorial-moon .experiment-guide.experiment-start{margin:0 0 24px;border:0;padding:8px 0;color:var(--text)}
+.editorial-moon .experiment-guide.experiment-start [data-learning-question]{font:400 23px/1.6 "SimSun",Georgia,serif;color:var(--text);margin:0 0 8px}
+.editorial-moon .experiment-guide.experiment-start .guide-steps{gap:4px 22px}
+.editorial-moon .experiment-guide.experiment-start .guide-steps p{font-size:15px;line-height:1.85;margin:0;color:var(--muted)}
+.editorial-moon .experiment-guide.experiment-start #guide-mode{display:none}
+@media(max-width:700px){
+ .editorial :is(.editorial-lab,.imaging-pilot) .experiment-start{margin-bottom:20px}
+ .editorial :is(.editorial-lab,.imaging-pilot) .experiment-start [data-learning-question],.editorial-moon .experiment-guide.experiment-start [data-learning-question]{font-size:20px;line-height:1.65}
+ .editorial :is(.editorial-lab,.imaging-pilot) .experiment-start [data-learning-instruction]{font-size:14px;line-height:1.85}
+ .editorial .editorial-lab .experiment-start #sky-instruction{font-size:14px}
+ .editorial .article-body .paragraph-experiments{font-size:14px;gap:4px 16px;padding:10px 0;margin:14px 0 24px}
+ .editorial.integrated-legacy>[data-experiment-reading-links]{margin:8px 18px 0;font-size:13px;gap:2px 20px}
+ .editorial-solar .experiment-prompt.experiment-start{grid-column:1/-1;grid-row:2}
+ .editorial-solar .experiment-prompt.experiment-start strong{display:block;font-size:20px;line-height:1.65}
+ .editorial-solar .experiment-prompt.experiment-start p{font-size:14px;line-height:1.85;margin:6px 0 0}
+}
 .editorial .article-tools{display:flex;align-items:flex-start;gap:30px;border-bottom:1px solid var(--line);padding:0 0 16px;margin:0 0 36px;flex-wrap:wrap}
 .editorial .article-tools :is(.article-contents,.reader-tools){margin:0;border:0;padding:0;font-size:13px;max-width:100%}
 .editorial .article-tools details[open]{flex-basis:100%}

@@ -44,7 +44,7 @@ export const lessonEntries={
  8:{question:'同一束星光，为什么有时容易看、有时难看？',targets:[target('light','observing','观测与噪声')]},
  9:{question:'收光、成像、放大与分辨，各改变了什么？',targets:[target('optics','imaging','光路与像面'),target('optics','resolution','口径与分辨'),target('optics','sampling','倍率与采样')]},
  10:{question:'怎样从颜色、亮度和谱线读出天体的物理？',targets:[target('light','thermal','连续谱与温度'),target('light','motion','谱线与运动'),target('light','magnitude','温度、距离与消光')]},
- 11:{question:'恒星内部的平衡，怎样连接到它的一生？',targets:[target('stars','evolution','剖面与赫罗图')]},
+ 11:{question:'恒星内部的平衡，怎样连接到它的一生？',targets:[target('stars','hr','温度与光度的赫罗图'),target('stars','evolution','演化与内部剖面')]},
  12:{question:'引力、坍缩与几何，怎样产生极端现象？',targets:[target('stars','collapse','坍缩与潮汐'),target('stars','pulsar','脉冲星灯塔'),target('stars','ia','Ia 光变校正示意')]},
  13:{question:'银河的亮带与宇宙的背景光，分别是什么证据？',targets:[target('galaxy','galaxy','银河内外'),target('galaxy','cmb','CMB 全天方向'),target('galaxy','cmb-spectrum','FIRAS 平均谱')]},
  14:{question:'天文图像里的颜色与结构，是怎样得到的？',targets:[target('imaging','real','真实窄带通道'),target('imaging','teaching','教学计数与配准')]},
@@ -52,4 +52,4 @@ export const lessonEntries={
  16:{question:'从实际测量量，怎样一步步推向宇宙尺度？',targets:[target('measure','shadow','月面阴影测高'),target('measure','jupiter','木卫一称木星'),target('measure','s2','S2称银心'),target('measure','distance','距离阶梯与误差')]},
 };
 export const labURL=slug=>labs.find(l=>l.slug===slug)?.url||'/lab/'+slug;
-export function experimentURL(slug,mode){const base=labURL(slug);return mode&&confirmedModes[slug]?.includes(mode)?base+'?mode='+encodeURIComponent(mode):base;}
+export function experimentURL(slug,mode){const base=labURL(slug),modes=Object.hasOwn(confirmedModes,slug)?confirmedModes[slug]:null;return mode&&Array.isArray(modes)&&modes.includes(mode)?base+'?mode='+encodeURIComponent(mode):base;}

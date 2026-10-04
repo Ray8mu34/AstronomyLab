@@ -59,6 +59,10 @@ export function mount(el){
  function camera(extent,target=[0,0,0]){extent*=Math.max(1,1.6/view.camera.aspect);view.controls.target.set(...target);view.camera.position.set(target[0]+extent*.65,target[1]+extent*.8,target[2]+extent*1.2);view.controls.update();}
  function rocket(radius,length,color){const m=new THREE.Mesh(new THREE.CylinderGeometry(radius,radius,length,24),new THREE.MeshStandardMaterial({color,roughness:.4}));group.add(m);return m;}
  function refresh(){
+  // Short mode guidance must also update before the current conic and
+  // landing/staging interfaces take their early-return rendering paths.
+  const guides={orbit:['到达太空后，还要多快才能留在轨道？','先选“圆”与“临界抛物线”，再拖动经过时间；在同一高度比较轨道是否闭合。'],transfer:['到了高轨，为什么还需要第二次点火？','可试：选择“看后续轨迹”，切换点火；比较同一时刻的两个标记。'],staging:['回收储备会怎样占用上升性能？','可试：记下总Δv，再保留10 t推进剂；同时对照分级与始终不分离的质量预算。'],landing:['推力等于重量，能停住下降吗？','可试：选择推力等于重量，再播放；观察已有下降速率与停止距离。']};
+  el.querySelector('#orbit-question').textContent=guides[state.mode][0];el.querySelector('#orbit-instruction').textContent=guides[state.mode][1];
   pilot.dataset.mode=state.mode;conics.setActive(state.mode==='orbit');
   const useLandingStaging=state.mode==='landing'||state.mode==='staging';
   landingStagingSlot.hidden=!useLandingStaging;
@@ -126,8 +130,6 @@ export function mount(el){
  }
  function renderUI(){syncControls(el,state);const s=state,q=current;
   const progress=el.querySelector('[data-value="progress"]');if(progress)progress.textContent=N(s.progress*100,1)+'%';
-  const guides={orbit:['到达太空后，还要多快才能留在轨道？','可试：在同一高度，依次看只抬高、圆轨道与临界逃逸；观察落点和轨道是否闭合。'],transfer:['到了高轨，为什么还需要第二次点火？','可试：选择“看后续轨迹”，切换点火；比较同一时刻的两个标记。'],staging:['回收储备会怎样占用上升性能？','可试：记下总Δv，再保留10 t推进剂；同时对照分级与始终不分离的质量预算。'],landing:['推力等于重量，能停住下降吗？','可试：选择推力等于重量，再播放；观察已有下降速率与停止距离。']};
-  el.querySelector('#orbit-question').textContent=guides[s.mode][0];el.querySelector('#orbit-instruction').textContent=guides[s.mode][1];
   el.querySelector('#orbit-play').textContent=s.play?'暂停':'播放';el.querySelector('#orbit-play').setAttribute('aria-pressed',String(s.play));
   let output='';if(s.mode==='orbit')output=metric('当前轨道',q.info.kind)+metric('本高度圆速 / 逃逸速度',N(q.info.vc,3)+' / '+N(q.info.escape,3)+' km/s');
   if(s.mode==='transfer'){const p=transferDemoPoint(s.height,s.target,s.progress,s.secondBurn),r=Math.hypot(...p),v=s.progress>=1&&s.secondBurn?q.v2:Math.sqrt(EARTH.mu*(2/r-1/q.a));output=metric('当前高度 / 速率',N(r-EARTH.radius,0)+' km / '+N(v,3)+' km/s')+metric('远地点第二次点火',s.secondBurn?'开启 · 圆化高轨':'关闭 · 沿椭圆返回');output+=`<p>经过 ${N(s.progress*q.seconds/3600,2)} h · ${s.progress<1?'正沿转移椭圆上升':s.progress===1?'到达远地点（瞬时点火前/后）':s.secondBurn?'已进入目标圆轨道':'正沿椭圆返回'}</p>`;}

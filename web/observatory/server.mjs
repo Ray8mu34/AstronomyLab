@@ -22,6 +22,8 @@ const server=http.createServer((req,res)=>{
  if(/^reading\/L\d{2}\.html$/.test(name)){send(res,path.join(workspace,'build/articles',name.slice(8)),req.method,readingHTML);return;}
  if(name==='reading/article-reading.css'){send(res,path.join(workspace,'build/articles/article-reading.css'),req.method);return;}
  if(name.startsWith('reading/linked/assets/')){const base=path.join(workspace,'build/articles/linked/assets');send(res,inside(base,name.slice('reading/linked/assets/'.length)),req.method,readingHTML);return;}
+ if(name==='sources/release-status.md'){send(res,path.join(workspace,'THIRD_PARTY.md'),req.method);return;}
+ if(name==='sources/experience-review.md'){send(res,path.join(workspace,'docs/IMPROVEMENT-2026-10-04.md'),req.method);return;}
  if(name==='status.json'){let report;try{report=JSON.parse(fs.readFileSync(path.join(root,'data/verification-summary.json'),'utf8'));}catch{}res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-cache'});res.end(JSON.stringify({state:report?.state||'in_progress',checked_at:report?.checked_at||null,count:report?.checks?.length||0,visual_review:report?.model_visual_review||'pending',human_review:'pending',classroom_trial:'pending',textbook_comparison:'pending'}));return;}
  if(mainFiles.has(name)||['shared','modules','data','sources'].includes(parts[0])){send(res,inside(root,name),req.method);return;}
  res.writeHead(404);res.end('Not found');

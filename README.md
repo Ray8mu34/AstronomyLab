@@ -28,3 +28,19 @@ node web/observatory/server.mjs
 原始文章和实验模型沿用当前课程版本；独立发行只更改工程状态摘要的读取位置与私有检查页链接，不升级科学审校状态。所有真人审校、真实试讲、教材对照仍pending。
 
 部署与隔离边界见 docs/DEPLOYMENT.md；第三方素材边界见 THIRD_PARTY.md。仓库公开不代表所有素材再分发许可已确认。
+
+## 2026-10-04 主线改进与本地验证
+
+本轮范围和实际进度见 [改进计划](docs/IMPROVEMENT-2026-10-04.md)。段落与实验的关联使用公开概念元数据，浏览中的阅读位置、模式和关键控件状态按历史项保存；不携带原题或教师记录。自由相机姿态、比较缓存、随机噪声种子与播放状态不在本轮恢复范围内；恢复后动画暂停，已列入白名单的时间控件仍保留其读数。
+
+`npm run check`现在执行运行界面文件语法检查和公开Node单元测试；`npm run check:syntax`只检查语法。它们均不能替代浏览器、科学模型审校或真实试讲。
+
+浏览器回归需已有Playwright和支持WebGL的浏览器，不自动安装依赖。先启动本地预览，再运行：
+
+```powershell
+node web/observatory/server.mjs --port 4181
+# 在另一终端；安装在项目中时可省略--playwright，浏览器可通过--browser指定已有程序。
+npm run test:browser -- --base http://127.0.0.1:4181 --playwright "<已有Playwright模块路径>" --browser "<已有浏览器可执行文件路径>"
+```
+
+结果写入被Git忽略的`build/qa/review-improvements/`。脚本记录操作断言和截图；截图的模型视觉复核需实际打开另行记录。软件WebGL、视口模拟与实体设备、现场投影的结果分别说明。当前公开部署记录仍代表既有上线版本，本轮本地修改没有自动部署。

@@ -29,3 +29,10 @@
 .global-nav .nav-theme h2{font-family:"Microsoft YaHei",sans-serif;font-size:10px;font-weight:400;color:#97acbe;margin:4px 9px 5px;letter-spacing:.5px}
 .global-nav .nav-theme>a{display:block;font-size:12px;padding:7px 9px;line-height:1.5;margin:0}
 @media(max-width:700px){.global-nav .nav-dropdown>div{width:auto;gap:13px 10px;max-height:70vh}.global-nav .nav-theme>a{font-size:11px;padding:7px}.global-nav .nav-theme h2{margin-left:7px;font-size:10px}}
+
+/* Unified reading return for the two existing labs, including classic UI. */
+.integrated-legacy>[data-experiment-reading-links]{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 26px;margin:12px max(24px,4vw) 0;font:13px/1.8 "Microsoft YaHei",sans-serif;flex:none}
+.integrated-legacy>[data-experiment-reading-links]>nav{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 20px;margin:0}
+.integrated-legacy>[data-experiment-reading-links] a{display:inline-block;max-width:100%;padding:5px 0;color:inherit;overflow-wrap:anywhere;text-underline-offset:3px}
+.integrated-legacy>[data-experiment-reading-links] a:focus-visible{outline:2px solid #71c8c7;outline-offset:3px}
+@media(max-width:700px){.integrated-legacy>[data-experiment-reading-links]{margin:8px 18px 0;font-size:12px;gap:2px 20px}.integrated-legacy>[data-experiment-reading-links]>nav{gap:2px 16px}}

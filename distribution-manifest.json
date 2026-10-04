@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-04T07:33:58.697Z",
-  "scope": "Independent runtime/source distribution; original exam, teacher/private QA/key files excluded.",
+  "generated_at": "2026-10-04T10:52:54.075Z",
+  "scope": "Independent runtime/source distribution; original exam, teacher/private QA/key files excluded. This manifest excludes itself.",
   "files": [
     {
       "path": ".gitattributes",
@@ -19,13 +19,13 @@
     },
     {
       "path": "README.md",
-      "sha256": "601c82bebe4dd2c991d0c85e3399dc11a083452c8a5439cb9863af090f7f6f63",
-      "bytes": 2034
+      "sha256": "3b5bc613d32fff41e442f5c5602d06d9fafa3fa771f22c82d990159faf5732cb",
+      "bytes": 3475
     },
     {
       "path": "THIRD_PARTY.md",
-      "sha256": "fb5fe8c7d877af2dff0597d00477b13f26186875b5cf68502978dac930ce14fa",
-      "bytes": 848
+      "sha256": "5c67c22d685ee4bb7a7b654c1c92a2f7a151ed1df6d3753b8eac78731cb6caae",
+      "bytes": 2749
     },
     {
       "path": "assets/01/v02/hl-tau.jpg",
@@ -698,14 +698,39 @@
       "bytes": 4752
     },
     {
+      "path": "docs/IMPROVEMENT-2026-10-04.md",
+      "sha256": "c1e5d730076f8754938c9355f4efe0e9f8db6531b8794f5d3868d80782686783",
+      "bytes": 7777
+    },
+    {
       "path": "docs/TECHNICAL-REPORT.md",
       "sha256": "031fd494d9eef09c266aee10e0551e54fa330235f8ac94c5ac125acd518e1515",
       "bytes": 3567
     },
     {
       "path": "package.json",
-      "sha256": "262a7077cce5ad21f5638f90141f9a5fa6250ddeec500c16a59e0c6d477b6a69",
-      "bytes": 360
+      "sha256": "fe0956b464f243f1079e97c1191d29deac51a89b53879b0160c308b78576b12a",
+      "bytes": 501
+    },
+    {
+      "path": "tests/browser-review.mjs",
+      "sha256": "e4de7d70cbbb7823a31fd3f288aaf8df25c150750c26aca4439b693d21f84e71",
+      "bytes": 13427
+    },
+    {
+      "path": "tests/experiment-state.test.mjs",
+      "sha256": "e77fda123a0dbc74cf19b1cc8895c05584dc3ee47b30c50af5f431783d43683e",
+      "bytes": 19390
+    },
+    {
+      "path": "tests/learning-paths.test.mjs",
+      "sha256": "8d088765fb7c301561acccbcd0300041b4db9b5005a4d913cae1599a4b865d97",
+      "bytes": 4066
+    },
+    {
+      "path": "tests/reading-navigation.test.mjs",
+      "sha256": "9865dbc9fab74c2c2958b669e9c9fb09b4928a9393a1e171751afefb3c94a5bf",
+      "bytes": 10564
     },
     {
       "path": "tools/article-reading.css",
@@ -718,9 +743,14 @@
       "bytes": 26879
     },
     {
+      "path": "tools/check.mjs",
+      "sha256": "24a65f68f62106c46682f5198319ed18d418eafb6689ff8863e9fe7d8e7709c0",
+      "bytes": 1217
+    },
+    {
       "path": "web/earth-moon/SOURCES.md",
-      "sha256": "40eefa205797e32ecf457c781b3c56ea63a55d6e4bb5d26e80cd5e40a65d156f",
-      "bytes": 7816
+      "sha256": "56641fbb9395f5275a234e0729200f2db610cafb12efb7f5ca209935f82821b5",
+      "bytes": 8351
     },
     {
       "path": "web/earth-moon/app.js",
@@ -829,13 +859,13 @@
     },
     {
       "path": "web/observatory/README.md",
-      "sha256": "660f889074c19c2447ff3c46727b7fe2c54ebacce47984ba17a4cbb310cf980a",
-      "bytes": 375
+      "sha256": "81507f982c79c47fee49a15727579736a6607a3e5b81d47a6914758c2da907ff",
+      "bytes": 848
     },
     {
       "path": "web/observatory/app.js",
-      "sha256": "c88a977cc77825814ced862bff51f87f9f738dc47f46278f05488a07c828d379",
-      "bytes": 17105
+      "sha256": "2e80b08a5a55be7ef5cd30b612d8ebe5b47cfc108a32f5fdfa1f1529c674266f",
+      "bytes": 23003
     },
     {
       "path": "web/observatory/data/catalog-manifest.json",
@@ -989,8 +1019,8 @@
     },
     {
       "path": "web/observatory/index.html",
-      "sha256": "95e59ecb747bbd79bf13dc82c60e0d913fee5c3820acfc6ff51961cbc121097f",
-      "bytes": 905
+      "sha256": "8d74ede23e95f0e0a58e9ebe1da851457382e138ef3235a60d3029f785880908",
+      "bytes": 1567
     },
     {
       "path": "web/observatory/modules/alignments-physics.mjs",
@@ -1034,8 +1064,8 @@
     },
     {
       "path": "web/observatory/modules/imaging.js",
-      "sha256": "4d5f10236490e059f63220d3e4591b86b14d37227e4836710337580544d6cf47",
-      "bytes": 26183
+      "sha256": "49c2ee2476797661372f234b78ad94934a213139c9eb156bc13d2706ae320380",
+      "bytes": 26351
     },
     {
       "path": "web/observatory/modules/landing-staging-lab.css",
@@ -1129,8 +1159,8 @@
     },
     {
       "path": "web/observatory/modules/orbits.js",
-      "sha256": "87e41e0ff3c6b66aa29228a58297820ddd8ef620fa5f1b41ce7b0091087b2161",
-      "bytes": 30415
+      "sha256": "5c38af4f31e0bd58fbe3e385d05204b8d96c69441215ba924831461fbd88506f",
+      "bytes": 30562
     },
     {
       "path": "web/observatory/modules/sky-demo-geometry.mjs",
@@ -1214,13 +1244,13 @@
     },
     {
       "path": "web/observatory/navigation.css",
-      "sha256": "2332f3091788f5d65947f5aace8ee72cefec4c1059b166257e3fa348690e9093",
-      "bytes": 4301
+      "sha256": "0c20f2dd51b0a45b8f3fa1d3eb944bfc91efdb7e4f5a064114dcdbedc5919e07",
+      "bytes": 5172
     },
     {
       "path": "web/observatory/server.mjs",
-      "sha256": "8350213ebb1dc34b0f984c12692360dd5fce1d29bbce87a166428766d1eb81aa",
-      "bytes": 5930
+      "sha256": "a41662d2d4cebf83a34a9c1ae2d22194f62423287f221cb7f809c364620184ba",
+      "bytes": 6165
     },
     {
       "path": "web/observatory/shared/course-map.css",
@@ -1229,28 +1259,43 @@
     },
     {
       "path": "web/observatory/shared/course-map.js",
-      "sha256": "d32db2b50c452f028068bc141e881c8ca5afe6d64c5dbd06b1fe95d5ab42d16c",
-      "bytes": 7826
+      "sha256": "c1468a3db99b20fad1f52c5e4bb417ff8515fed5e368b53c44b1e06de924e21d",
+      "bytes": 7953
     },
     {
       "path": "web/observatory/shared/editorial-labs.js",
-      "sha256": "4eadc0067d2ba4d1d9b7fb121e94c9758a0390b649c427aac8ffbecf7741ec14",
-      "bytes": 6301
+      "sha256": "a8f0a406b1446d2cfd4783cde5ff008e7030612275c1db5c4f1b584f8d2fad5e",
+      "bytes": 8118
     },
     {
       "path": "web/observatory/shared/editorial.css",
-      "sha256": "999ff688d88d0a702c71ae13dba140e23cc5d390d527c7e761acba58cd465f7d",
-      "bytes": 63600
+      "sha256": "86a3d507a81df17653c0f47b5751f78897ed2d3a16af5c647d048704845cf8b4",
+      "bytes": 67045
     },
     {
       "path": "web/observatory/shared/editorial.js",
-      "sha256": "8ee5a983a952578a65d895fa0fe7b7fd2c8b789768bd1f12b5a6bb0cfd52f53f",
-      "bytes": 12087
+      "sha256": "c32050f94090e939a9cedf5d5ceae658170eeec0914d332075dc872061592a55",
+      "bytes": 13287
+    },
+    {
+      "path": "web/observatory/shared/experiment-state.js",
+      "sha256": "13a32ef5d0aa6f81a5a856012b66c371028b03f32517951573afca32a98ca726",
+      "bytes": 17399
     },
     {
       "path": "web/observatory/shared/lab.js",
       "sha256": "389a62349375473cc51d2008b9a90f833cce8261467129ed7865d913e871d28f",
       "bytes": 5421
+    },
+    {
+      "path": "web/observatory/shared/learning-paths.js",
+      "sha256": "830f640558df4592f18d672a69f96ede30626d382108f2e1dae9d56543ff8ae6",
+      "bytes": 5279
+    },
+    {
+      "path": "web/observatory/shared/load-content.js",
+      "sha256": "e5fa4fd2849efe49636c18d2de6d5d35a718747ef3520e4674650934cecd4c11",
+      "bytes": 3841
     },
     {
       "path": "web/observatory/shared/mode-entry.js",
@@ -1259,8 +1304,13 @@
     },
     {
       "path": "web/observatory/shared/navigation.js",
-      "sha256": "579423fab6e291c426f86d0c7866fdbb72bba9bd6fbcc4c609cd3fc6cedda466",
-      "bytes": 1971
+      "sha256": "a8b491be81849a98c76ce59bb6cc2cb2300a27d8b65a0244f44065a672e80776",
+      "bytes": 6105
+    },
+    {
+      "path": "web/observatory/shared/reading-state.js",
+      "sha256": "4ddd6b0e9b5f1e8f4cdd248036afbd24d80e66bef3905352d987e0602925a431",
+      "bytes": 7909
     },
     {
       "path": "web/observatory/site.css",
@@ -1279,8 +1329,8 @@
     },
     {
       "path": "web/observatory/sources/imaging.md",
-      "sha256": "3efc4abefc4a794385f1a4d8193295408b4b77dbc3f6db976e72766f3692db09",
-      "bytes": 4885
+      "sha256": "827bf09b9f7a21b6428ef13241ccb55df7526a9a664adfae52fc3f18d585b3ff",
+      "bytes": 5404
     },
     {
       "path": "web/observatory/sources/landing-staging-sources.md",
@@ -1344,8 +1394,8 @@
     },
     {
       "path": "web/observatory/sources/stars.md",
-      "sha256": "0e1719b493483e361dcb938bdb3eee9965b1f548a2c332943e65656c777aeecd",
-      "bytes": 10787
+      "sha256": "9ec9bcfe37db6cda528b50e181609b68f3ff887db3e3ba43730930328f78f993",
+      "bytes": 11310
     },
     {
       "path": "web/observatory/tools/prepare-catalog.py",
