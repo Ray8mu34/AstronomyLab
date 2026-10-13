@@ -1,5 +1,17 @@
 > 2026-10-13：用户授权发布当前R1与分批UI状态。发布准备与最新结果见主交接及本机build/qa/release-20261013；以下2026-10-04检查数量属于历史证据。运行包由deploy/lab生成，本轮不更换Nginx、证书或其他站点配置。
 
+## 2026-10-13 发布结果
+
+R1与当前分批UI已从原`1e8a776`快进发布，代码提交`38c7a48678e913a32fc0ba942ec3b64db6e6f729`（含公开保护清单范围修正）；后续发布回执只更新维护文档。生产仍由ubuntu的PM2 `astronomy-lab`运行`/srv/apps/astronomy-lab/web/observatory/server.mjs`，监听127.0.0.1:4180，实际Node22.22.1。生成deploy/lab与生产web资源一致，不引入新运行依赖或外部课程服务。
+
+同一发布包本地完整浏览器182/182；本地97语法/48Node/34Imaging与完整334保护通过。生产源码在独立归档中完成Node22同项检查，公开256保护及232包哈希通过；实际服务244资源逐一HTTP取回、SHA一致。HTTPS首页、月相、HR、Imaging返回200；公网真实操作检查4/4、脚本异常0，覆盖月相手调与比较+条件、HR对象与A/B身份、Imaging真实数组不因赋色改变。私有与不存在路径404、POST405。软件Edge/SwiftShader不代表实体设备或科学审校。
+
+首次远端完整浏览器运行因太阳系大素材默认30秒load超时中止，证据保留；没有称其完整通过。首次277公开保护清单含21个不公开的内部QA，保留失败并修正为256公开保护+21原哈希保留记录，本机完整334项范围不变。
+
+回滚材料位于`/srv/data/astronomy-lab/release-20261013/previous-worktree.tgz`与`previous-head.bundle`，另有仅在服务器保存的PM2部署前私有快照。旧工作区部署前clean；只重启AstronomyLab并保存进程列表，其他站点PID及核对的Nginx配置哈希保持。既有第三方pending、四项功能/UI停止项与人工验收身份保持，不因部署自动升级。
+
+若需要代码回滚，先核对本项目工作区clean，再仅在本仓库`git switch --detach 1e8a77642b489c990e917a4791c0eb83851fadd1`并重启`astronomy-lab`、核对本地及HTTPS健康；不要reset其他项目或恢复整套PM2/Nginx配置。历史旧阅读地址仍按R1隔离兼容回退；本轮没有接入外置讲义包。
+
 # 独立部署与维护交接
 
 2026-10-04 已部署到 https://lab.zjuaaa.cn/，源码仓库为 https://github.com/Ray8mu34/AstronomyLab。官网不新增入口，两个项目分别维护。SSH 登录资料仅保留在本地对话，不写入公开仓库。

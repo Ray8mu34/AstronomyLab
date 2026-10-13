@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T05:03:27.860Z",
+  "generated_at": "2026-10-13T05:07:21.390Z",
   "scope": "Git-visible maintainable source and generated deploy/lab; private inputs, credentials and internal QA excluded",
   "baselineHead": "1e8a77642b489c990e917a4791c0eb83851fadd1",
   "publicDistribution": "blocked_pending_licenses",
@@ -41,8 +41,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5423,
-      "sha256": "be0eb613fced05cbba553255fbfff1d07eec0f7342b12dc57eccdc00248bfdb9"
+      "bytes": 5547,
+      "sha256": "6160452203ca1ec1268a60c995b49991b3ef1a59b8905559befb3fb44ba8cc59"
     },
     {
       "path": "THIRD_PARTY.md",
@@ -2121,8 +2121,8 @@
     },
     {
       "path": "docs/DEPLOYMENT.md",
-      "bytes": 5024,
-      "sha256": "cbbbbb7cb9180b640551b833131d9fc38c26c6bc7233f81cbc1d9e97265c911a"
+      "bytes": 7053,
+      "sha256": "7e1b0c420e0102a875276a5a6ff328d91236a21af7bb808e7c46320c323a96fc"
     },
     {
       "path": "docs/IMPROVEMENT-2026-10-04.md",
@@ -2131,8 +2131,8 @@
     },
     {
       "path": "docs/LAB-REFACTOR-2026-10-05.md",
-      "bytes": 119570,
-      "sha256": "f23bc5df2ac8ce2074718f47afe2eb4677cecd1e856c96ec822671a01ed6a79e"
+      "bytes": 120227,
+      "sha256": "d7b89100e80c39b4f5620e59455a17ef00a937866f606e72b0dcb62d18d4144c"
     },
     {
       "path": "docs/TECHNICAL-REPORT.md",

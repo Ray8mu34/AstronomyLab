@@ -4,6 +4,8 @@
 
 ## 2026-10-13 发布准备
 
+**发布结果：已推送并上线。代码提交38c7a48678e913a32fc0ba942ec3b64db6e6f729，后续回执仅维护文档。最终同包本地完整182/182，生产Node22.22.1的97语法/48Node/34Imaging及256公开保护、232包哈希通过；生产244资源HTTP SHA全一致，公网真实操作4/4、异常0。本机334完整保护再次通过。仅重启AstronomyLab，其他站点PID及Nginx配置核对保持；备份与回滚见docs/DEPLOYMENT.md。第三方pending、自动冻结/人工批准身份、4停止项不升级。证据build/qa/release-20261013/INDEX.json，完整与失败运行分别保留，不推断远端完整浏览器通过。**
+
 从原普通HEAD `1e8a77642b489c990e917a4791c0eb83851fadd1` 整理当前R1、批准样板及分批UI源码，保留原历史。生成deploy/lab（232文件、244资源），97运行文件语法、48Node测试及34纯Imaging检查通过；334保护、包哈希、source drift0及禁止资源0通过。Git可见806文件扫描无私钥/token特征、无私有路径和超过95MiB文件；本机证据、设计调研截图、原始科学档案与教师资料不上传。第三方pending与blocked_pending_licenses不因用户发布授权改成许可通过。
 
 生产部署前原仓库clean、HEAD仍为旧基线，实际Node22.22.1；旧工作树及Git bundle已备份于`/srv/data/astronomy-lab/release-20261013/`。独立候选端口4181实际核对232包文件及244资源哈希零失败；仅AstronomyLab待更新，不改Nginx或其他PM2进程。完整Node22服务浏览器回归和最终上线结果以本节后续发布记录及本机证据为准，准备不代表已部署。
