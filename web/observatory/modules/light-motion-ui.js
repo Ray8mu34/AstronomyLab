@@ -1,0 +1,32 @@
+// Presentation only for the existing Doppler/rotation task.
+export function attachMotionUI(root,{redraw}){
+ const q=s=>root.querySelector(s),slots=new Map();let ready=false,active=false,disposed=false,advanced=null,advancedText='';
+ const style=document.createElement('link');style.rel='stylesheet';style.href='/modules/light-motion-ui.css';root.append(style);
+ const shell=document.createElement('section');shell.className='motion-shell';shell.hidden=true;shell.setAttribute('aria-label','谱线位移与展宽观察工作区');
+ shell.innerHTML='<header class="motion-header"><a href="/">← Lab</a><h1>谱线与运动</h1><span>教学吸收线 · 连续谱归一</span><details class="motion-modes"><summary>谱线与运动 ⌄</summary><div data-motion-modes></div></details></header><div class="motion-body"></div><details class="motion-info"><summary>读图、圆面与来源</summary><div class="motion-info-body"><button type="button" data-motion-close>关闭说明 ×</button><div data-motion-info></div><a href="/sources/light.md" target="_blank" rel="noopener">原模型与来源 ↗</a></div></details>';
+ root.append(shell);const s=x=>shell.querySelector(x);
+ const head=document.createElement('div');head.className='motion-chart-head';head.innerHTML='<span data-motion-centre></span><span class="motion-identities"><i class="motion-current"></i>当前卷积　<i class="motion-nospin"></i>同速度无自转　<span data-motion-baseline-name hidden>灰：保存基线</span></span>';
+ const plotArea=document.createElement('div');plotArea.className='motion-plot-area';plotArea.innerHTML='<svg class="motion-centre-guide" aria-hidden="true"><circle r="4"></circle><path></path></svg>';
+ const dock=document.createElement('div');dock.className='motion-dock';dock.innerHTML='<div class="motion-primary"></div><p class="motion-reference">静止参考 λ₀ = 656.28 nm · 远离为正　<span data-motion-projected></span></p><div class="motion-tools"><details class="motion-projection"><summary>投影与仪器条件</summary><div class="motion-disclosure" data-motion-projection><button type="button" data-motion-close>关闭条件 ×</button><p>倾角只改变 v sin i；仪器展宽是另一个条件。</p></div></details><details class="motion-presets"><summary>运动预设</summary><div class="motion-disclosure" data-motion-presets></div></details><details class="motion-baseline"><summary>保存基线 · 对照</summary><div class="motion-disclosure" data-motion-baseline><button type="button" data-motion-close>结束对照 ×</button><p data-motion-base-identity></p><p>静止参考是固定实验室波长；保存基线是本模式的一组参数。</p></div></details></div><p class="motion-boundary">低速多普勒 · 固定内禀 σ = 4 km/s；不是实测光谱或地球运动校正。</p></div>';
+ function move(node,host){if(!node||slots.has(node))return;const slot=document.createComment('motion return');node.before(slot);slots.set(node,slot);host.append(node);}
+ function suspend(){if(!active)return;active=false;if(advanced)advanced.textContent=advancedText;advanced=null;for(const[node,slot]of[...slots].reverse())slot.replaceWith(node);slots.clear();head.remove();plotArea.remove();dock.remove();root.classList.remove('motion-active');document.body.classList.remove('motion-observing');shell.hidden=true;}
+ function setMode(mode){if(!ready||disposed)return;if(mode!=='motion'){suspend();return;}if(active)return;active=true;root.classList.add('motion-active');document.body.classList.add('motion-observing');shell.hidden=false;
+  move(q('.light-workbench'),s('.motion-body'));q('.light-visual').prepend(head,plotArea);move(q('#light-plot'),plotArea);q('.light-controls').prepend(dock);
+  for(const key of['vr','veq'])move(q(`[data-key="${key}"]`)?.closest('label'),dock.querySelector('.motion-primary'));
+  move(q('[data-key="inclination"]')?.closest('label'),dock.querySelector('[data-motion-projection]'));move(q('.light-advanced'),dock.querySelector('[data-motion-projection]'));advanced=q('.light-advanced>summary');if(advanced){advancedText=advanced.textContent;advanced.textContent='线型与仪器细节';}
+  move(q('.light-presets'),dock.querySelector('[data-motion-presets]'));move(q('.light-actions'),dock.querySelector('[data-motion-baseline]'));move(q('[data-comparison]'),dock.querySelector('[data-motion-baseline]'));move(q('.lab-tabs'),s('[data-motion-modes]'));
+  for(const node of[q('.light-question'),q('#light-metrics'),q('#light-legend'),q('.light-auxiliary'),q('.light-explanation'),q('[data-mode-boundary]'),q('[data-focus-open]')?.parentElement])move(node,s('[data-motion-info]'));
+ }
+ function render({state,result,base,drawing}){if(!active)return;const comparing=dock.querySelector('.motion-baseline').open;
+  head.querySelector('[data-motion-centre]').textContent=`当前线心 ${result.centre.toFixed(3)} nm`;
+  head.querySelector('[data-motion-baseline-name]').hidden=!comparing;
+  dock.querySelector('[data-motion-projected]').textContent=`v sin i = ${result.vmax.toFixed(1)} km/s · i = ${state.inclination}°`;
+  dock.querySelector('[data-motion-base-identity]').textContent=`基线：vᵣ ${base.vr} km/s · v ${base.veq} km/s · i ${base.inclination}° · ℛ ${base.resolution}　／　当前：vᵣ ${state.vr} km/s · v ${state.veq} km/s · i ${state.inclination}° · ℛ ${state.resolution}`;
+  if(drawing){const point=result.points.reduce((best,p)=>Math.abs(p[0]-result.centre)<Math.abs(best[0]-result.centre)?p:best,result.points[0]),[x,y]=drawing.toPixel(...point),svg=plotArea.querySelector('svg');svg.setAttribute('viewBox',`0 0 ${drawing.width} ${drawing.height}`);svg.querySelector('circle').setAttribute('cx',x);svg.querySelector('circle').setAttribute('cy',y);svg.querySelector('path').setAttribute('d',`M ${x} ${y+7} V ${drawing.height-48}`);}
+ }
+ function close(details){if(details?.open){details.open=false;details.querySelector('summary')?.focus({preventScroll:true});if(details!==s('.motion-modes')&&head.getBoundingClientRect().top<0)head.scrollIntoView({block:'start'});}}
+ const click=e=>{if(e.target.closest('[data-motion-close]'))close(e.target.closest('details'));if(e.target.closest('[data-mode]'))close(s('.motion-modes'));};
+ const keydown=e=>{if(e.key!=='Escape'||!active||q('.c-focus[open]'))return;const all=root.querySelectorAll('.motion-shell details[open],.motion-dock details[open]');if(all.length){e.preventDefault();close(all[all.length-1]);}};
+ root.addEventListener('click',click);root.addEventListener('keydown',keydown);const frame=requestAnimationFrame(()=>{if(!disposed){ready=true;redraw();}});
+ return{setMode,beforeControls:suspend,get comparing(){return!ready||dock.querySelector('.motion-baseline').open;},render,dispose(){disposed=true;cancelAnimationFrame(frame);suspend();root.removeEventListener('click',click);root.removeEventListener('keydown',keydown);shell.remove();style.remove();}};
+}

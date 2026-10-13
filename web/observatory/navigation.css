@@ -2,6 +2,7 @@
 @media(max-width:700px){.global-nav{flex-direction:column;gap:16px;align-items:flex-start;padding:17px 20px}.global-nav .global-links{width:100%;justify-content:space-between;gap:7px;font-size:11px}.global-nav .site-brand{font-size:15px}.global-nav .site-brand small{font-size:8px;letter-spacing:1px}.global-nav .global-links>a{white-space:nowrap}.global-nav .nav-dropdown>div{top:105px;left:20px;width:calc(100% - 40px)}.integrated-legacy>header{padding:10px 16px;height:auto;min-height:49px;align-items:center}.integrated-legacy .modes button{padding:5px 9px;font-size:11px}}
 
 /* Compact shared navigation; experiment-specific controls stay in their header. */
+.solar-tool-boundary{font:13px/1.7 "Microsoft YaHei",sans-serif;margin:8px max(24px,4vw);color:inherit;flex:none}
 .global-nav{min-height:62px;padding:10px max(24px,4vw);gap:24px}
 .global-nav .site-brand{gap:9px;white-space:nowrap}
 .global-nav .site-brand>span:first-child{font-size:26px;line-height:1}

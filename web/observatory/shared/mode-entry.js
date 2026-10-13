@@ -1,4 +1,4 @@
-import {confirmedModes} from './course-map.js';
+import {confirmedModes} from './tool-registry.js';
 // Frozen modules retain their own controls and model state. Route entry uses
 // the same public buttons as a learner; it never assigns scientific state.
 const recipes={
@@ -15,7 +15,7 @@ export function enterMode(slug,mode,host){
  if(!steps)return;
  for(const selector of steps){
   const button=host.querySelector(selector);
-  if(!button)throw Error('课程实验入口未匹配：'+slug+'/'+mode);
+  if(!button)throw Error('工具模式入口未匹配：'+slug+'/'+mode);
   button.click();
  }
 }

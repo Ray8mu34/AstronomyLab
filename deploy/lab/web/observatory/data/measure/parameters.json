@@ -1,0 +1,9 @@
+{
+  "checked_on":"2026-10-03",
+  "io":{"a_km":421800,"period_day":1.769138,"eccentricity":0.004,"source":"https://nssdc.gsfc.nasa.gov/planetary/factsheet/joviansatfact.html","table_updated":"2023-12-06","model":"Circular display approximation, not date-specific ephemeris; no original measurement uncertainty supplied by table."},
+  "jupiter":{"equatorial_radius_km":71492,"source":"https://nssdc.gsfc.nasa.gov/planetary/factsheet/joviansatfact.html"},
+  "s2_teaching":{"angle_semimajor_mas":125,"distance_pc":8000,"period_year":16,"eccentricity":0.88,"source":"https://www.eso.org/public/news/eso1825/","nature":"Rounded teaching reconstruction consistent with period~16 yr and periapsis~120 AU. Angle and distance are not quoted fitted parameters. No downloaded astrometric time series, no fitting or GR precession."},
+  "constants":{"G_SI":6.67430e-11,"AU_m":149597870700,"year_seconds":31557600,"mu_sun_SI":1.32712440041279419e20,"source":"https://ssd.jpl.nasa.gov/astro_par.html"},
+  "uncertainty_note":"All slider errors are user-chosen hypothetical 1 sigma independent small errors. They are not uncertainties quoted by observations. Correlations, G uncertainty and model systematics omitted.",
+  "shadow_and_photometry":"Teaching inputs, not measurements extracted from the displayed Tycho or distance-ladder images."
+}

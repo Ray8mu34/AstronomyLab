@@ -1,0 +1,88 @@
+[
+  {
+    "path": "assets/11/v02/orion.jpg",
+    "url": "https://cdn.esahubble.org/archives/images/publicationjpg/heic0601a.jpg",
+    "sha256": "db35758ed21509a16974d0ad36383ee0dd515c88c806f83fd1a4ad5ad5ae1477",
+    "bytes": 2110438,
+    "pixels": [
+      4000,
+      4000
+    ]
+  },
+  {
+    "path": "assets/11/v02/ring.jpg",
+    "url": "https://cdn.esahubble.org/archives/images/large/heic1310a.jpg",
+    "sha256": "9ff71b3d9cc02a609e60fa8dec55e1803358a033011fbc4a0c8b9f586a46b7b6",
+    "bytes": 3213851,
+    "pixels": [
+      3179,
+      3179
+    ]
+  },
+  {
+    "path": "assets/11/v02/gaia-hr.jpg",
+    "url": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2018/04/gaia_s_hertzsprung-russell_diagram/17476330-1-eng-GB/Gaia_s_Hertzsprung-Russell_diagram.jpg",
+    "sha256": "f2e6e8b1dc181cd36a7e43c27ac0ac579ac7e9252f7686ec9d68bf9dac86f341",
+    "bytes": 1533846,
+    "pixels": [
+      2480,
+      3754
+    ]
+  },
+  {
+    "path": "assets/12/v02/sgr-a.jpg",
+    "url": "https://cdn.eso.org/images/large/eso2208-eht-mwa.jpg",
+    "sha256": "372c24c62809ee4455648fc520296d649c5d11751650cce146fb5013a261fd1c",
+    "bytes": 571188,
+    "pixels": [
+      4076,
+      4076
+    ]
+  },
+  {
+    "path": "assets/12/v02/sn1987a.jpg",
+    "url": "https://cdn.esahubble.org/archives/images/publicationjpg/heic1704a.jpg",
+    "sha256": "2336d87264f3adee960ea2a0d301d60a71fb7ed81ec77e92f0b648a2eebfd4fe",
+    "bytes": 7722867,
+    "pixels": [
+      3645,
+      4000
+    ]
+  },
+  {
+    "path": "assets/13/v02/hudf.jpg",
+    "url": "https://cdn.esahubble.org/archives/images/publicationjpg/heic0406a.jpg",
+    "sha256": "e753d42fa9e5aabb807d5dba74b9d88205c4ce007f9c5ad106c0d9cb6f81fc59",
+    "bytes": 9447246,
+    "pixels": [
+      4000,
+      4000
+    ]
+  },
+  {
+    "path": "assets/13/v02/planck.jpg",
+    "url": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2013/03/planck_cmb/12583930-4-eng-GB/Planck_CMB.jpg",
+    "sha256": "75a2ecdd593ccaf092ffe7a594c5283fd6d6529ed084d063956deb8859ed4448",
+    "bytes": 2373272,
+    "pixels": [
+      1920,
+      960
+    ]
+  },
+  {
+    "path": "assets/13/v02/gaia-sky.png",
+    "url": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2020/12/the_colour_of_the_sky_from_gaia_s_early_data_release_3/22358049-1-eng-GB/The_colour_of_the_sky_from_Gaia_s_Early_Data_Release_3.png",
+    "sha256": "123c34b98fefb0484c79d2aa32643315c83a12211d4a48320e745ddc06248ec2",
+    "bytes": 2836415,
+    "pixels": [
+      2000,
+      1000
+    ]
+  },
+  {
+    "path": "assets/13/v02/firas_monopole_spec_v1.txt",
+    "url": "https://lambda.gsfc.nasa.gov/data/cobe/firas/monopole_spec/firas_monopole_spec_v1.txt",
+    "sha256": "df793c3dca09ebfa7dbc5aa0ec1951daa8884431bc30eff28a710d7516cf50fa",
+    "bytes": 2388
+  }
+]

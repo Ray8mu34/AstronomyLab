@@ -24,7 +24,7 @@ from urllib.parse import unquote, urlsplit, urlunsplit
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-PANDOC = Path(os.environ.get('PANDOC') or shutil.which('pandoc') or str(ROOT / 'tools/vendor/pandoc-3.12/pandoc.exe'))
+PANDOC = ROOT / 'tools/vendor/pandoc-3.12/pandoc.exe'
 OUT = ROOT / 'build/articles'
 QA = ROOT / 'build/qa/v02-article-qa.json'
 HAN = re.compile(r'[\u3400-\u4dbf\u4e00-\u9fff\U00020000-\U0002ebef]')

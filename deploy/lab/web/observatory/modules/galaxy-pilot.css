@@ -1,0 +1,67 @@
+.galaxy-pilot{--galaxy-line:#30414d;min-width:0}
+.galaxy-pilot [hidden]{display:none!important}
+.galaxy-pilot .galaxy-head h2{font-size:23px;margin:0 0 6px;line-height:1.5;color:var(--gold)}
+.galaxy-pilot .galaxy-head p{font-size:13px;color:var(--muted);margin:0;line-height:1.7}
+.galaxy-pilot button{font-size:12px;min-height:37px;line-height:1.5}
+.galaxy-pilot .galaxy-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0}
+.galaxy-pilot .galaxy-topics{margin:0}
+.galaxy-pilot .galaxy-workbench{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:22px;align-items:start}
+.galaxy-pilot .galaxy-scene-panel,.galaxy-pilot .galaxy-observation-panel{min-width:0}
+.galaxy-pilot .galaxy-observation-panel{border-left:1px solid var(--galaxy-line);padding-left:22px}
+.galaxy-pilot #galaxy-view-buttons{gap:5px;margin:0 0 10px}
+.galaxy-pilot #galaxy-view-buttons button{font-size:11px;padding:6px 9px}
+.galaxy-pilot .galaxy-scene-panel h3,.galaxy-pilot .galaxy-observation-panel h3{font:12px "Microsoft YaHei",sans-serif;color:var(--teal);margin:0 0 9px;line-height:1.6}
+.galaxy-pilot .scene-host{height:310px}
+.galaxy-pilot .galaxy-scene{position:relative}
+.galaxy-pilot .galaxy-overlay{position:absolute;top:10px;left:10px;pointer-events:none;color:#d3e3f2;font-size:10px;line-height:1.8;max-width:90%;text-shadow:0 2px 5px #000;white-space:pre-line;z-index:1}
+.galaxy-pilot .galaxy-wave-buttons,.galaxy-pilot .galaxy-cmb-views{margin:0 0 8px;gap:6px}
+.galaxy-pilot .galaxy-wave-buttons button{padding:5px 9px;font-size:11px}
+.galaxy-pilot .galaxy-observation-pair{display:grid;grid-template-columns:1fr;gap:10px}
+.galaxy-pilot .galaxy-observation-pair.comparing{grid-template-columns:repeat(2,minmax(0,1fr))}
+.galaxy-pilot figure{margin:0;min-width:0}
+.galaxy-pilot .galaxy-map{width:100%;height:165px;object-fit:contain;display:block;background:#060b11}
+.galaxy-pilot figcaption{font-size:10px;line-height:1.6;margin-top:5px;color:var(--muted)}
+.galaxy-pilot .galaxy-caution{font-size:11px;color:var(--muted);line-height:1.7;margin:7px 0}
+.galaxy-pilot .galaxy-direction-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.galaxy-pilot .control{font-size:12px;margin-bottom:8px}
+.galaxy-pilot .control output{color:var(--gold);font-variant-numeric:tabular-nums}
+.galaxy-pilot .control small{display:block;font-size:10px;line-height:1.5}
+.galaxy-pilot .galaxy-presets{margin:4px 0 0;gap:6px}
+.galaxy-pilot .galaxy-presets button{padding:5px 9px;font-size:11px}
+.galaxy-pilot .galaxy-readouts{display:flex;gap:16px;border-top:1px solid var(--galaxy-line);margin-top:14px;padding:12px 0 0;flex-wrap:wrap}
+.galaxy-pilot .galaxy-readouts>div{min-width:0;flex:1}
+.galaxy-pilot .galaxy-readouts small{display:block;font-size:11px;line-height:1.6}
+.galaxy-pilot .galaxy-readouts strong{display:block;font:18px Georgia,"SimSun",serif;color:var(--gold);margin-top:5px;overflow-wrap:anywhere}
+.galaxy-pilot #galaxy-feedback{font-size:11px;line-height:1.7;color:var(--muted);margin:8px 0;min-height:19px}
+.galaxy-pilot #galaxy-scene-note{font-size:10px;line-height:1.7;margin:9px 0}
+.galaxy-pilot .galaxy-more{border-top:1px solid var(--galaxy-line);padding-top:12px;margin-top:16px}
+.galaxy-pilot summary{cursor:pointer;color:var(--teal);font-size:13px;line-height:1.8;padding-bottom:8px}
+.galaxy-pilot .galaxy-caption{font-size:12px;color:var(--muted);line-height:1.8;overflow-wrap:anywhere}
+.galaxy-pilot .galaxy-advanced{display:grid;gap:10px;margin-top:12px}
+.galaxy-pilot .galaxy-advanced .control-row{font-size:12px}
+.galaxy-pilot .galaxy-cmbmap{width:100%;height:200px;display:block;cursor:crosshair;background:#fff}
+.galaxy-pilot .galaxy-colorbar{height:9px;background:linear-gradient(90deg,#001ec5,#04a4fc,#fefefe,#ffac06,#f43c04);margin:7px 0}
+.galaxy-pilot .galaxy-legend{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted)}
+.galaxy-pilot .galaxy-ruler{font-size:12px;font-variant-numeric:tabular-nums;margin:5px 0 8px}
+.galaxy-pilot .galaxy-ruler strong{color:var(--gold);font-weight:400}
+.galaxy-pilot #galaxy-spectrum{height:220px;cursor:crosshair}
+.galaxy-pilot .galaxy-figure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.galaxy-pilot .galaxy-figure-grid>div{min-width:0}
+.galaxy-pilot canvas:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:700px){
+ .galaxy-pilot .galaxy-head h2{font-size:20px}
+ .galaxy-pilot .galaxy-workbench{grid-template-columns:1fr;gap:10px}
+ .galaxy-pilot .galaxy-observation-panel{border-left:0;padding-left:0;border-top:1px solid var(--galaxy-line);padding-top:12px}
+ .galaxy-pilot .galaxy-observation-panel{grid-row:1}
+ .galaxy-pilot .galaxy-scene-panel{grid-row:2;border-top:1px solid var(--galaxy-line);padding-top:12px}
+ .galaxy-pilot .scene-host{height:210px}
+ .galaxy-pilot .galaxy-map{height:130px}
+ .galaxy-pilot #galaxy-view-buttons button{padding:5px 8px;font-size:10px;min-height:34px}
+ .galaxy-pilot .galaxy-overlay{font-size:9px;line-height:1.6}
+ .galaxy-pilot .galaxy-readouts{gap:12px}
+ .galaxy-pilot .galaxy-readouts strong{font-size:17px}
+ .galaxy-pilot .galaxy-readouts small{font-size:10px}
+ .galaxy-pilot .galaxy-figure-grid{grid-template-columns:1fr}
+ .galaxy-pilot .galaxy-cmbmap{height:175px}
+ .galaxy-pilot .galaxy-toolbar button{font-size:11px;padding:6px 9px}
+}

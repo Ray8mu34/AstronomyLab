@@ -1,0 +1,32 @@
+// Presentation only. Native map, sphere, coordinates and experiment state keep their owners.
+import {THREE} from '../shared/scene.js';
+export function attachCmbMapUI(root,{redraw,scene,marker}){
+ const q=s=>root.querySelector(s),slots=new Map(),projected=new THREE.Vector3();let ready=false,active=false,disposed=false,status='loading',annotationFrame=0;
+ const style=document.createElement('link');style.rel='stylesheet';style.href='/modules/galaxy-cmb-ui.css';root.append(style);
+ const shell=document.createElement('section');shell.className='cmb-map-shell';shell.hidden=true;shell.setAttribute('aria-label','CMB 全天方向观察工作区');
+ shell.innerHTML=`<header class="cmb-map-header"><a href="/">← Lab</a><h1>CMB 全天方向</h1><details class="cmb-map-modes"><summary>全天方向 ⌄</summary><div data-cmb-map-modes></div></details></header><div class="cmb-map-body"><div class="cmb-map-identity"><span>Planck · 2013 发布图</span><span>等距柱状投影 · 银经 l / 银纬 b</span></div><div class="cmb-map-data-state" role="status" aria-live="polite"></div><div class="cmb-map-ready"><div class="cmb-map-north">银北 · b = +90°</div><div data-cmb-map-image></div><div class="cmb-map-axis"><span>+180° · +l ←</span><span>l = 0° · 银心</span><span>−180°</span></div><div class="cmb-map-south">银南 · b = −90°</div><div class="cmb-map-context"><div class="cmb-map-reading"><div class="cmb-map-selection"><div data-cmb-map-read></div><p>点图选方向 · 方向键 5° / Shift 15°</p></div><div class="cmb-map-colors" data-cmb-map-colors></div><div data-cmb-map-caution></div><details class="cmb-map-conditions"><summary>按坐标选方向 ⌄</summary><div class="cmb-map-disclosure"><button type="button" data-cmb-map-close>关闭坐标条件 ×</button><div data-cmb-map-controls></div></div></details></div><section class="cmb-map-reference" aria-label="同一所选方向的球面投影参照"><div data-cmb-map-scene></div><div><h2>同一方向 · 球面投影</h2><p>两图金标对应当前 l / b。<br>球面只记方向，不表示深度。</p><p class="cmb-map-hint">拖动球面仅转动视角，<br>不改变所选方向。</p></div></section></div></div><details class="cmb-map-info"><summary>读图、来源与边界 ⌄</summary><div class="cmb-map-disclosure"><button type="button" data-cmb-map-close>关闭说明 ×</button><div data-cmb-map-info></div></div></details></div>`;
+ root.append(shell);const s=x=>shell.querySelector(x);
+ const ring=document.createElement('span');ring.className='cmb-map-marker';ring.setAttribute('aria-hidden','true');ring.hidden=true;s('[data-cmb-map-scene]').append(ring);
+ const outOfView=document.createElement('p');outOfView.className='cmb-map-outside';outOfView.hidden=true;outOfView.setAttribute('role','status');outOfView.textContent='所选方向在当前球面视场外；平面图与 l/b 保持当前方向。';s('.cmb-map-reference>div:last-child').append(outOfView);
+ function annotate(){if(!active||disposed)return;const host=q('#galaxy-scene');marker.getWorldPosition(projected).project(scene.camera);const visible=status==='ready'&&projected.x>=-1&&projected.x<=1&&projected.y>=-1&&projected.y<=1&&projected.z>=-1&&projected.z<=1;ring.hidden=!visible;outOfView.hidden=status!=='ready'||visible;if(visible){ring.style.left=((projected.x+1)*host.clientWidth/2)+'px';ring.style.top=((1-projected.y)*host.clientHeight/2)+'px';}annotationFrame=requestAnimationFrame(annotate);}
+ function move(node,target){if(!node||slots.has(node))return;const slot=document.createComment('CMB direction return');node.before(slot);slots.set(node,slot);target.append(node);}
+ function suspend(){if(!active)return;active=false;cancelAnimationFrame(annotationFrame);ring.hidden=true;outOfView.hidden=true;for(const[node,slot]of [...slots].reverse())slot.replaceWith(node);slots.clear();s('.cmb-map-reset-note')?.remove();root.classList.remove('cmb-map-active');document.body.classList.remove('cmb-map-observing');shell.hidden=true;}
+ function setMode(on){if(!ready||disposed)return;if(!on){suspend();return;}if(active)return;active=true;root.classList.add('cmb-map-active');document.body.classList.add('cmb-map-observing');shell.hidden=false;
+  move(q('#galaxy-cmb-observations'),s('[data-cmb-map-image]'));
+  move(q('#galaxy-cmb-observations .galaxy-ruler'),s('[data-cmb-map-read]'));
+  move(q('#galaxy-cmb-observations .galaxy-colorbar'),s('[data-cmb-map-colors]'));move(q('#galaxy-cmb-observations .galaxy-legend'),s('[data-cmb-map-colors]'));
+  move(q('#galaxy-cmb-observations .galaxy-caution'),s('[data-cmb-map-caution]'));
+  move(q('[data-direction-controls]'),s('[data-cmb-map-controls]'));move(q('#galaxy-scene'),s('[data-cmb-map-scene]'));
+  move(q('.galaxy-topics'),s('[data-cmb-map-modes]'));move(q('[data-cmb-views]'),s('[data-cmb-map-modes]'));move(q('[data-reset]'),s('[data-cmb-map-modes]'));
+  const note=document.createElement('p');note.className='cmb-map-reset-note';note.textContent='重置实验返回银河盘外俯瞰；全部 CMB 参数回到原默认值。';s('[data-cmb-map-modes]').append(note);
+  for(const node of [q('.galaxy-head'),q('#galaxy-scene-note'),q('#galaxy-overlay'),q('#galaxy-details-cmb > .galaxy-caption'),q('#galaxy-copy').closest('details'),q('.galaxy-pilot > div.galaxy-more'),q('[data-mode-boundary]'),q('#galaxy-feedback')])move(node,s('[data-cmb-map-info]'));
+  annotationFrame=requestAnimationFrame(annotate);
+ }
+ function render(){if(!active)return;const loaded=status==='ready';s('.cmb-map-ready').hidden=!loaded;const message=s('.cmb-map-data-state');message.hidden=loaded;message.setAttribute('role',status==='failed'?'alert':'status');message.textContent=status==='failed'?'Planck 全天发布图未能加载，方向图与球面纹理暂不可用。请重新载入页面，或检查原 JPEG 是否可访问；模型和 FIRAS 平均谱不能替代方向数据。':'正在读取 Planck 全天发布图；图像到达前不展示替代地图或无纹理球面。';}
+ const close=details=>{if(!details?.open)return;details.open=false;details.querySelector('summary').focus({preventScroll:true});};
+ const click=e=>{if(e.target.closest('[data-cmb-map-close]'))close(e.target.closest('details'));if(e.target.closest('[data-topic],[data-cmb-view],[data-reset]'))close(s('.cmb-map-modes'));};
+ const key=e=>{if(e.key!=='Escape'||!active)return;const open=[...shell.querySelectorAll('details[open]')];if(open.length){e.preventDefault();close(open.at(-1));}};
+ root.addEventListener('click',click);root.addEventListener('keydown',key);
+ const frame=requestAnimationFrame(()=>{if(disposed)return;ready=true;redraw();});
+ return{setMode,render,setImageStatus(value){status=value;render();},dispose(){disposed=true;cancelAnimationFrame(frame);suspend();root.removeEventListener('click',click);root.removeEventListener('keydown',key);shell.remove();style.remove();}};
+}

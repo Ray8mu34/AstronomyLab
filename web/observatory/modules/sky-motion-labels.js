@@ -1,6 +1,6 @@
 // Screen-size labels with leaders to actual 3D reference points.
 // No change to the scene's positions, angles or physical scale.
-import {THREE} from '../shared/lab.js';
+import {THREE} from '../shared/scene.js';
 export function makeMotionLabels(host,camera,specs){
  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
  svg.classList.add('sky-motion-labels');svg.setAttribute('aria-hidden','true');host.append(svg);

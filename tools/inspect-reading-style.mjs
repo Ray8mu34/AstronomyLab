@@ -1,0 +1,10 @@
+import {createRequire} from 'node:module';
+import {pathToFileURL} from 'node:url';
+import path from 'node:path';
+const require=createRequire(import.meta.url);
+const {chromium}=require('C:/Users/30674/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
+const page=await browser.newPage();
+await page.goto(pathToFileURL(path.resolve('build/articles/L02.html')).href);
+console.log(JSON.stringify(await page.evaluate(()=>[...document.querySelectorAll('section p')].slice(0,6).map(p=>({text:p.textContent.slice(0,80),color:getComputedStyle(p).color,font:getComputedStyle(p).fontFamily,closestAnchor:p.closest('a')?.outerHTML.slice(0,120)}))),null,2));
+await browser.close();

@@ -1,0 +1,9 @@
+﻿名称,English_name,volume_equivalent_mean_radius_km,mass_10^24_kg,bulk_density_g_cm3,source_url,checked_date
+水星,Mercury,2439.4,0.330103,5.4289,https://ssd.jpl.nasa.gov/planets/phys_par.html,2026-10-02
+金星,Venus,6051.8,4.86731,5.243,https://ssd.jpl.nasa.gov/planets/phys_par.html,2026-10-02
+地球,Earth,6371.0084,5.97217,5.5134,https://ssd.jpl.nasa.gov/planets/phys_par.html,2026-10-02
+火星,Mars,3389.5,0.641691,3.934,https://ssd.jpl.nasa.gov/planets/phys_par.html,2026-10-02
+木星,Jupiter,69911,1898.125,1.3262,https://ssd.jpl.nasa.gov/planets/phys_par.html,2026-10-02
+土星,Saturn,58232,568.317,0.6871,https://ssd.jpl.nasa.gov/planets/phys_par.html,2026-10-02
+天王星,Uranus,25362,86.8099,1.27,https://ssd.jpl.nasa.gov/planets/phys_par.html,2026-10-02
+海王星,Neptune,24622,102.4092,1.638,https://ssd.jpl.nasa.gov/planets/phys_par.html,2026-10-02

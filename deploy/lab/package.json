@@ -1,0 +1,11 @@
+{
+  "name": "astronomy-lab-r1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node web/observatory/server.mjs"
+  }
+}

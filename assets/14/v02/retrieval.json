@@ -1,0 +1,72 @@
+[
+  {
+    "path": "assets/14/v02/crab.jpg",
+    "url": "https://cdn.esahubble.org/archives/images/large/heic0515a.jpg",
+    "bytes": 6486246,
+    "dimensions": [
+      3864,
+      3864
+    ],
+    "sha256": "43b4ea82bbb50686697634e7cc212e06b0f501d26a9ce2ec5619504840ea4345"
+  },
+  {
+    "path": "assets/14/v02/horsehead-optical.jpg",
+    "url": "https://cdn.eso.org/images/publicationjpg/eso0202a.jpg",
+    "bytes": 6986232,
+    "dimensions": [
+      3887,
+      4000
+    ],
+    "sha256": "164a91b31eb37ddd79f55ff77e63f5745351c8c98d2cfb6ebef2ba6cd5193843"
+  },
+  {
+    "path": "assets/14/v02/m33.jpg",
+    "url": "https://cdn.eso.org/images/publicationjpg/eso1424a.jpg",
+    "bytes": 3788911,
+    "dimensions": [
+      4000,
+      3355
+    ],
+    "sha256": "24b3d51ec8f2d1ad998bb5bb6f83111f251df0b64b21bcaafd1c2213a5d00853"
+  },
+  {
+    "path": "assets/14/v02/horsehead-ir.jpg",
+    "url": "https://cdn.esahubble.org/archives/images/large/heic1307a.jpg",
+    "bytes": 2481793,
+    "dimensions": [
+      2704,
+      2826
+    ],
+    "sha256": "3dae8324d6dcb13f0af75cc59b5441262658f4d3e7228eca77bcb26f100cccc8"
+  },
+  {
+    "path": "assets/14/v02/m17-sho.jpg",
+    "url": "https://cdn.esahubble.org/archives/images/large/heic0305a.jpg",
+    "bytes": 1063572,
+    "dimensions": [
+      2163,
+      1756
+    ],
+    "sha256": "3f9f6b6bcdf92ff2a72f8720287053bcbc950cb8ff0a139343e44307052d948c"
+  },
+  {
+    "path": "assets/15/v02/crs21-landing.jpg",
+    "url": "https://www.nasa.gov/wp-content/uploads/2020/12/CRS-landing_screengrab.jpg",
+    "bytes": 247589,
+    "dimensions": [
+      1280,
+      720
+    ],
+    "sha256": "998ed6fdc9ca3be424961c1633d46d1feae1f3c133e914df2e4f932325edd1c5"
+  },
+  {
+    "path": "assets/16/v02/s2-orbit.jpg",
+    "url": "https://cdn.eso.org/images/large/eso0226c.jpg",
+    "bytes": 178438,
+    "dimensions": [
+      971,
+      720
+    ],
+    "sha256": "c85610ae847abfafe195aafa34986f8af773931a994f90d5fab6fee918024fca"
+  }
+]

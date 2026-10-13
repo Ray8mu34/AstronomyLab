@@ -1,0 +1,91 @@
+/* Local to motion; original plots, models and sibling presentation are untouched. */
+body.motion-observing{--mo-bg:#0b1420;--mo-ink:#d5e1ea;--mo-muted:#9bb0c2;--mo-line:#263747;--mo-current:#71c8c7;--mo-nospin:#ebc77e;background:var(--mo-bg);color:var(--mo-ink);scrollbar-color:var(--mo-muted) var(--mo-bg)}
+body.motion-observing #site-navigation,body.motion-observing #app>.tool-heading,body.motion-observing #mode-context,body.motion-observing .site-footer{display:none}
+body.tool-site.editorial.motion-observing #app[data-page=lab]{max-width:none;margin:0;padding:0}
+#lab-mount.motion-active>:not(.motion-shell):not(link):not(.c-focus){display:none!important}
+body.motion-observing #app #lab-mount.motion-active .motion-shell[hidden]{display:none!important}
+body.motion-observing #app #lab-mount.motion-active{--text:var(--mo-ink);--muted:var(--mo-muted);--line:var(--mo-line);font-family:"Microsoft YaHei",system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--mo-ink)}
+body.motion-observing #app #lab-mount.motion-active [hidden]{display:none!important}
+body.motion-observing #app #lab-mount.motion-active :is(button,summary,a,input,select){font:inherit;color:inherit}
+body.motion-observing #app #lab-mount.motion-active :is(button,summary,a){cursor:pointer}
+body.motion-observing #app #lab-mount.motion-active button{border:1px solid var(--mo-line);border-radius:0;background:transparent;box-shadow:none;padding:9px 14px;min-height:42px}
+body.motion-observing #app #lab-mount.motion-active :is(button,summary,a):hover{color:var(--mo-current)}
+body.motion-observing #app #lab-mount.motion-active :is(button,summary,a,input,select):focus-visible{outline:2px solid var(--mo-current);outline-offset:4px}
+body.motion-observing #app #lab-mount.motion-active summary{list-style:none;min-height:42px;display:flex;align-items:center;font-size:14px;gap:8px}
+body.motion-observing #app #lab-mount.motion-active summary::-webkit-details-marker{display:none}
+body.motion-observing #app #lab-mount.motion-active .motion-header{display:flex;align-items:center;gap:24px;padding:0 32px;min-height:58px;border-bottom:1px solid var(--mo-line)}
+body.motion-observing #app #lab-mount.motion-active .motion-header h1{margin:0;font:500 21px "Microsoft JhengHei","Microsoft YaHei",sans-serif;letter-spacing:.04em}
+body.motion-observing #app #lab-mount.motion-active .motion-header a{text-decoration:none;font-size:14px;color:var(--mo-muted)}
+body.motion-observing #app #lab-mount.motion-active .motion-header>span{font-size:13px;color:var(--mo-muted)}
+body.motion-observing #app #lab-mount.motion-active .motion-modes{margin-left:auto;position:relative}
+body.motion-observing #app #lab-mount.motion-active [data-motion-modes]{position:absolute;top:100%;right:0;z-index:5;width:250px;padding:14px;border:1px solid var(--mo-line);background:var(--mo-bg)}
+body.motion-observing #app #lab-mount.motion-active .lab-tabs{display:grid;gap:8px;margin:0;padding:0;border:0}
+body.motion-observing #app #lab-mount.motion-active .lab-tabs button{text-align:left}
+body.motion-observing #app #lab-mount.motion-active .light-workbench{display:block;border:0;margin:0;padding:0}
+body.motion-observing #app #lab-mount.motion-active .light-visual{padding:0 24px;border:0;background:none}
+body.motion-observing #app #lab-mount.motion-active #light-title{display:none}
+body.motion-observing #app #lab-mount.motion-active .motion-chart-head{display:flex;justify-content:space-between;gap:12px;padding:14px 40px 9px;font-size:13px;line-height:1.8;flex-wrap:wrap}
+body.motion-observing #app #lab-mount.motion-active [data-motion-centre]{color:var(--mo-current)}
+body.motion-observing #app #lab-mount.motion-active .motion-identities{color:var(--mo-ink)}
+body.motion-observing #app #lab-mount.motion-active .motion-identities i{display:inline-block;width:16px;border-top:2px solid;vertical-align:middle;margin-right:4px}
+body.motion-observing #app #lab-mount.motion-active .motion-current{color:var(--mo-current)}
+body.motion-observing #app #lab-mount.motion-active .motion-nospin{color:var(--mo-nospin)}
+body.motion-observing #app #lab-mount.motion-active .motion-plot-area{position:relative;height:calc(100svh - 380px);min-height:330px}
+body.motion-observing #app #lab-mount.motion-active .motion-plot-area canvas{display:block;width:100%;height:100%;aspect-ratio:auto}
+body.motion-observing #app #lab-mount.motion-active .motion-centre-guide{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+body.motion-observing #app #lab-mount.motion-active .motion-centre-guide circle{fill:var(--mo-current);stroke:var(--mo-bg);stroke-width:2}
+body.motion-observing #app #lab-mount.motion-active .motion-centre-guide path{stroke:var(--mo-current);stroke-width:1;stroke-dasharray:3 5;opacity:.6;fill:none}
+body.motion-observing #app #lab-mount.motion-active .light-controls{display:block!important;border:0!important;background:none;padding:0 64px!important;max-width:none;width:auto;margin:0}
+body.motion-observing #app #lab-mount.motion-active .light-controls>#light-controls{display:none}
+body.motion-observing #app #lab-mount.motion-active .motion-primary{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+body.motion-observing #app #lab-mount.motion-active .motion-primary .control{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;padding:10px 0;font-size:14px}
+body.motion-observing #app #lab-mount.motion-active .motion-primary output{float:none;font-size:19px;color:var(--mo-current)}
+body.motion-observing #app #lab-mount.motion-active .motion-primary input{grid-column:1/-1;width:100%;min-height:34px;margin:0;accent-color:var(--mo-current)}
+body.motion-observing #app #lab-mount.motion-active .motion-primary small{font-size:12px;color:var(--mo-muted)}
+body.motion-observing #app #lab-mount.motion-active .motion-reference{font-size:13px;margin:0 0 8px;color:var(--mo-muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;line-height:1.7}
+body.motion-observing #app #lab-mount.motion-active [data-motion-projected]{color:var(--mo-ink)}
+body.motion-observing #app #lab-mount.motion-active .motion-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 24px;border-top:1px solid var(--mo-line)}
+body.motion-observing #app #lab-mount.motion-active .motion-projection:not([open]){grid-column:1;grid-row:1}
+body.motion-observing #app #lab-mount.motion-active .motion-presets:not([open]){grid-column:2;grid-row:1}
+body.motion-observing #app #lab-mount.motion-active .motion-baseline:not([open]){grid-column:3;grid-row:1}
+body.motion-observing #app #lab-mount.motion-active .motion-projection[open]{grid-column:1/-1;grid-row:2}
+body.motion-observing #app #lab-mount.motion-active .motion-presets[open]{grid-column:1/-1;grid-row:3}
+body.motion-observing #app #lab-mount.motion-active .motion-baseline[open]{grid-column:1/-1;grid-row:4}
+body.motion-observing #app #lab-mount.motion-active .motion-tools summary:after,body.motion-observing #app #lab-mount.motion-active .motion-info>summary:after{content:'＋';color:var(--mo-muted);margin-left:5px}
+body.motion-observing #app #lab-mount.motion-active details[open]>summary:after{content:'−'}
+body.motion-observing #app #lab-mount.motion-active .motion-disclosure{padding:8px 0 18px;line-height:1.8;font-size:14px}
+body.motion-observing #app #lab-mount.motion-active .motion-disclosure>button{float:right;margin:0 0 8px 18px}
+body.motion-observing #app #lab-mount.motion-active .motion-disclosure p{font-size:13px;color:var(--mo-muted);margin:8px 0}
+body.motion-observing #app #lab-mount.motion-active .motion-disclosure .control{max-width:650px;font-size:14px;margin:12px 0}
+body.motion-observing #app #lab-mount.motion-active .motion-disclosure input{accent-color:var(--mo-current);min-height:34px}
+body.motion-observing #app #lab-mount.motion-active .motion-disclosure select{background:var(--mo-bg);border:1px solid var(--mo-line);min-height:42px}
+body.motion-observing #app #lab-mount.motion-active .light-advanced{border:0;margin:0;padding:0}
+body.motion-observing #app #lab-mount.motion-active .light-presets,body.motion-observing #app #lab-mount.motion-active .light-actions{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+body.motion-observing #app #lab-mount.motion-active .motion-boundary,body.motion-observing #app #lab-mount.motion-active .light-feedback{font-size:12px;color:var(--mo-muted);line-height:1.7;margin:0;padding:4px 0;min-height:0}
+body.motion-observing #app #lab-mount.motion-active .motion-info{padding:0 64px 12px}
+body.motion-observing #app #lab-mount.motion-active .motion-info>summary{font-size:13px;color:var(--mo-muted);min-height:32px}
+body.motion-observing #app #lab-mount.motion-active .motion-info-body{border-top:1px solid var(--mo-line);padding:12px 0;line-height:1.8}
+body.motion-observing #app #lab-mount.motion-active .motion-info-body>button{float:right}
+body.motion-observing #app #lab-mount.motion-active .light-question{display:block;padding:0}
+body.motion-observing #app #lab-mount.motion-active #light-metrics{display:flex;border:0;gap:24px}
+body.motion-observing #app #lab-mount.motion-active .motion-info-body :is(h2,h3){font-size:18px}
+body.motion-observing #app #lab-mount.motion-active .motion-info-body p{font-size:14px;line-height:1.9}
+body.motion-observing #app #lab-mount.motion-active .c-focus .light-visual{padding:0}
+body.motion-observing #app #lab-mount.motion-active .c-focus{background:var(--mo-bg);color:var(--mo-ink);--bg:var(--mo-bg)}
+body.motion-observing #app #lab-mount.motion-active .c-focus .light-controls{padding:0 20px!important}
+@media(max-width:700px){
+ body.motion-observing #app #lab-mount.motion-active .motion-header{padding:8px 14px;gap:14px;flex-wrap:wrap;min-height:50px}
+ body.motion-observing #app #lab-mount.motion-active .motion-header h1{font-size:19px}
+ body.motion-observing #app #lab-mount.motion-active .motion-header>span{display:none}
+ body.motion-observing #app #lab-mount.motion-active [data-motion-modes]{max-width:calc(100vw - 28px)}
+ body.motion-observing #app #lab-mount.motion-active .light-visual{padding:0 4px}
+ body.motion-observing #app #lab-mount.motion-active .motion-chart-head{padding:12px 16px;display:grid;font-size:12px}
+ body.motion-observing #app #lab-mount.motion-active .motion-plot-area{height:43svh;min-height:310px}
+ body.motion-observing #app #lab-mount.motion-active .light-controls{padding:0 20px!important}
+ body.motion-observing #app #lab-mount.motion-active .motion-primary{grid-template-columns:1fr;gap:0}
+ body.motion-observing #app #lab-mount.motion-active .motion-tools{display:block}
+ body.motion-observing #app #lab-mount.motion-active .motion-tools summary{border-bottom:1px solid var(--mo-line);min-height:44px}
+ body.motion-observing #app #lab-mount.motion-active .motion-info{padding:0 20px 20px}
+ body.motion-observing #app #lab-mount.motion-active .motion-disclosure>button{float:none;margin:0 0 12px}
+ body.motion-observing #app #lab-mount.motion-active #light-metrics{flex-wrap:wrap}
+}

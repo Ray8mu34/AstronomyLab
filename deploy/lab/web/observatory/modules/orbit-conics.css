@@ -1,0 +1,25 @@
+.conics-lab{color:var(--text);min-width:0}
+.conic-heading{display:flex;justify-content:space-between;gap:14px;align-items:center;margin:0 0 10px}
+.conic-heading strong{display:block;font-size:22px;font-weight:400}.conic-heading span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.conic-views,.conic-presets,.conic-shortcuts{display:flex;gap:6px;flex-wrap:wrap}
+.conics-lab button{color:var(--text);background:transparent;border:1px solid var(--line);border-radius:0;min-height:38px;padding:6px 12px;font-size:13px;cursor:pointer}
+.conics-lab button[aria-pressed=true]{background:#dce8df;border-color:#326359;color:#204a40}.conics-lab button:disabled{opacity:.4;cursor:default}
+.conic-workbench{display:grid;grid-template-columns:minmax(0,1fr) 252px;gap:30px;align-items:start}
+.conic-visual,.conic-controls{min-width:0}.conic-canvas{display:block;width:100%;height:420px;background:#08131e}
+.conic-transport{display:flex;align-items:center;gap:8px;margin-top:10px}.conic-transport .conic-play{background:#326359;color:#fff;border-color:#326359;min-width:90px;font-size:15px}
+.conic-transport output{margin-left:auto;font-size:13px;font-variant-numeric:tabular-nums;text-align:right}
+.conic-timeline{display:block;margin-top:8px}.conic-timeline>span,.conic-control>span{display:flex;justify-content:space-between;gap:8px;font-size:13px;line-height:1.6}
+.conic-timeline input,.conic-control input{width:100%;min-height:24px;accent-color:#326359;margin:4px 0 0}
+.conic-caption{font-size:12px;line-height:1.8;color:var(--muted);margin:5px 0 0}
+.conic-presets{display:grid;grid-template-columns:1fr 1fr;margin:0 0 16px}.conic-presets button{padding:7px 4px}
+.conic-control{display:block;margin:0 0 15px}.conic-control output{white-space:nowrap;font-variant-numeric:tabular-nums}
+.conic-reference{font-size:11px;color:var(--muted);line-height:1.8;margin:-10px 0 12px;font-variant-numeric:tabular-nums}
+.conic-times{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0}.conic-times label{display:block;font-size:13px;line-height:1.7}.conic-times input{box-sizing:border-box;display:block;width:100%;min-width:0;margin-top:4px;padding:7px 9px;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:0;font-size:15px;min-height:36px}
+.conic-shortcuts button{padding:5px 9px;font-size:12px}.conic-status{font-size:12px;color:var(--muted);line-height:1.8;margin:10px 0}
+.conic-parameters,.conic-explanation{border-top:1px solid var(--line);padding-top:10px;margin-top:16px}.conic-parameters summary,.conic-explanation summary{font-size:14px;line-height:1.8;cursor:pointer}.conic-parameters .conic-control{margin-top:12px}
+.conic-parameters dl{font-size:12px;line-height:1.8;margin:12px 0}.conic-parameters dt{color:var(--muted)}.conic-parameters dd{margin:0 0 9px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.conic-explanation p{max-width:820px;font-size:15px;line-height:1.9;margin:15px 0}
+@media(max-width:900px){.conic-workbench{grid-template-columns:minmax(0,1fr) 220px;gap:18px}.conic-canvas{height:360px}}
+@media(max-width:700px){.conic-heading{align-items:flex-start;gap:8px}.conic-heading strong{font-size:18px}.conic-heading span{font-size:12px}.conic-views{gap:4px;flex-wrap:nowrap}.conic-views button{font-size:11px;min-height:34px;padding:4px 7px;white-space:nowrap}.conic-workbench{grid-template-columns:minmax(0,1fr);gap:12px}.conic-canvas{height:260px}.conic-transport{gap:6px;margin-top:7px}.conic-transport button{padding:5px 8px;min-height:36px}.conic-transport .conic-play{min-width:78px;font-size:13px}.conic-transport output{font-size:12px}.conic-timeline>span{font-size:12px}.conic-caption{font-size:11px;line-height:1.6}.conic-presets{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:8px}.conic-presets button{font-size:11px;padding:4px 1px;min-height:36px;white-space:nowrap}.conic-control{margin-bottom:8px}.conic-times{grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}.conic-times label{font-size:11px}.conic-times input{font-size:14px;padding:5px 7px;min-height:34px}.conic-shortcuts button{min-height:32px;font-size:11px}.conic-status{margin:6px 0;font-size:11px}.conic-parameters{margin-top:6px}.conic-explanation{margin-top:15px}.conic-explanation p{font-size:14px}}
+@media(max-width:350px){.conic-canvas{height:230px}.conic-heading strong{font-size:16px}.conic-heading span{font-size:11px}.conic-views button{font-size:10px;padding:3px 5px}.conic-transport output{font-size:11px}.conic-control>span{font-size:12px}}
+@media(max-width:700px){.conic-reference{margin:-3px 0 7px;font-size:10px}}

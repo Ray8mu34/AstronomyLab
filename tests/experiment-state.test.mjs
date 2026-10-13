@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {confirmedModes} from '../web/observatory/shared/course-map.js';
+import {confirmedModes} from '../web/observatory/shared/tool-registry.js';
 import {experimentAdapters,EXPERIMENT_STATE_VERSION,ensureExperimentEntry,validateControlValue,validateExperimentSnapshot,currentExperimentMode,captureExperiment,restoreExperiment,bindExperimentState,readExperimentSnapshot,initializeLegacyExperiment,waitForLegacyControls} from '../web/observatory/shared/experiment-state.js';
 
 class CustomEvent extends Event{constructor(type,options={}){super(type,options);this.detail=options.detail;}}
@@ -126,7 +126,7 @@ test('segment navigation prefers the actual article origin and preserves classic
  const previousDocument=globalThis.document,previousLocation=globalThis.location;
  globalThis.document={addEventListener(){},body:{classList:{contains:()=>false}},getElementById:()=>({})};globalThis.location={href:'http://localhost/lab/sky',pathname:'/lab/sky',search:''};
  try{
-  const {experimentReadingPaths,navigationURL}=await import('../web/observatory/shared/navigation.js');
+  const {experimentReadingPaths,navigationURL}=await import('../web/observatory/compat/reading-navigation.js');
   const {pathsForExperiment,readingURL}=await import('../web/observatory/shared/learning-paths.js');
   const origin=pathsForExperiment('sky','stars')[0];const paths=experimentReadingPaths('sky','day','http://localhost/lab/sky?mode=day&from='+origin.id);assert.equal(paths[0].id,origin.id);assert.equal(paths[1].mode,'day');
   const classic=navigationURL(readingURL(origin),'http://localhost/labs/earth-moon/?ui=classic');assert.ok(classic.includes('?ui=classic#'));assert.equal(navigationURL('/read/03#section','http://localhost/labs/earth-moon/'),'/read/03#section');
@@ -137,7 +137,7 @@ test('repeated legacy state announcements preserve the current return anchor DOM
  const previousDocument=globalThis.document,previousLocation=globalThis.location;
  globalThis.document={addEventListener(){},body:{classList:{contains:()=>false}},getElementById:()=>({})};globalThis.location={href:'http://localhost/lab/sky',pathname:'/lab/sky',search:''};
  try{
-  const {updateExperimentReadingLinks}=await import('../web/observatory/shared/navigation.js');
+  const {updateExperimentReadingLinks}=await import('../web/observatory/compat/reading-navigation.js');
   const host={children:[],querySelector(selector){const key=selector==='[data-segment-links]'?'segmentLinks':'fullArticleLinks';return this.children.find(node=>Object.hasOwn(node.dataset,key))??null;},prepend(node){this.children.unshift(node);},append(node){this.children.push(node);}};
   let created=0;globalThis.document={body:{classList:{contains:name=>name==='integrated-legacy'}},querySelector:()=>host,createElement(){created++;return{dataset:{},setAttribute(){},remove(){host.children.splice(host.children.indexOf(this),1);}};}};
   globalThis.location={href:'http://localhost/labs/earth-moon/?mode=period',pathname:'/labs/earth-moon/',search:'?mode=period'};

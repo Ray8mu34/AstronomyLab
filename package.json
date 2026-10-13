@@ -1,6 +1,5 @@
 {
   "name": "astronomy-lab",
-  "version": "0.1.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -9,9 +8,13 @@
   "scripts": {
     "start": "node web/observatory/server.mjs",
     "check": "node tools/check.mjs",
-    "check:syntax": "node tools/check.mjs --syntax-only",
     "test": "node tools/check.mjs --tests-only",
-    "test:browser": "node tests/browser-review.mjs"
+    "test:browser:legacy": "node tests/browser-review.mjs",
+    "export:lectures": "conda run -n dl_env python tools/export-lectures.py --web --self-test",
+    "build:lab": "node tools/build-lab.mjs",
+    "check:boundaries": "node tools/check-boundaries.mjs",
+    "test:standalone": "node tests/standalone-refactor.mjs",
+    "build:deploy": "node tools/build-lab.mjs --out deploy/lab"
   },
-  "description": "Standalone astronomy teaching laboratory: 16 articles and 11 interactive laboratories."
+  "description": "AstronomyLab R1 source repository: independent tools and separate original lecture assets"
 }

@@ -1,0 +1,8 @@
+{
+  "earth_radius_m": 6371000.0,
+  "mu_m3_s2": 398600000000000.0,
+  "circular_speed_at_200km_km_s": 7.788483668677207,
+  "kinetic_energy_at_200km_MJ_kg": 30.330238928625782,
+  "potential_increment_at_200km_MJ_kg": 1.9042686503610604,
+  "model": "spherical Earth, circular orbit, no atmosphere or rotation"
+}

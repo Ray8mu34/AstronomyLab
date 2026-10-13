@@ -81,12 +81,7 @@ export function editorialLegacy(){
    const sources=document.querySelector('.topbar>.text-button');sources.textContent='资料 ↗';sources.setAttribute('aria-label','资料与图注');
    document.querySelector('#reset-experiment').textContent='重置';
    document.querySelector('.experiment-prompt').classList.add('legacy-prompt');
-  }else{
-   document.querySelector('.lab-header').hidden=true;
-   const intro=document.querySelector('.intro');intro.querySelector('h1').textContent='日地月的运动与所见';intro.querySelector('.intro-note').remove();intro.querySelector('.eyebrow').textContent='第03—04讲';
-   const guide=document.querySelector('.experiment-guide');learningGuide(guide,guide.querySelector('#guide-question'),guide.querySelector('#guide-operation'));
-   document.querySelectorAll('.experiments button>small,.experiments button>span').forEach(n=>n.remove());
-   document.querySelector('.observation-link').classList.add('legacy-observation');
+
   }
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();

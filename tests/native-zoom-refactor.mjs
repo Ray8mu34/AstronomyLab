@@ -1,0 +1,24 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+const hashFile=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const option=(name,fallback)=>{const i=process.argv.indexOf(name);return i<0?fallback:process.argv[i+1];};
+const base=option('--base','http://127.0.0.1:4182'),packageRoot=option('--package','dist/lab');
+const startedAt=new Date().toISOString(),packageSHA256=hashFile(packageRoot+'.zip'),runtimeManifestSHA256=hashFile(packageRoot+'/web/observatory/runtime-assets.json');
+const out=path.resolve(option('--out','build/qa/lab-refactor/native-zoom')),extension=path.join(out,'extension'),profile=path.join(out,'profile');fs.mkdirSync(extension,{recursive:true});
+fs.writeFileSync(path.join(extension,'manifest.json'),JSON.stringify({manifest_version:3,name:'Local R1 zoom verification',version:'1.0',permissions:['tabs'],background:{service_worker:'worker.js'}}));
+fs.writeFileSync(path.join(extension,'worker.js'),`chrome.tabs.onUpdated.addListener((id,change,tab)=>{if(change.status==='complete'&&tab.url?.startsWith(${JSON.stringify(base+'/')}))chrome.tabs.setZoom(id,2);});`);
+const {chromium}=createRequire(import.meta.url)('C:/Users/30674/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const ctx=await chromium.launchPersistentContext(profile,{executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true,viewport:null,ignoreDefaultArgs:['--disable-extensions'],args:['--window-size=1366,768',`--disable-extensions-except=${extension}`,`--load-extension=${extension}`,'--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const page=await ctx.newPage(),checks=[];let failed;
+try{for(const [slug,url]of [['home','/'],['moon','/labs/earth-moon/?mode=period'],['imaging','/lab/imaging?mode=real'],['solar','/labs/solar-system/?mode=compare'],['optics','/lab/optics?mode=resolution'],['measure','/lab/measure?mode=shadow']]){
+ await page.goto(base+url,{waitUntil:'networkidle'});await page.waitForFunction(()=>devicePixelRatio===2);await page.waitForTimeout(300);
+ const metrics=await page.evaluate(()=>({innerWidth,outerWidth,innerHeight,devicePixelRatio,scrollWidth:document.documentElement.scrollWidth,cssZoom:getComputedStyle(document.body).zoom}));assert(metrics.scrollWidth<=metrics.innerWidth+1,JSON.stringify(metrics));assert.equal(metrics.cssZoom,'1');assert.equal(metrics.devicePixelRatio,2);
+ const session=await ctx.newCDPSession(page),layout=await session.send('Page.getLayoutMetrics');
+ const capture=await session.send('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:true,clip:{x:0,y:0,width:layout.contentSize.width,height:layout.contentSize.height,scale:1}});
+ fs.writeFileSync(path.join(out,slug+'-200.png'),Buffer.from(capture.data,'base64'));
+ const viewport=await session.send('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false});fs.writeFileSync(path.join(out,slug+'-200-viewport.png'),Buffer.from(viewport.data,'base64'));
+ await session.detach();checks.push({slug,url,metrics,state:'passed',visualReview:'pending',capture:{method:'CDP paint-coordinate contentSize; Playwright CSS-sized fullPage clips at native tab zoom',width:layout.contentSize.width,height:layout.contentSize.height,cssWidth:layout.cssContentSize.width,cssHeight:layout.cssContentSize.height}});
+ }}catch(e){failed=e.stack;}finally{await ctx.close();if(hashFile(packageRoot+'.zip')!==packageSHA256||hashFile(packageRoot+'/web/observatory/runtime-assets.json')!==runtimeManifestSHA256)failed='Package changed during verification';fs.writeFileSync(path.join(out,'checks.json'),JSON.stringify({startedAt,checkedAt:new Date().toISOString(),packageSHA256,runtimeManifestSHA256,state:failed?'failed':'passed',method:'Isolated Edge extension chrome.tabs.setZoom(2), native DPR and CSS zoom checked separately',checks,error:failed,realDevice:false,projection:false},null,2));}console.log(JSON.stringify({checks:checks.length,error:failed||null}));if(failed)process.exitCode=1;

@@ -1,4 +1,5 @@
 import {LANDING_DEFAULTS,STAGING_DEFAULTS,landingSimulation,stagingSimulation,idealIgnitionHeight} from './landing-staging-physics.mjs';
+import {attachProcessUI} from './landing-staging-ui.js';
 let serial=0;
 const fmt=(v,n=1)=>Number(v).toFixed(n),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const range=(key,label,value,min,max,step,unit)=>`<label class="ls-control"><span>${label}<output data-value="${key}">${fmt(value,step<1?1:0)} ${unit}</output></span><input type="range" data-param="${key}" aria-label="${label}" min="${min}" max="${max}" step="${step}" value="${value}"></label>`;
@@ -13,6 +14,7 @@ export function mountLandingStaging(host,{mode='landing',onUpdate=()=>{}}={}){
  if(!document.querySelector('link[data-landing-staging-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./landing-staging-lab.css',import.meta.url).href;link.dataset.landingStagingStyle='';document.head.append(link);}
  const root=document.createElement('section');root.className='ls-lab';root.dataset.mode=mode;root.setAttribute('aria-label',mode==='landing'?'着陆点火时机实验':'分级质量与速度预算实验');host.replaceChildren(root);
  const $=s=>root.querySelector(s);
+ const presentation=attachProcessUI(root);
  function graph(key,title,unit,domain,series){
   const gid=`${id}-${key}`,W=400,H=78,left=36,right=10,top=8,bottom=19,pw=W-left-right,ph=H-top-bottom;
   const x=t=>left+t/model.seconds*pw,y=v=>top+(domain[1]-v)/(domain[1]-domain[0])*ph;
@@ -30,6 +32,7 @@ export function mountLandingStaging(host,{mode='landing',onUpdate=()=>{}}={}){
   return `<svg class="ls-staging-scene" data-compact="${compact}" viewBox="0 0 ${W} 290" role="img" aria-label="相同初始火箭丢弃与携带空一级并列，色带表示剩余推进剂">${rocket('drop',compact?30:72,false)}${rocket('carry',compact?90:209,true)}<text x="${W/2}" y="284" text-anchor="middle" class="ls-svg-note">结构与间距为示意</text></svg>`;
  }
  function build(preserveControls=false){
+  presentation.beforeBuild(preserveControls);
   pause();time=0;graphs=[];announced='';root.dataset.mode=mode;
   model=mode==='landing'?landingSimulation(landing):stagingSimulation(staging);
   if(mode==='landing')sceneMax=Math.max(300,Math.ceil(Math.max(...model.points.map(p=>p.h))/100)*100);
@@ -54,6 +57,7 @@ export function mountLandingStaging(host,{mode='landing',onUpdate=()=>{}}={}){
   if(landingMode){for(const b of root.querySelectorAll('.ls-presets button')){b.setAttribute('aria-pressed',String(b.dataset.action===chosen));if(b.dataset.action==='critical')b.disabled=model.critical===null;}
    const iy=276-model.ignitionHeight/sceneMax*225; $('[data-ignition-line]').setAttribute('y1',iy);$('[data-ignition-line]').setAttribute('y2',iy);$('[data-ignition-label]').setAttribute('y',iy+4);
   }else{const max=model.total;$('[data-budget-bars]').innerHTML=['drop','carry'].map(key=>`<div class="ls-budget-row"><small>${key==='drop'?'丢弃':'携带'}</small><div><i data-bar="${key}-first" style="--width:0%;--color:#637995"></i><i data-bar="${key}-second" style="--width:0%;--color:${key==='drop'?'#346d60':'#a5653c'}"></i></div><output data-budget-total="${key}"></output></div>`).join('');}
+  presentation.sync(mode);
   update();
  }
  function update(){
@@ -102,5 +106,5 @@ export function mountLandingStaging(host,{mode='landing',onUpdate=()=>{}}={}){
  const visibility=()=>{if(document.hidden&&playing){pause();update();}};document.addEventListener('visibilitychange',visibility,{signal:abort.signal});
  build();
  const resize=new ResizeObserver(()=>{if(destroyed||mode!=='staging')return;const compact=root.clientWidth<600;if($('[data-compact]')?.dataset.compact!==String(compact)){ $('.ls-scene').innerHTML=stagingScene();update();}});resize.observe(root);
- return {destroy(){if(destroyed)return;pause();destroyed=true;abort.abort();resize.disconnect();if(root.parentNode===host)root.remove();},setMode(next){if(!['landing','staging'].includes(next))throw new RangeError('Unknown mode');if(destroyed)return;mode=next;root.setAttribute('aria-label',mode==='landing'?'着陆点火时机实验':'分级质量与速度预算实验');build();},seek,play,pause(){pause();update();},reset,get snapshot(){return snapshot();}};
+ return {destroy(){if(destroyed)return;pause();destroyed=true;abort.abort();resize.disconnect();presentation.dispose();if(root.parentNode===host)root.remove();},setMode(next){if(!['landing','staging'].includes(next))throw new RangeError('Unknown mode');if(destroyed)return;mode=next;root.setAttribute('aria-label',mode==='landing'?'着陆点火时机实验':'分级质量与速度预算实验');build();},seek,play,pause(){pause();update();},reset,get snapshot(){return snapshot();}};
 }

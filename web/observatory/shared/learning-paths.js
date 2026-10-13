@@ -1,4 +1,4 @@
-import {confirmedModes} from './course-map.js';
+import {confirmedModes} from './tool-registry.js';
 
 // Public reading links only. These are existing article section IDs; source
 // articles, figures and scientific models are not rewritten by this registry.

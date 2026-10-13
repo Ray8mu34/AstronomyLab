@@ -1,0 +1,140 @@
+.sky-pilot{--sky-line:#2b404f;min-width:0;color:#dce6ee}
+.sky-pilot [hidden]{display:none!important}
+.sky-pilot .sky-tabs{display:flex;flex-wrap:wrap;gap:5px 16px;margin:0 0 13px;border-bottom:1px solid var(--sky-line)}
+.sky-pilot .sky-tabs button{border:0;border-radius:0;background:transparent;padding:10px 2px;color:#afbfcd;font-size:14px;border-bottom:2px solid transparent}
+.sky-pilot .sky-tabs button[aria-pressed=true]{color:#ebc77e;border-bottom-color:#ebc77e}
+.sky-pilot button{min-height:34px;line-height:1.35;font-size:12px}
+.sky-pilot button[aria-pressed=true]{color:#ebc77e;border-color:#b49a65;background:#202921}
+.sky-pilot button:focus-visible,.sky-pilot input:focus-visible,.sky-pilot select:focus-visible,.sky-pilot summary:focus-visible{outline:2px solid #ebc77e;outline-offset:3px}
+.sky-pilot .sky-guide{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;margin-bottom:17px}
+.sky-pilot .sky-guide h2{grid-column:1/-1;margin:0;font-size:24px;line-height:1.5;color:#ebc77e;font-weight:400}
+.sky-pilot #sky-instruction{font-size:13px;color:#b3c5d2;line-height:1.7;align-self:center}
+.sky-pilot [data-action=guide]{background:transparent;border:0;color:#a2b5c5;padding:3px 0;font-size:11px}
+.sky-pilot .sky-workspace{display:grid;grid-template-columns:minmax(0,1fr) 295px;gap:22px;align-items:start}
+.sky-pilot .sky-observation{min-width:0}
+.sky-pilot .sky-stage{border:1px solid var(--sky-line);background:#090f19}
+.sky-pilot .sky-view-head{display:flex;justify-content:space-between;align-items:center;gap:9px;padding:9px 13px;border-bottom:1px solid var(--sky-line);min-height:43px}
+.sky-pilot .sky-view-head h3{font-size:14px;margin:0;font-weight:400;line-height:1.5}
+.sky-pilot #sky-views{display:flex;gap:5px;flex-shrink:0}
+.sky-pilot #sky-views button{padding:5px 9px;min-height:30px;font-size:11px}
+.sky-pilot .scene-host{height:290px}
+.sky-pilot #sky-day-diagram{width:100%;height:328px;overflow:hidden}
+.sky-pilot #sky-main-plot{width:100%;height:310px;display:block}
+.sky-pilot .legend{font-size:11px;line-height:1.6;padding:8px 13px;margin:0;border-top:1px solid #192c38}
+.sky-pilot .sky-readings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:13px 0;border-bottom:1px solid var(--sky-line)}
+.sky-pilot .sky-readings>div{min-width:0}
+.sky-pilot .sky-readings small{font-size:11px;line-height:1.5;color:#a9bfcc;display:block}
+.sky-pilot .sky-readings strong{display:block;font-size:20px;line-height:1.5;font-weight:400;color:#ebc77e;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.sky-pilot .sky-extra-readings{font-size:12px;color:#a8beca;margin-top:7px}
+.sky-pilot .sky-extra-readings .sky-readings strong{font-size:16px}
+.sky-pilot .sky-controls{border-left:1px solid var(--sky-line);padding-left:19px;min-width:0}
+.sky-pilot .sky-controls h3{font-size:16px;font-weight:400;margin:2px 0 14px;color:#dce6ee;line-height:1.5}
+.sky-pilot .control{margin:13px 0;display:block;font-size:12px;line-height:1.5;color:#aec2d0}
+.sky-pilot .control [data-value]{float:right;color:#ebc77e;font-variant-numeric:tabular-nums}
+.sky-pilot .control input[type=range]{width:100%;display:block;min-height:23px;margin:4px 0 0;accent-color:#71c8c7}
+.sky-pilot .control select{display:block;width:100%;max-width:100%;font-size:12px;min-height:36px;margin-top:5px}
+.sky-pilot .control-row{display:flex;align-items:center;gap:7px;line-height:1.7;font-size:12px;margin:11px 0;color:#aec2d0}
+.sky-pilot .control-row input{accent-color:#71c8c7}
+.sky-pilot .sky-control-caption{font-size:12px;color:#aec2d0;margin-top:13px;display:flex;justify-content:space-between;gap:6px}
+.sky-pilot .sky-control-caption span{color:#ebc77e;font-variant-numeric:tabular-nums}
+.sky-pilot .button-row{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0 12px}
+.sky-pilot .sky-seasons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.sky-pilot .sky-seasons button{padding:7px 3px}
+.sky-pilot .sky-endpoints button{flex:1 1 80px;padding:7px 5px}
+.sky-pilot .sky-parameters{border-top:1px solid var(--sky-line);padding-top:11px;margin:15px 0;font-size:12px;line-height:1.8;color:#a9bfcc}
+.sky-pilot summary{cursor:pointer;min-height:30px;line-height:1.7}
+.sky-pilot .sky-controls fieldset{margin:16px 0 10px;padding:4px 12px;border:1px solid var(--sky-line)}
+.sky-pilot .sky-controls legend{padding:0 5px}
+.sky-pilot .sky-reset-row{display:flex;flex-wrap:wrap;gap:6px;padding-top:11px;border-top:1px solid var(--sky-line)}
+.sky-pilot .sky-reset-row [data-action=reset]{color:#ebc77e}
+.sky-pilot .sky-feedback{color:#71c8c7;font-size:12px;line-height:1.7;min-height:22px;margin:9px 0}
+.sky-pilot .sky-chart{border-top:1px solid var(--sky-line);margin-top:16px;padding-top:10px;color:#adbfcc;font-size:13px}
+.sky-pilot .sky-chart h3{font-size:14px;font-weight:400;line-height:1.6;margin:10px 0}
+.sky-pilot .sky-chart canvas{width:100%;height:270px}
+.sky-pilot[data-mode=precession] .sky-chart canvas{max-width:360px;height:350px;margin:0 auto;display:block}
+.sky-pilot #sky-comparison{margin-top:12px;padding:12px 0;border-bottom:1px solid var(--sky-line);font-size:12px;line-height:1.7}
+.sky-pilot .sky-compare-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sky-pilot #sky-comparison p{color:#a9bfcc;margin:7px 0}
+.sky-pilot #sky-comparison table{border-collapse:collapse;width:100%;table-layout:fixed;font-size:12px}
+.sky-pilot #sky-comparison td,.sky-pilot #sky-comparison th{border-top:1px solid var(--sky-line);text-align:left;padding:7px 8px 7px 0;vertical-align:top;overflow-wrap:anywhere;font-weight:400}
+.sky-pilot #sky-comparison td{color:#ebc77e}
+.sky-pilot .sky-explanation,.sky-pilot .sky-catalogue{border-top:1px solid var(--sky-line);margin-top:19px;padding:13px 0;font-size:14px;line-height:1.7}
+.sky-pilot .lab-copy{padding-top:8px}
+.sky-pilot .lab-copy h3{font-weight:400;color:#ebc77e;font-size:21px}
+.sky-pilot .sky-reading{border-top:1px solid var(--sky-line);padding-top:17px;line-height:1.8;font-size:12px;gap:10px 18px}
+.sky-pilot .sky-transport{padding:0 0 12px;color:inherit}
+.sky-pilot .sky-transport-buttons{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.sky-pilot .sky-transport-buttons button{white-space:nowrap}
+.sky-pilot .sky-transport-buttons>label{display:flex;align-items:center;gap:5px;font-size:12px;margin-left:auto}
+.sky-pilot .sky-transport select{width:64px;min-height:34px;padding:4px}
+.sky-pilot #sky-timeline .control{margin:8px 0 4px}
+.sky-pilot #sky-motion-status{font-size:12px;line-height:1.6;margin:5px 0 0;min-height:20px}
+.sky-pilot #sky-motion-views{margin:0 0 10px}
+.sky-pilot #sky-scene{position:relative}
+.sky-pilot .sky-motion-labels{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.sky-pilot .sky-motion-labels text{font:13px "Microsoft YaHei",sans-serif;stroke:#090f19;stroke-width:2.5px;paint-order:stroke fill}
+.sky-pilot .sky-motion-labels line{stroke-width:1;opacity:.55}
+.sky-pilot .sky-day-endpoints{display:grid;grid-template-columns:1fr}
+.sky-pilot input[type=date]{display:block;min-height:38px;width:100%;margin:6px 0;border:1px solid #899aa2;background:transparent;color:inherit;font:inherit;padding:4px 8px}
+.editorial #lab-mount .sky-pilot #sky-day-diagram{height:115px;margin-top:0}
+.editorial #lab-mount .sky-pilot .day-controls:empty{display:none}
+.editorial #lab-mount .sky-pilot .sky-transport .control{font-size:13px}
+.editorial #lab-mount .sky-pilot .sky-transport .control [data-value]{font-size:13px}
+.editorial #lab-mount .sky-pilot .sky-transport select{min-height:40px}
+.editorial #lab-mount .sky-pilot .sky-transport-buttons button{padding:7px 10px;min-height:40px}
+.editorial #lab-mount .sky-pilot #sky-motion-status{color:var(--muted)}
+.editorial #lab-mount .sky-pilot #sky-motion-views button{min-height:36px;padding:5px 9px;font-size:12px}
+.editorial #lab-mount .sky-pilot[data-mode=day] .scene-host{height:335px}
+@media(max-width:700px){
+ .editorial #lab-mount .sky-pilot .scene-host{height:230px}
+ .editorial #lab-mount .sky-pilot[data-mode=day] .scene-host{height:235px}
+ .editorial #lab-mount .sky-pilot .sky-view-head{margin:0 0 8px;gap:5px}
+ .editorial #lab-mount .sky-pilot #sky-motion-views{gap:5px;margin:0 0 8px}
+ .editorial #lab-mount .sky-pilot .sky-transport{padding-bottom:8px}
+ .editorial #lab-mount .sky-pilot .sky-transport-buttons{gap:5px}
+ .editorial #lab-mount .sky-pilot .sky-transport-buttons button{padding:6px 8px;font-size:12px;min-height:36px}
+ .editorial #lab-mount .sky-pilot .sky-transport select{min-height:36px;width:51px;font-size:12px}
+ .editorial #lab-mount .sky-pilot .sky-transport-buttons>label{font-size:11px;gap:3px}
+ .editorial #lab-mount .sky-pilot #sky-motion-status{font-size:11px;line-height:1.55}
+ .editorial #lab-mount .sky-pilot #sky-timeline .control{font-size:11px;margin:6px 0 3px}
+ .editorial #lab-mount .sky-pilot #sky-timeline .control [data-value]{font-size:11px}
+ .editorial #lab-mount .sky-pilot .legend{font-size:11px;line-height:1.7;padding:8px 0}
+ .editorial #lab-mount .sky-pilot .sky-day-endpoints{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .editorial #lab-mount .sky-pilot .sky-day-endpoints button{font-size:12px;padding:7px 4px}
+}
+@media(max-width:900px){
+ .sky-pilot .sky-workspace{grid-template-columns:minmax(0,1fr) 265px;gap:14px}
+ .sky-pilot .sky-controls{padding-left:13px}
+ .sky-pilot .sky-guide h2{font-size:22px}
+}
+@media(max-width:700px){
+ .sky-pilot .sky-tabs{gap:1px 13px;margin-bottom:10px}
+ .sky-pilot .sky-tabs button{font-size:12px;padding:8px 0;min-height:33px}
+ .sky-pilot .sky-guide{grid-template-columns:1fr;gap:4px;margin-bottom:12px}
+ .sky-pilot .sky-guide h2{font-size:20px;line-height:1.55}
+ .sky-pilot #sky-instruction{font-size:12px;line-height:1.65}
+ .sky-pilot [data-action=guide]{justify-self:end;min-height:25px}
+ .sky-pilot .sky-workspace{grid-template-columns:1fr;gap:12px}
+ .sky-pilot .sky-observation{display:contents}
+ .sky-pilot .sky-stage{grid-row:1}
+ .sky-pilot #sky-metrics{grid-row:2}
+ .sky-pilot .sky-controls{grid-row:3}
+ .sky-pilot #sky-comparison{grid-row:4}
+ .sky-pilot .sky-chart{grid-row:5}
+ .sky-pilot .sky-view-head{flex-wrap:wrap;gap:6px;padding:8px 10px}
+ .sky-pilot .sky-view-head h3{font-size:13px}
+ .sky-pilot .scene-host{height:254px}
+ .sky-pilot #sky-day-diagram{height:412px}
+ .sky-pilot #sky-main-plot{height:275px}
+ .sky-pilot .legend{font-size:10px;padding:7px 10px}
+ .sky-pilot .sky-readings{gap:8px;padding:10px 0}
+ .sky-pilot .sky-readings small{font-size:10px;line-height:1.5}
+ .sky-pilot .sky-readings strong{font-size:16px;line-height:1.6}
+ .sky-pilot .sky-controls{border-left:0;border-top:1px solid var(--sky-line);padding:13px 0 0}
+ .sky-pilot .sky-controls h3{margin:0 0 10px}
+ .sky-pilot .control{margin:10px 0}
+ .sky-pilot .sky-parameters{margin:12px 0}
+ .sky-pilot .sky-chart{margin-top:9px;padding-top:7px}
+ .sky-pilot .sky-chart canvas{height:265px}
+ .sky-pilot .sky-reading{gap:8px 12px}
+}

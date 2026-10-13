@@ -1,0 +1,109 @@
+/* Only light/thermal; the shared plot and all sibling styles remain unchanged. */
+body.thermal-observing{--th-bg:#0b1420;--th-ink:#d5e1ea;--th-muted:#9bb0c2;--th-line:#263747;--th-current:#71c8c7;background:var(--th-bg);color:var(--th-ink);scrollbar-color:var(--th-muted) var(--th-bg)}
+body.thermal-observing #site-navigation,body.thermal-observing #app>.tool-heading,body.thermal-observing #mode-context,body.thermal-observing .site-footer{display:none}
+body.tool-site.editorial.thermal-observing #app[data-page=lab]{max-width:none;padding:0;margin:0}
+#lab-mount.thermal-active>:not(.thermal-shell):not(link):not(.c-focus){display:none!important}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-shell[hidden]{display:none!important}
+body.thermal-observing #app #lab-mount.thermal-active{--text:var(--th-ink);--muted:var(--th-muted);--line:var(--th-line);color:var(--th-ink);font-family:"Microsoft YaHei",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+body.thermal-observing #app #lab-mount.thermal-active :is(button,summary,a,input){font:inherit;color:inherit}
+body.thermal-observing #app #lab-mount.thermal-active :is(button,summary,a){cursor:pointer}
+body.thermal-observing #app #lab-mount.thermal-active button{border:1px solid var(--th-line);border-radius:0;background:transparent;box-shadow:none;padding:9px 14px;min-height:42px}
+body.thermal-observing #app #lab-mount.thermal-active :is(button,summary,a):hover{color:var(--th-current)}
+body.thermal-observing #app #lab-mount.thermal-active :is(button,summary,a,input):focus-visible{outline:2px solid var(--th-current);outline-offset:4px}
+body.thermal-observing #app #lab-mount.thermal-active [hidden]{display:none!important}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-header{display:flex;align-items:center;gap:24px;padding:0 32px;min-height:58px;border-bottom:1px solid var(--th-line)}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-header h1{margin:0;font:500 21px "Microsoft JhengHei","Microsoft YaHei",sans-serif;letter-spacing:.06em}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-header a{font-size:14px;text-decoration:none;color:var(--th-muted)}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-header>span{font-size:13px;color:var(--th-muted)}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-modes{margin-left:auto;position:relative}
+body.thermal-observing #app #lab-mount.thermal-active summary{list-style:none;min-height:42px;display:flex;align-items:center;gap:8px;font-size:14px}
+body.thermal-observing #app #lab-mount.thermal-active summary::-webkit-details-marker{display:none}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-mode-body{position:absolute;top:100%;right:0;width:250px;padding:14px;background:var(--th-bg);border:1px solid var(--th-line);z-index:5}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-mode-body .lab-tabs{display:grid;gap:8px;margin:0;padding:0;border:0;overflow:visible}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-mode-body button{text-align:left;white-space:normal}
+body.thermal-observing #app #lab-mount.thermal-active [aria-pressed=true]{color:var(--th-current);border-color:var(--th-current)}
+body.thermal-observing #app #lab-mount.thermal-active .light-workbench{display:block;margin:0;padding:0;border:0}
+body.thermal-observing #app #lab-mount.thermal-active .light-visual{margin:0;padding:0 24px;border:0;background:none}
+body.thermal-observing #app #lab-mount.thermal-active #light-title{display:none}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-chart-head{display:flex;justify-content:space-between;gap:20px;padding:14px 40px 9px;font-size:13px;color:var(--th-muted)}
+body.thermal-observing #app #lab-mount.thermal-active [data-thermal-scale]{color:var(--th-ink)}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-plot-area{position:relative;height:calc(100svh - 340px);min-height:330px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-plot-area canvas{display:block;width:100%;height:100%;aspect-ratio:auto}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-peak-guide{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-peak-guide path{stroke:var(--th-current);stroke-width:1;stroke-dasharray:3 5;opacity:.6;fill:none}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-peak-guide circle{fill:var(--th-current);stroke:var(--th-bg);stroke-width:2}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-peak-identity{display:flex;flex-wrap:wrap;gap:4px 20px;align-items:baseline}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-peak{color:var(--th-current);font-size:14px;line-height:1.7;white-space:nowrap}
+body.thermal-observing #app #lab-mount.thermal-active .light-controls{display:block!important;width:auto;max-width:none;border:0!important;background:none;padding:0 64px!important;margin:0}
+body.thermal-observing #app #lab-mount.thermal-active .light-controls>#light-controls{display:none}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-primary .control{display:grid;grid-template-columns:90px 90px minmax(100px,1fr) 24px;gap:12px;align-items:center;margin:0;padding:10px 0}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-primary .control output{float:none;font-size:21px;color:var(--th-current)}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-primary .control input{grid-column:3;grid-row:1;width:100%;margin:0;accent-color:var(--th-current);cursor:ew-resize;min-height:34px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-primary .control small{grid-column:4;grid-row:1;color:var(--th-muted);font-size:14px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-physical{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:2px 0 8px;font-size:14px;line-height:1.8}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-surface-note{color:var(--th-muted);font-size:13px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 24px;border-top:1px solid var(--th-line);align-items:start}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-tools>details,body.thermal-observing #app #lab-mount.thermal-active [data-thermal-display]{min-width:0}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-conditions:not([open]){grid-column:1;grid-row:1}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-presets:not([open]){grid-column:2;grid-row:1}
+body.thermal-observing #app #lab-mount.thermal-active [data-thermal-display]:not(:has(details[open])){grid-column:3;grid-row:1}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-baseline:not([open]){grid-column:4;grid-row:1}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-conditions[open]{grid-column:1/-1;grid-row:2}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-presets[open]{grid-column:1/-1;grid-row:3}
+body.thermal-observing #app #lab-mount.thermal-active [data-thermal-display]:has(details[open]){grid-column:1/-1;grid-row:4}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-baseline[open]{grid-column:1/-1;grid-row:5}
+body.thermal-observing #app #lab-mount.thermal-active [data-thermal-conditions]{display:grid;grid-template-columns:minmax(240px,1fr) minmax(320px,1.5fr) auto;gap:6px 24px;align-items:start}
+body.thermal-observing #app #lab-mount.thermal-active [data-thermal-conditions]>.control{grid-column:1;grid-row:1/3}
+body.thermal-observing #app #lab-mount.thermal-active [data-thermal-conditions]>button{grid-column:3;grid-row:1;white-space:nowrap}
+body.thermal-observing #app #lab-mount.thermal-active [data-thermal-conditions]>p{grid-column:2;grid-row:2}
+body.thermal-observing #app #lab-mount.thermal-active [data-thermal-conditions]>#light-metrics{grid-column:2;grid-row:1}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-tools summary:after,body.thermal-observing #app #lab-mount.thermal-active .thermal-info>summary:after{content:'＋';color:var(--th-muted);font-size:15px;margin-left:4px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-tools details[open]>summary:after,body.thermal-observing #app #lab-mount.thermal-active .thermal-info[open]>summary:after{content:'−'}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-disclosure-body,body.thermal-observing #app #lab-mount.thermal-active .light-advanced>div{font-size:14px;line-height:1.8;padding:8px 0 18px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-disclosure-body p{font-size:13px;color:var(--th-muted);margin:8px 0}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-disclosure-body .control{margin:10px 0;font-size:14px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-disclosure-body input[type=range]{accent-color:var(--th-current);width:100%;min-height:34px}
+body.thermal-observing #app #lab-mount.thermal-active #light-metrics{display:block;border:0;margin:0;padding:0}
+body.thermal-observing #app #lab-mount.thermal-active #light-metrics>div{display:flex;justify-content:space-between;gap:12px;margin:8px 0;padding:0;border:0}
+body.thermal-observing #app #lab-mount.thermal-active #light-metrics strong{font-size:14px;font-weight:400;white-space:normal}
+body.thermal-observing #app #lab-mount.thermal-active .light-presets,body.thermal-observing #app #lab-mount.thermal-active .light-actions{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+body.thermal-observing #app #lab-mount.thermal-active .light-advanced{margin:0;border:0;padding:0}
+body.thermal-observing #app #lab-mount.thermal-active .light-check{display:flex;gap:8px;align-items:start;font-size:14px;margin:10px 0}
+body.thermal-observing #app #lab-mount.thermal-active .light-check input{accent-color:var(--th-current);width:18px;height:18px;flex:none;margin-top:4px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-window-note{font-size:12px;color:var(--th-muted);margin:0;padding:5px 0;line-height:1.7}
+body.thermal-observing #app #lab-mount.thermal-active .light-feedback{min-height:0;font-size:13px;margin:0;padding:0;color:var(--th-muted)}
+body.thermal-observing #app #lab-mount.thermal-active .light-feedback:empty{display:none}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-info{padding:0 64px 12px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-info>summary{font-size:13px;color:var(--th-muted);min-height:32px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-info-body{border-top:1px solid var(--th-line);padding:14px 0;line-height:1.8;max-width:100%}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-info-body>button{float:right;margin:0 0 12px 20px}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-info-body :is(h2,h3){font-size:18px;line-height:1.7}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-info-body p{font-size:14px;line-height:1.9}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-info-body .light-question{display:block;padding:0}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-info-body #light-legend{font-size:13px;color:var(--th-muted)}
+body.thermal-observing #app #lab-mount.thermal-active .thermal-info-body .light-explanation{border:0;margin:8px 0}
+body.thermal-observing #app #lab-mount.thermal-active .c-focus .light-visual{padding:0}
+body.thermal-observing #app #lab-mount.thermal-active .c-focus .light-controls{padding:0 20px!important}
+@media(max-width:700px){
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-header{padding:8px 14px;gap:14px;flex-wrap:wrap;min-height:50px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-header>span{display:none}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-header h1{font-size:19px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-mode-body{max-width:calc(100vw - 28px)}
+ body.thermal-observing #app #lab-mount.thermal-active .light-visual{padding:0 4px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-chart-head{padding:12px 16px;gap:5px;display:grid;font-size:12px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-plot-area{height:45svh;min-height:310px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-peak{font-size:12px}
+ body.thermal-observing #app #lab-mount.thermal-active .light-controls{padding:0 20px!important}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-primary .control{grid-template-columns:72px 1fr 20px;gap:8px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-primary .control output{font-size:20px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-primary .control input{grid-row:2;grid-column:1/-1}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-primary .control small{grid-column:3;grid-row:1}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-physical{gap:4px;font-size:13px;padding-bottom:10px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-tools{display:block}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-tools>details,body.thermal-observing #app #lab-mount.thermal-active .thermal-tools .light-advanced,body.thermal-observing #app #lab-mount.thermal-active [data-thermal-display]{display:block}
+ body.thermal-observing #app #lab-mount.thermal-active [data-thermal-conditions]{display:block}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-tools summary{min-height:44px;border-bottom:1px solid var(--th-line)}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-info{padding:0 20px 20px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-info-body>button{float:none;margin:0 0 12px}
+ body.thermal-observing #app #lab-mount.thermal-active .thermal-physical span{width:100%}
+}

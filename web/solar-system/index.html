@@ -7,10 +7,10 @@
   <title>太阳系 · 一张正在运动的地图</title>
   <link rel="stylesheet" href="style.css">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
-</head>
-<body>
+<link rel="icon" href="data:,"><link rel="stylesheet" href="/navigation.css"></head>
+<body class="integrated-legacy"><div id="site-navigation"></div>
   <header class="topbar">
-    <a class="brand" href="./" aria-label="太阳系沙盘首页"><svg viewBox="0 0 36 36" aria-hidden="true"><ellipse cx="18" cy="18" rx="16" ry="6" transform="rotate(-32 18 18)"/><circle cx="18" cy="18" r="5"/><circle cx="30" cy="10" r="2"/></svg><span>天文知识地图<small>从试卷讲起的天文学知识入门</small></span></a>
+    <a class="brand" href="./" aria-label="太阳系沙盘首页"><svg viewBox="0 0 36 36" aria-hidden="true"><ellipse cx="18" cy="18" rx="16" ry="6" transform="rotate(-32 18 18)"/><circle cx="18" cy="18" r="5"/><circle cx="30" cy="10" r="2"/></svg><span>天文知识地图<small>天体、尺度与运动</small></span></a>
     <nav class="modes" aria-label="地图视图">
       <button data-mode="explore" aria-pressed="true">宇宙沙盘</button>
       <button data-mode="distance" aria-pressed="false">轨道距离</button>
@@ -71,7 +71,7 @@
         <button id="tab-data" role="tab" aria-selected="false" aria-controls="object-content" data-tab="data">参数与尺度</button>
       </div>
       <button id="reading-toggle" class="reading-toggle" aria-expanded="false" aria-controls="solar-reading">展开阅读 ↓</button>
-      <div class="panel-footer"><span>让一个知识点，点亮一片区域。</span><button id="reading-open">阅读全文 ↗</button></div>
+      <div class="panel-footer"><span>让一个知识点，点亮一片区域。</span></div>
     </aside>
   </main>
 
@@ -84,7 +84,7 @@
 
 
   <dialog id="info-dialog" class="info-dialog"><div class="dialog-head"><span id="dialog-kicker">地图说明</span><button class="dialog-close" aria-label="关闭说明">×</button></div><div id="dialog-content"></div></dialog>
-  <noscript><p class="noscript">请启用 JavaScript 以旋转太阳系。完整文章仍可在课程目录的 lesson.md 中阅读。</p></noscript>
-  <script type="module" src="app.js"></script>
+  <noscript><p class="noscript">请启用 JavaScript 以旋转太阳系。模型与来源说明随本工具保留。</p></noscript>
+  <script type="module" src="app.js"></script><script type="module" src="/shared/tool-start.js"></script>
 </body>
 </html>

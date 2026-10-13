@@ -1,0 +1,47 @@
+[
+  {
+    "path": "assets/08/v02/light-pollution.jpg",
+    "url": "https://cdn.eso.org/images/publicationjpg/potw1936a.jpg",
+    "size": [
+      4000,
+      1978
+    ],
+    "sha256": "bc788c5d8c577e2dd9b3013baeabdd3b230c6fdf1586bf0696c3423d79d838eb"
+  },
+  {
+    "path": "assets/08/v02/airglow.jpg",
+    "url": "https://cdn.eso.org/images/publicationjpg/potw1638a.jpg",
+    "size": [
+      4000,
+      1697
+    ],
+    "sha256": "057a97942e23635f30ff36bc9bc448e6cc2064b515e0432000c8a75ee64e60e2"
+  },
+  {
+    "path": "assets/09/v02/primary-mirror.jpg",
+    "url": "https://cdn.eso.org/images/large/recoating-ut4.jpg",
+    "size": [
+      1200,
+      797
+    ],
+    "sha256": "a065398199eea72cfe0d959dc2866ec809069d2a008f83aa5341fd3f3e4375c8"
+  },
+  {
+    "path": "assets/09/v02/neptune-ao.jpg",
+    "url": "https://cdn.eso.org/images/large/eso1824b.jpg",
+    "size": [
+      2416,
+      1248
+    ],
+    "sha256": "99e96891e1749eafc35ffda4cc820af89dbc292cf2d27a74735d311af9a4df0f"
+  },
+  {
+    "path": "assets/10/v02/flames-spectra.jpg",
+    "url": "https://cdn.eso.org/images/large/eso0219b.jpg",
+    "size": [
+      910,
+      685
+    ],
+    "sha256": "c919ca944ab3d9a7cfce1cbc0e89e4d1943dcef935ed23459a57912b60c5ddd4"
+  }
+]

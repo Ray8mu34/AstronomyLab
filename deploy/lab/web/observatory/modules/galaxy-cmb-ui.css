@@ -1,0 +1,80 @@
+/* Local to the real direction map. Source colors and native renderers are untouched. */
+body.cmb-map-observing{--cm-bg:#0b1420;--cm-ink:#c5d5e2;--cm-muted:#93a9ba;--cm-line:#263645;--cm-gold:#f3c764;--cm-focus:#76c7ce;background:var(--cm-bg);color:var(--cm-ink);scrollbar-color:var(--cm-muted) var(--cm-bg)}
+body.cmb-map-observing #site-navigation,body.cmb-map-observing #app>.tool-heading,body.cmb-map-observing #mode-context,body.cmb-map-observing .site-footer{display:none}
+body.tool-site.editorial.cmb-map-observing #app[data-page=lab]{max-width:none;margin:0;padding:0}
+#lab-mount.cmb-map-active>:not(.cmb-map-shell):not(link){display:none!important}
+body.cmb-map-observing #app #lab-mount.cmb-map-active{color:var(--cm-ink);--text:var(--cm-ink);--muted:var(--cm-muted);--line:var(--cm-line);--gold:var(--cm-gold);--teal:var(--cm-focus);font-family:"Microsoft YaHei",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+body.cmb-map-observing #app #lab-mount.cmb-map-active [hidden]{display:none!important}
+body.cmb-map-observing #app #lab-mount.cmb-map-active :is(button,summary,a,input){font:inherit;color:inherit}
+body.cmb-map-observing #app #lab-mount.cmb-map-active :is(button,summary,a){cursor:pointer}
+body.cmb-map-observing #app #lab-mount.cmb-map-active :is(button,summary,a):hover{color:var(--cm-focus)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active :is(button,summary,a,input,canvas):focus-visible{outline:2px solid var(--cm-focus);outline-offset:3px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active button{border:1px solid var(--cm-line);border-radius:0;background:transparent;box-shadow:none;min-height:42px;padding:8px 12px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-header{display:flex;align-items:center;gap:25px;border-bottom:1px solid var(--cm-line);padding:0 32px;min-height:62px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-header h1{font:500 23px Georgia,"SimSun",serif;margin:0}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-header a{font-size:13px;text-decoration:none;color:var(--cm-muted)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-modes{margin-left:auto;position:relative}
+body.cmb-map-observing #app #lab-mount.cmb-map-active summary{list-style:none;display:flex;align-items:center;min-height:44px;cursor:pointer;font-size:14px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active summary::-webkit-details-marker{display:none}
+body.cmb-map-observing #app #lab-mount.cmb-map-active [data-cmb-map-modes]{position:absolute;z-index:3;right:0;top:100%;width:min(300px,80vw);background:var(--cm-bg);border:1px solid var(--cm-line);padding:14px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active [data-cmb-map-modes] .button-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0;border:0}
+body.cmb-map-observing #app #lab-mount.cmb-map-active [data-cmb-map-modes] [aria-pressed=true]{color:var(--cm-focus);border-color:var(--cm-focus)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reset-note{font-size:12px;line-height:1.7;color:var(--cm-muted);margin:10px 0 0}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-body{max-width:1040px;margin:auto;padding:12px 24px 30px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-identity{display:flex;justify-content:space-between;gap:20px;font-size:13px;line-height:1.8;color:var(--cm-muted);padding:3px 0 8px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-north,body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-south{text-align:center;font-size:12px;color:var(--cm-muted);line-height:22px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active #galaxy-cmbmap{display:block;width:100%;height:auto;aspect-ratio:2/1;cursor:crosshair;background:var(--cm-bg)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-axis{display:flex;justify-content:space-between;gap:6px;font-size:12px;color:var(--cm-muted);line-height:22px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-selection{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:4px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-ruler{margin:0;padding:0;font-size:14px;line-height:1.8}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-ruler strong{font-weight:400;color:var(--cm-gold)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-selection>p{margin:0;color:var(--cm-muted);font-size:12px;line-height:1.8}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-colors{display:flex;align-items:center;gap:12px;margin-top:7px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-colorbar{width:90px;height:5px;border-radius:0;margin:0;background:linear-gradient(90deg,#001ec5,#04a4fc,#fefefe,#ffac06,#f43c04)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-legend{display:flex;gap:16px;margin:0;font-size:12px;color:var(--cm-muted)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-caution{font-size:13px;color:var(--cm-ink);line-height:1.7;margin:7px 0 8px;padding:0}
+body.cmb-map-observing #app #lab-mount.cmb-map-active :is(.cmb-map-conditions,.cmb-map-info){border-top:1px solid var(--cm-line)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-disclosure{padding:6px 0 20px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active [data-cmb-map-controls]{max-width:850px;margin-top:14px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-direction-controls{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .control{font-size:14px;margin:0;padding:0;display:block}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .control input[type=range]{display:block;width:100%;height:30px;accent-color:var(--cm-focus);cursor:pointer;margin:4px 0 0}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .control output{color:var(--cm-gold)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .control small{display:block;font-size:12px;color:var(--cm-muted)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-context{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;align-items:start;margin-top:10px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-selection{display:block}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reference{display:flex;align-items:center;gap:16px;padding:0;margin:0}
+body.cmb-map-observing #app #lab-mount.cmb-map-active #galaxy-scene{display:block;width:176px;height:160px;min-height:0;background:#080d15;flex-shrink:0}
+body.cmb-map-observing #app #lab-mount.cmb-map-active #galaxy-scene canvas{display:block;width:100%;height:100%}
+body.cmb-map-observing #app #lab-mount.cmb-map-active [data-cmb-map-scene]{position:relative;flex-shrink:0;overflow:hidden}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-marker{position:absolute;z-index:2;width:14px;height:14px;border:2px solid var(--cm-gold);border-radius:50%;box-shadow:0 0 0 2px #080d15;transform:translate(-50%,-50%);pointer-events:none}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reference .cmb-map-outside{max-width:190px;margin-top:6px;color:var(--cm-gold);font-size:12px;line-height:1.7}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reference h2{font-size:14px;font-weight:400;margin:0 0 6px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reference p{font-size:13px;line-height:1.8;margin:0;color:var(--cm-ink)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reference .cmb-map-hint{font-size:12px;color:var(--cm-muted);margin-top:8px}
+body.cmb-map-observing #app #lab-mount.cmb-map-active :is(.note,.galaxy-caption,.lab-copy){font-size:13px;line-height:1.8;color:var(--cm-muted)}
+body.cmb-map-observing #app #lab-mount.cmb-map-active #galaxy-overlay{position:static;white-space:pre-line;font-size:13px;line-height:1.8;margin:8px 0;color:var(--cm-muted);text-shadow:none}
+body.cmb-map-observing #app #lab-mount.cmb-map-active #galaxy-cmb-observations>.note{display:none}
+body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-data-state{min-height:550px;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px;font-size:16px;line-height:2;color:var(--cm-gold)}
+@media(min-width:701px) and (max-height:720px){body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-body{max-width:900px}}
+@media(max-width:700px){
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-header{padding:0 14px;gap:14px;min-height:58px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-header h1{font-size:19px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-body{padding:8px 12px 20px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-identity{display:block;padding:3px 0 6px;font-size:12px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-identity span{display:block}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-selection{display:block}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-selection>p{margin-top:3px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-caution{font-size:12px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-colors{gap:8px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-colorbar{width:64px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-legend{gap:10px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .galaxy-direction-controls{grid-template-columns:1fr;gap:16px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active #galaxy-scene{width:148px;height:144px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reference{gap:12px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-context{display:block;margin-top:6px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reference{border-top:1px solid var(--cm-line);padding:10px 0}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reference p{font-size:12px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-reference .cmb-map-hint{font-size:11px}
+ body.cmb-map-observing #app #lab-mount.cmb-map-active .cmb-map-data-state{min-height:450px;padding:18px}
+}

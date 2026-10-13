@@ -1,46 +1,67 @@
 # AstronomyLab
 
-独立天文学教学网站：16篇完整文章、11个交互实验室、素材和科学来源导航。与社团官网 WebsiteZJUAAA 分开维护和部署。
+**本 README 所在目录就是唯一项目根目录，也是 Git 仓库根目录。日常开发、构建和 Git 操作都在这里进行。** 页面源码位于 `web/`；`deploy/lab/` 是生成的服务器运行包。旧的 `deployment/AstronomyLab` 开发副本已移到仓库外备份，不再维护两份网站源码。
 
-在线站点：[lab.zjuaaa.cn](https://lab.zjuaaa.cn/)。2026-10-04 已完成独立部署、HTTPS 和续期模拟验证。技术与性能报告见 [docs/TECHNICAL-REPORT.md](docs/TECHNICAL-REPORT.md)，维护交接见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
+R1 与后续分批 UI 改造保留原 Git 历史；2026-10-13 用户授权提交、推送与部署当前状态。发布结果、备份与回滚信息统一维护在 [重构交接](docs/LAB-REFACTOR-2026-10-05.md) 与 [部署记录](docs/DEPLOYMENT.md)。
 
-## 运行
+16 篇原始 Markdown 是独立内容资产；Lab 是无需先读讲义的天文演示与工具集合。11 工具、43 模式保留原 ID 与入口，UI 按已批准样板分批改造。自动冻结与人工批准分别记录；解析轨道、木星测量、S2 和星表仍保留明确停止项，不能称为全模式视觉验收完成。保护太阳系沙盘及原科学数据、模型与来源。
 
-需要 Node.js 22。服务没有 npm 运行时依赖，不需要 npm install、数据库、Python 或服务器显卡。
+后续独立视觉阶段的三个异质样板现已人工批准并冻结：`earth-moon/phase`（空间动态）、Imaging 两模式（二维图像）、`stars/hr`（二维坐标）。[UI Design System / Design Direction v1](ASTRONOMYLAB-UI-DESIGN-DIRECTION.md) 是后续 Codex 的稳定设计规则；[DESIGN.md](DESIGN.md) 记录批准证据与运行时所有者。规则不授权批量改造其他模式，其他页面的 R1 基础适配仍不等于视觉批准。
 
-```powershell
-node web/observatory/server.mjs
-```
+## 开发
 
-打开 http://127.0.0.1:4180/ 。可用 --port 指定其他本机端口。3D和天文计算在浏览器运行，要求 WebGL2；服务器仅发送文件、路由及轻量HTML适配。
-
-## 目录
-
-- web/observatory：统一入口、共享界面、9个实验模块、Node服务和数据。
-- web/solar-system、web/earth-moon：同来源接入的两个既有实验室。
-- course：16篇 lesson.md 编辑源；build/articles：当前阅读HTML和公开科学来源页。
-- assets：当前站点允许访问的素材、署名、科学表示与使用条件。
-- tools/build-articles-v02.py：文章导出源；需已有Pandoc和Pillow，可用PANDOC变量指定二进制。不是运行服务的依赖。
-- web/observatory/tools/prepare-catalog.py：索引源，保留人工修改的哈希保护。
-
-原卷、教师文件、私钥、原始科学数据压缩包及内部QA报告未纳入仓库。需要重新提取科学数据时按模块来源记录另行取得原始文件；既有衍生数据已经包含，日常启动不重新下载。
-
-原始文章和实验模型沿用当前课程版本；独立发行只更改工程状态摘要的读取位置与私有检查页链接，不升级科学审校状态。所有真人审校、真实试讲、教材对照仍pending。
-
-部署与隔离边界见 docs/DEPLOYMENT.md；第三方素材边界见 THIRD_PARTY.md。仓库公开不代表所有素材再分发许可已确认。
-
-## 2026-10-04 主线改进与本地验证
-
-本轮范围和实际进度见 [改进计划](docs/IMPROVEMENT-2026-10-04.md)。段落与实验的关联使用公开概念元数据，浏览中的阅读位置、模式和关键控件状态按历史项保存；不携带原题或教师记录。自由相机姿态、比较缓存、随机噪声种子与播放状态不在本轮恢复范围内；恢复后动画暂停，已列入白名单的时间控件仍保留其读数。
-
-`npm run check`现在执行运行界面文件语法检查和公开Node单元测试；`npm run check:syntax`只检查语法。它们均不能替代浏览器、科学模型审校或真实试讲。
-
-浏览器回归需已有Playwright和支持WebGL的浏览器，不自动安装依赖。先启动本地预览，再运行：
+在本目录使用已有 Node >=22；当前实际验证为 Node 24.14.0，Node22 专项待验。无需 `npm install`。
 
 ```powershell
-node web/observatory/server.mjs --port 4181
-# 在另一终端；安装在项目中时可省略--playwright，浏览器可通过--browser指定已有程序。
-npm run test:browser -- --base http://127.0.0.1:4181 --playwright "<已有Playwright模块路径>" --browser "<已有浏览器可执行文件路径>"
+npm run check
+npm start -- --port 4189
 ```
 
-结果写入被Git忽略的`build/qa/review-improvements/`。脚本记录操作断言和截图；截图的模型视觉复核需实际打开另行记录。软件WebGL、视口模拟与实体设备、现场投影的结果分别说明。当前公开部署记录仍代表既有上线版本，本轮本地修改没有自动部署。
+访问命令实际指定端口（如 http://127.0.0.1:4189/）。开发服务直接读取 `web/`，修改 UI 时不应编辑运行包。端口被占用时选择空闲端口，不结束其他项目进程。新增运行资源后需要重新构建资源白名单，并重新启动自己的本地预览。
+
+## 构建运行包
+
+```powershell
+npm run build:deploy
+npm run check:boundaries
+node deploy/lab/web/observatory/server.mjs --port 4188
+```
+
+`build:deploy` 从当前源码生成 `deploy/lab/` 和本地 ZIP；运行包无需课程、文章服务、Python、Pandoc 或 npm 依赖。发布须有用户授权，并检查源与包哈希、生产工作区、备份和独立端口验证；只重启 AstronomyLab 进程。`build:lab` 是同一构建工具的备用 `dist/lab/` 导出，不是另一套维护源码。
+
+## 目录职责
+
+| 路径 | 职责 |
+| --- | --- |
+| `.git/` | 原 GitHub 仓库的提交历史与配置 |
+| `web/` | 唯一网站源码，含 11 工具、共享代码、数据及来源 |
+| `tools/`、`tests/` | 构建、维护与回归源码 |
+| `course/*/lesson.md`、`assets/` | 16 篇原始正文及本地图片、来源依赖 |
+| `docs/` | 开发手册及持续维护的交接记录 |
+| `deploy/lab/` | 从源码生成的独立运行包；不要手工修改 |
+| `dist/` | 本地资料包与派生阅读导出；Git 忽略 |
+| `build/articles/` | 旧派生阅读，供兼容核查；不是 Lab 的运行依赖 |
+| `build/qa/` | 本地验收、截图、录屏及目录整理证据；Git 忽略 |
+| `output/` | 已交付报告等本地输出；Git 忽略 |
+| `course/_teacher/`、`docs/开发指导/教材部分/` | 私有教师资料与原卷；保留在本机，Git 忽略 |
+| `tools/vendor/`、`web/**/raw/` | 本机已有维护工具与科学原始文件；Git 忽略 |
+
+旧发布副本、临时预览、审查快照和 Git 备份集中保存在项目外的 `AstronomyLab-backups/`，具体位置见本机交接记录。只有本项目根目录作为日常开发入口。
+
+`source-protection.json` 是可随源码保存的 277 项保护子集；本机完整 W0 记录包含 334 项，存在时边界检查优先使用完整记录。`distribution-manifest.json` 是当前 Git 可见源码及运行包文件清单；实际 HTTP 资源白名单是 `web/observatory/runtime-assets.json`。
+
+## 原始讲义
+
+```powershell
+npm run export:lectures
+```
+
+使用既有 Conda `dl_env` 与 Pandoc；本机 `tools/vendor` 被 Git 忽略，其他机器可以用 `PANDOC` 指向已有程序。导出不改写原始 Markdown。依赖见 [tools/dependencies.md](tools/dependencies.md)。原始资料为 `dist/lectures-source/`，派生静态阅读为 `dist/lectures-web/`；可选外置阅读通过服务的 `--lectures` 接入。正式旧阅读迁移地址仍待确定。
+
+## 验证与边界
+
+R1 历史工程证据包括 48 项 Node 测试、全部 43 模式桌面及窄屏操作、状态恢复、六段完整录屏、原生 200% 操作及实际 30 分钟稳定性。目录整理只验证路径、源字节、Git 保护与运行，不代表重新完成全部历史验收。最新实际命令与结果见交接记录。
+
+已知 UI 问题及其余 37 模式深改保留待办；真人科学审校、教材对照、真实试讲、实体手机、现场投影和硬件长期性能尚未完成。工程通过不能代替这些验收。
+
+原卷、教师记录、凭据、原始科学压缩包和内部 QA 不公开上传。第三方许可待核保持待核，运行包及资料包维持 `blocked_pending_licenses`。来源见 `THIRD_PARTY.md` 与模块记录。旧 `docs/DEPLOYMENT.md`、`TECHNICAL-REPORT.md` 是历史生产记录，不能当作 R1 已部署的证明。

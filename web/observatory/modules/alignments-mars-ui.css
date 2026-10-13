@@ -1,0 +1,65 @@
+/* Local Mixed workspace: original spatial scene first, necessary direction graph second. */
+body.mars-observing{--ma-bg:#080d15;--ma-ink:#d5e1ea;--ma-muted:#9bb0c2;--ma-line:#263747;--ma-earth:#89b7dd;--ma-mars:#71c8c7;--ma-current:#ebc77e;background:var(--ma-bg);color:var(--ma-ink);color-scheme:dark;scrollbar-color:var(--ma-muted) var(--ma-bg)}
+body.mars-observing :is(#site-navigation,#mode-context,.site-footer),body.mars-observing #app>.tool-heading{display:none}
+body.tool-site.editorial.mars-observing #app[data-page=lab]{max-width:none;margin:0;padding:0 28px 24px}
+body.mars-observing #app #lab-mount.mars-active{--text:var(--ma-ink);--muted:var(--ma-muted);--line:var(--ma-line);font-family:"Microsoft YaHei",system-ui,sans-serif;color:var(--ma-ink);font-variant-numeric:tabular-nums}
+body.mars-observing #app #lab-mount .alignments-pilot.mars-active>:not(.mars-shell):not(link){display:none!important}
+body.mars-observing #app #lab-mount.mars-active [hidden]{display:none!important}
+.mars-header{min-height:58px;display:flex;align-items:center;gap:24px;border-bottom:1px solid var(--ma-line)}
+.mars-header h1{font-size:21px;line-height:1.5;font-weight:500;margin:0}.mars-header>a{font-size:14px;color:var(--ma-muted);text-decoration:none}.mars-modes{margin-left:auto;position:relative}
+body.mars-observing #app #lab-mount.mars-active :is(button,summary,a){font:inherit;cursor:pointer;color:var(--ma-ink)}
+body.mars-observing #app #lab-mount.mars-active button{background:transparent;border:1px solid var(--ma-line);border-radius:0;padding:7px 12px;min-height:40px;font-size:13px;box-shadow:none}
+body.mars-observing #app #lab-mount.mars-active :is(button,summary,a):hover{color:var(--ma-mars);background:transparent}
+body.mars-observing #app #lab-mount.mars-active :focus-visible{outline:2px solid var(--ma-mars);outline-offset:3px}
+body.mars-observing #app #lab-mount.mars-active summary{min-height:42px;display:flex;align-items:center;font-size:13px;list-style:none;padding:6px 0}
+body.mars-observing #app #lab-mount.mars-active summary::-webkit-details-marker{display:none}
+[data-mars-modes]{position:absolute;right:0;top:100%;z-index:5;width:260px;max-width:calc(100vw - 28px);padding:12px;background:var(--ma-bg);border:1px solid var(--ma-line)}
+body.mars-observing #app #lab-mount.mars-active .lab-tabs{display:grid;gap:8px;border:0;margin:0}
+body.mars-observing #app #lab-mount.mars-active .lab-tabs .active{border-color:var(--ma-mars);color:var(--ma-mars)}
+body.mars-observing #app #lab-mount.mars-active .alignment-workspace{display:block;min-width:0;border:0;background:transparent;padding:0}
+.mars-views{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;align-items:start}
+body.mars-observing #app #lab-mount.mars-active .viz-panel{grid-area:auto;padding:0;min-width:0;border:0;border-radius:0;background:transparent}
+body.mars-observing #app #lab-mount.mars-active .alignment-orbit-view{display:block}
+body.mars-observing #app #lab-mount.mars-active .panel-title{font-size:14px;line-height:1.6;font-weight:400;color:var(--ma-muted);margin:0;padding:10px 0 4px;min-height:0}
+body.mars-observing #app #lab-mount.mars-active #alignment-space{position:relative;width:100%;height:calc(100svh - 265px);min-height:360px;max-height:690px;aspect-ratio:auto;background:var(--ma-bg);border:0;border-radius:0;flex:none}
+.mars-labels{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden}.mars-labels text{font:14px "Microsoft YaHei",system-ui,sans-serif;paint-order:stroke;stroke:var(--ma-bg);stroke-width:4px;stroke-linejoin:round}.mars-labels path{fill:none;stroke-width:1;opacity:.8}.mars-labels .mars-forward path{stroke-width:2;opacity:1}
+body.mars-observing #app #lab-mount.mars-active .mars-boundary{font-size:12px;line-height:1.8;color:var(--ma-muted);margin:2px 0 8px}
+.mars-reference{padding-top:10px;min-width:0}.mars-reference h2{font-size:14px;line-height:1.6;font-weight:400;margin:0 0 4px;color:var(--ma-ink)}
+body.mars-observing #app #lab-mount.mars-active #alignment-plot{height:270px;width:100%;aspect-ratio:auto;border:0;border-radius:0}
+body.mars-observing #app #lab-mount.mars-active :is(.mars-point-note,.mars-direction-note,.mars-conditions){font-size:12px;line-height:1.8;color:var(--ma-muted);margin:5px 0}
+body.mars-observing #app #lab-mount.mars-active .mars-direction-note{color:var(--ma-ink)}
+body.mars-observing #app #lab-mount.mars-active #alignment-metrics{display:flex;gap:10px 18px;flex-wrap:wrap;border:0;border-radius:0;margin:8px 0;padding:0}
+body.mars-observing #app #lab-mount.mars-active #alignment-metrics>div{display:flex;align-items:baseline;gap:6px;padding:0;border:0;background:none}
+body.mars-observing #app #lab-mount.mars-active #alignment-metrics>div:last-child{display:none}
+body.mars-observing #app #lab-mount.mars-active #alignment-metrics small{font-size:12px;color:var(--ma-muted)}
+body.mars-observing #app #lab-mount.mars-active #alignment-metrics strong{font-size:15px;color:var(--ma-current);margin:0}
+body.mars-observing #app #lab-mount.mars-active .alignment-primary-controls{display:none}
+.mars-clock{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:0 28px;border-top:1px solid var(--ma-line);padding:8px 0 4px}
+.mars-clock>p{grid-column:1/-1;font-size:12px;line-height:1.8;color:var(--ma-muted);margin:5px 0}.mars-time-actions{display:flex;gap:8px;align-items:center}
+body.mars-observing #app #lab-mount.mars-active .control{padding:0;margin:0;border:0;background:none;color:var(--ma-ink);font-size:14px;line-height:1.7;min-width:0}
+body.mars-observing #app #lab-mount.mars-active .control b{font-weight:500;color:var(--ma-current)}
+body.mars-observing #app #lab-mount.mars-active input[type=range]{width:100%;height:30px;accent-color:var(--ma-current);margin:3px 0 0}
+.mars-tools{display:flex;flex-wrap:wrap;align-items:start;gap:0 28px;border-top:1px solid var(--ma-line)}
+.mars-tools:has(#alignment-orbit-details[open])>[data-mars-geometry],.mars-tools>details[open]{width:100%;order:2}
+body.mars-observing #app #lab-mount.mars-active #alignment-presets{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 12px}
+body.mars-observing #app #lab-mount.mars-active #alignment-orbit-details{border:0}
+body.mars-observing #app #lab-mount.mars-active #alignment-orbit-details[open]>summary{position:sticky;top:0;background:var(--ma-bg);z-index:2}
+body.mars-observing #app #lab-mount.mars-active #alignment-orbit-controls{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:12px 0}
+.mars-tools input{scroll-margin-top:55px}
+body.mars-observing #app #lab-mount.mars-active .mars-secondary p{font-size:13px;line-height:1.8;color:var(--ma-muted);margin:5px 0}
+body.mars-observing #app #lab-mount.mars-active #alignment-observed{height:230px;width:100%;flex:none;aspect-ratio:auto;border:0}
+.mars-info{border-top:1px solid var(--ma-line);margin-top:8px}.mars-info>div{padding:10px 0;line-height:1.9}
+body.mars-observing #app #lab-mount.mars-active .mars-info :is(.lab-copy,.formula){background:transparent;color:var(--ma-ink);border-color:var(--ma-line)}
+@media(max-width:850px){
+ body.tool-site.editorial.mars-observing #app[data-page=lab]{padding:0 14px 24px}
+ .mars-header{gap:14px}.mars-header h1{font-size:19px}
+ .mars-views{display:contents}
+ body.mars-observing #app #lab-mount.mars-active .alignment-workspace{display:flex;flex-direction:column;gap:0}
+ body.mars-observing #app #lab-mount.mars-active .alignment-orbit-view{order:0;width:100%}
+ .mars-clock{order:1;width:100%;grid-template-columns:minmax(0,1fr) auto;gap:0 12px}
+ .mars-reference{order:2;width:100%;padding-top:8px}.mars-tools{order:3;gap:0 20px}
+ body.mars-observing #app #lab-mount.mars-active #alignment-space{height:280px;min-height:280px}
+ body.mars-observing #app #lab-mount.mars-active #alignment-plot{height:240px}
+ body.mars-observing #app #lab-mount.mars-active #alignment-orbit-controls{grid-template-columns:1fr;gap:20px}
+}
+@media(min-width:851px) and (max-height:650px){body.mars-observing #app #lab-mount.mars-active #alignment-space{height:calc(100svh - 255px);min-height:300px}.mars-header{min-height:46px}}

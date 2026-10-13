@@ -1,4 +1,4 @@
-import {confirmedModes} from './course-map.js';
+import {confirmedModes} from './tool-registry.js';
 
 // Tab-session snapshots belong to a history entry, never to a lab-wide last value.
 // Only the controls listed here are replayed, using the same events as the UI.
@@ -16,7 +16,7 @@ export const experimentAdapters={
  sky:{mode:modeChoice('data-tab'),controls:keys('group selected starsProgress shadowDay shadowDate latitude longitude obliquity view look lookAltitude equator ecliptic lunar galactic starDec extinction blend offset errors baseline motion height calendar spinMode speed years dayHours hour precessionYears'),choices:[choice('shadowCycle','data-shadow-cycle','day year','before'),choice('motionView','data-motion-view','oblique pole close')],pause:[{selector:'[data-action="play"]'}]},
  optics:{mode:modeChoice('data-task'),controls:keys('aperture focal eyepiece focus wavelength seeing pixel sensor separation view'),choices:[choice('type','data-type','refractor newtonian sct','before')],pause:[{selector:'[data-ray-pause]',inverted:true}]},
  light:{mode:modeChoice('data-mode'),controls:keys('temperature radius normalize references vr veq inclination epsilon resolution distance extinction dustPower exposure background height k signal frames read'),choices:[],pause:[]},
- imaging:{mode:modeChoice('data-dataset'),controls:[...keys('channel mapping method white exposure strength black gainS gainH gainO dx dy registered background read frames saturation noise subtract plate'),extra('pixelX','[data-pixel-axis="x"]'),extra('pixelY','[data-pixel-axis="y"]')],choices:[],pause:[]},
+ imaging:{mode:modeChoice('data-dataset'),controls:[...keys('channel mapping method white exposure strength black gainS gainH gainO dx dy registered background read frames saturation noise subtract plate seed'),extra('pixelX','[data-pixel-axis="x"]'),extra('pixelY','[data-pixel-axis="y"]')],choices:[],pause:[]},
  stars:{mode:modeChoice('data-mode'),controls:keys('mass index hrExample alpha zeta width period bhMass rsMultiple successful iaSample iaCorrection phase progress'),choices:[choice('collapseTask','data-collapse-task','collapse tidal','before'),choice('hrCompare','data-hr-compare','none temperature luminosity'),choice('view','data-view','scene chart')],pause:[{selector:'[data-play]'}]},
  galaxy:{mode:modeChoice('data-topic'),controls:keys('longitude latitude dust height disk bar bulge halo darkhalo delta frequency'),choices:[choice('view','data-view','outside edge inside rise','before'),choice('wave','data-wave','visible infrared','before')],pause:[]},
  orbits:{mode:modeChoice('data-mode'),controls:[...keys('height speed target secondBurn reserve payload prop1 dry1 prop2 ve twr landingHeight fallSpeed progress'),...['height','speed','totalHours','rateHours','progress'].map(name=>extra('conic:'+name,`[data-conic-key="${name}"]`)),...['payload','isp','dry1','thrust','fuel','fallSpeed','ignitionHeight'].map(name=>extra('param:'+name,`[data-param="${name}"]`)),extra('processSpeed','[data-speed]','change'),extra('processTime','[data-time-input]')],choices:[choice('conicView','data-conic-view','whole near')],pause:[{selector:'#orbit-play'},{selector:'[data-conic-action="play"]'},{selector:'.ls-transport [data-action="play"]'}]},
@@ -129,7 +129,18 @@ export async function restoreExperiment(slug,root,options={}){
  if(!snapshot){announce(slug,root,win);return false;}
  // The saved mode wins only within this exact history entry. A fresh route has
  // a new ID and therefore starts in the mode requested by its ordinary URL.
- clickMode(slug,snapshot.mode,root);pauseExperiment(slug,root);
+ clickMode(slug,snapshot.mode,root);
+ // Real spatial branches may be loaded only when first selected. Wait for
+ // their public mode selection before replaying controls; never write saved
+ // parameters into the previous mode's DOM. A failure removes modeLoading.
+ if(root.dataset.modeLoading===snapshot.mode){
+  const started=Date.now();
+  while(root.dataset.modeLoading===snapshot.mode&&currentExperimentMode(slug,root)!==snapshot.mode){
+   if(options.signal?.aborted||Date.now()-started>30000)return false;
+   await new Promise(resolve=>win.setTimeout(resolve,25));
+  }
+ }
+ pauseExperiment(slug,root);
  if(currentExperimentMode(slug,root)!==snapshot.mode)return false;
  for(const spec of adapter.choices.filter(spec=>spec.stage==='before'))if(own(snapshot.choices,spec.name))clickChoice(spec,snapshot.choices[spec.name],root);
  for(const spec of adapter.controls){

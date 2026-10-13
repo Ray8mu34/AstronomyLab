@@ -1,4 +1,4 @@
-import {THREE} from '../shared/lab.js';
+import {THREE} from '../shared/scene.js';
 import {makeMotionLabels} from './sky-motion-labels.js';
 import {DEG,equatorialVector} from './sky-physics.mjs';
 import {dayGeometry} from './sky-demo-geometry.mjs';

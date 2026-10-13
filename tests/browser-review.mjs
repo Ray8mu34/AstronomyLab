@@ -5,6 +5,10 @@ import {createRequire} from 'node:module';
 import {confirmedModes, experimentURL} from '../web/observatory/shared/course-map.js';
 import {pathsForExperiment, readingURL} from '../web/observatory/shared/learning-paths.js';
 
+// Historical course-product regression. Its reading/paragraph-return
+// requirements remain available for the isolated legacy reader. R1 tools use
+// standalone-refactor.mjs and deliberately do not require those links.
+
 const option=(name,fallback)=>{const i=process.argv.indexOf(name);return i<0?fallback:process.argv[i+1];};
 const base=option('--base','http://127.0.0.1:4181');
 const output=path.resolve(option('--out','build/qa/review-improvements'));

@@ -1,0 +1,53 @@
+body.gnomon-observing{--gn-bg:#090f19;--gn-ink:#dce6ee;--gn-muted:#aabccc;--gn-line:#2b404f;--gn-sun:#ebc77e;background:var(--gn-bg);color:var(--gn-ink);scrollbar-color:var(--gn-muted) var(--gn-bg)}
+body.gnomon-observing :is(#site-navigation,#mode-context,.site-footer),body.gnomon-observing #app>.tool-heading{display:none}
+body.tool-site.editorial.gnomon-observing #app[data-page=lab]{max-width:none;padding:0;margin:0}
+#lab-mount.gnomon-active>:not(.gnomon-shell):not(link){display:none!important}
+#app #lab-mount.gnomon-active{--text:var(--gn-ink);--muted:var(--gn-muted);--line:var(--gn-line);font-family:"Microsoft YaHei",system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--gn-ink)}
+#app #lab-mount.gnomon-active [hidden]{display:none!important}
+#app #lab-mount.gnomon-active :is(button,summary,a,input,select){font:inherit;color:inherit}
+#app #lab-mount.gnomon-active :is(button,summary,a,select){cursor:pointer}
+#app #lab-mount.gnomon-active :is(button,summary,a,input,select):focus-visible{outline:2px solid var(--gn-sun);outline-offset:4px}
+#app #lab-mount.gnomon-active :is(button,select,input[type=date]){background:var(--gn-bg);border:1px solid var(--gn-line);border-radius:0;box-shadow:none;min-height:42px;max-width:100%;padding:7px 11px;color-scheme:dark}
+#app #lab-mount.gnomon-active details{border:0;padding:0;margin:0}
+#app #lab-mount.gnomon-active summary{display:flex;align-items:center;min-height:44px;list-style:none;font-size:14px;cursor:pointer}
+#app #lab-mount.gnomon-active summary::-webkit-details-marker{display:none}
+#app #lab-mount.gnomon-active .gnomon-header{display:flex;align-items:center;gap:24px;min-height:58px;padding:0 26px;border-bottom:1px solid var(--gn-line)}
+#app #lab-mount.gnomon-active .gnomon-header h1{font-size:20px;font-weight:500;margin:0}
+#app #lab-mount.gnomon-active .gnomon-header a{text-decoration:none;font-size:14px;color:var(--gn-muted)}
+#app #lab-mount.gnomon-active .gnomon-modes{margin-left:auto;position:relative}
+#app #lab-mount.gnomon-active :is(.gnomon-date,.gnomon-cycle){position:relative}
+#app #lab-mount.gnomon-active :is([data-gnomon-modes],[data-gnomon-date],[data-gnomon-cycle]){position:absolute;right:0;top:100%;width:300px;max-width:calc(100vw - 24px);padding:12px;background:var(--gn-bg);border:1px solid var(--gn-line);z-index:6}
+#app #lab-mount.gnomon-active :is(.sky-tabs,.sky-subtasks,[data-gnomon-date]>.button-row){display:grid;gap:8px;padding:0;margin:0;border:0}
+#app #lab-mount.gnomon-active [data-gnomon-date]>.button-row{grid-template-columns:repeat(2,1fr);margin-top:10px}
+#app #lab-mount.gnomon-active .gnomon-observation{padding:0 24px}
+#app #lab-mount.gnomon-active .gnomon-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:54px}
+#app #lab-mount.gnomon-active .gnomon-heading>p{font-size:17px;line-height:1.6;margin:8px 0}
+#app #lab-mount.gnomon-active #sky-scene{position:relative;width:100%;height:calc(100svh - 410px);min-height:240px;max-height:650px}
+#app #lab-mount.gnomon-active #sky-scene canvas{display:block}
+#app #lab-mount.gnomon-active .gnomon-location{display:flex;gap:24px;align-items:center;justify-content:space-between;padding-top:6px}
+#app #lab-mount.gnomon-active [data-gnomon-latitude]{width:min(680px,65%)}
+#app #lab-mount.gnomon-active .control{font-size:13px;line-height:1.7;display:block;margin:6px 0;color:var(--gn-muted)}
+#app #lab-mount.gnomon-active .control [data-value]{float:right;color:var(--gn-sun)}
+#app #lab-mount.gnomon-active input[type=range]{display:block;width:100%;min-height:28px;accent-color:#71c8c7}
+#app #lab-mount.gnomon-active .sky-readings{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 20px;padding:0;border:0;background:none}
+#app #lab-mount.gnomon-active .sky-readings>div{display:flex;align-items:baseline;gap:8px}
+#app #lab-mount.gnomon-active .sky-readings :is(small,strong){font-size:13px;line-height:1.7;font-weight:400}
+#app #lab-mount.gnomon-active .sky-readings small{color:var(--gn-muted)}
+#app #lab-mount.gnomon-active .sky-readings strong{color:var(--gn-sun)}
+#app #lab-mount.gnomon-active [data-gnomon-clock]{display:flex;align-items:flex-start;gap:10px;position:relative}
+#app #lab-mount.gnomon-active [data-gnomon-clock]>[data-action=noon]{order:2;position:absolute;right:0;top:8px}
+#app #lab-mount.gnomon-active #sky-transport{width:100%;padding:8px 0 0;margin:0;background:none}
+#app #lab-mount.gnomon-active .sky-transport-buttons{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding-right:105px}
+#app #lab-mount.gnomon-active .sky-transport-buttons>label{display:flex;align-items:center;gap:8px;margin-left:auto;font-size:13px}
+#app #lab-mount.gnomon-active :is(#sky-motion-status,.gnomon-time-note,#sky-legend){font-size:12px;line-height:1.65;color:var(--gn-muted);padding:0;margin:4px 0}
+#app #lab-mount.gnomon-active .gnomon-secondary{margin:8px 24px 24px;border-top:1px solid var(--gn-line)}
+#app #lab-mount.gnomon-active :is(.gnomon-secondary details>div,.gnomon-secondary article){padding:8px 0 16px}
+#app #lab-mount.gnomon-active :is(.gnomon-secondary p,.gnomon-secondary table,.gnomon-secondary .lab-copy){font-size:14px;line-height:1.85;color:var(--gn-muted)}
+#app #lab-mount.gnomon-active .sky-reset-row{display:flex;gap:8px;flex-wrap:wrap}
+#app #lab-mount.gnomon-active .sky-compare-head{display:flex;align-items:center;gap:14px;justify-content:space-between}
+#app #lab-mount.gnomon-active #sky-comparison{background:none;border:0;padding:0}
+#app #lab-mount.gnomon-active :is(.sky-feedback,.legend){font-size:12px;line-height:1.7}
+#app #lab-mount.gnomon-active #sky-plot{width:100%;height:350px;max-height:none}
+@media(max-width:700px){#app #lab-mount.gnomon-active .gnomon-header{padding:0 12px;gap:16px}#app #lab-mount.gnomon-active .gnomon-observation{padding:0 12px}#app #lab-mount.gnomon-active .gnomon-heading>p{font-size:14px}#app #lab-mount.gnomon-active .gnomon-heading>details{flex-shrink:0}#app #lab-mount.gnomon-active #sky-scene{height:calc((100vw - 24px)*.79);min-height:220px;max-height:400px}#app #lab-mount.gnomon-active .gnomon-location{display:block}#app #lab-mount.gnomon-active [data-gnomon-latitude]{width:100%}#app #lab-mount.gnomon-active .gnomon-date>summary{min-height:38px}#app #lab-mount.gnomon-active .sky-readings{display:block}#app #lab-mount.gnomon-active .gnomon-secondary{margin:8px 12px 20px}#app #lab-mount.gnomon-active .sky-transport-buttons{padding-right:0}#app #lab-mount.gnomon-active [data-gnomon-clock]>[data-action=noon]{position:static;flex-shrink:0;margin-top:8px}#app #lab-mount.gnomon-active #sky-transport{min-width:0}#app #lab-mount.gnomon-active .sky-transport-buttons>label{margin-left:0}#app #lab-mount.gnomon-active #sky-plot{height:300px}}
+@media(min-width:701px) and (max-height:650px){#app #lab-mount.gnomon-active #sky-scene{height:calc(100svh - 380px);min-height:180px;max-height:260px}#app #lab-mount.gnomon-active .gnomon-heading>p{font-size:14px}#app #lab-mount.gnomon-active :is(#sky-motion-status,.gnomon-time-note){margin:2px 0;font-size:11px}}
+@media(max-width:700px) and (max-height:500px){#app #lab-mount.gnomon-active #sky-scene{height:180px;min-height:180px}#app #lab-mount.gnomon-active .gnomon-location{display:flex;gap:8px}#app #lab-mount.gnomon-active [data-gnomon-latitude]{width:60%}#app #lab-mount.gnomon-active .sky-readings{display:flex}#app #lab-mount.gnomon-active .sky-readings>div:first-child{display:none}#app #lab-mount.gnomon-active .sky-extra-readings>summary{min-height:30px}}

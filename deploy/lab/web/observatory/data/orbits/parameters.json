@@ -1,0 +1,11 @@
+{
+  "checked_on": "2026-10-03",
+  "earth": {"mu_km3_s2":398600.435507,"mean_radius_km":6371},
+  "constants_source":"https://ssd.jpl.nasa.gov/astro_par.html",
+  "radius_source":"https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+  "model":"Vacuum spherical Earth; point spacecraft; no atmosphere, J2, rotation, finite thrust or third bodies.",
+  "defaults":{"release_height_km":200,"horizontal_speed_km_s":7.79,"transfer_target_height_km":35786},
+  "schematic_budgets":{"first_stage_dry_t":10,"first_stage_propellant_t":80,"second_stage_dry_t":3,"second_stage_propellant_t":25,"payload_t":2,"exhaust_km_s":3},
+  "schematic_note":"Mass budgets and landing defaults are teaching examples; not a rocket product specification or measured trajectory.",
+  "numerical_integration":"RK4, default timestep 4 s, first surface intersection solved by 32 bisections; path truncated at 18 Earth radii or 24000 s."
+}
