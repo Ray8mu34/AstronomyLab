@@ -48,7 +48,7 @@ node deploy/lab/web/observatory/server.mjs --port 4188
 
 旧发布副本、临时预览、审查快照和 Git 备份集中保存在项目外的 `AstronomyLab-backups/`，具体位置见本机交接记录。只有本项目根目录作为日常开发入口。
 
-`source-protection.json` 是可随源码保存的 277 项保护子集；本机完整 W0 记录包含 334 项，存在时边界检查优先使用完整记录。`distribution-manifest.json` 是当前 Git 可见源码及运行包文件清单；实际 HTTP 资源白名单是 `web/observatory/runtime-assets.json`。
+`source-protection.json` 是可随源码保存的 256 项保护子集；21 项内部 QA 被排除在 Git 发布之外，其原哈希仍记录在清单中，本机文件保持。完整 W0 记录包含 334 项，存在时边界检查优先使用完整记录。`distribution-manifest.json` 是当前 Git 可见源码及运行包文件清单；实际 HTTP 资源白名单是 `web/observatory/runtime-assets.json`。
 
 ## 原始讲义
 

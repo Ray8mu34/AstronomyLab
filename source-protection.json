@@ -90,11 +90,6 @@
       "sha256": "1593543cc21e8a038eadb776774c17c43b75cd7734b9803f50e6035380b8ea32"
     },
     {
-      "path": "web/observatory/data/galaxy/browser-check.json",
-      "bytes": 723,
-      "sha256": "37c5f2ddaf1968c0693ea26797d37c1b591c32591f3f4d5517bc0488ccc3b88b"
-    },
-    {
       "path": "web/observatory/data/galaxy/firas_monopole_spec_v1.txt",
       "bytes": 2388,
       "sha256": "df793c3dca09ebfa7dbc5aa0ec1951daa8884431bc30eff28a710d7516cf50fa"
@@ -105,39 +100,9 @@
       "sha256": "7cc7837c26737cffb243dff18bee020d5697a8652b954122c0952406d3b4f835"
     },
     {
-      "path": "web/observatory/data/galaxy/math-check.json",
-      "bytes": 746,
-      "sha256": "8b9b1ede5e71ba66a13bb20b763b90830ffc402153159e6d628d679952a93b76"
-    },
-    {
       "path": "web/observatory/data/galaxy/planck-equirectangular.jpg",
       "bytes": 870613,
       "sha256": "575d06b6596b1cfb6a9b02e87a936f5ee8fbe80b64aab10d80dbf9c700108634"
-    },
-    {
-      "path": "web/observatory/data/galaxy/probe-cmb.png",
-      "bytes": 833630,
-      "sha256": "9851644a9a77f941a66d011ff0aa48956593234bef97a056ac0e720eb77c7b8d"
-    },
-    {
-      "path": "web/observatory/data/galaxy/probe-infrared.png",
-      "bytes": 612192,
-      "sha256": "497488254bb63f7aa008b90760d7a1db3d277ca4a33f7bb1995f1dac7beab240"
-    },
-    {
-      "path": "web/observatory/data/galaxy/probe-inside.png",
-      "bytes": 657932,
-      "sha256": "9fef4b598f4e3708ce73be64e16772a8bc27c93e19fef30dcc8678821c0b4b90"
-    },
-    {
-      "path": "web/observatory/data/galaxy/probe-mobile.png",
-      "bytes": 589485,
-      "sha256": "8ab4566b21fa4c96a1c0e5e518a8194dc69fb9a1cd9e87dfb281730836049714"
-    },
-    {
-      "path": "web/observatory/data/galaxy/probe-outside.png",
-      "bytes": 559084,
-      "sha256": "de61e7179f6006793c9bcff967a5c71692a704f6af1a1d63b9142d6c1861dbec"
     },
     {
       "path": "web/observatory/data/imaging/502-linear.f32",
@@ -173,21 +138,6 @@
       "path": "web/observatory/data/light/check-models.mjs",
       "bytes": 5951,
       "sha256": "4984c4bb5d4011eb593b53d6655ef88f50c32f77b08f7e920e2596655a640d3c"
-    },
-    {
-      "path": "web/observatory/data/light/model-checks.json",
-      "bytes": 3324,
-      "sha256": "34c6381f15f5898b718fe269e04ec71a2be8cb3236a12a01f98c55b0b1f408e1"
-    },
-    {
-      "path": "web/observatory/data/measure/browser-checks.json",
-      "bytes": 1882,
-      "sha256": "4dfd0da692d04266a0b6100be297e166f02fd08eb45d92e100f6978af408ae59"
-    },
-    {
-      "path": "web/observatory/data/measure/model-checks.json",
-      "bytes": 1841,
-      "sha256": "0eaa1c6db004bf0bcab7cf17c48564b171485eae744d8cbdfe6e675ecbef3800"
     },
     {
       "path": "web/observatory/data/measure/parameters.json",
@@ -235,19 +185,9 @@
       "sha256": "87d4254fb983bdba5f27974870abfbd330db8055823af50abe4e2baaa68da7db"
     },
     {
-      "path": "web/observatory/data/optics/browser-checks.json",
-      "bytes": 1065,
-      "sha256": "34b8a73904caa7620626f1ad96550d14632dd1b9385f48dedbd2dec592a9f9e5"
-    },
-    {
       "path": "web/observatory/data/optics/browser-smoke.mjs",
       "bytes": 3853,
       "sha256": "d8d91ef91bbfe50e01f9a68fd4941e2057d69c9a49ce6ea91038a075d9185174"
-    },
-    {
-      "path": "web/observatory/data/optics/math-checks.json",
-      "bytes": 940,
-      "sha256": "50d16c78d3eefe24048e096bbeb3e5083a94408ac8a5908d8d6cdbe5501981c3"
     },
     {
       "path": "web/observatory/data/optics/reference-build.py",
@@ -263,26 +203,6 @@
       "path": "web/observatory/data/optics/verify.mjs",
       "bytes": 2822,
       "sha256": "68be455158e93c2ac4f7474047100d5abc39e941ffc939ac9a5a9a24fe06902c"
-    },
-    {
-      "path": "web/observatory/data/optics/visual-review.json",
-      "bytes": 2767,
-      "sha256": "39318692885ceec4ffe64008a75c858a1263733cf69104fca63a5640ee2b6a46"
-    },
-    {
-      "path": "web/observatory/data/orbits/browser-checks.json",
-      "bytes": 1882,
-      "sha256": "4dfd0da692d04266a0b6100be297e166f02fd08eb45d92e100f6978af408ae59"
-    },
-    {
-      "path": "web/observatory/data/orbits/model-checks.json",
-      "bytes": 1841,
-      "sha256": "0eaa1c6db004bf0bcab7cf17c48564b171485eae744d8cbdfe6e675ecbef3800"
-    },
-    {
-      "path": "web/observatory/data/orbits/model-visual-review.json",
-      "bytes": 3366,
-      "sha256": "dbc351359d3096549ad3b0d94e9c0476d84520a9078cd59aff92b25c5f1f69a1"
     },
     {
       "path": "web/observatory/data/orbits/parameters.json",
@@ -665,11 +585,6 @@
       "sha256": "63f5a64c95f1d85fed4145902e8d1096cf294c37fa469b20898ebc441fcdefc2"
     },
     {
-      "path": "assets/05/v02/article-ast.json",
-      "bytes": 27006,
-      "sha256": "e4e279f17b4413118d057f951d59b1e605885e7a64e1f9c05834f6bf2d094cff"
-    },
-    {
       "path": "assets/05/v02/calendar-fit.png",
       "bytes": 195364,
       "sha256": "7fa2f6b254bc72485cd1284265148a08aad101b253c41d7a4dc500535b4a0b95"
@@ -740,11 +655,6 @@
       "sha256": "85bb7f463d6805b770be3f2b6a2efe6e07cdc78411372b65213f5af9298a73af"
     },
     {
-      "path": "assets/06/v02/article-ast.json",
-      "bytes": 31242,
-      "sha256": "cdfe95d701716565c4051f800a6a1afdf4df62b9f4ec59f0ed50bbbcb56f8646"
-    },
-    {
       "path": "assets/06/v02/astrometry-source.html",
       "bytes": 178563,
       "sha256": "4eadd5c79f5a57f623262ace3f1c25a33a849690cbe3d777062d96f646e337b4"
@@ -783,11 +693,6 @@
       "path": "assets/06/v02/star-altitudes.svg",
       "bytes": 22736,
       "sha256": "ad96f491c0b00c04949d803da3dd4025495ac93f5e7fb9bfa9e4a167ae40a41e"
-    },
-    {
-      "path": "assets/07/v02/article-ast.json",
-      "bytes": 29577,
-      "sha256": "8f9fcc468e3fb638e3d7d5a26cdaf8f6a2469ce6e8887e114374391201b3fd52"
     },
     {
       "path": "assets/07/v02/four-circles.png",
@@ -1005,11 +910,6 @@
       "sha256": "b479b2bf5c4c0f8e6114aa63efdbd789a9a3207717de547762a6e4ae5cab45de"
     },
     {
-      "path": "assets/11/v02/contact-batch-C.jpg",
-      "bytes": 997605,
-      "sha256": "7074ce9269f72c184280a6a56a3e1f594e0fa3954bcf9a9129ecea607b0a1dd1"
-    },
-    {
       "path": "assets/11/v02/contact_images.py",
       "bytes": 675,
       "sha256": "8b32c88c08402078145b59e56276c8e2d30ec14058800a2cf52235fb8efb4937"
@@ -1073,11 +973,6 @@
       "path": "assets/13/v02/hudf.jpg",
       "bytes": 9447246,
       "sha256": "e753d42fa9e5aabb807d5dba74b9d88205c4ce007f9c5ad106c0d9cb6f81fc59"
-    },
-    {
-      "path": "assets/13/v02/numeric-link-check.json",
-      "bytes": 832,
-      "sha256": "d02f8aa35170555b044c16430f32722d2de246ba35d5539d9d937c4dc8b9d177"
     },
     {
       "path": "assets/13/v02/planck.jpg",
@@ -1390,12 +1285,141 @@
       "sha256": "8b0043083f4d3f4a2a8fa26f815cce158750774aa58c55beaad569c2c76c0957"
     }
   ],
-  "scope": "Only copied Git-visible source files; private/omitted files remain covered by the original workspace W0 record. Hashes do not establish science or distribution permissions.",
+  "scope": "Git-visible original source/data; complete 334-file local baseline remains authoritative when present",
   "scopeUpdatedAt": "2026-10-05T16:01:23.489Z",
   "excludedPrivateFromRepository": [
     {
       "path": "web/observatory/data/stars/MIST2.5-1-3-15.zip",
       "reason": "Local original scientific archive, protected by the full private W0 baseline; excluded from Git"
+    }
+  ],
+  "publicationScopeUpdatedAt": "2026-10-13T05:03:27.784Z",
+  "excludedLocalEvidence": [
+    {
+      "path": "web/observatory/data/galaxy/browser-check.json",
+      "bytes": 723,
+      "sha256": "37c5f2ddaf1968c0693ea26797d37c1b591c32591f3f4d5517bc0488ccc3b88b",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/galaxy/math-check.json",
+      "bytes": 746,
+      "sha256": "8b9b1ede5e71ba66a13bb20b763b90830ffc402153159e6d628d679952a93b76",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/galaxy/probe-cmb.png",
+      "bytes": 833630,
+      "sha256": "9851644a9a77f941a66d011ff0aa48956593234bef97a056ac0e720eb77c7b8d",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/galaxy/probe-infrared.png",
+      "bytes": 612192,
+      "sha256": "497488254bb63f7aa008b90760d7a1db3d277ca4a33f7bb1995f1dac7beab240",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/galaxy/probe-inside.png",
+      "bytes": 657932,
+      "sha256": "9fef4b598f4e3708ce73be64e16772a8bc27c93e19fef30dcc8678821c0b4b90",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/galaxy/probe-mobile.png",
+      "bytes": 589485,
+      "sha256": "8ab4566b21fa4c96a1c0e5e518a8194dc69fb9a1cd9e87dfb281730836049714",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/galaxy/probe-outside.png",
+      "bytes": 559084,
+      "sha256": "de61e7179f6006793c9bcff967a5c71692a704f6af1a1d63b9142d6c1861dbec",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/light/model-checks.json",
+      "bytes": 3324,
+      "sha256": "34c6381f15f5898b718fe269e04ec71a2be8cb3236a12a01f98c55b0b1f408e1",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/measure/browser-checks.json",
+      "bytes": 1882,
+      "sha256": "4dfd0da692d04266a0b6100be297e166f02fd08eb45d92e100f6978af408ae59",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/measure/model-checks.json",
+      "bytes": 1841,
+      "sha256": "0eaa1c6db004bf0bcab7cf17c48564b171485eae744d8cbdfe6e675ecbef3800",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/optics/browser-checks.json",
+      "bytes": 1065,
+      "sha256": "34b8a73904caa7620626f1ad96550d14632dd1b9385f48dedbd2dec592a9f9e5",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/optics/math-checks.json",
+      "bytes": 940,
+      "sha256": "50d16c78d3eefe24048e096bbeb3e5083a94408ac8a5908d8d6cdbe5501981c3",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/optics/visual-review.json",
+      "bytes": 2767,
+      "sha256": "39318692885ceec4ffe64008a75c858a1263733cf69104fca63a5640ee2b6a46",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/orbits/browser-checks.json",
+      "bytes": 1882,
+      "sha256": "4dfd0da692d04266a0b6100be297e166f02fd08eb45d92e100f6978af408ae59",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/orbits/model-checks.json",
+      "bytes": 1841,
+      "sha256": "0eaa1c6db004bf0bcab7cf17c48564b171485eae744d8cbdfe6e675ecbef3800",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "web/observatory/data/orbits/model-visual-review.json",
+      "bytes": 3366,
+      "sha256": "dbc351359d3096549ad3b0d94e9c0476d84520a9078cd59aff92b25c5f1f69a1",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "assets/05/v02/article-ast.json",
+      "bytes": 27006,
+      "sha256": "e4e279f17b4413118d057f951d59b1e605885e7a64e1f9c05834f6bf2d094cff",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "assets/06/v02/article-ast.json",
+      "bytes": 31242,
+      "sha256": "cdfe95d701716565c4051f800a6a1afdf4df62b9f4ec59f0ed50bbbcb56f8646",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "assets/07/v02/article-ast.json",
+      "bytes": 29577,
+      "sha256": "8f9fcc468e3fb638e3d7d5a26cdaf8f6a2469ce6e8887e114374391201b3fd52",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "assets/11/v02/contact-batch-C.jpg",
+      "bytes": 997605,
+      "sha256": "7074ce9269f72c184280a6a56a3e1f594e0fa3954bcf9a9129ecea607b0a1dd1",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
+    },
+    {
+      "path": "assets/13/v02/numeric-link-check.json",
+      "bytes": 832,
+      "sha256": "d02f8aa35170555b044c16430f32722d2de246ba35d5539d9d937c4dc8b9d177",
+      "reason": "Internal QA excluded from Git publication; original bytes retained locally"
     }
   ]
 }

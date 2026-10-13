@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T04:52:13.463Z",
+  "generated_at": "2026-10-13T05:03:27.860Z",
   "scope": "Git-visible maintainable source and generated deploy/lab; private inputs, credentials and internal QA excluded",
   "baselineHead": "1e8a77642b489c990e917a4791c0eb83851fadd1",
   "publicDistribution": "blocked_pending_licenses",
@@ -41,8 +41,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5324,
-      "sha256": "2b0d229f0c58db0baea64c283fd0baa01fbdc3e06e91bbedf018a4b06f35faa7"
+      "bytes": 5423,
+      "sha256": "be0eb613fced05cbba553255fbfff1d07eec0f7342b12dc57eccdc00248bfdb9"
     },
     {
       "path": "THIRD_PARTY.md",
@@ -2131,8 +2131,8 @@
     },
     {
       "path": "docs/LAB-REFACTOR-2026-10-05.md",
-      "bytes": 118861,
-      "sha256": "51e51a854693549d3ce5ffda4cbe8cd5f23e46a7e7ccdd8aa38bf95e7a20304b"
+      "bytes": 119570,
+      "sha256": "f23bc5df2ac8ce2074718f47afe2eb4677cecd1e856c96ec822671a01ed6a79e"
     },
     {
       "path": "docs/TECHNICAL-REPORT.md",
@@ -2176,8 +2176,8 @@
     },
     {
       "path": "source-protection.json",
-      "bytes": 48210,
-      "sha256": "754263e9e9c0d694ba994a6946f30d51070750b902b4427668e15e31e66fadb2"
+      "bytes": 50206,
+      "sha256": "9afa5d796174a689b335dc61e23d83f3fc082a50946ed4158f81b245c4222aac"
     },
     {
       "path": "tests/acceptance-summary-refactor.mjs",
