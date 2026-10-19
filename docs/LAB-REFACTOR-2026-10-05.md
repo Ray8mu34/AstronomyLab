@@ -1,5 +1,16 @@
 # AstronomyLab R1 重构进度与交接
 
+## 2026-10-19 GitHub源码推送回执（未部署）
+
+用户在六项修复本地验收后明确授权“推送到github，不过不部署”。此前的文案整理、第一科学包修复、测试、生成运行包、设计/主交接更新和明确删除已提交为 [`0e63e3e`](https://github.com/Ray8mu34/AstronomyLab/commit/0e63e3e530e43db2d9616cf1eb40516a9c2291fe)，并通过 `git push origin main` 成功快进；`git ls-remote origin refs/heads/main` 已核对远端完整SHA为 `0e63e3e530e43db2d9616cf1eb40516a9c2291fe`。本节是后续文档回执，不将自己的提交hash写入自身。
+
+推送前fetch确认本地与origin/main均为67048a8、ahead/behind=0/0；GitHub API检查Actions工作流0、仓库webhook0，本地仅sample hooks，没有由这些入口触发的自动部署。实际暂存采用明确路径清单，未使用git add .。对拟公开812份Git文件逐blob扫描，凭据特征、私有路径及95MiB以上文件均0命中；244条运行源码SHA仍与本次182/182最终包一致，未无故重复全部测试。暂存差异及CRLF whitespace检查通过。
+
+第一科学包与新加入的第二前端输入包目录/zip均仅保留本机，并加入精确gitignore；私有原卷、教师资料、raw、build/qa、output及凭据继续不上传。可公开的USNO/NASA原有资料、科学数据、来源署名、三项pending和blocked_pending_licenses不升级。公开审查与命令回执在本机 `build/qa/science-round1-20261019/github-push/`。
+
+此次仅更新GitHub源码，没有连接生产服务器、执行部署脚本或重启任何服务；生产事实仍查既有docs/DEPLOYMENT.md记录。本地最终包预览仍为 `http://127.0.0.1:4382/`。下节的“未提交/推送”属于此次授权之前的本地验收阶段记录。
+
+
 ## 2026-10-19 第一科学包：六项修复与同包集成验收（本地完成）
 
 用户明确授权第一科学包的六项修复，覆盖旧的笼统模型/视觉冻结限制；本轮没有发布授权。HEAD 保持 `67048a8b180ea39385f5d328ed5bc5feffcea735`，已有文案修改、未跟踪科学包及根目录四份文档删除均保留，没有 reset/clean、提交、推送或线上操作。项目外备份包含503文件约41.27 MB与删除索引，路径见 `build/qa/science-round1-20261019/integration/baseline.json`。备份在并行实现已经开始后于06:20 UTC采集，不能称为六项全部修复前的纯净源码；各执行者另存修改前局部源及本包冻结基线。基线 check 为97语法/48 Node通过；第一次边界检查的2个模型差异及部分包漂移已来自同时进行的本轮修改，另有根 THIRD_PARTY 删除，不误记为历史模型缺陷。
