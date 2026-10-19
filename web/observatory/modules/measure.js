@@ -1,6 +1,7 @@
 let THREE;
 import {assetURL,bindControls,syncControls} from '../shared/core-controls.js';
 import {plot} from '../shared/plot.js';
+import {registerExperimentModel,validateExperimentModel} from '../shared/experiment-state.js';
 import {attachShadowUI} from './measure-shadow-ui.js';
 import {attachDistanceUI} from './measure-distance-ui.js';
 import {CONSTANTS,shadowHeight,dynamicalMass,s2Mass,distanceModulus,parallaxDistance,scalePropagation} from './measure-physics.mjs';
@@ -9,9 +10,9 @@ const input=(key,label,value,min,max,step)=>`<label class="control"><span>${labe
 const m=(label,value)=>`<div><small>${label}</small><strong>${value}</strong></div>`;
 const content={
  shadow:`<h3>从图上的暗线，到月面的一段高度</h3><p>低角度阳光让一座山投出长影，明暗交界便成为放大地形起伏的天然仪器。先把地面近似为水平，把山峰近似为直立高度h，太阳高度角为α，影长为l。由直角三角形得到h=l tanα。主图是带地面标尺的合成几何示意，固定合成阴影长10 km。把金色测量端点拖到影尖，或用影长滑杆与方向键读数。展开几何与曲线后，直角三角形按当前推断绘制；青色竖线代表高度，金色底边代表量得的影长，两个方向同比例。真实月面曲率、坡度和视线投影尚未加入。</p><div class="formula">h = l tanα<br>σ<sub>h</sub>² ≈ (tanα σ<sub>l</sub>)² + (l sec²α σ<sub>α</sub>)²<br>σ<sub>α</sub>用弧度；默认两个输入误差独立且较小。</div><p class="note">传播规则：<a href="https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty" target="_blank" rel="noopener">NIST TN1297附录A</a>。此处将其一阶规则应用到直角三角形的h=l tanα；不包含协方差或系统误差。</p><p>距离测量也隐在其中。照片最先给出像素或角长度，转换为千米需要相机标尺与月球距离。小角近似l≈dθ要求θ用弧度，1角秒在384400 km处约对应1.86 km。只输入“照片上的10格”而不说明每格代表什么，便无法推出物理高度。下面的第谷峰照片是轨道探测器斜视影像，本实验的10 km影长、10°太阳高度及误差都是教学输入，没有从那张照片读取峰高。</p><p>右图比较同一个输入影长，在不同太阳高度下推出的h与一阶误差带。太阳接近地平时阴影长而易辨，但小角度误差可能相对于结果很大；太阳高时阴影短，地形位置与投影又更难辨认。测量精度不是“阴影越长越好”一个因素决定。改变误差滑块，观察哪一项正在主导，也可在日地月模型追踪太阳方向如何形成这些阴影。</p>`,
- jupiter:`<h3>把木星旁的小点，变成一把引力秤</h3><p>从一次照片只能得到木卫一的投影位置。连续观测得到周期，结合距离和轨道投影才得到真实半长轴。这里默认a=421800 km、P=1.769138日，实际查阅NASA木星卫星参数表；动画按近圆、忽略倾角的理想轨道绘制，不是某日星历。木卫一被放大为标记，木星采用同长度比例的赤道半径71492 km。</p><div class="formula">μ = G(M+m) = 4π²a³/P²<br>M ≈ 4π²a³/(GP²)　(m ≪ M)<br>(σ<sub>M</sub>/M)² ≈ 9(σ<sub>a</sub>/a)² + 4(σ<sub>P</sub>/P)²</div><p>质量不像照片上的颜色那样直接进入眼睛，它通过使轨道弯曲而被测量。保持周期不变，a增加10%，质量估计变为原来的1.1³≈1.331倍；保持半长轴不变，周期越短，所需质量越大。右侧的曲线把这种强依赖展开，曲线上当前点所在位置对应输入值；两条细线使用自行设定的一阶相对误差。滑块误差没有来自NASA参数表的测量误差支持，它们只是让你研究误差传播的假设。</p><p>精密研究通常优先给出GM，因为轨道直接约束它；再除以G换算千克，还要承担G本身的误差。当前误差带只传播a、P，不纳入G、卫星质量、互相扰动、非球形木星引力场等系统误差。这一步能给出约1.90×10²⁷ kg的量级，并不能复制正式木星引力场解。返回太阳系比较密度时，还需要另一个独立的半径测量。</p>`,
- s2:`<h3>让同一把秤，延伸到银河中心</h3><p>S2在银河中心运行的轨道把同一个引力关系带到约四百万太阳质量的尺度。这里使用圆整教学参数：角半长轴125 mas、距离8000 pc、周期16年，得到a≈1000 AU。椭圆偏心率固定0.88，使近心距离约120 AU，与ESO2018年介绍的量级相符。三维图为牛顿椭圆模型，标记的中心位置是引力焦点，黑洞视界没有按尺寸显示，图中也不渲染黑洞阴影。</p><div class="formula">a / AU ≈ (θ / arcsec)(d / pc)<br>μ = 4π²a³/P²　 M/M<sub>☉</sub> = μ/(GM<sub>☉</sub>)<br>σ<sub>a</sub>/a ≈ √[(σ<sub>θ</sub>/θ)²+(σ<sub>d</sub>/d)²]</div><p>通过半长轴的三次方，距离误差进入质量估计。只用角位置拟合一个投影椭圆，还没有唯一得到真正的三维轨道；正式研究联合多年代位置、视向速度、仪器校准与相对论修正。下面的ESO图记录了1992—2002年的历史位置与拟合，当前输入并不是从这幅低分辨率图重新提取的数据，也不是最新精密轨道解。125 mas和8000 pc仅服务于本文的量级演算。</p><p>右侧扫描的是采用不同银河中心距离、其他输入固定时推出的质量，曲线不表示新的观测。用任意模型画出椭圆，不足以证明真实星已经走在那条路上；证据来自带时间和误差的测量，以及多种观测量的一致性。ESO2018年的结果研究了光谱中的相对论红移，本页牛顿轨道只能解释动力学质量量级，不能承担精密相对论检验。</p>`,
- distance:`<h3>距离不是孤立的一栏，而是整张知识地图的标尺</h3><p>先改变视差p，几何距离d=1/p立即响应；本页输入使用毫角秒，所以d(pc)=1000/p(mas)。若半年观测选择到最大摆幅，约2 AU基线对应的是2p，而不是p。右图显示距离估计对视差的非线性响应；它提醒我们，视差接近零时简单倒数及对称一阶误差会失效。滑块始终保持正且较高信噪比，模型没有处理低信噪比、负视差、零点偏差或贝叶斯距离推断。</p><div class="formula">μ<sub>d</sub> = m − M − A = 5 log₁₀(d/10 pc)<br>d(pc) = 10<sup>(μ<sub>d</sub>+5)/5</sup><br>σ<sub>d</sub>/d ≈ (ln10/5) σ<sub>μ</sub></div><p>第二组输入把视亮度m、已校准绝对星等M和消光A连接起来，使用同一波段的星等。它们是可调整的教学样例，不是一颗指定星的测量。给定m与M，增大A意味着更多光在途中被遮挡，因此未经消光校正会把源估计得更远。造父变星的周期—光度关系需要先用几何距离等校准，再用它测宿主星系；具有校准距离的Ia宿主又可校准标准化后的超新星。左侧阶梯保留这种依赖方向，不把每一级说成独立绝对尺。</p><p>最后一个滑块专门改变共同采用的距离标尺，保持角直径、角轨道、周期和通量不变。线性半径按d变，光度按d²变，轨道质量按d³变。增加10%距离分别得到1.10、1.21、1.331倍。星表更新一个距离值，可能连带改写尺度、能量与演化判断。真实联合拟合会有协方差，本页仅研究其他量固定的依赖。独立测距、动力学与光谱提供彼此可核对的尺度约束。</p>`
+ jupiter:`<h3>把木星旁的小点，变成一把引力秤</h3><p>从一次照片只能得到木卫一的投影位置。连续观测得到周期，结合距离和轨道投影才得到真实半长轴。这里默认a=421800 km、P=1.769138日，参数来自 NASA 木星卫星表；动画采用忽略倾角的近圆轨道。木卫一被放大为标记，木星采用同长度比例的赤道半径71492 km。</p><div class="formula">μ = G(M+m) = 4π²a³/P²<br>M ≈ 4π²a³/(GP²)　(m ≪ M)<br>(σ<sub>M</sub>/M)² ≈ 9(σ<sub>a</sub>/a)² + 4(σ<sub>P</sub>/P)²</div><p>质量不像照片上的颜色那样直接进入眼睛，它通过使轨道弯曲而被测量。保持周期不变，a增加10%，质量估计变为原来的1.1³≈1.331倍；保持半长轴不变，周期越短，所需质量越大。右侧的曲线把这种强依赖展开，曲线上当前点所在位置对应输入值；两条细线使用自行设定的一阶相对误差。滑块误差没有来自NASA参数表的测量误差支持，它们只是让你研究误差传播的假设。</p><p>精密研究通常优先给出GM，因为轨道直接约束它；再除以G换算千克，还要承担G本身的误差。当前误差带只传播a、P，不纳入G、卫星质量、互相扰动、非球形木星引力场等系统误差。这一步能给出约1.90×10²⁷ kg的量级，并不能复制正式木星引力场解。返回太阳系比较密度时，还需要另一个独立的半径测量。</p>`,
+ s2:`<h3>让同一把秤，延伸到银河中心</h3><p>S2在银河中心运行的轨道把同一个引力关系带到约四百万太阳质量的尺度。这里使用圆整教学参数：角半长轴125 mas、距离8000 pc、周期16年，得到a≈1000 AU。椭圆偏心率固定0.88，使近心距离约120 AU，与ESO2018年介绍的量级相符。三维图为牛顿椭圆模型，标记的中心位置是引力焦点，黑洞视界没有按尺寸显示，图中也不渲染黑洞阴影。</p><div class="formula">a / AU ≈ (θ / arcsec)(d / pc)<br>μ = 4π²a³/P²　 M/M<sub>☉</sub> = μ/(GM<sub>☉</sub>)<br>σ<sub>a</sub>/a ≈ √[(σ<sub>θ</sub>/θ)²+(σ<sub>d</sub>/d)²]</div><p>通过半长轴的三次方，距离误差进入质量估计。只用角位置拟合一个投影椭圆，还没有唯一得到真正的三维轨道；正式研究联合多年代位置、视向速度、仪器校准与相对论修正。下面的ESO图记录了1992—2002年的历史位置与拟合，本实验采用 125 mas 与 8000 pc 的圆整参数作量级演算，ESO 历史图作为观测参照。</p><p>右侧扫描的是采用不同银河中心距离、其他输入固定时推出的质量，曲线不表示新的观测。用任意模型画出椭圆，不足以证明真实星已经走在那条路上；证据来自带时间和误差的测量，以及多种观测量的一致性。ESO2018年的结果研究了光谱中的相对论红移，本页牛顿轨道只能解释动力学质量量级，不能承担精密相对论检验。</p>`,
+ distance:`<h3>距离不是孤立的一栏，而是整张知识地图的标尺</h3><p>先改变视差p，几何距离d=1/p立即响应；本页输入使用毫角秒，所以d(pc)=1000/p(mas)。若半年观测选择到最大摆幅，约2 AU基线对应的是2p，而不是p。右图显示距离估计对视差的非线性响应；它提醒我们，视差接近零时简单倒数及对称一阶误差会失效。滑块始终保持正且较高信噪比，模型没有处理低信噪比、负视差、零点偏差或贝叶斯距离推断。</p><div class="formula">μ<sub>d</sub> = m − M − A = 5 log₁₀(d/10 pc)<br>d(pc) = 10<sup>(μ<sub>d</sub>+5)/5</sup><br>σ<sub>d</sub>/d ≈ (ln10/5) σ<sub>μ</sub></div><p>第二组输入把视亮度m、已校准绝对星等M和消光A连接起来，使用同一波段的星等。这是一组可调整的独立测光样例。给定m与M，增大A意味着更多光在途中被遮挡，因此未经消光校正会把源估计得更远。造父变星的周期—光度关系需要先用几何距离等校准，再用它测宿主星系；具有校准距离的Ia宿主又可校准标准化后的超新星。左侧阶梯保留这种依赖方向，不把每一级说成独立绝对尺。</p><p>最后一个滑块专门改变共同采用的距离标尺，保持角直径、角轨道、周期和通量不变。线性半径按d变，光度按d²变，轨道质量按d³变。增加10%距离分别得到1.10、1.21、1.331倍。星表更新一个距离值，可能连带改写尺度、能量与演化判断。真实联合拟合会有协方差，本页仅研究其他量固定的依赖。独立测距、动力学与光谱提供彼此可核对的尺度约束。</p>`
 };
 export async function mount(el,{mode:requestedMode}={}){
  const state={mode:'shadow',length:10,alpha:10,sigmaLength:.5,sigmaAlpha:.5,a:421800,period:1.769138,errorA:1,errorP:.1,theta:125,distance:8000,s2Period:16,errorTheta:1,errorDistance:1,errorS2P:1,p:10,errorParallax:.1,apparent:18,absolute:-5,extinction:.2,errorModulus:.1,factor:1,phase:0,play:false};
@@ -22,7 +23,12 @@ export async function mount(el,{mode:requestedMode}={}){
  <div class="legend" id="measure-legend"></div>
  <details class="measure-analysis"><summary>展开几何、敏感度曲线与完整读数</summary><div id="measure-geometry"></div><div class="panel-title" id="measure-plot-title"></div><canvas class="plot-canvas" id="measure-plot" aria-label="当前输入的敏感度曲线和假设一阶误差"></canvas><div class="metrics" id="measure-metrics"></div></details><article class="lab-copy" id="measure-copy"></article><div class="lab-copy"><h3>测量关系与资料</h3><p><a href="/labs/earth-moon/">日地月：照明几何</a> · <a href="/lab/sky">天空坐标：视差与真实空间</a> · <a href="/lab/galaxy">银河内外：从太阳位置到银心</a> · <a href="/lab/orbits">航天：给定质量预测轨道</a> · <a href="/sources/measure.md">本页数据、计算方法和核验记录</a></p><figure id="measure-figure"></figure></div></div>`;
  const defaults={...state};let view=null,group=null,jupiterTexture=null,sceneTask=null,disposed=false,modeRequest=0;
- let unBind=()=>{},current=null,lastPlot=null,orbiter=null,comparison=null,dragPointer=null,shadowUI,distanceUI;const api={module:'measure',state,get result(){return current;}};window.__lab=api;
+ let unBind=()=>{},current=null,lastPlot=null,orbiter=null,comparison=null,dragPointer=null,shadowUI,distanceUI;const api={module:'measure',state,getState,applyState,get result(){return current;}};window.__lab=api;
+ function getState(){if(state.mode!=='jupiter')return null;const {a,period,errorA,errorP,phase}=state;return {version:1,kind:'jupiter-mass',a,period,errorA,errorP,phase};}
+ function applyState(candidate){
+  const saved=validateExperimentModel('measure','jupiter',candidate);if(!saved||state.mode!=='jupiter')return false;
+  const {version,kind,...parameters}=saved;Object.assign(state,parameters,{play:false});controls();refresh();return true;
+ }
  async function ensureScene(){if(view)return;if(sceneTask)return sceneTask;
   sceneTask=(async()=>{const sceneModule=await import('../shared/scene.js');if(disposed)return;THREE=sceneModule.THREE;const makeScene=sceneModule.makeScene;
 view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,0,0]});group=new THREE.Group();view.scene.add(group);
@@ -52,12 +58,12 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
    const peak=mesh(new THREE.ConeGeometry(Math.min(.5,h*.3),h,4),0x7b8c9e);peak.position.set(0,h/2,0);
    const shadow=mesh(new THREE.PlaneGeometry(s.length,.25),0x080d15);shadow.rotation.x=-Math.PI/2;shadow.position.set(s.length/2,.015,0);
    line([[0,0,0],[0,h,0]],0x71c8c7);line([[0,h,0],[s.length,.02,0]],0xebc77e);line([[0,h,0],[-s.length*.6,h+s.length*.6*Math.tan(s.alpha*Math.PI/180),0]],0xebc77e);camera(extent);}
-   metrics=m('推算高度 h',F(h,3)+' km')+m('假设 1σ随机误差',F(current.sigma,3)+' km')+m('相对 1σ误差',F(100*current.sigma/h,1)+' %')+m('384400 km处 1角秒',F(384400*CONSTANTS.arcsec,2)+' km');title='亲手量影长 → 用太阳高度推算峰高';legend='合成几何示意，非真实照片：固定影尖在10 km。标尺为地面长度，不是相机像素。平地、平行太阳光；不含月面坡度、曲率和视线投影。';chartTitle='固定输入影长，照明角怎样影响高度与误差';
+   metrics=m('推算高度 h',F(h,3)+' km')+m('假设 1σ随机误差',F(current.sigma,3)+' km')+m('相对 1σ误差',F(100*current.sigma/h,1)+' %')+m('384400 km处 1角秒',F(384400*CONSTANTS.arcsec,2)+' km');title='亲手量影长 → 用太阳高度推算峰高';legend='合成几何：影尖固定在 10 km；标尺表示地面长度。采用平地与平行太阳光。';chartTitle='固定输入影长，照明角怎样影响高度与误差';
    const curve=Array.from({length:121},(_,i)=>{const a=2+i*58/120;return[a,shadowHeight(s.length,a).height];});plotOptions={series:band(curve,x=>shadowHeight(s.length,x,s.sigmaLength,s.sigmaAlpha).sigma),xDomain:[2,60],yDomain:[0,s.length*Math.tan(Math.PI/3)*1.15+2],xLabel:'太阳高度 / °',yLabel:'由同一影长推得高度 / km'};
-   figure=`<img loading="lazy" style="width:100%;max-width:900px" src="${assetURL('assets/16/v02/tycho-peak.jpg')}" alt="LRO第谷中央峰与山影"><figcaption>LRO轨道探测器第谷中央峰斜视影像，2011-06-10。Credit: NASA Goddard/Arizona State University。输入影长没有由该图测出。</figcaption>`;
+   figure=`<img loading="lazy" style="width:100%;max-width:900px" src="${assetURL('assets/16/v02/tycho-peak.jpg')}" alt="LRO第谷中央峰与山影"><figcaption>LRO轨道探测器第谷中央峰斜视影像，2011-06-10。Credit: NASA Goddard/Arizona State University。照片用于观察月面地形。</figcaption>`;
   }else if(s.mode==='jupiter'){
    current=dynamicalMass(s.a*1000,s.period*CONSTANTS.day,s.errorA/100,s.errorP/100);const central=mesh(new THREE.SphereGeometry(71492/s.a*4,40,24),0xffffff);central.material.map=jupiterTexture;orbiter=mesh(new THREE.SphereGeometry(.09,16,12),0xebc77e);line(Array.from({length:241},(_,i)=>[4*Math.cos(i*Math.PI/120),0,4*Math.sin(i*Math.PI/120)]),0x71c8c7);camera(6.2);
-   metrics=m('GM',current.mu.toExponential(4)+' m³/s²')+m('质量估计',current.mass.toExponential(4)+' kg')+m('假设相对 1σ误差',F(current.relative*100,2)+' %')+m('假设 1σ质量误差',current.sigma.toExponential(2)+' kg');title='近圆木卫一模型，周期给出质量';legend='NASA表参数为默认基准；动画不是某日星历。木卫一标记放大。误差滑块为假设输入，不是原表测量误差。';chartTitle='保持周期不变，半长轴如何改变质量';
+   metrics=m('GM',current.mu.toExponential(4)+' m³/s²')+m('质量估计',current.mass.toExponential(4)+' kg')+m('假设相对 1σ误差',F(current.relative*100,2)+' %')+m('假设 1σ质量误差',current.sigma.toExponential(2)+' kg');title='近圆木卫一模型，周期给出质量';legend='默认参数来自 NASA；木卫一标记放大，轨道按近圆模型播放。误差由滑块设定。';chartTitle='保持周期不变，半长轴如何改变质量';
    const curve=Array.from({length:121},(_,i)=>{const a=300000+i*250000/120;return[a/1000,dynamicalMass(a*1000,s.period*86400).mass/1e27];});plotOptions={series:band(curve,(_,y)=>y*current.relative),xDomain:[300,550],yDomain:[0,curve.at(-1)[1]*(1+current.relative)*1.1],xLabel:'真实半长轴 / 千km',yLabel:'质量 / 10²⁷ kg'};
   }else if(s.mode==='s2'){
    current=s2Mass(s.theta,s.distance,s.s2Period,s.errorTheta/100,s.errorDistance/100,s.errorS2P/100);mesh(new THREE.SphereGeometry(.09,16,12),0x63788a);orbiter=mesh(new THREE.SphereGeometry(.08,16,12),0xebc77e);const e=.88;
@@ -87,6 +93,11 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
   return `视差 ${F(s.p,1)} mas → ${F(q.parallax.distance,1)} pc · 半径/光度/质量 ${F(q.scale.radius,3)} / ${F(q.scale.luminosity,3)} / ${F(q.scale.mass,3)}`;
  }
  function renderUI(){shadowUI?.setMode(state.mode);distanceUI?.setMode(state.mode);syncControls(el,state);const s=state;
+  // Readouts describe the mass model, including off-grid mathematical presets;
+  // the adjacent native range still uses its declared keyboard/dragging step.
+  if(s.mode==='jupiter')for(const key of ['a','period','errorA','errorP']){
+   const output=el.querySelector(`[data-value="${key}"]`);if(output)output.textContent=String(Number(s[key].toPrecision(15)));
+  }
   const guides={shadow:['一段阴影，能告诉我们多高的山？','可试：把金色端点拖到影尖；看影长如何进入高度。误差假设可展开。'],jupiter:['木星的质量，怎样藏在卫星轨道里？','可试：记下当前读数，再把半长轴增大10%；看质量为何增加约33.1%。'],s2:['银心距离改变，黑洞质量会跟着变多少？','可试：保持角半长轴与周期，增加10%距离；看同一角轨道需要多大的中心质量。'],distance:['改动一把距离标尺，会连动哪些结论？','可试：将共同距离标尺增加10%，对照半径、光度与轨道质量的不同倍率。']};
   el.querySelector('#measure-question').textContent=guides[s.mode][0];el.querySelector('#measure-instruction').textContent=guides[s.mode][1];
   el.querySelector('#measure-play').textContent=s.play?'暂停轨道动画':'播放轨道动画';el.querySelector('#measure-play').setAttribute('aria-pressed',String(s.play));
@@ -107,7 +118,7 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
  // Original teaching geometry. The ruler represents ground km; no photograph calibration is implied.
  function shadowSVG(){const x=60+state.length*28;
   return `<svg viewBox="0 0 680 275" aria-label="合成阴影与公里标尺。固定影尖10公里。当前量得${F(state.length,1)}公里。">
-   <text x="24" y="27" class="measure-svg-note">合成几何示意 · 非真实照片</text><text x="24" y="59">俯视：从山脚量到影尖</text>
+   <text x="24" y="27" class="measure-svg-note">合成测影几何</text><text x="24" y="59">俯视：从山脚量到影尖</text>
    <path d="M60 120 L340 137 L340 147 L60 165 Z" fill="#030508" stroke="#7a8895"/><circle cx="60" cy="142" r="18" fill="#798b98"/><text x="28" y="105">山脚</text><text x="318" y="105">影尖</text>
    <line x1="60" y1="180" x2="620" y2="180" stroke="#7f93a5"/>${Array.from({length:21},(_,i)=>`<line x1="${60+i*28}" y1="180" x2="${60+i*28}" y2="${i%5?188:194}" stroke="#7f93a5"/>${i%5?'':`<text x="${60+i*28}" y="215" text-anchor="middle">${i} km</text>`}`).join('')}
    <line x1="60" y1="235" x2="${x}" y2="235" stroke="#ebc77e" stroke-width="3"/><text x="340" y="265" text-anchor="middle">量得 l = ${F(state.length,1)} km</text>
@@ -145,5 +156,6 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
  const observer=new ResizeObserver(()=>{if(lastPlot)plot(el.querySelector('#measure-plot'),lastPlot);});observer.observe(el.querySelector('#measure-plot'));
  shadowUI=attachShadowUI(el,{redraw:refresh});
  distanceUI=attachDistanceUI(el,{redraw:refresh});
- return ()=>{disposed=true;modeRequest++;shadowUI.dispose();distanceUI.dispose();unBind();shadowHost.removeEventListener('pointerdown',pointerDown);shadowHost.removeEventListener('pointermove',pointerMove);shadowHost.removeEventListener('pointerup',pointerUp);shadowHost.removeEventListener('pointercancel',pointerUp);shadowHost.removeEventListener('keydown',keydown);el.removeEventListener('click',click);observer.disconnect();clear();jupiterTexture?.dispose();view?.dispose();if(window.__lab===api)delete window.__lab;};
+ const unregisterModel=registerExperimentModel(el,{getState:mode=>mode==='jupiter'?getState():null,applyState});
+ return ()=>{unregisterModel();disposed=true;modeRequest++;shadowUI.dispose();distanceUI.dispose();unBind();shadowHost.removeEventListener('pointerdown',pointerDown);shadowHost.removeEventListener('pointermove',pointerMove);shadowHost.removeEventListener('pointerup',pointerUp);shadowHost.removeEventListener('pointercancel',pointerUp);shadowHost.removeEventListener('keydown',keydown);el.removeEventListener('click',click);observer.disconnect();clear();jupiterTexture?.dispose();view?.dispose();if(window.__lab===api)delete window.__lab;};
 }

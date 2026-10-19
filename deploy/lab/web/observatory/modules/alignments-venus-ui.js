@@ -9,7 +9,7 @@ export function attachVenusUI(root,{redraw,space,earth,planet,sun}){
  const tools=document.createElement('div');tools.className='venus-tools';tools.innerHTML='<details class="venus-presets"><summary>构型预设</summary><div data-venus-presets></div></details><details class="venus-curve"><summary>展开受光比例关系</summary><div data-venus-curve><button type="button" data-venus-close>收起关系图 ×</button></div></details>';
  const presets=tools.querySelector('.venus-presets'),curve=tools.querySelector('.venus-curve');
  const clock=document.createElement('div');clock.className='venus-clock';clock.innerHTML='<div class="venus-time-actions"></div><p>理想圆轨道日数，无真实日期含义 · 播放 18 天/秒 · 复位至 72 天并暂停</p>';
- const boundary=document.createElement('p');boundary.className='venus-nearby';boundary.textContent='几何受光，非云层亮度；观察图大小随距离变化并设上限，不能量角直径。';
+ const boundary=document.createElement('p');boundary.className='venus-nearby';boundary.textContent='金星亮区表示几何受光；图像随距离缩放，最大显示尺寸设有上限。';
  const labels=document.createElementNS('http://www.w3.org/2000/svg','svg');labels.classList.add('venus-orbit-labels');labels.setAttribute('aria-hidden','true');
  for(const[name,color]of[['太阳','#ebc77e'],['地球','#89b7dd'],['金星','#71c8c7']]){const g=document.createElementNS(labels.namespaceURI,'g');g.innerHTML=`<path stroke="${color}"/><text fill="${color}">${name}</text>`;labels.append(g);}
  const closeButton=document.createElement('button');closeButton.type='button';closeButton.dataset.venusClose='';closeButton.textContent='关闭几何条件 ×';

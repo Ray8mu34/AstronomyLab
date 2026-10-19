@@ -2,6 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {confirmedModes} from '../web/observatory/shared/tool-registry.js';
 import {experimentAdapters,EXPERIMENT_STATE_VERSION,ensureExperimentEntry,validateControlValue,validateExperimentSnapshot,currentExperimentMode,captureExperiment,restoreExperiment,bindExperimentState,readExperimentSnapshot,initializeLegacyExperiment,waitForLegacyControls} from '../web/observatory/shared/experiment-state.js';
+import {registerExperimentModel,validateExperimentModel} from '../web/observatory/shared/experiment-state.js';
+import {conicState} from '../web/observatory/modules/orbit-conics-physics.mjs';
+import {EARTH} from '../web/observatory/modules/orbits-physics.mjs';
+import {dynamicalMass} from '../web/observatory/modules/measure-physics.mjs';
 
 class CustomEvent extends Event{constructor(type,options={}){super(type,options);this.detail=options.detail;}}
 class MockWindow extends EventTarget{
@@ -31,6 +35,7 @@ class MockRoot extends EventTarget{
  querySelectorAll(selector){const attribute=/^button\[([^\]]+)\]$/.exec(selector)?.[1];return attribute?this.buttons.filter(button=>button.getAttribute(attribute)!==null):[];}
 }
 const range=(root,key,value='0',min='0',max='100',step='1',onApply)=>root.add(`[data-key="${key}"]`,{value,min,max,step,onApply});
+const conicRecipe=(height,speed)=>({version:1,kind:'orbit-conics',height,speed,totalHours:24,rateHours:1.2,elapsed:123.456789,view:'whole'});
 function rootForMode(slug,mode,win=new MockWindow()){
  const root=new MockRoot(win),attribute=experimentAdapters[slug].mode.attribute;
  const modes=slug==='sky'?confirmedModes.sky.filter(mode=>mode!=='calendar'):slug==='galaxy'?['galaxy','cmb']:confirmedModes[slug];
@@ -45,6 +50,63 @@ test('all eleven experiments and 43 modes have explicit public-control adapters'
  assert.deepEqual(Object.keys(experimentAdapters).sort(),Object.keys(confirmedModes).sort());
  let count=0;for(const [slug,modes]of Object.entries(confirmedModes)){for(const mode of modes){assert.equal(currentExperimentMode(slug,rootForMode(slug,mode)),mode);count++;}const names=experimentAdapters[slug].controls.map(c=>c.name);assert.equal(new Set(names).size,names.length,slug);}
  assert.equal(count,43);
+});
+test('scientific snapshots retain circular/escape inputs at all four heights independently of rounded native values',async()=>{
+ for(const height of [100,200,1200,5000])for(const preset of ['vc','escape']){
+  const win=new MockWindow(),source=rootForMode('orbits','orbit',win),speed=conicState(height,0)[preset],model=conicRecipe(height,speed);
+  source.add('[data-conic-key="speed"]',{value:String(Number(speed.toFixed(3))),min:'0',max:'16',step:'.001'});
+  registerExperimentModel(source,{getState:()=>model});const snapshot=captureExperiment('orbits',source);
+  assert.equal(snapshot.model.speed,speed);assert.equal(snapshot.values['conic:speed'],Number(speed.toFixed(3)));
+  // Mutating a caller's object after capture cannot change the stored recipe.
+  model.speed=0;assert.equal(readExperimentSnapshot('orbits','entry-a',win).model.speed,speed);
+  const target=rootForMode('orbits','orbit',win);let applied=null,controlEvents=0;
+  target.add('[data-conic-key="speed"]',{value:'7',min:'0',max:'16',step:'.001',onApply:()=>controlEvents++});
+  registerExperimentModel(target,{applyState:saved=>{applied=saved;return true;}});
+  assert.equal(await restoreExperiment('orbits',target),true);assert.equal(controlEvents,0);assert.equal(applied.speed,speed);
+  const actual=conicState(applied.height,applied.speed),expected=conicState(height,speed);
+  assert.deepEqual(actual,expected);assert.equal(actual.kind,preset==='escape'?'临界抛物线':'圆（椭圆特例）');
+  const independentEnergy=speed*speed/2-EARTH.mu/(EARTH.radius+height);
+  assert.ok(Math.abs(actual.energy-independentEnergy)<=64*Number.EPSILON*EARTH.mu/actual.r);
+ }
+});
+test('Jupiter authority retains +10% semi-major axis and dynamical mass without range replay',async()=>{
+ const win=new MockWindow(),source=rootForMode('measure','jupiter',win),recipe={version:1,kind:'jupiter-mass',a:421800*1.1,period:1.769138,errorA:1,errorP:.1,phase:.56789};
+ range(source,'a','464000','300000','550000','100');registerExperimentModel(source,{getState:()=>recipe});
+ const saved=captureExperiment('measure',source);assert.equal(saved.model.a,463980.00000000006);assert.equal(saved.values.a,464000);
+ const target=rootForMode('measure','jupiter',win);let result=null;range(target,'a','421800','300000','550000','100',()=>assert.fail('native a must not overwrite the model'));
+ registerExperimentModel(target,{applyState:value=>{result=dynamicalMass(value.a*1000,value.period*86400,value.errorA/100,value.errorP/100);return true;}});
+ await restoreExperiment('measure',target);assert.deepEqual(result,dynamicalMass(recipe.a*1000,recipe.period*86400,.01,.001));
+});
+test('versioned model validation rejects incomplete, mismatched and nonfinite scientific problems',()=>{
+ const good=conicRecipe(200,11.014585251781234),base={version:1,slug:'orbits',mode:'orbit',values:{'conic:speed':11.015},choices:{},model:good};
+ assert.deepEqual(validateExperimentSnapshot(base,'orbits').model,good);
+ for(const change of [{version:2},{kind:'jupiter-mass'},{speed:NaN},{speed:Infinity},{speed:'11'},{speed:17},{height:99},{totalHours:0},{elapsed:-1},{elapsed:86401},{view:'fake'}])assert.equal(validateExperimentSnapshot({...base,model:{...good,...change}},'orbits'),null,JSON.stringify(change));
+ const incomplete={...good};delete incomplete.rateHours;assert.equal(validateExperimentSnapshot({...base,model:incomplete},'orbits'),null);
+ assert.equal(validateExperimentSnapshot({...base,mode:'transfer'},'orbits'),null);
+ const jupiter={version:1,kind:'jupiter-mass',a:463980,period:1.769138,errorA:1,errorP:.1,phase:0};
+ for(const change of [{a:0},{period:Infinity},{errorA:-1},{phase:7}])assert.equal(validateExperimentModel('measure','jupiter',{...jupiter,...change}),null);
+});
+test('invalid scientific records and unavailable owners leave current controls, choices and history intact',async()=>{
+ for(const bad of [true,false]){
+  const win=new MockWindow(),target=rootForMode('orbits','transfer',win),input=target.add('[data-conic-key="speed"]',{value:'7.79',min:'0',max:'16',step:'.001'}),history=structuredClone(win.history.state);
+  const recipe=conicRecipe(200,11.014585251781234);if(bad)recipe.version=999;
+  win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:orbits',JSON.stringify({version:1,slug:'orbits',mode:'orbit',values:{'conic:speed':11.015},choices:{},model:recipe}));
+  let applications=0;if(bad)registerExperimentModel(target,{applyState:()=>{applications++;}});
+  assert.equal(await restoreExperiment('orbits',target),false);assert.equal(input.value,'7.79');assert.equal(currentExperimentMode('orbits',target),'transfer');assert.equal(applications,0);assert.deepEqual(win.history.state,history);
+ }
+});
+test('legacy control-only snapshots retain their rounded physical inputs without inferring presets',async()=>{
+ const win=new MockWindow(),target=rootForMode('orbits','orbit',win);let speed=0;
+ target.add('[data-conic-key="speed"]',{value:'7.79',min:'0',max:'16',step:'.001',onApply:(_,input)=>speed=Number(input.value)});
+ registerExperimentModel(target,{applyState:()=>assert.fail('legacy snapshot has no precise model')});
+ win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:orbits',JSON.stringify({version:1,slug:'orbits',mode:'orbit',values:{'conic:speed':11.015},choices:{}}));
+ assert.equal(await restoreExperiment('orbits',target),true);assert.equal(speed,11.015);assert.equal(conicState(200,speed).kind,'双曲线');
+});
+test('model provider disposal and invalid captures cannot overwrite the latest valid history record',()=>{
+ const win=new MockWindow(),root=rootForMode('orbits','orbit',win);let model=conicRecipe(200,11.014585251781234);
+ const unregister=registerExperimentModel(root,{getState:()=>model});const good=captureExperiment('orbits',root);
+ model={...model,speed:NaN};assert.equal(captureExperiment('orbits',root),null);assert.deepEqual(readExperimentSnapshot('orbits','entry-a',win),good);
+ unregister();assert.equal(Object.hasOwn(captureExperiment('orbits',root),'model'),false);
 });
 test('entry creation preserves reading and unrelated history fields',()=>{
  const win=new MockWindow(null);win.history.state={outside:3,astronomy:{reading:{y:42}}};

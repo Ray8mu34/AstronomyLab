@@ -10,6 +10,47 @@ export function psf(s,n=161){const p=parameters(s),lambda=s.wavelength*1e-6,half
 let total=0;for(const v of out)total+=v;for(let k=0;k<out.length;k++)out[k]/=total*step*step;const peak=out[mid*n+mid];let halfRadius=null;for(let x=mid+1;x<n;x++){const a=out[mid*n+x-1],b=out[mid*n+x];if(a>=peak*.5&&b<peak*.5){halfRadius=(x-1-mid+(a-peak*.5)/(a-b))*step;break;}}return {grid:out,n,half,step,peak,fwhm:halfRadius===null?null:2*halfRadius,centralPeak:peak,parameters:p,samplingWarning:step>p.rayleigh/5};}
 export function samplePSF(p,x,y){const tx=(x+p.half)/p.step,ty=(y+p.half)/p.step;if(tx<0||ty<0||tx>=p.n-1||ty>=p.n-1)return 0;const ix=Math.floor(tx),iy=Math.floor(ty),a=tx-ix,b=ty-iy;return p.grid[iy*p.n+ix]*(1-a)*(1-b)+p.grid[iy*p.n+ix+1]*a*(1-b)+p.grid[(iy+1)*p.n+ix]*(1-a)*b+p.grid[(iy+1)*p.n+ix+1]*a*b;}
 export function doubleIntensity(p,x,y,separation){return .5*(samplePSF(p,x-separation/2,y)+samplePSF(p,x+separation/2,y));}
-// 均匀方形像素以4×4中点求积；输出为每像素占画面内双星总光的分数。
-export function detector(p,separation,pixelScale){const count=Math.min(151,Math.max(5,Math.ceil(2*p.half/pixelScale))),extent=count*pixelScale/2,values=new Float64Array(count*count);for(let y=0;y<count;y++)for(let x=0;x<count;x++){let v=0;for(let j=0;j<4;j++)for(let i=0;i<4;i++)v+=doubleIntensity(p,(x+(i+.5)/4)*pixelScale-extent,(y+(j+.5)/4)*pixelScale-extent,separation);values[y*count+x]=v/16*pixelScale**2;}return {values,count,extent,pixelScale,truncated:count===151&&extent<p.half};}
+// Primitive of a piecewise-linear row. Outside the finite PSF square the
+// intensity is zero, matching samplePSF (the boundary itself has zero area).
+function linePrimitive(values,prefix,start,stride,n,step,t){
+  if(t<=0)return 0;
+  if(t>=n-1)return prefix[n-1];
+  const k=Math.floor(t),f=t-k,a=values[start+k*stride],b=values[start+(k+1)*stride];
+  return prefix[k]+step*(a*f+(b-a)*f*f/2);
+}
+const rowIntegrals=new WeakMap();
+function psfRowIntegrals(p){
+  let rows=rowIntegrals.get(p);
+  if(rows)return rows;
+  rows=Array.from({length:p.n},(_,y)=>{
+    const prefix=new Float64Array(p.n);
+    for(let x=1;x<p.n;x++)prefix[x]=prefix[x-1]+p.step*(p.grid[y*p.n+x-1]+p.grid[y*p.n+x])/2;
+    return prefix;
+  });
+  rowIntegrals.set(p,rows);return rows;
+}
+// Exact rectangular integration of the existing bilinear interpolant. First
+// integrate each grid row in x, then its piecewise-linear interpolation in y.
+// Prefix integrals are reused; no subpixel quadrature or output renormalization.
+export function detector(p,separation,pixelScale){
+  const count=Math.min(151,Math.max(5,Math.ceil(2*p.half/pixelScale))),extent=count*pixelScale/2,values=new Float64Array(count*count),rows=psfRowIntegrals(p),column=new Float64Array(p.n),prefix=new Float64Array(p.n);
+  for(const shift of [-separation/2,separation/2])for(let x=0;x<count;x++){
+    const lo=(x*pixelScale-extent-shift+p.half)/p.step,hi=lo+pixelScale/p.step;
+    for(let y=0;y<p.n;y++)column[y]=linePrimitive(p.grid,rows[y],y*p.n,1,p.n,p.step,hi)-linePrimitive(p.grid,rows[y],y*p.n,1,p.n,p.step,lo);
+    prefix[0]=0;
+    for(let y=1;y<p.n;y++)prefix[y]=prefix[y-1]+p.step*(column[y-1]+column[y])/2;
+    for(let y=0;y<count;y++){
+      const bottom=(y*pixelScale-extent+p.half)/p.step,top=bottom+pixelScale/p.step;
+      values[y*count+x]+=.5*(linePrimitive(column,prefix,0,1,p.n,p.step,top)-linePrimitive(column,prefix,0,1,p.n,p.step,bottom));
+    }
+  }
+  return {values,count,extent,pixelScale,truncated:count===151&&extent<p.half,integration:'exact-bilinear',totalFlux:values.reduce((sum,value)=>sum+value,0)};
+}
 export function thinLensRay(height,focal,distance,angle=0){return height+distance*(angle-height/focal);}
+
+// Common sky window, centred on the midpoint of the equal-brightness pair.
+// Both panels use this mapping; detector-array bounds may extend past it.
+export function skyImageTransform(half,centerX,top,side,separation){
+  const left=centerX-side/2,pixelsPerArcsec=side/(2*half);
+  return {half,left,top,side,pixelsPerArcsec,starCenters:[-separation/2,separation/2].map(x=>({x:left+(x+half)*pixelsPerArcsec,y:top+half*pixelsPerArcsec}))};
+}

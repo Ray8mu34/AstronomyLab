@@ -9,7 +9,7 @@ export function handleLectures(req,res,name,{lecturesRoot,send}){
  const old=/^(?:read\/(\d{2})|reading\/L(\d{2})\.html)$/.exec(name);
  if(old||['courses','materials','lectures'].includes(name)){
   if(readingFiles?.has('index.html')&&fs.existsSync(path.join(lecturesRoot,'index.html'))){const target=old?`reading/L${old[1]||old[2]}.html`:'index.html';res.writeHead(307,{Location:'/lecture-assets/'+target,'Cache-Control':'no-cache'});res.end();}
-  else{res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','X-Content-Type-Options':'nosniff'});res.end(`<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>独立讲义资料</title><body style="max-width:760px;margin:40px auto;padding:0 20px;font:16px/1.9 sans-serif"><h1>讲义已独立保存</h1><p>16篇原始 Markdown 与图片、来源文件在 lectures-source 资料包中。派生阅读副本为 lectures-web，可单独打开其 index.html。</p><p>当前工具服务未接入外置阅读包。开发期可通过 <code>--lectures &lt;lectures-web目录&gt;</code> 接入；此说明是本地兼容回退，正式旧链接迁移地址尚未确定。</p><p>旧地址：${escape(name)}</p><a href="/">返回演示工具 →</a></body></html>`);}return true;
+  else{res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','X-Content-Type-Options':'nosniff'});res.end(`<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>讲义资料</title><body style="max-width:760px;margin:40px auto;padding:0 20px;font:16px/1.9 sans-serif"><h1>讲义资料</h1><p>在线讲义暂不可用。你可以返回工具目录，继续探索天文演示。</p><a href="/">返回演示工具 →</a></body></html>`);}return true;
  }
  if(!name.startsWith('lecture-assets/'))return false;
  if(!lecturesRoot||!readingFiles){res.writeHead(404);res.end('Reading package is not configured');return true;}

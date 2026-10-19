@@ -9,7 +9,7 @@ export function installEclipseUI(lab){
  body.append(ui);
  const modes=document.querySelector('.experiments'),guide=$('guide-actions'),controls=document.querySelector('.controls'),spaceView=document.querySelector('.space-view'),observerView=document.querySelector('.observer-view'),shadow=$('shadow-panel'),metrics=document.querySelector('.metrics'),time=document.querySelector('.time-label'),speed=document.querySelector('.speed-label'),spaceTitle=spaceView.querySelector('.view-title>span'),observerTitle=observerView.querySelector('.view-title'),info=ui.querySelector('.eclipse-info-body'),homes=new Map();
  const display=document.createElement('details');display.id='eclipse-display';display.innerHTML='<summary>显示比例与空间视角</summary>';
- const reading=document.createElement('details');reading.innerHTML='<summary>任务、机制与完整边界</summary>';
+ const reading=document.createElement('details');reading.innerHTML='<summary>原理与公式</summary>';
  const extras=document.createElement('details');extras.id='eclipse-extras';extras.innerHTML='<summary>完整读数、显示与资料</summary>';
  const parameter=document.createElement('label');parameter.className='eclipse-parameter-choice';parameter.innerHTML='调整条件 <select id="eclipse-parameter"><option value="inclination">月轨倾角</option><option value="distance">地月距离</option><option value="node">交点线方向</option><option value="east">观察点东偏</option><option value="north">观察点北偏</option></select>';
  const parameterFields=['inclination','distance','node','east','north'].map(id=>({id,el:$(id).closest('label')}));
@@ -17,7 +17,7 @@ export function installEclipseUI(lab){
  const caption=document.querySelector('.observer-caption'),context=document.createElement('p');context.className='eclipse-observer-context';
  const fieldNote=document.createElement('p');fieldNote.className='eclipse-field-note';fieldNote.hidden=true;
  const geometryContext=document.createElement('p');geometryContext.className='eclipse-geometry-context';
- const meaning=document.createElement('p');meaning.className='eclipse-meaning';meaning.textContent='展示比例 ≠ 天空角尺度 · 教学几何，不是食预报。';
+ const meaning=document.createElement('p');meaning.className='eclipse-meaning';meaning.textContent='天体与影锥按展示比例缩放；遮挡率按物理尺寸计算。';
  const sectionEntry=document.createElement('button');sectionEntry.id='eclipse-section-entry';sectionEntry.textContent='解释本影 / 半影 / 伪本影 ↗';sectionEntry.setAttribute('aria-pressed','false');
  const sectionClose=document.createElement('button');sectionClose.id='eclipse-section-close';sectionClose.textContent='收起影锥 ×';
  const solarRef=document.createElementNS('http://www.w3.org/2000/svg','svg');solarRef.classList.add('eclipse-solar-reference');solarRef.setAttribute('role','img');solarRef.setAttribute('aria-label','太阳方向；边缘标志不表示太阳距离');solarRef.innerHTML='<line/><path/><text>太阳方向</text>';
@@ -40,7 +40,7 @@ export function installEclipseUI(lab){
   spaceView.hidden=false;observerView.hidden=false;shadow.hidden=lab.state.view!=='shadow';
   sectionEntry.setAttribute('aria-pressed',String(!shadow.hidden));sectionEntry.textContent=shadow.hidden?'解释本影 / 半影 / 伪本影 ↗':'收起影锥 ×';
   const solar=lab.state.observe==='sun';context.textContent=solar?`观察太阳 · 从随月下点移动的教学地面点看 · 东偏 ${lab.state.east.toFixed(1)}° / 北偏 ${lab.state.north.toFixed(1)}°（非城市）`:'观察月球 · 沿原地心方向看月面 · 固定黄道北向上';
-  meaning.textContent=(!solar&&lab.state.red?'红光仅定性示意 · ':'')+'展示比例 ≠ 天空角尺度 · 教学几何，不是食预报。';
+  meaning.textContent=(!solar&&lab.state.red?'月食红光示意 · ':'')+'天体与影锥按展示比例缩放；遮挡率按物理尺寸计算。';
   $('observed').setAttribute('aria-label',context.textContent+'；空格播放或暂停');
   geometryContext.textContent=solar?'金点：教学地面观察点 · 跟随月下点；拖动月球看对齐变化':'月面采用地心方向；金点非月食观察者。拖动月球看入影变化';
   $('observer-label').style.display=solar?'':'none';
@@ -48,7 +48,7 @@ export function installEclipseUI(lab){
   fieldNote.hidden=!solar||!disk||disk.horizon<=0||Math.abs(disk.x*r/disk.sunRadius)<w/2+disk.moonRadius*r/disk.sunRadius&&Math.abs(disk.y*r/disk.sunRadius)<h/2+disk.moonRadius*r/disk.sunRadius;
   if(!fieldNote.hidden)fieldNote.textContent=`月球圆面在视场外，角距 ${(disk.separation/lab.physics.RAD).toFixed(2)}°`;
   let origin='本次载入起点';try{const entry=history.state?.astronomy?.entryId,saved=JSON.parse(sessionStorage.getItem('astronomy:moon-scene:v1:'+entry));if(saved?.origin){const s=decodeRecipe(saved.origin),names={total:'日全食',annular:'日环食',partial:'日偏食',miss:'新月却无食',lunar:'月全食'};origin=(names[s.guidePreset]||'导入 / 模式')+'起点（'+s.days.toFixed(3)+' 天）';}}catch{/* Original storage fallback remains usable. */}
-  const note=$('eclipse-clock-basis');note.textContent=`模型第 ${$('day-value').textContent} 天 · ${$('speed').selectedOptions[0].textContent} · 局部小时相对模型新 / 满月，非接触时刻。${lab.state.guidePreset?'载入条件':'当前手调 / 播放'}；复位回${origin}并暂停。`;
+  const note=$('eclipse-clock-basis');note.textContent=`模型第 ${$('day-value').textContent} 天 · ${$('speed').selectedOptions[0].textContent} · 局部小时以模型新 / 满月为零点。${lab.state.guidePreset?'载入条件':'当前手调 / 播放'}；复位回${origin}并暂停。`;
   $('reset').title='返回'+origin+'与载入视角并暂停';
   $('status').classList.toggle('eclipse-error',/失败|不兼容/.test($('status').textContent));
  }
@@ -57,7 +57,7 @@ export function installEclipseUI(lab){
   move(modes,$('eclipse-modes'));move(guide,$('eclipse-presets'));move($('preset-summary'),$('eclipse-presets'));move($('observe-toggle'),observerTitle);observerTitle.after(context);move(caption,observerView);caption.prepend(fieldNote);observerView.append(meaning);spaceView.append(geometryContext,sectionEntry);$('space').append(solarRef);shadow.querySelector('.view-title').append(sectionClose);
   spaceView.append($('eclipse-information'));move(shadow,spaceView);info.append(parameter,extras);extras.append(display,reading);for(const el of[$('geometry-settings')])move(el,info);move($('eclipse-controls'),extras);$('geometry-settings').open=true;for(const el of[document.querySelector('.view-switch'),document.querySelector('.view-tools'),$('presentation')])move(el,display);move($('scene-caption'),spaceView);for(const el of[document.querySelector('.experiment-guide'),document.querySelector('.interpretation'),$('mode-boundary')])move(el,reading);move(document.querySelector('.recipe-controls'),extras);move(metrics,extras);move($('sources'),extras);move($('shadow-svg'),shadowScroll);shadow.querySelector('.shadow-heading').after(shadowScroll);
   for(const el of[$('play'),$('local-time'),$('reset'),time,$('status')])move(el,ui.querySelector('.eclipse-clock'));move(speed,display);time.firstChild.textContent='模型第 ';$('eclipse-time').setAttribute('aria-describedby','eclipse-clock-basis');
-  for(const{el}of viewNames){if(el.dataset.view==='space')el.textContent='空间关系（保留观测结果）';if(el.dataset.view==='observer')el.textContent='观测结果（保留必要几何）';if(el.dataset.view==='shadow')el.textContent='展开影锥解释';if(el.dataset.view==='paired')el.textContent='观测与必要几何';}
+  for(const{el}of viewNames){if(el.dataset.view==='space')el.textContent='空间关系';if(el.dataset.view==='observer')el.textContent='观测结果';if(el.dataset.view==='shadow')el.textContent='展开影锥解释';if(el.dataset.view==='paired')el.textContent='观测与空间关系';}
   observerTitle.after(context);$('observed').before(document.querySelector('.eclipse-clock'),$('eclipse-clock-basis'));current();lab.resize();lab.refresh();
  }
  function closeInfo(){ $('eclipse-information').open=false;$('eclipse-condition-entry').focus({preventScroll:true});document.querySelector('.views').scrollIntoView({block:'start'}); }

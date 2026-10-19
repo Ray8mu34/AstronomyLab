@@ -6,7 +6,7 @@ export function attachSamplingUI(root,{redraw}){
  shell.innerHTML='<header class="sampling-header"><a href="/">← Lab</a><h1>放大与采样</h1><span>连续光场 → 像素积分</span><details class="sampling-modes"><summary>放大采样 ⌄</summary><div data-sampling-modes></div></details></header><div class="sampling-body"></div><details class="sampling-info"><summary>读图、模型与来源</summary><div><button type="button" data-sampling-close>关闭说明 ×</button><div data-sampling-info></div><a href="/sources/optics.md" target="_blank" rel="noopener">原模型与来源 ↗</a></div></details>';
  q('.optics-pilot').append(shell);const s=x=>shell.querySelector(x);
  const toolbar=document.createElement('div');toolbar.className='sampling-toolbar';toolbar.innerHTML='<details class="sampling-presets"><summary>采样预设与复位</summary><div data-sampling-presets></div></details>';
- const note=document.createElement('p');note.className='sampling-note';note.textContent='各图分别自动归一，仅比较形状；角宽分别标注，不能按屏幕亮度比较通量。';
+ const note=document.createElement('p');note.className='sampling-note';note.textContent='两图共用天空角尺度，分别归一以比较形状；边缘可显示部分像元。';
  const closeButton=document.createElement('button');closeButton.type='button';closeButton.dataset.samplingClose='';closeButton.textContent='关闭详细参数 ×';
  function move(node,host){if(!node||slots.has(node))return;const slot=document.createComment('sampling return');node.before(slot);slots.set(node,slot);host.append(node);}
  function suspend(){if(!active)return;active=false;for(const[node,slot]of[...slots].reverse())slot.replaceWith(node);slots.clear();toolbar.remove();note.remove();closeButton.remove();q('.optics-pilot')?.classList.remove('sampling-active');root.classList.remove('sampling-active');document.body.classList.remove('sampling-observing');shell.hidden=true;}

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "authorizedAt": "2026-10-19",
+  "authorization": "User-invoked science package tasks B and F; old digests remain in source-protection.json and the full W0 baseline.",
+  "changes": [
+    {
+      "path": "web/observatory/modules/optics-physics.mjs",
+      "before": "c9f7f29d3fcc2d29ba705b73662fa1e58124140f3370be4864f20be5f0e76aa6",
+      "after": "f9f2f46015fa1992fca798faf0877c70b4b496a64dcf16fe333f00a4cfa6ba59",
+      "task": "AstronomyLab_01_Science_Package/01_scientific_integrity/CODEX_PROMPT.txt (2026-10-19)",
+      "reason": "Science package task B: exact rectangle integration of the existing piecewise bilinear PSF; model and source data retained."
+    },
+    {
+      "path": "web/observatory/modules/galaxy-physics.mjs",
+      "before": "7960d690aaf17ea24a51fe3c2dc1a27000b838addcd00a8b51d4b07bf6e059ce",
+      "after": "e1697837d5ef4005ef704d13f14a91c87b54ac3b0584499a7409877e027057db",
+      "task": "AstronomyLab_01_Science_Package/01_scientific_integrity/CODEX_PROMPT.txt (2026-10-19)",
+      "reason": "Science package task F: validate the fixed NASA FIRAS product structure, units, row order, finite values and positive sigma."
+    }
+  ]
+}

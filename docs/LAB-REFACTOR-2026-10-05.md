@@ -1,5 +1,53 @@
 # AstronomyLab R1 重构进度与交接
 
+## 2026-10-19 第一科学包：六项修复与同包集成验收（本地完成）
+
+用户明确授权第一科学包的六项修复，覆盖旧的笼统模型/视觉冻结限制；本轮没有发布授权。HEAD 保持 `67048a8b180ea39385f5d328ed5bc5feffcea735`，已有文案修改、未跟踪科学包及根目录四份文档删除均保留，没有 reset/clean、提交、推送或线上操作。项目外备份包含503文件约41.27 MB与删除索引，路径见 `build/qa/science-round1-20261019/integration/baseline.json`。备份在并行实现已经开始后于06:20 UTC采集，不能称为六项全部修复前的纯净源码；各执行者另存修改前局部源及本包冻结基线。基线 check 为97语法/48 Node通过；第一次边界检查的2个模型差异及部分包漂移已来自同时进行的本轮修改，另有根 THIRD_PARTY 删除，不误记为历史模型缺陷。
+
+| 任务 | 实际改动与本轮验收 |
+| --- | --- |
+| A 精确科学状态 | 在原实验历史体系登记模块 getState/applyState，v1快照新增带自身版本的model；原生range仍按原步长量化，数学预设不经DOM舍入保存。坏model整份拒绝，旧无model快照诚实恢复旧数值。100/200/1200/5000 km圆与临界预设，capture/刷新/目录真实点击后退前进、可见标签、键盘10种键及可信拖动均验证；最终生成包16/16。200 km速度11.014585251781234 km/s、e=1及零能量保持，滑杆11.015不再改变权威问题；木星421800×1.1的463980.00000000006 km及质量保持，标签463980。未扩大分类容差。 |
+| B 像元面积积分 | 对原有限分段双线性PSF使用可复用行前缀与矩形原函数积分；两星各半通量，探测器数组不重新归一化。九组独立节点基函数oracle的最大总通量相对误差3.997e-15，归一分布L1最大2.328e-15，满足原1e-3/1e-2预算。实际dl_env独立SciPy艾里64/128阶均运行，窄峰L1约0.00029347885；32阶仅留未收敛对照。有限窗口与网格近似仍分别记录。 |
+| C 共享天空坐标 | 连续图与像元图实际drawImage共用天空窗口、中心与角度映射；完整探测器extent另记，边界允许部分像元。F400/800/1600的窗口及星点位置保持、角像元依次减半（5.156620/2.578310/1.289155角秒）。实际连续图16761个栅格点独立复算字节误差0；连续原生拖动33次input/32次draw逐帧验证映射。 |
+| D 月相手机遮挡 | ResizeObserver读取固定时间条真实高度并预留空间；默认大月面与向下几何保留，主动比较用紧凑上下布局共同观察。374×860、374×667、320×568共45次科学边界观测及既有月相4/4通过；检查球体轮廓、轨道、太阳参照、标签及月面反馈，非仅canvas可见。3段实际原片及自然1×回看在D索引。320×568部分月相方向文字与地球标签轻微相交为P3保留。 |
+| E 速度颜色参考系 | 圆面颜色、左右文字和图例统一观测者总视向速度，含正负、单位与运动方向文字。自转静止/全盘远离/全盘接近独立公式与真实Canvas检查通过；v_r=150、v_eq=120、i=90°的+30至+270 km/s场景错误蓝色块从2195降为0。正确主谱线模型及相邻三模式科学结果/像素保持。 |
+| F FIRAS身份与完整性 | 原43行官方v1数据字节未变；加载需通过产品、五列、单位、有限值、正sigma、严格递增频率与数值身份摘要，残差可正负。HTML、截断、坏列、NaN/Infinity、sigma、重复/乱序、伪单位等24项Node与24项真实响应浏览器检查通过，坏内容进入failed并可恢复；原谱页13/13含像素/邻接保持。官方远端与本地字节SHA256相同，记录在F索引。 |
+
+光学固定条件的同窗误差（相对误差为无量纲；独立参考没有复用生产求积）：
+
+| 条件 | 参考总通量 | 修复前相对误差 | 修复后相对误差 | 修复后L1 |
+| --- | ---: | ---: | ---: | ---: |
+| ordinary-default | 0.99886457295 | -1.0082e-3 | 6.6613e-16 | 1.8595e-15 |
+| undersample-preset | 0.99989406629 | -2.1338e-2 | -3.9968e-15 | 2.2508e-16 |
+| f4-200mm-800mm-pixel10 | 0.99987084978 | -1.8287e-1 | 1.1102e-15 | 5.1797e-16 |
+| f5-200mm-1000mm-pixel10 | 0.99987084978 | -1.5451e-3 | 1.1102e-15 | 1.1420e-15 |
+| narrow-psf-pixel6-separation2 | 0.99991083225 | -9.1143e-1 | 8.8818e-16 | 7.6591e-16 |
+
+性能证据来自AMD Ryzen 9 8945HX、Edge 155.0.4283.62软件WebGL，5次预热后50次同步psf+detector：默认中位4.4 ms/p95 6.0 ms，窄峰0.7/1.1 ms；原生连续拖动input到实际draw中位9.3 ms、最大28.7 ms。它们是本机测量，不推断统一性能分数或硬件验收。
+
+最终执行 `node tools/check.mjs`（97语法、88 Node，含原Imaging检查）、`node tools/build-lab.mjs --out deploy/lab`、`node tools/check-boundaries.mjs --package deploy/lab`；244资源/232文件、包哈希/source drift=0/禁止资源=0。完整原入口 `tests/standalone-refactor.mjs` 的 assets,coverage,history-all,layout,faults 在同一冻结最终包一次182/182，含43模式×桌面/390和全部模式历史恢复；不是继承旧成绩或拼接两包。最终包额外 `npm run test:native-presets -- --mode all --base http://127.0.0.1:4382 --playwright <已有模块路径> --browser <已有Edge路径>` 为16/16，测试入口支持CLI/环境路径，不依赖旧机器calibration文件。全部实际完整命令、错误表、包及源码SHA见 `integration/verification.json`；冻结包标识 `r1-20261005-8071f8831008`，runtime manifest SHA256 `7f18a26569ee86b3e61aa5e3255ab81517cdac1421fc3fd6fa83960f55707104`。
+
+原保护哈希不改；`source-protection-amendments.json` 仅列本包明确授权的optics-physics、galaxy-physics精确before/after及理由。检查结果为332原字节未变＋2授权科学变更，不称334原字节全等；未知条目、重复、旧hash不符、后续字节漂移仍失败，独立审查确认无静默放行。根THIRD_PARTY保持删除，许可运行源迁至 `web/observatory/sources/release-status.md` 并修复既有来源链接；旧manifest拥有且哈希精确吻合的单个退休生成文件先归档后移除，再由构建生成新路径。署名、vendor许可、三项pending和blocked_pending_licenses保持。
+
+限定modules的premium strict仍12条历史finding，按file/rule/message对照新增0，不称clean pass；D范围另有23条原index按钮静态发现，新增0。DESIGN只补本次遮挡修复的局部所有者规则，lint0 error/0 warning（4 infos），不升级人工视觉批准。失败记录保留：A旧量化门禁、B/C旧求积结果与测试RAF观测顺序假失败、E颜色解码测试假失败、F坏单位反例均在各索引。D第一次原始baseline目录被误覆盖，已明确标注不再作before证据；另存before-source重放有独立时间/hash，不能冒充失去的原片。
+
+六项证据入口统一在 `build/qa/science-round1-20261019/{A,BC,D,E,F}/`，总索引 `INDEX.json`，集成详情 `integration/verification.json`，独立审查 `review/review.json` 为P1=0/P2=0/P3=1（含15源hash与3段原片完整1×自然结束）。本地最终包预览 `http://127.0.0.1:4382/`，本次服务PID60124、exec session32110；启动 `node deploy/lab/web/observatory/server.mjs --port 4382`。未执行实体手机、现场投影、真实硬件长期性能、30分钟稳定性、新手访谈或教材对照；科学修复与工程通过不等于43模式科学认证或学习效果验证。本轮未部署，线上事实仍按既有DEPLOYMENT记录。
+
+
+## 2026-10-17 全站成品文案整理（本地完成）
+
+用户要求清理前端所有使用者不需要知道的描述，去除防御性、自证与审稿 demo 口吻。本次覆盖 11 工具、43 模式，修改 48 个前端源码文件：删除候选版/待试用/审校进度、来源核验日志和“没有冒充/不使用替代”等表达；模型说明改为直接描述对象、条件与读数。统一已有说明入口名称，简化加载、错误与重试提示，讲义兼容页移除维护命令。保留数据身份、单位、比例、缺测、科学纠误、太阳观测防护、来源与使用条件。C 指标明确为通量比的对数指标。未改变模型、科学数据、控制参数、模式 ID、布局与场景恢复；太阳系仅修改来源弹窗文字。
+
+用户文案规则已补入 DESIGN.md。独立 frontend-design-review 文案审查 P1=0/P2=0；其最后三条建议也已处理：日地月故障提示改为可理解的加载/画面中断说明，自转周期明确为相对远星的周期。本次为文案整理，不升级既有视觉冻结、科学审校或实体设备验收身份。
+
+实际验证与本机证据统一存于 `build/qa/frontend-copy-20261017/`，汇总 `verification.json`，外部源码备份 `D:/Users/ZJUAAA/2026/AstronomyLab-backups/frontend-copy-20261017/`。修改前工作区 clean。`npm run check` 最终通过 97 文件语法、48 Node 测试及 34 纯 Imaging 检查；`npm run build:deploy` 与最终 QA 包均为 244 资源、232 文件；`npm run check:boundaries` 334 保护/232 包文件通过，source drift=0、禁止资源=0。`npx --offline -p @google/design.md designmd lint DESIGN.md` 0 errors/0 warnings。premium 严格静态审计复用既有 canonical config，仍为 12 条历史发现，与 10-13 基线按 file/rule/message 对比新增 0；不称 clean pass。首次 Conda 捕获输出出现 GBK 编码错误，改用 `conda run --no-capture-output -n dl_env python -X utf8 ...`，未改环境或依赖。Git 行尾按既有 CRLF 用命令级 `core.whitespace=...cr-at-eol` 核查通过，未改全局配置。
+
+完整候选包浏览器运行 `node tests/standalone-refactor.mjs --base http://127.0.0.1:4198 --out build/qa/frontend-copy-20261017/browser --package build/qa/frontend-copy-20261017/package --part assets,coverage,history-all,layout,faults --playwright C:/Users/30674/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright --browser "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"` 首次 178/182：43 模式桌面/390px操作、全部历史恢复及布局通过；三项故障断言仍匹配旧文案，导致月球贴图失败测试未走到解除路由并连带影响随后上下文恢复。保留失败日志。测试改为检查新提示、图像隐藏、重试入口与原恢复行为，未放宽模型断言。最后三项源码差异仅日地月故障文案与太阳系来源措辞；最终包 `package-final` 在 4199 对 assets/faults 重跑 25/25，含真实 context loss 与解除故障后的恢复。合并同名最终结果为 182/182；这是完整候选运行加最终包分段复核，**不称同一最终包单次完整 182**。
+
+专项 `node tests/galaxy-cmb-ui.mjs --base http://127.0.0.1:4197 --before http://127.0.0.1:4198 --out build/qa/frontend-copy-20261017/cmb-final` 15/15；`node tests/galaxy-spectrum-ui.mjs --base http://127.0.0.1:4197 --before http://127.0.0.1:4198 --out build/qa/frontend-copy-20261017/spectrum-pass` 13/13，含待加载、404、空表、真实恢复与科学像素对照。早期专项按历史布局直接点击已收起控件、空表误当 alert 的测试失败保留；改为打开现有模式菜单/教学条件，并分别检查空状态 status 与失败 alert。基线为本次候选包，未声称重新核验旧视觉 checkpoint。实际查看桌面/窄屏及故障截图；本次没有运动/布局改动，不重新录制运动验收。
+
+本地预览 `http://127.0.0.1:4197/`。本次未提交、推送或连接生产服务器，线上仍为 10-13 发布状态；本地 deploy/lab 仅由构建命令更新。许可及 blocked_pending_licenses 保持，原始课程、科学数据、素材、视频和历史证据不改。
+
 **当前维护位置（2026-10-13）：唯一项目/Git根，源码web/。用户明确授权提交并推送当前状态，连接本项目生产服务器完成部署；此授权覆盖早期不提交/不推送/不部署限制，不改变科学、状态与其他项目保护边界。第10批分级/着陆与圭表已自动冻结，其余四项保留停止状态，失败试验已撤回。自动冻结不推断成人工批准。发布证据集中build/qa/release-20261013，既有UI证据索引保持。**
 
 ## 2026-10-13 发布准备

@@ -20,12 +20,12 @@ export function attachProcessUI(root){
   if(!q('.process-header')){
    const land=mode==='landing',header=document.createElement('header');header.className='process-header';header.innerHTML=`<a href="/">← Lab</a><h1>${land?'点火与着陆':'分级火箭'}</h1><details class="process-modes" data-process-disclosure="modes"><summary>${land?'着陆过程':'分级预算'} ⌄</summary><div data-process-modes></div></details>`;root.prepend(header);move(pilot?.querySelector('.lab-tabs'),q('[data-process-modes]'));
    const clock=document.createElement('div');clock.className='process-clock';q('.ls-process').before(clock);for(const s of['.ls-transport','.ls-scrubber','.ls-timeline'])move(q(s),clock);
-   const note=document.createElement('p');note.className='process-time-note';note.textContent='模型经过时间 · 倍率为模型秒/实秒。重置返回原默认参数与0 s，并暂停。';clock.append(note);
+   const note=document.createElement('p');note.className='process-time-note';note.textContent='模型经过时间 · 倍率为模型秒/实秒。重置返回默认参数与 0 s，并暂停。';clock.append(note);
    const advanced=q('.ls-details:not(.ls-explanation)');advanced.dataset.processDisclosure='conditions';
    let budget;
    if(land){
     const presets=document.createElement('details');presets.className='process-presets';presets.dataset.processDisclosure='presets';presets.innerHTML='<summary>点火时机 ⌄</summary>';clock.before(presets);move(q('.ls-presets'),presets);move(q('.ls-main-control'),clock);
-    const semantic=document.createElement('p');semantic.className='process-landing-note';semantic.textContent='向上为正 · 速度为零还须看离地高度。曲线为本次条件的教学预测，非实际制导。';q('.ls-process').before(semantic);
+    const semantic=document.createElement('p');semantic.className='process-landing-note';semantic.textContent='向上为正 · 同时观察速度与离地高度，判断点火时机。';q('.ls-process').before(semantic);
    }else{
     move(q('.ls-main-control'),advanced);budget=document.createElement('details');budget.className='process-budget';budget.dataset.processDisclosure='budget';budget.innerHTML='<summary>各级 Δv 分解 · 同时刻预算</summary>';advanced.before(budget);
    }

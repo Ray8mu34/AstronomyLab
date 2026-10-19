@@ -19,6 +19,11 @@ __pycache__/
 /course/GPT6pro给的范例/
 /course/第一二讲_天文课程素材包/
 /docs/开发指导/教材部分/
+# Local science-review input, frozen baseline and probes; not public source.
+/docs/AstronomyLab_01_Science_Package/
+/docs/AstronomyLab_01_Science_Package.zip
+/docs/AstronomyLab_02_Frontend_Package/
+/docs/AstronomyLab_02_Frontend_Package.zip
 /tools/vendor/
 /web/**/raw/
 /web/**/qa/

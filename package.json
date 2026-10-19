@@ -14,6 +14,7 @@
     "build:lab": "node tools/build-lab.mjs",
     "check:boundaries": "node tools/check-boundaries.mjs",
     "test:standalone": "node tests/standalone-refactor.mjs",
+    "test:native-presets": "node tests/native-preset-precision.mjs",
     "build:deploy": "node tools/build-lab.mjs --out deploy/lab"
   },
   "description": "AstronomyLab R1 source repository: independent tools and separate original lecture assets"

@@ -5,6 +5,12 @@ import {confirmedModes} from './tool-registry.js';
 export const EXPERIMENT_STATE_VERSION=1;
 const prefix='astronomy:experiment:v1:';
 const contexts=new WeakMap(), memory=new WeakMap();
+const models=new WeakMap();
+// Modules own scientific values; native controls only own user step rounding.
+// This registry shares the existing history lifecycle, with no second store.
+export function registerExperimentModel(root,api){
+ models.set(root,api);return()=>{if(models.get(root)===api)models.delete(root);};
+}
 const keys=(names)=>names.split(' ').filter(Boolean).map(name=>({name,selector:`[data-key="${name}"]`,event:'input'}));
 const extra=(name,selector,event='input')=>({name,selector,event});
 const choice=(name,attribute,values,stage='after')=>({name,attribute,values:values.split(' '),stage});
@@ -25,6 +31,26 @@ export const experimentAdapters={
 
 const record=value=>value!==null&&typeof value==='object'&&!Array.isArray(value);
 const own=(object,key)=>Object.prototype.hasOwnProperty.call(object,key);
+export function validateExperimentModel(slug,mode,value){
+ if(!record(value)||value.version!==1)return null;
+ let bounds;
+ if(slug==='orbits'&&mode==='orbit'&&value.kind==='orbit-conics'){
+  bounds={height:[100,5000],speed:[0,16],totalHours:[.01,876000],rateHours:[.00001,1000000],elapsed:[0,876000*3600]};
+  if(!['whole','near'].includes(value.view)||value.elapsed>value.totalHours*3600)return null;
+ }else if(slug==='measure'&&mode==='jupiter'&&value.kind==='jupiter-mass')bounds={a:[300000,550000],period:[1.3,2.5],errorA:[0,5],errorP:[0,2],phase:[0,2*Math.PI]};
+ else return null;
+ const result={version:1,kind:value.kind};
+ for(const [key,[min,max]]of Object.entries(bounds)){
+  if(typeof value[key]!=='number'||!Number.isFinite(value[key])||value[key]<min||value[key]>max)return null;
+  result[key]=value[key];
+ }
+ if(value.kind==='orbit-conics')result.view=value.view;
+ return result;
+}
+const modelControls={
+ 'orbit-conics':new Set(['conic:height','conic:speed','conic:totalHours','conic:rateHours','conic:progress']),
+ 'jupiter-mass':new Set(['a','period','errorA','errorP']),
+};
 const adapterFor=slug=>own(experimentAdapters,slug)?experimentAdapters[slug]:null;
 const entryValid=value=>typeof value==='string'&&/^[A-Za-z0-9_-]{1,128}$/.test(value);
 const windowOf=(root,options={})=>options.window||root?.ownerDocument?.defaultView||globalThis.window;
@@ -69,7 +95,11 @@ export function validateExperimentSnapshot(value,slug){
  const adapter=adapterFor(slug),values={},choices={};
  for(const spec of adapter.controls){if(own(value.values,spec.name)){const item=value.values[spec.name];if(typeof item==='boolean'||typeof item==='string'&&item.length<=128||typeof item==='number'&&Number.isFinite(item))values[spec.name]=item;}}
  for(const spec of adapter.choices){const item=value.choices[spec.name];if(spec.toggle&&!spec.values?typeof item==='boolean':spec.values.includes(item))choices[spec.name]=item;}
- return{version:EXPERIMENT_STATE_VERSION,slug,mode:value.mode,values,choices};
+ const snapshot={version:EXPERIMENT_STATE_VERSION,slug,mode:value.mode,values,choices};
+ // Old snapshots contain only quantized control values. Replay those values
+ // honestly; never infer which mathematical preset might have produced them.
+ if(own(value,'model')){const model=validateExperimentModel(slug,value.mode,value.model);if(!model)return null;snapshot.model=model;}
+ return snapshot;
 }
 export function readExperimentSnapshot(slug,entryId,win=globalThis.window){
  const key=snapshotKey(slug,entryId);if(!key||!win)return null;
@@ -104,7 +134,10 @@ export function captureExperiment(slug,root,options={}){
  const values={},choices={};
  for(const spec of adapter.controls){const input=root.querySelector(spec.selector);if(!input)continue;const value=input.type==='checkbox'?input.checked:input.tagName==='SELECT'||input.type==='date'?input.value:input.value===''?undefined:Number(input.value);const valid=validateControlValue(input,value);if(valid!==undefined)values[spec.name]=valid;}
  for(const spec of adapter.choices){const value=readChoice(spec,root);if(spec.toggle&&!spec.values?typeof value==='boolean':spec.values.includes(value))choices[spec.name]=value;}
- const snapshot={version:EXPERIMENT_STATE_VERSION,slug,mode,values,choices};writeSnapshot(snapshot,entryId,win);return snapshot;
+ const snapshot={version:EXPERIMENT_STATE_VERSION,slug,mode,values,choices};
+ const candidate=models.get(root)?.getState(mode);
+ if(candidate!==null&&candidate!==undefined){const model=validateExperimentModel(slug,mode,candidate);if(!model)return null;snapshot.model=model;}
+ writeSnapshot(snapshot,entryId,win);return snapshot;
 }
 function clickChoice(spec,value,root){
  if(spec.toggle){const button=root.querySelector(spec.selector);if(button&&!button.disabled&&readChoice(spec,root)!==value)button.click();return;}
@@ -127,6 +160,9 @@ export async function restoreExperiment(slug,root,options={}){
  const entryId=options.entryId||ensureExperimentEntry(win);contexts.set(root,{entryId,win});
  const snapshot=readExperimentSnapshot(slug,entryId,win);
  if(!snapshot){announce(slug,root,win);return false;}
+ // Refuse a scientific snapshot before changing the current experiment when
+ // its owning module is unavailable; a DOM fallback would change its problem.
+ const model=models.get(root);if(snapshot.model&&!model?.applyState)return false;
  // The saved mode wins only within this exact history entry. A fresh route has
  // a new ID and therefore starts in the mode requested by its ordinary URL.
  clickMode(slug,snapshot.mode,root);
@@ -144,6 +180,7 @@ export async function restoreExperiment(slug,root,options={}){
  if(currentExperimentMode(slug,root)!==snapshot.mode)return false;
  for(const spec of adapter.choices.filter(spec=>spec.stage==='before'))if(own(snapshot.choices,spec.name))clickChoice(spec,snapshot.choices[spec.name],root);
  for(const spec of adapter.controls){
+  if(snapshot.model&&modelControls[snapshot.model.kind].has(spec.name))continue;
   if(!own(snapshot.values,spec.name))continue;
   // Query again after every event: mass/catalogue/parameter changes can rebuild
   // controls and their ranges; no detached input receives a later replay.
@@ -152,6 +189,7 @@ export async function restoreExperiment(slug,root,options={}){
   const EventClass=win.Event||globalThis.Event;input.dispatchEvent(new EventClass(spec.event,{bubbles:true}));
  }
  for(const spec of adapter.choices.filter(spec=>spec.stage!=='before'))if(own(snapshot.choices,spec.name))clickChoice(spec,snapshot.choices[spec.name],root);
+ if(snapshot.model&&model.applyState(snapshot.model)===false)return false;
  pauseExperiment(slug,root);announce(slug,root,win);return true;
 }
 export function bindExperimentState(slug,root,options={}){

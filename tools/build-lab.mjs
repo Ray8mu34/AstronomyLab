@@ -23,7 +23,7 @@ for(const slug of ['solar-system','earth-moon']){
 directory('web/solar-system/vendor','/vendor');directory('web/solar-system/textures','/textures');
 // Scientific figures are shared assets, but only literal tool dependencies are admitted.
 for(const item of [...entries.values()].filter(e=>/\.(m?js|css|html)$/.test(e.source))){const text=fs.readFileSync(path.join(root,item.source),'utf8');for(const match of text.matchAll(/(?:\/?)(assets\/[A-Za-z0-9_./-]+\.(?:png|jpe?g|svg|webp|gif))/g))add(match[1],'/'+match[1],'tool-figure');}
-add('THIRD_PARTY.md','/sources/release-status.md','license-record');
+add('web/observatory/sources/release-status.md','/sources/release-status.md','license-record');
 // Carry the existing per-figure attributions without making the course ledger a
 // runtime dependency. The maintainer ledger is read only during local builds.
 function csv(text){const rows=[];let row=[],field='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){if(quoted&&text[i+1]==='"'){field+='"';i++;}else quoted=!quoted;}else if(!quoted&&(c===','||c==='\n')){row.push(field.replace(/\r$/,''));field='';if(c==='\n'){rows.push(row);row=[];}}else field+=c;}if(field||row.length){row.push(field);rows.push(row);}return rows;}

@@ -14,6 +14,7 @@ export function installPhaseUI(lab) {
  <div class="subject-caption"><span class="caption-label">地心方向所见</span><button id="phase-entry" popovertarget="phase-menu"><span id="reduced-phase"></span><span class="small-chevron" aria-hidden="true">⌄</span></button><span class="caption-label">固定黄道北向上 · 月面按视场放大</span></div>
  <p class="reduced-boundary">普通月相不是地球影子。</p><div class="reduced-transport" aria-label="时间控制"></div>`;
  body.append(ui);
+ const subjectCaption=ui.querySelector('.subject-caption'),phaseBoundary=ui.querySelector('.reduced-boundary'),views=document.querySelector('.views'),transport=ui.querySelector('.reduced-transport');
  const modes=document.querySelector('.experiments'),controls=document.querySelector('.controls'),geometry=$('geometry-settings'),metrics=document.querySelector('.metrics'),speed=document.querySelector('.speed-label'),viewTools=document.querySelector('.view-tools'),viewSwitch=document.querySelector('.view-switch'),heading=document.querySelector('.space-view .view-title'),headingText=heading.querySelector('span'),timeLabel=document.querySelector('.time-label'),status=$('status');
  const guide=document.querySelector('.experiment-guide'),boundary=$('mode-boundary'),interpretation=document.querySelector('.interpretation');
  const originals={heading:headingText.innerHTML,time:timeLabel.firstChild.textContent,dayDescription:$('day').getAttribute('aria-describedby'),resetTitle:$('reset').getAttribute('title'),geometryOpen:geometry.open};
@@ -34,13 +35,14 @@ export function installPhaseUI(lab) {
   rate.textContent='播放速率 '+$('speed').selectedOptions[0].textContent;
   let origin='本次载入起点';
   try{const entry=history.state?.astronomy?.entryId,saved=JSON.parse(sessionStorage.getItem('astronomy:moon-scene:v1:'+entry));if(saved?.origin)origin='载入起点 '+decodeRecipe(saved.origin).days.toFixed(3)+' 天';}catch{/* Unavailable storage must leave real controls usable. */}
-  $('clock-basis').textContent='0天为模型基准，非日历日期 · 复位回'+origin+'并暂停';$('reset').title='返回'+origin+'（包括载入条件与视角）并暂停';
+  $('clock-basis').textContent='模型时间 · 复位回'+origin+'并暂停';$('reset').title='返回'+origin+'（包括载入条件与视角）并暂停';
  }
  function sync(){
   const phase=lab.state.mode==='phase';
   if(phase!==active){
    active=phase;ui.hidden=!active;body.classList.toggle('reduced',active);body.classList.toggle('comparing',active&&comparing);
    if(active){
+    views.append(subjectCaption,phaseBoundary);
     $('mode-menu').append(modes);$('phase-menu').append($('guide-actions'));$('condition-menu').append(metrics,controls);
     viewSettings.append(speed,viewTools,viewSwitch,$('presentation'),$('plane-note'),$('scene-caption'));controls.append(viewSettings,$('sources'));$('explanation').before(guide);interpretation.append(boundary);
     headingText.innerHTML='空间关系 <small>· 拖动月球</small>';heading.append(compare);
@@ -48,6 +50,7 @@ export function installPhaseUI(lab) {
     timeLabel.firstChild.textContent='模型第 ';timeLabel.append(rate);$('day').setAttribute('aria-describedby','clock-basis');status.classList.add('phase-status');
     for(const el of hidden)el.classList.add('legacy-hidden');
    }else{
+    ui.append(subjectCaption,phaseBoundary);
     closeMenus();for(const [el,marker]of homes)marker.after(el);
     viewSettings.remove();compare.remove();rate.remove();hint.remove();headingText.innerHTML=originals.heading;timeLabel.firstChild.textContent=originals.time;status.classList.remove('phase-status');
     for(const el of hidden)el.classList.remove('legacy-hidden');
@@ -60,7 +63,10 @@ export function installPhaseUI(lab) {
   reference.style.display=active?'':'none';
   if(active){geometry.open=true;$('reduced-phase').textContent=$('phase-name').textContent;compare.hidden=lab.state.view!=='paired';clockSemantics();}
  }
- compare.addEventListener('click',()=>{if(!active||!lab.state.ready)return;comparing=!comparing;body.classList.toggle('comparing',comparing);compare.textContent=comparing?'收起比较 ↙':'展开比较 ↗';compare.setAttribute('aria-pressed',String(comparing));lab.resize();});
+ compare.addEventListener('click',()=>{if(!active||!lab.state.ready)return;comparing=!comparing;body.classList.toggle('comparing',comparing);compare.textContent=comparing?'收起比较 ↙':'展开比较 ↗';compare.setAttribute('aria-pressed',String(comparing));lab.resize();if(matchMedia('(max-width:800px)').matches)window.scrollTo({top:0,behavior:'instant'});});
+ // The original clock can wrap as its loaded-origin text changes. Reserve its
+ // measured height, including safe-area padding, rather than an assumed footer.
+ const transportSize=new ResizeObserver(()=>{if(!active)return;const height=transport.getBoundingClientRect().height;body.style.setProperty('--phase-transport-height',height+'px');lab.resize();});transportSize.observe(transport);
  document.addEventListener('keydown',e=>{if(active&&e.key==='Escape'&&$('condition-menu').matches(':popover-open')&&!document.querySelector('dialog[open]')){e.preventDefault();$('condition-menu').hidePopover();$('condition-entry').focus();}});
  for(const id of ['mode-entry','phase-entry'])$(id).addEventListener('click',()=>{if($('condition-menu').matches(':popover-open'))$('condition-menu').hidePopover();});
  modes.addEventListener('click',e=>{if(e.target.closest('[data-mode]'))closeMenus();});
@@ -93,7 +99,7 @@ export function installPhaseUI(lab) {
   $('solar-word').setAttribute('x',sx);$('solar-word').setAttribute('y',sy);
  }
  function presentationFrame(){if(suspended||!lab.state.ready||!lab.renderer.domElement.isConnected){frame=0;return;}scientificLabels();frame=requestAnimationFrame(presentationFrame);}
- window.addEventListener('pagehide',e=>{suspended=true;cancelAnimationFrame(frame);frame=0;if(!e.persisted){modeObserver.disconnect();mirror.disconnect();geometryDisplay.disconnect();}});
+ window.addEventListener('pagehide',e=>{suspended=true;cancelAnimationFrame(frame);frame=0;if(!e.persisted){modeObserver.disconnect();mirror.disconnect();geometryDisplay.disconnect();transportSize.disconnect();}});
  window.addEventListener('pageshow',e=>{if(e.persisted&&lab.state.ready){suspended=false;sync();if(!frame)frame=requestAnimationFrame(presentationFrame);}});
  sync();frame=requestAnimationFrame(presentationFrame);
 }

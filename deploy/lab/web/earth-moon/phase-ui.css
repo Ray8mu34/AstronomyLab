@@ -125,3 +125,30 @@ body.reduced{background:var(--bg);min-height:100dvh}
 .reduced[data-stage-view="space"] .subject-caption,.reduced[data-stage-view="space"] .reduced-boundary{display:none}
 .reduced[data-stage-view="observer"] .observer-view{right:0}
 @media(max-width:800px){.reduced[data-stage-view="space"] .space-view{position:relative;top:100px;left:20px;width:calc(100% - 40px)}.reduced[data-stage-view="space"] #space{height:calc(100dvh - 300px)}}
+
+/* The phone document owns both views; the fixed clock owns only its reserved
+   footer. Expanded comparison spends the available height on both observations. */
+@media(max-width:800px){
+ body.reduced{--phase-transport-height:130px;--phase-comparison-moon:clamp(120px,calc((100dvh - var(--phase-transport-height) - 177px)*.44),260px);scroll-padding-bottom:calc(var(--phase-transport-height) + 16px)}
+ .reduced main{padding:54px 0 calc(var(--phase-transport-height) + 24px)}
+ .reduced .views{display:flex;flex-direction:column;gap:0}
+ .reduced .observer-view,.reduced.comparing .observer-view{position:relative;inset:auto;width:100%;order:0}
+ .reduced .subject-caption,.reduced.comparing .subject-caption{position:static;order:1;margin:0 20px;gap:2px}
+ .reduced .reduced-boundary,.reduced.comparing .reduced-boundary{position:static;order:2;margin:16px 20px 18px}
+ .reduced .space-view,.reduced.comparing .space-view,.reduced[data-stage-view="space"] .space-view{position:relative;inset:auto;order:3;margin:0 20px;width:calc(100% - 40px);padding-bottom:0}
+ .reduced #space{scroll-margin-bottom:calc(var(--phase-transport-height) + 16px)}
+ .reduced-transport{padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+ .condition-menu,.reduced.comparing .condition-menu{bottom:calc(var(--phase-transport-height) + 6px)}
+ .phase-menu{top:auto;bottom:calc(var(--phase-transport-height) + 20px);max-height:calc(100dvh - var(--phase-transport-height) - 80px)}
+ .reduced.comparing #observed{height:var(--phase-comparison-moon);min-height:0}
+ .reduced.comparing #north-label{top:4px;font-size:10px}
+ .reduced.comparing .subject-caption{display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 8px}
+ .reduced.comparing .subject-caption .caption-label:first-child{grid-column:1;grid-row:1}
+ .reduced.comparing #phase-entry{grid-column:2;grid-row:1;font-size:21px;min-height:38px}
+ .reduced.comparing .subject-caption .caption-label:last-child{grid-column:1/-1;grid-row:2;font-size:11px;line-height:16px}
+ .reduced.comparing .space-view{order:2;margin-top:4px}
+ .reduced.comparing .reduced-boundary{order:3;margin-top:12px}
+ .reduced.comparing #space{height:clamp(156px,calc(100dvh - var(--phase-transport-height) - var(--phase-comparison-moon) - 177px),300px);min-height:156px}
+ .reduced[data-stage-view="space"] #space{height:calc(100dvh - var(--phase-transport-height) - 120px);min-height:170px}
+ .reduced[data-stage-view="observer"] .space-view,.reduced[data-stage-view="observer"] .reduced-boundary{display:none}
+}

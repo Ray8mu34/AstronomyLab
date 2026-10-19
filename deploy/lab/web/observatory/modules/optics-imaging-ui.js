@@ -4,7 +4,7 @@ export function attachOpticsImagingUI(root,{redraw}){
  const link=document.createElement('link');link.rel='stylesheet';link.href='/modules/optics-imaging-ui.css';root.append(link);
  const shell=document.createElement('section');shell.className='oi-shell';shell.hidden=true;
  shell.innerHTML=`<header class="oi-header"><a href="/">← Lab</a><h1>成像</h1><details class="oi-modes"><summary>成像 · 模式 ⌄</summary><div data-oi-modes></div></details></header>
- <div data-oi-body></div><details class="oi-info"><summary>读图、模型边界与来源 ⌄</summary><div data-oi-info><button type="button" data-oi-close>关闭说明 ×</button></div></details>`;
+ <div data-oi-body></div><details class="oi-info"><summary>读图与来源 ⌄</summary><div data-oi-info><button type="button" data-oi-close>关闭说明 ×</button></div></details>`;
  q('.optics-pilot').append(shell);const s=x=>shell.querySelector(x);
  const cause=document.createElement('section');cause.className='oi-cause';cause.setAttribute('aria-label','接收位置与离焦成像的因果参照');
  cause.innerHTML=`<div class="oi-geometry"><svg viewBox="0 0 360 122" role="img" aria-label="近轴会聚示意，青色最佳像面与金色接收面；位移放大">
@@ -14,7 +14,7 @@ export function attachOpticsImagingUI(root,{redraw}){
  </svg><p>近轴会聚示意 · 离焦位移放大</p></div><div class="oi-focus-control"><div data-oi-primary></div><p class="oi-causal-copy" data-oi-causal></p></div>`;
  const tools=document.createElement('div');tools.className='oi-tools';tools.innerHTML='<div data-oi-profile-action></div><details class="oi-system"><summary>结构与完整光路 · 示意 ⌄</summary><p>长度与离焦位移为教学示意；SCT只表示传播顺序，未按真实曲面追迹。</p><div data-oi-system></div><button type="button" data-oi-close>关闭光路 ×</button></details><div data-oi-parameters></div><div data-oi-reset></div>';
  const identity=document.createElement('p');identity.className='oi-identity';
- const note=document.createElement('p');note.className='oi-display-note';note.textContent='灰度平方根拉伸、自动归一，只比较形状；屏幕亮度不代表绝对收光量。';
+ const note=document.createElement('p');note.className='oi-display-note';note.textContent='灰度经平方根拉伸并归一，便于比较星点形状；收光量见面积读数。';
  const closeButton=document.createElement('button');closeButton.type='button';closeButton.dataset.oiClose='';closeButton.textContent='关闭详细参数 ×';
  function move(n,h){if(!n||slots.has(n))return;const slot=document.createComment('optics imaging return');n.before(slot);slots.set(n,slot);h.append(n);}
  function attr(n,key,value){if(!attributes.has(n))attributes.set(n,{});const saved=attributes.get(n);if(!(key in saved))saved[key]=n.getAttribute(key);n.setAttribute(key,value);}
