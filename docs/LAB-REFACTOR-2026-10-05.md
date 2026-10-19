@@ -1,8 +1,16 @@
 # AstronomyLab R1 重构进度与交接
 
-## 2026-10-19 第二轮发布授权与准备（执行中）
+## 2026-10-19 第二轮 GitHub 与生产发布完成
 
-用户在本地验收完成后明确授权把第二轮重构推送到GitHub并部署，覆盖下节本地验收阶段的“不提交、推送、部署”限制。本轮仅限AstronomyLab，许可仍为blocked_pending_licenses，不改其他站点、Nginx或全局服务。发布前fetch确认main与origin/main均为46668aa、ahead/behind为0/0；GitHub Actions和仓库webhook均0。项目外发布checkpoint位于D:/Users/ZJUAAA/2026/AstronomyLab-backups/release-frontend-round2-20261019-2026-10-19T08-53-13-293Z，含852个当前文件（包括已验zip）、55项删除索引及Git bundle。851份拟公开文件的凭据/私有路径/95MiB以上扫描均0命中，223份运行源与最终包SHA仍匹配。当前只是本地发布准备，实际推送、生产版本与回执将以完成后的记录更新；本机证据位于build/qa/release-frontend-round2-20261019/。
+用户在本地验收后明确授权推送并部署，覆盖下节本地阶段的“不提交、推送、部署”限制。第二轮源码提交 [df03eff5faa4bfe30d4bf0251d3bf19d4a60a7a9](https://github.com/Ray8mu34/AstronomyLab/commit/df03eff5faa4bfe30d4bf0251d3bf19d4a60a7a9) 已推送main并以ls-remote确认；本节为后续文档回执，不写自身提交hash。生产 https://lab.zjuaaa.cn/ 已切换同一已验包 r1-20261005-ad7992e8d7e2，runtime manifest SHA256 b5866a98b611f8c616f1e54e1b4898112bf4f08c2770d31a1dbf9ac4ba4086a6，238运行资源/226包文件，许可仍为 blocked_pending_licenses。
+
+发布前main/origin同步于46668aa；Actions工作流、仓库webhook均0。采用明确路径暂存294项，851份公开文件/602个唯一Git blob的凭据、私有路径及95MiB以上扫描0命中；223运行源与最终包完全相同。01/02输入包、教师、raw、QA及凭据继续仅在本机ignored，既有删除未恢复。项目外发布checkpoint为 D:/Users/ZJUAAA/2026/AstronomyLab-backups/release-frontend-round2-20261019-2026-10-19T08-53-13-293Z，含852文件、55删除索引及Git bundle。
+
+服务器部署前HEAD为67048a8b180ea39385f5d328ed5bc5feffcea735且clean；备份保留在 /srv/data/astronomy-lab/release-frontend-round2-20261019/previous-worktree.tgz 与 previous-head.bundle，已验证可读与SHA，PM2私有快照只存服务器。远端GitHub fetch未完成后，使用本机已推送且ls-remote确认的精确增量bundle传入，Git验证对象与所需旧基点，origin配置不变。独立候选4181在原生产继续服务期间验证：Node22.22.1的95语法/103Node通过，公开保护256＝254未变＋2精确科学授权变更，226包SHA、238实际HTTP资源SHA、43模式入口、5项404与POST405通过；候选精确预设/恢复/键盘/拖动16/16，关键新UI抽测7/7、异常0。该发布抽测不是再跑完整182，前轮完整及组合证据范围仍按下节记录。
+
+仅本项目PM2 astronomy-lab切换，实际运行 /srv/apps/astronomy-lab/web/observatory/server.mjs、127.0.0.1:4180，当前PID823408，进程列表已保存。切换后本机端口与公网首页200、实际 /app.js SHA256 46c4cb5577c28a15ab95a2bf90746ff21d92f780e9eb6eddcedc926833e544a5 与已验包一致，服务器manifest SHA相同。zjuaaa-site PID23405及核对的三份Nginx配置SHA保持；未改其他站点、代理、证书或全局服务。实际命令、失败保留、候选/生产记录见本机 build/qa/release-frontend-round2-20261019/INDEX.json。
+
+需要回滚时，先确认本项目工作区clean，再在 /srv/apps/astronomy-lab 执行 git switch --detach 67048a8b180ea39385f5d328ed5bc5feffcea735，仅 pm2 restart astronomy-lab 并核对4180及公网健康；不要恢复整套PM2/Nginx或覆盖其他项目。文档回执随后仅快进到服务器，不重启运行服务。
 
 ## 2026-10-19 第二前端包（本地软件迁移完成）
 

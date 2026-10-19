@@ -1,3 +1,13 @@
+## 2026-10-19 第二轮前端发布结果（当前）
+
+用户明确授权推送后部署。生产 [lab.zjuaaa.cn](https://lab.zjuaaa.cn/) 已发布源码提交 [df03eff5faa4bfe30d4bf0251d3bf19d4a60a7a9](https://github.com/Ray8mu34/AstronomyLab/commit/df03eff5faa4bfe30d4bf0251d3bf19d4a60a7a9)，后续回执仅改维护文档。运行包 r1-20261005-ad7992e8d7e2，238资源/226文件，manifest SHA256 b5866a98b611f8c616f1e54e1b4898112bf4f08c2770d31a1dbf9ac4ba4086a6；blocked_pending_licenses及完整署名保持。
+
+部署前 /srv/apps/astronomy-lab 的HEAD为67048a8b180ea39385f5d328ed5bc5feffcea735、工作区clean。可读归档、Git bundle及SHA位于 /srv/data/astronomy-lab/release-frontend-round2-20261019/，私有PM2快照只保留服务器。因远端GitHub fetch未完成，使用本机已推送并核实的1.01MB增量bundle，验证所需旧基点与目标Git对象；未改origin配置。独立候选4181保留旧服务时完成 Node22.22.1 的95语法/103Node、256公开保护（254原哈希＋2科学精确例外）、226包SHA及238 HTTP SHA、43模式入口、5私有/不存在404和POST405。精确状态16/16、关键UI7/7通过；完整本轮软件验收身份见唯一主交接，不将发布抽测称为重复全量182。
+
+仅重启 astronomy-lab，当前PID823408、Node22.22.1、入口 /srv/apps/astronomy-lab/web/observatory/server.mjs、监听127.0.0.1:4180；PM2列表已保存。本机与公网首页200，实际 /app.js SHA256 46c4cb5577c28a15ab95a2bf90746ff21d92f780e9eb6eddcedc926833e544a5 与候选一致，服务器manifest SHA相同。其他站点 zjuaaa-site PID23405与三份Nginx配置SHA不变，没有改代理、证书或全局重启。
+
+回滚先核对本仓库clean，再仅执行 git -C /srv/apps/astronomy-lab switch --detach 67048a8b180ea39385f5d328ed5bc5feffcea735 和 pm2 restart astronomy-lab，确认4180及HTTPS健康。不要恢复整套PM2或Nginx。后续文档回执只快进到服务器、不再重启。公开上传扫描851文件0命中，输入01/02包、教师、raw、QA及凭据留本机。详细命令与实际失败记录在本机 build/qa/release-frontend-round2-20261019/，以下10月13日及10月4日为历史记录。
+
 > 2026-10-13：用户授权发布当前R1与分批UI状态。发布准备与最新结果见主交接及本机build/qa/release-20261013；以下2026-10-04检查数量属于历史证据。运行包由deploy/lab生成，本轮不更换Nginx、证书或其他站点配置。
 
 ## 2026-10-13 发布结果
