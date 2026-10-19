@@ -103,6 +103,7 @@ export function mountLandingStaging(host,{mode='landing',onUpdate=()=>{}}={}){
   build(true);
  },{signal:abort.signal});
  root.addEventListener('change',e=>{if(e.target.matches('[data-speed]'))speed=Number(e.target.value);},{signal:abort.signal});
+ root.addEventListener('keydown',e=>{if(e.key==='End'&&e.target.matches('[data-time-input]')){e.preventDefault();seek(model.seconds);}},{signal:abort.signal});
  const visibility=()=>{if(document.hidden&&playing){pause();update();}};document.addEventListener('visibilitychange',visibility,{signal:abort.signal});
  build();
  const resize=new ResizeObserver(()=>{if(destroyed||mode!=='staging')return;const compact=root.clientWidth<600;if($('[data-compact]')?.dataset.compact!==String(compact)){ $('.ls-scene').innerHTML=stagingScene();update();}});resize.observe(root);

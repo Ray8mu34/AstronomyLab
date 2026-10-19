@@ -6,6 +6,7 @@ import {registerExperimentModel,validateExperimentModel} from '../web/observator
 import {conicState} from '../web/observatory/modules/orbit-conics-physics.mjs';
 import {EARTH} from '../web/observatory/modules/orbits-physics.mjs';
 import {dynamicalMass} from '../web/observatory/modules/measure-physics.mjs';
+import {rng} from '../web/observatory/modules/light-physics.mjs';
 
 class CustomEvent extends Event{constructor(type,options={}){super(type,options);this.detail=options.detail;}}
 class MockWindow extends EventTarget{
@@ -76,6 +77,104 @@ test('Jupiter authority retains +10% semi-major axis and dynamical mass without 
  const target=rootForMode('measure','jupiter',win);let result=null;range(target,'a','421800','300000','550000','100',()=>assert.fail('native a must not overwrite the model'));
  registerExperimentModel(target,{applyState:value=>{result=dynamicalMass(value.a*1000,value.period*86400,value.errorA/100,value.errorP/100);return true;}});
  await restoreExperiment('measure',target);assert.deepEqual(result,dynamicalMass(recipe.a*1000,recipe.period*86400,.01,.001));
+});
+test('galactic direction authority retains point selection across all shared galaxy modes without range replay',async()=>{
+ for(const mode of confirmedModes.galaxy){
+  const win=new MockWindow(),source=rootForMode('galaxy',mode,win),model={version:1,kind:'galactic-direction',longitude:85.15845070422536,latitude:45.25253080985916};
+  range(source,'longitude','85','-180','180');range(source,'latitude','45','-90','90');
+  registerExperimentModel(source,{getState:()=>model});const saved=captureExperiment('galaxy',source);
+  assert.equal(saved.values.longitude,85);assert.equal(saved.values.latitude,45);assert.deepEqual(saved.model,model);
+  const expected={...model};model.longitude=0;
+  const target=rootForMode('galaxy',mode,win);let restored;
+  range(target,'longitude','0','-180','180','1',()=>assert.fail('native longitude must not quantize point selection'));
+  range(target,'latitude','0','-90','90','1',()=>assert.fail('native latitude must not quantize point selection'));
+  registerExperimentModel(target,{applyState:value=>{restored=value;return true;}});
+  assert.equal(await restoreExperiment('galaxy',target),true);assert.deepEqual(restored,expected);
+ }
+});
+test('planet alignment day preserves exact preset precision while other controls retain native replay',async()=>{
+ for(const mode of ['venus','transit','mars']){
+  const win=new MockWindow(),source=rootForMode('alignments',mode,win),day=mode==='mars'?-90.123456789:291.96182439614387,model={version:1,kind:'planet-alignments',mode,day};
+  range(source,'day',String(Number(day.toFixed(1))),mode==='mars'?'-190':'0',mode==='mars'?'190':'583.9236487922877','.1');range(source,'inclination','2.3','0','8','.1');registerExperimentModel(source,{getState:()=>model});
+  const saved=captureExperiment('alignments',source);assert.equal(saved.model.day,day);assert.equal(saved.values.day,Number(day.toFixed(1)));assert.deepEqual(Object.keys(saved.model).sort(),['day','kind','mode','version']);
+  const target=rootForMode('alignments',mode,win);let applied,ordinaryEvents=0;range(target,'day','0',mode==='mars'?'-190':'0',mode==='mars'?'190':'583.9236487922877','.1',()=>assert.fail('native day must not round an exact preset'));range(target,'inclination','0','0','8','.1',()=>ordinaryEvents++);registerExperimentModel(target,{applyState:value=>{applied=value;return true;}});
+  assert.equal(await restoreExperiment('alignments',target),true);assert.equal(applied.day,day);assert.equal(applied.mode,mode);assert.equal(ordinaryEvents,1);
+ }
+});
+test('planet alignment model refuses mismatched modes and corrupt snapshots before touching current state',async()=>{
+ const good={version:1,kind:'planet-alignments',mode:'venus',day:291.96182439614387};
+ for(const day of[0,583.9236487922877])assert.equal(validateExperimentModel('alignments','venus',{...good,day}).day,day);
+ for(const day of[-190,190])assert.equal(validateExperimentModel('alignments','mars',{...good,mode:'mars',day}).day,day);
+ for(const change of[{version:2},{kind:'orbit-conics'},{mode:'mars'},{day:-.01},{day:583.924},{day:NaN},{day:Infinity},{day:'291.9'},{day:null}]){
+  const win=new MockWindow(),root=rootForMode('alignments','mars',win),history=structuredClone(win.history.state),input=range(root,'day','-90','-190','190','.1');let applied=0;registerExperimentModel(root,{applyState:()=>applied++});
+  win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:alignments',JSON.stringify({version:1,slug:'alignments',mode:'venus',values:{day:292},choices:{},model:{...good,...change}}));
+  assert.equal(await restoreExperiment('alignments',root),false);assert.equal(currentExperimentMode('alignments',root),'mars');assert.equal(input.value,'-90');assert.equal(applied,0);assert.deepEqual(win.history.state,history);
+ }
+ const incomplete={...good};delete incomplete.day;assert.equal(validateExperimentModel('alignments','venus',incomplete),null);assert.equal(validateExperimentModel('alignments','unknown',good),null);assert.equal(validateExperimentModel('sky','sky',good),null);
+});
+test('legacy alignment snapshots honestly restore their quantized day without guessing a preset',async()=>{
+ const win=new MockWindow(),root=rootForMode('alignments','venus',win),input=range(root,'day','72','0','583.9236487922877','.1');let applied=0;registerExperimentModel(root,{applyState:()=>applied++});
+ win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:alignments',JSON.stringify({version:1,slug:'alignments',mode:'venus',values:{day:292},choices:{}}));
+ assert.equal(await restoreExperiment('alignments',root),true);assert.equal(Number(input.value),292);assert.equal(applied,0);
+});
+test('sky condition authority preserves exact obliquity across each original mode without changing native step',async()=>{
+ for(const mode of confirmedModes.sky){const win=new MockWindow(),source=rootForMode('sky',mode,win),model={version:1,kind:'sky-conditions',mode,obliquity:23.44};range(source,'obliquity','23.4','0','45','.1');registerExperimentModel(source,{getState:()=>model});const saved=captureExperiment('sky',source);assert.equal(saved.values.obliquity,23.4);assert.equal(saved.model.obliquity,23.44);
+  const target=rootForMode('sky',mode,win);let applied;range(target,'obliquity','0','0','45','.1',()=>assert.fail('range step must not round scientific obliquity'));registerExperimentModel(target,{applyState:value=>{applied=value;return true;}});assert.equal(await restoreExperiment('sky',target),true);assert.deepEqual(applied,model);assert.equal(target.querySelector('[data-key="obliquity"]').step,'.1');}
+});
+test('sky obliquity rejects invalid or mismatched models before any current state/history mutation',async()=>{
+ const good={version:1,kind:'sky-conditions',mode:'sky',obliquity:23.44};for(const obliquity of[0,45])assert.equal(validateExperimentModel('sky','sky',{...good,obliquity}).obliquity,obliquity);
+ for(const change of[{version:2},{kind:'galactic-direction'},{mode:'day'},{obliquity:-.01},{obliquity:45.01},{obliquity:NaN},{obliquity:Infinity},{obliquity:'23.44'},{obliquity:null}]){const win=new MockWindow(),root=rootForMode('sky','day',win),history=structuredClone(win.history.state),input=range(root,'obliquity','12','0','45','.1');let applied=0;registerExperimentModel(root,{applyState:()=>applied++});win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:sky',JSON.stringify({version:1,slug:'sky',mode:'sky',values:{obliquity:23.4},choices:{},model:{...good,...change}}));assert.equal(await restoreExperiment('sky',root),false);assert.equal(currentExperimentMode('sky',root),'day');assert.equal(input.value,'12');assert.equal(applied,0);assert.deepEqual(win.history.state,history);}
+ const missing={...good};delete missing.obliquity;assert.equal(validateExperimentModel('sky','sky',missing),null);assert.equal(validateExperimentModel('sky','unknown',good),null);assert.equal(validateExperimentModel('alignments','venus',good),null);
+});
+test('old sky control-only snapshots retain rounded obliquity instead of inferring the old default',async()=>{
+ const win=new MockWindow(),root=rootForMode('sky','sky',win),input=range(root,'obliquity','0','0','45','.1');let applied=0;registerExperimentModel(root,{applyState:()=>applied++});win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:sky',JSON.stringify({version:1,slug:'sky',mode:'sky',values:{obliquity:23.4},choices:{}}));assert.equal(await restoreExperiment('sky',root),true);assert.equal(Number(input.value),23.4);assert.equal(applied,0);
+});
+test('galactic direction validates endpoints and refuses bad models before changing valid state or history',async()=>{
+ const good={version:1,kind:'galactic-direction',longitude:85.15845070422536,latitude:45.25253080985916};
+ for(const longitude of [-180,180])for(const latitude of [-90,90])assert.deepEqual(validateExperimentModel('galaxy','cmb',{...good,longitude,latitude}),{...good,longitude,latitude});
+ const bad=[{version:2},{kind:'orbit-conics'},{longitude:180.01},{longitude:-180.01},{latitude:90.01},{latitude:-90.01},{longitude:NaN},{latitude:Infinity},{longitude:'85'},{latitude:null}];
+ for(const change of bad){
+  const win=new MockWindow(),root=rootForMode('galaxy','galaxy',win),before=structuredClone(win.history.state);
+  const input=range(root,'longitude','12','-180','180'),model={...good,...change};let applied=0;
+  registerExperimentModel(root,{applyState:()=>{applied++;}});
+  assert.equal(validateExperimentModel('galaxy','cmb',model),null);
+  win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:galaxy',JSON.stringify({version:1,slug:'galaxy',mode:'cmb',values:{longitude:85},choices:{},model}));
+  assert.equal(await restoreExperiment('galaxy',root),false);assert.equal(currentExperimentMode('galaxy',root),'galaxy');assert.equal(input.value,'12');assert.equal(applied,0);assert.deepEqual(win.history.state,before);
+ }
+ const incomplete={...good};delete incomplete.latitude;assert.equal(validateExperimentModel('galaxy','cmb',incomplete),null);
+ assert.equal(validateExperimentModel('galaxy','unknown',good),null);assert.equal(validateExperimentModel('stars','hr',good),null);
+});
+test('legacy galactic direction snapshots restore their actual rounded values and invalid captures preserve latest valid model',async()=>{
+ const win=new MockWindow(),root=rootForMode('galaxy','cmb',win);let longitude=0,latitude=0;
+ range(root,'longitude','0','-180','180','1',(_,input)=>longitude=Number(input.value));range(root,'latitude','0','-90','90','1',(_,input)=>latitude=Number(input.value));
+ let model={version:1,kind:'galactic-direction',longitude:85.15845070422536,latitude:45.25253080985916};
+ registerExperimentModel(root,{getState:()=>model,applyState:()=>assert.fail('old snapshots have no precise model')});
+ win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:galaxy',JSON.stringify({version:1,slug:'galaxy',mode:'cmb',values:{longitude:85,latitude:45},choices:{}}));
+ assert.equal(await restoreExperiment('galaxy',root),true);assert.equal(longitude,85);assert.equal(latitude,45);
+ const valid=captureExperiment('galaxy',root);model={...model,latitude:NaN};assert.equal(captureExperiment('galaxy',root),null);assert.deepEqual(readExperimentSnapshot('galaxy','entry-a',win),valid);
+});
+test('observing snapshots preserve the fixed uint32 noise sample seed and repeat its generated sequence',async()=>{
+ const win=new MockWindow(),source=rootForMode('light','observing',win),recipe={version:1,kind:'light-sample',seed:5};
+ registerExperimentModel(source,{getState:()=>recipe});const saved=captureExperiment('light',source);assert.deepEqual(saved.model,recipe);
+ let seed=4;const target=rootForMode('light','observing',win);registerExperimentModel(target,{applyState:model=>{seed=model.seed;return true;}});
+ assert.equal(await restoreExperiment('light',target),true);assert.equal(seed,5);
+ const before=rng(recipe.seed),after=rng(seed);assert.deepEqual(Array.from({length:81},()=>before()),Array.from({length:81},()=>after()));
+ for(const edge of [0,0xffffffff])assert.deepEqual(validateExperimentModel('light','observing',{...recipe,seed:edge}),{...recipe,seed:edge});
+});
+test('bad observing sample seeds reject the whole snapshot and old snapshots retain the original default seed',async()=>{
+ const valid={version:1,kind:'light-sample',seed:5};
+ for(const seed of [-1,0x100000000,.5,NaN,Infinity,'5',null]){
+  const win=new MockWindow(),root=rootForMode('light','thermal',win),before=structuredClone(win.history.state),control=range(root,'exposure','100','10','2000');let applications=0;
+  registerExperimentModel(root,{applyState:()=>{applications++;}});
+  assert.equal(validateExperimentModel('light','observing',{...valid,seed}),null);
+  win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:light',JSON.stringify({version:1,slug:'light',mode:'observing',values:{exposure:400},choices:{},model:{...valid,seed}}));
+  assert.equal(await restoreExperiment('light',root),false);assert.equal(currentExperimentMode('light',root),'thermal');assert.equal(control.value,'100');assert.equal(applications,0);assert.deepEqual(win.history.state,before);
+ }
+ assert.equal(validateExperimentModel('light','thermal',valid),null);assert.equal(validateExperimentModel('light','observing',{kind:'light-sample',version:2,seed:5}),null);assert.equal(validateExperimentModel('light','observing',{kind:'light-sample',version:1}),null);
+ const win=new MockWindow(),root=rootForMode('light','observing',win);let seed=4,exposure=100;
+ range(root,'exposure','100','10','2000','1',(_,control)=>exposure=Number(control.value));registerExperimentModel(root,{applyState:model=>{seed=model.seed;return true;}});
+ win.sessionStorage.setItem('astronomy:experiment:v1:entry-a:light',JSON.stringify({version:1,slug:'light',mode:'observing',values:{exposure:400},choices:{}}));
+ assert.equal(await restoreExperiment('light',root),true);assert.equal(exposure,400);assert.equal(seed,4);
 });
 test('versioned model validation rejects incomplete, mismatched and nonfinite scientific problems',()=>{
  const good=conicRecipe(200,11.014585251781234),base={version:1,slug:'orbits',mode:'orbit',values:{'conic:speed':11.015},choices:{},model:good};

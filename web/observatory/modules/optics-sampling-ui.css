@@ -1,65 +1,23 @@
-/* Local I-type sampling tokens; original image/model colours are unchanged. */
-body.sampling-observing{--sp-bg:#080e18;--sp-ink:#d5e1ea;--sp-muted:#9bb0c2;--sp-line:#33434f;background:var(--sp-bg);color:var(--sp-ink);color-scheme:dark}
-body.sampling-observing #app{max-width:none;padding:0 24px 32px;background:var(--sp-bg)}
-body.sampling-observing #site-navigation,body.sampling-observing #app>.tool-heading,body.sampling-observing #mode-context,body.sampling-observing .site-footer{display:none}
-body.tool-site.editorial.sampling-observing #app[data-page=lab]{max-width:none;margin:0;padding:0 24px 32px}
-body.sampling-observing #app>.breadcrumb,body.sampling-observing #app>h1,body.sampling-observing #app>.page-lead{display:none}
-body.sampling-observing #app #lab-mount{margin:0;max-width:none;background:var(--sp-bg)}
-body.sampling-observing #app #lab-mount .sampling-shell{color:var(--sp-ink)}
-.sampling-header{display:flex;gap:18px;align-items:center;min-height:64px;border-bottom:1px solid var(--sp-line);flex-wrap:wrap}
-.sampling-header h1{font:500 20px/1.5 "Microsoft YaHei",sans-serif;margin:0}
-.sampling-header>a,.sampling-header>span{font-size:13px;color:var(--sp-muted)}
-.sampling-modes{margin-left:auto;position:relative}
-.sampling-modes[open]>div{position:absolute;right:0;z-index:5;background:var(--sp-bg);padding:10px;border:1px solid var(--sp-line);width:260px}
-.sampling-header summary,.sampling-toolbar summary,.sampling-info>summary{cursor:pointer;font-size:13px;padding:10px 0;color:var(--sp-ink)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active{margin:0;--text:var(--sp-ink);--muted:var(--sp-muted);--line:var(--sp-line)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-workspace{display:flex;flex-direction:column;border:0;border-radius:0;background:transparent;overflow:visible}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-observation{width:100%}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-primary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin:18px 0 4px;align-items:end}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .control{padding:0;margin:0;background:transparent;border:0;min-width:0;color:var(--sp-ink)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-control-reading{color:#ebc77e}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active input[type=range]{width:100%;height:30px;accent-color:#71c8c7}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active select{background:var(--sp-bg);color:var(--sp-ink);border:1px solid var(--sp-line);border-radius:2px;min-height:38px;font-size:13px}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-stage{display:block}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-stage .optics-view-head{height:50px;padding:8px 0;min-height:0}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-stage .optics-view-head h3{font-size:14px;color:var(--sp-ink)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-stage [data-image]{height:max(490px,calc(100svh - 305px));width:100%;aspect-ratio:auto;border:0;border-radius:0;background:var(--sp-bg)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-enlarge{font-size:13px;border-radius:2px;border-color:var(--sp-line);background:transparent;color:var(--sp-ink)}
-body.sampling-observing #app #lab-mount .sampling-note{font-size:12px;color:var(--sp-muted);margin:5px 0 10px;line-height:1.6}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-outcomes{display:flex;gap:26px;flex-wrap:wrap;border:0;border-top:1px solid var(--sp-line);padding:10px 0}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-outcomes>div{padding:0;border:0;display:flex;gap:8px;align-items:baseline}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-outcomes small{color:var(--sp-muted);font-size:12px}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-outcomes strong{color:var(--sp-ink);font-size:15px;margin:0}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-controls{width:100%;min-height:0;border:0;padding:0;background:transparent;color:var(--sp-ink);color-scheme:dark}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-controls>h3{display:none}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active button{background:transparent;color:var(--sp-ink);border:1px solid var(--sp-line);border-radius:2px;min-height:38px;padding:6px 10px;font-size:13px}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-controls button:hover{background:#142330;color:var(--sp-ink)}
-.sampling-toolbar{display:flex;align-items:start;gap:26px;flex-wrap:wrap}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-profile-toggle{display:block;margin:4px 0}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-parameters{margin:4px 0;border-color:var(--sp-line)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-secondary{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;padding:18px 0}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-controls .note{color:var(--sp-muted);font-size:12px}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active[data-profile-open=true] .optics-profile-view{display:block;border:0;border-top:1px solid var(--sp-line)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-profile-view [data-profile]{height:320px}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-focus{background:var(--sp-bg);color:var(--sp-ink);--text:var(--sp-ink);--muted:var(--sp-muted)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-focus-head{background:var(--sp-bg);color:var(--sp-ink)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-focus-head h2{background:transparent;color:var(--sp-ink)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-focus-head button{background:var(--sp-bg);color:var(--sp-ink)}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-focus .optics-primary{grid-template-columns:1fr;gap:14px;margin:0}
-body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-focus [data-image]{height:350px}
-.sampling-info{border-top:1px solid var(--sp-line);margin:12px 0}
-.sampling-info>div{padding:12px 0;color:var(--sp-ink)}
-body.sampling-observing #app #lab-mount .sampling-info :is(p,h2,h3,small){color:var(--sp-ink)}
-body.sampling-observing #app #lab-mount .sampling-info :is(.lab-copy,.metrics>div,.formula){background:transparent;color:var(--sp-ink);border-color:var(--sp-line)}
-body.sampling-observing #app #lab-mount :focus-visible{outline:2px solid #71c8c7;outline-offset:3px}
-@media(max-width:700px){
- body.tool-site.editorial.sampling-observing #app[data-page=lab]{padding:0 10px 24px}
- .sampling-header{gap:10px;min-height:64px}.sampling-header h1{font-size:18px}.sampling-header>span{display:none}
- body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-primary{grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
- body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-primary [data-control=view]{grid-column:1/-1}
- body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-stage [data-image]{height:calc(2 * (100vw - 60px) + 96px);min-height:616px}
- body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-secondary{grid-template-columns:1fr;gap:20px}
- body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-outcomes{gap:8px 16px}
- body.sampling-observing #app #lab-mount .optics-pilot.sampling-active .optics-outcomes>div{gap:6px}
- .sampling-toolbar{gap:10px 18px}.sampling-header summary{font-size:12px}
-}
+body.sampling-observing{background:var(--al-black);color:var(--al-paper);color-scheme:dark}
+body.sampling-observing :is(#mode-context,.site-footer){display:none}
+
+body.sampling-observing #lab-mount{margin:0;max-width:none}.sampling-active{margin:0}.sampling-active:has(>.sampling-shell)>:not(.sampling-shell){display:none}
+.sampling-shell{box-sizing:border-box;max-width:1440px;padding:0 40px 32px;margin:auto;color:var(--al-text);font:var(--al-body)/var(--al-leading) var(--al-font)}
+.sampling-modes{margin-left:auto;position:relative}.sampling-modes[open]>div{position:absolute;right:0;top:100%;z-index:5;min-width:240px;padding:12px;background:var(--al-surface);border:1px solid var(--al-control-border);border-radius:var(--al-radius-layer)}
+.sampling-modes .optics-tasks{display:flex;flex-direction:column;border:0}.sampling-modes .optics-tasks button{min-height:44px;text-align:left;font:inherit;color:var(--al-text);border:0;padding:8px 12px;background:transparent}.sampling-modes .optics-tasks button.active{color:var(--al-action);border:0}
+.sampling-intro{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin:22px 0 16px}.sampling-intro h1{font:600 var(--al-title-tool)/1.4 var(--al-font);margin:0;color:var(--al-text)}.sampling-intro p{margin:0;color:var(--al-muted);font-size:var(--al-label)}
+.sampling-views{display:flex;align-items:center;justify-content:space-between;gap:12px}.sampling-view-choices{display:flex;gap:2px}.sampling-view-choices .al-button{border-color:transparent;background:transparent;min-height:44px}.sampling-view-choices .al-button[aria-pressed=true]{color:var(--al-text);border-bottom:2px solid var(--al-action);border-radius:0}.sampling-view-choices .al-button[aria-pressed=false]{color:var(--al-muted)}
+.sampling-image{width:100%;margin-top:8px}.sampling-shell [data-image]{display:block;width:100%;height:clamp(300px,calc(100svh - 360px),600px);border:0;border-radius:0;background:var(--al-black);cursor:crosshair}
+.sampling-observe{display:flex;justify-content:space-between;gap:20px;color:var(--al-muted);font-size:var(--al-tick);margin:0 0 18px}
+.sampling-main-controls{display:grid;grid-template-columns:1fr 1fr;gap:60px;border-top:1px solid var(--al-line);padding-top:15px}.sampling-shell .sampling-main-controls .control{display:block;margin:0;padding:0;min-width:0;border:0;background:transparent;color:var(--al-text)}
+.sampling-main-controls .control>span{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:var(--al-label)}.sampling-main-controls .optics-control-reading{color:var(--al-text);font-family:var(--al-numeric);font-variant-numeric:tabular-nums;white-space:nowrap}.sampling-main-controls .optics-control-reading b{font-size:var(--al-readout);font-weight:400}.sampling-main-controls input[type=range]{height:44px;width:100%;margin:0;accent-color:var(--al-action)}
+.sampling-response{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:6px 0 8px}.sampling-response p{margin:0;color:var(--al-muted);font-size:var(--al-label)}.sampling-response strong{color:var(--al-text);font-size:20px;font-weight:400}.sampling-response .al-button{flex-shrink:0}.sampling-inspection{display:block;margin:8px 0 16px;color:var(--al-text);font-size:var(--al-tick)}
+.sampling-tools{display:flex;gap:30px;align-items:start;flex-wrap:wrap;border-top:1px solid var(--al-line);padding-top:4px;margin-top:10px}.sampling-tools>details,.sampling-tools>[data-sampling-parameters]{min-width:0}.sampling-shell summary{min-height:44px;cursor:pointer;padding:10px 0;font:400 var(--al-label)/1.6 var(--al-font);color:var(--al-muted)}.sampling-tools>details[open],.sampling-tools>[data-sampling-parameters]:has(details[open]){flex-basis:100%;order:1}.sampling-tools>details>div{padding:10px 0 20px}
+.sampling-shell .optics-parameters{border:0;padding:0;margin:0}.sampling-shell .optics-secondary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 32px;padding:12px 0}.sampling-shell .optics-secondary .control{padding:0;border:0;background:transparent;margin:0;color:var(--al-text);font:400 var(--al-label)/1.6 var(--al-font)}.sampling-shell .optics-secondary input{width:100%;height:44px;accent-color:var(--al-action)}.sampling-shell .optics-secondary select{font:inherit;min-height:44px;background:var(--al-surface);color:var(--al-text);border:1px solid var(--al-control-border)}.sampling-shell .optics-control-reading{color:var(--al-text)}
+.sampling-shell .optics-presets{display:flex;gap:10px;flex-wrap:wrap}.sampling-shell .optics-presets button,.sampling-shell .optics-types button{font:inherit;min-height:44px;border:1px solid var(--al-control-border);background:transparent;color:var(--al-text);padding:8px 14px;border-radius:var(--al-radius-control)}.sampling-shell .optics-profile-view{display:block;border:0}.sampling-shell .optics-profile-view [data-profile]{height:300px;width:100%}.sampling-shell .optics-view-head{font:inherit;padding:0}.sampling-shell .optics-view-head h3{font:inherit;color:var(--al-text)}.sampling-shell .optics-axis-note{color:var(--al-muted)}.sampling-shell .note{color:var(--al-muted);font-size:var(--al-tick)}.sampling-info{max-width:780px}.sampling-info p{font:inherit;margin:0 0 12px}
+.sampling-shell:fullscreen{max-width:none;overflow:auto;padding:24px 5vw;background:var(--al-black)}.sampling-shell:fullscreen [data-image]{height:calc(100svh - 310px)}
+@media(max-width:700px){.sampling-shell .sampling-expand{display:none}}
+@media(max-width:1000px){.sampling-shell{padding:0 24px 28px}.sampling-intro{display:block}.sampling-intro p{margin-top:8px}.sampling-main-controls{gap:32px}}
+@media(max-width:700px){.sampling-shell{padding:0 16px 24px}.sampling-intro{margin:18px 0 12px}.sampling-intro h1{font-size:25px;line-height:1.4}.sampling-intro p{font-size:14px;margin-top:8px}.sampling-view-choices .al-button{padding:8px 9px;font-size:14px}.sampling-expand{display:none}.sampling-shell [data-image]{height:calc(100vw + 28px);max-height:none}.sampling-shell[data-display=comparison] [data-image]{height:calc(2 * (100vw - 56px) + 112px)}.sampling-observe{font-size:13px;gap:12px;margin-bottom:12px;flex-wrap:wrap}.sampling-main-controls{gap:20px;padding-top:12px}.sampling-main-controls .control>span{display:block;font-size:14px}.sampling-main-controls .optics-control-reading{display:block;margin-top:3px;font-size:13px}.sampling-main-controls .optics-control-reading b{font-size:23px}.sampling-response{align-items:center;gap:6px}.sampling-response p{font-size:14px}.sampling-response p>span{display:none}.sampling-response .al-button{font-size:13px;padding:8px}.sampling-tools{gap:10px 20px;margin-top:8px}.sampling-tools summary{font-size:14px}.sampling-shell .optics-secondary{grid-template-columns:1fr;gap:18px}.sampling-shell .optics-types{grid-column:1/-1}.sampling-inspection{font-size:13px;overflow-wrap:anywhere}}
+
+.optics-image-cause{display:grid;grid-template-columns:minmax(240px,360px) minmax(0,1fr);align-items:center;justify-content:center;gap:32px;border-top:1px solid var(--al-line);padding:12px 0}.optics-image-cause svg{width:100%;max-height:125px;font:400 var(--al-tick) var(--al-font);fill:var(--al-muted)}.optics-cause-axis{stroke:var(--al-line)}.optics-cause-rays{stroke:var(--al-reference);fill:none;stroke-width:1.5}.optics-cause-best{stroke:var(--al-reference);stroke-width:3}.optics-cause-plane{stroke:var(--al-action);stroke-width:3;stroke-dasharray:5 3}.optics-image-cause p{color:var(--al-muted);font-size:var(--al-label)}.sampling-shell[data-optics-mode=imaging] .sampling-main-controls{grid-template-columns:1fr;max-width:900px;margin:auto}.optics-image-system[open]{flex-basis:100%}.optics-image-system .scene-host{height:360px}.optics-image-system .optics-view-head{display:flex;justify-content:space-between}.optics-image-system button{color:var(--al-text);background:transparent;border:1px solid var(--al-control-border);min-height:44px}.sampling-shell .optics-types{display:flex;gap:12px;flex-wrap:wrap}.sampling-shell .optics-types button{border:1px solid var(--al-control-border);background:transparent;color:var(--al-text);padding:8px;min-height:44px}.sampling-shell .optics-types button.active{border-color:var(--al-action)}@media(max-width:700px){.optics-image-cause{grid-template-columns:1fr;gap:4px}.optics-image-cause svg{max-height:100px}.sampling-shell[data-optics-mode=resolution] .sampling-response{display:block}.sampling-shell[data-optics-mode=resolution] .sampling-response p>span{display:block;margin-top:8px}.sampling-shell[data-optics-mode=resolution] .sampling-response button{margin-top:8px}}

@@ -53,7 +53,12 @@ test('state adapters use the neutral registry and preserve a teaching image nois
 test('pure DOM and Canvas helpers do not import scenes, Three or content registries',async()=>{
  for(const name of ['core-controls.js','plot.js']){
   const text=await readFile(new URL('../web/observatory/shared/'+name,import.meta.url),'utf8');
-  assert.ok(!/^import\s/m.test(text),name);assert.ok(!/lessonLinks|course-map|learning-paths/.test(text),name);
+  const dependencies=source=>[...source.matchAll(/(?:\b(?:import|export)\s+(?:[^;\n]*?\s+from\s*)?|\bimport\s*\(\s*)['"]([^'"]+)['"]/g)].map(m=>m[1]);
+  const direct=dependencies(text);
+  assert.deepEqual(direct,name==='plot.js'?['./presentation.js']:[],name+' may only consume the canonical DOM presentation helper');
+  const shared=new URL('../web/observatory/shared/',import.meta.url),visited=new Set();
+  const checkDependency=async url=>{if(visited.has(url.href))return;visited.add(url.href);assert(url.href.startsWith(shared.href),'2D helper dependency leaves shared presentation layer: '+url.href);assert(!/(?:^|\/)(?:scene|lab|three|.*catalog.*|course-map|learning-paths|tool-registry)(?:[./-]|$)/i.test(url.pathname),'Forbidden scene/Three/content dependency: '+url.href);const source=await readFile(url,'utf8');assert(!/lessonLinks|course-map|learning-paths|THREE\.|WebGLRenderer/.test(source),url.href);for(const specifier of dependencies(source)){assert(specifier.startsWith('./')||specifier.startsWith('../'),'External 2D helper dependency: '+specifier);await checkDependency(new URL(specifier,url));}};
+  await checkDependency(new URL('../web/observatory/shared/'+name,import.meta.url));
  }
  const light=await readFile(new URL('../web/observatory/modules/light.js',import.meta.url),'utf8');
  assert.ok(light.includes("from '../shared/plot.js'"));assert.ok(!/shared\/(?:lab|scene)\.js|lessonLinks|\/read\//.test(light));

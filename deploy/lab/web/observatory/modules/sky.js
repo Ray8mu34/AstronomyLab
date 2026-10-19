@@ -4,19 +4,17 @@ import {plot} from '../shared/plot.js';
 import {DEG, wrap, solarEquatorial, horizontal, equatorialVector, equatorialToLocal, dayLength, circumpolar, gnomon, parallaxDistance, starPosition, airMass, calendarDrift} from './sky-physics.mjs';
 import {DAY_YEAR, SIDEREAL_HOURS, PRECESSION_PERIOD, PRECESSION_TILT, dayGeometry, precessionGeometry} from './sky-demo-geometry.mjs';
 import {ERA,dateAtDay,dayAtDate,solarLongitudeAtDate,distanceSequence,epochPrecession} from './sky-motion-physics.mjs';
-import {attachCalendarUI} from './sky-calendar-ui.js';
-import {attachDayUI} from './sky-day-ui.js';
-import {attachPathUI} from './sky-sky-ui.js';
-import {attachPrecessionUI} from './sky-precession-ui.js';
-import {attachGnomonUI} from './sky-measure-ui.js';
+import {attachSkyPresentation} from './sky-presentation.js';
+import {getGraphicStyle} from '../shared/presentation.js';
+import {registerExperimentModel,validateExperimentModel} from '../shared/experiment-state.js';
 
 
 const C={teal:0x71c8c7,gold:0xebc77e,blue:0x8aaedd,purple:0xa796d0,grey:0x4b5b6a};
-const range=(key,label,min,max,step=1)=>`<label class="control">${label} <span data-value="${key}"></span><input data-key="${key}" type="range" min="${min}" max="${max}" step="${step}"></label>`;
-const select=(key,label,options)=>`<label class="control">${label}<select data-key="${key}">${options.map(([v,t])=>`<option value="${v}">${t}</option>`).join('')}</select></label>`;
+const range=(key,label,min,max,step=1)=>`<label class="control al-parameter" for="sky-input-${key}"><span>${label}<output data-value="${key}"></output></span><input id="sky-input-${key}" aria-label="${label}" data-key="${key}" type="range" min="${min}" max="${max}" step="${step}"></label>`;
+const select=(key,label,options)=>`<label class="control" for="sky-select-${key}">${label}<select id="sky-select-${key}" aria-label="${label}" data-key="${key}">${options.map(([v,t])=>`<option value="${v}">${t}</option>`).join('')}</select></label>`;
 const check=(key,label)=>`<label class="control-row"><input data-key="${key}" type="checkbox"> ${label}</label>`;
 function label(text,color='#cbd5dd',scale=1){
-  const c=document.createElement('canvas');const measure=c.getContext('2d');measure.font='44px sans-serif';c.width=Math.ceil(measure.measureText(text).width+28);c.height=72;const x=c.getContext('2d');x.font='44px sans-serif';x.fillStyle=color;x.textAlign='center';x.fillText(text,c.width/2,51);
+  const font='44px '+getGraphicStyle(document.body).fontFamily,c=document.createElement('canvas');const measure=c.getContext('2d');measure.font=font;c.width=Math.ceil(measure.measureText(text).width+28);c.height=72;const x=c.getContext('2d');x.font=font;x.fillStyle=color;x.textAlign='center';x.fillText(text,c.width/2,51);
   const texture=new THREE.CanvasTexture(c);const s=new THREE.Sprite(new THREE.SpriteMaterial({map:texture,transparent:true,depthTest:false}));s.scale.set(c.width/72*.75*scale,.75*scale,1);return s;
 }
 function line(points,color,opacity=1){return new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color,transparent:opacity<1,opacity}));}
@@ -26,17 +24,22 @@ const world=(v)=>new THREE.Vector3(v[0],v[2],-v[1]);
 const circle=(fn)=>Array.from({length:181},(_,i)=>fn(i*2*Math.PI/180));
 const decimal=(v,d=2)=>v===null?'—':Number(v).toFixed(d);
 
-export async function mount(el,{mode:requestedMode}={}){
-  const response=await fetch('/data/sky/stars.json');if(!response.ok)throw Error('真实恒星子目录无法读取');const catalogue=await response.json();
+export async function mount(el,{mode:requestedMode,signal}={}){
+  el.innerHTML='<p class="loading" role="status">正在载入工具…</p>';
+  const response=await fetch('/data/sky/stars.json',{signal});if(!response.ok)throw Error('真实恒星子目录无法读取');const catalogue=await response.json();
   const defaults={tab:'sky',latitude:30,longitude:90,hour:12,obliquity:23.44,view:'local',look:180,lookAltitude:30,equator:true,ecliptic:true,lunar:false,galactic:false,starDec:70,extinction:.2,group:'dipper',blend:0,offset:0,selected:54061,errors:true,motion:false,baseline:2,height:1,calendar:'gregorian',years:400,playing:false,measureTask:'shadow',dayHours:0,precessionYears:0,starsProgress:0,speed:1,shadowCycle:'day',shadowDay:171,shadowDate:'2026-06-21',spinMode:'both'};
   const initial=requestedMode||new URLSearchParams(location.search).get('mode');
   const state={...defaults,motionView:'oblique',tab:initial==='calendar'?'measure':['sky','stars','measure','day','precession'].includes(initial)?initial:defaults.tab,measureTask:initial==='calendar'?'calendar':'shadow'};
   const tabNames={sky:'天空与四季',stars:'方向与距离',measure:'测影与历法',day:'两种一天',precession:'地轴岁差'};
-  el.innerHTML=`<link rel="stylesheet" href="/modules/sky-pilot.css"><div class="sky-pilot">
-  <nav class="sky-tabs" aria-label="天空实验现象">${Object.entries(tabNames).map(([key,name])=>`<button data-tab="${key}" aria-pressed="${key===state.tab}">${name}</button>`).join('')}</nav>
+  const loadSceneModules=()=>Promise.all([import('../shared/scene.js'),import('./sky-motion-renderer.js')]);
+  // Keep the route's visible loading state until a 3D entry can mount its complete shell.
+  let sceneModules=state.tab==='measure'&&state.measureTask==='calendar'?null:await loadSceneModules();
+  if(signal?.aborted)return;
+  el.innerHTML=`<link rel="stylesheet" href="/modules/sky-presentation.css"><div class="sky-pilot sky-atlas">
+  <details class="sky-mode-menu al-disclosure"><summary>天球与时间</summary><nav class="sky-tabs al-mode-nav" aria-label="天空实验现象">${[['sky','太阳路径'],['stars','方向与距离'],['measure','测影'],['calendar','历法'],['day','两种一天'],['precession','地轴岁差']].map(([key,name])=>`<button data-navigation-mode="${key}" data-tab="${key==='calendar'?'measure':key}" aria-pressed="false">${name}</button>`).join('')}</nav></details>
   <header class="sky-guide"><h2 id="sky-question"></h2><div id="sky-instruction"></div><button data-action="guide" aria-expanded="true" aria-controls="sky-instruction">收起观察提示</button></header>
   <div class="sky-workspace"><section class="sky-observation" aria-label="当前现象与读数">
-  <section class="sky-stage"><div class="sky-view-head"><h3 id="sky-scene-title"></h3><div id="sky-views" role="group" aria-label="空间观察方式">${[['local','地面'],['earth','地球外部'],['inside','抬头']].map(([v,t])=>`<button data-view="${v}">${t}</button>`).join('')}</div></div>
+  <section class="sky-stage"><div class="sky-view-head"><h3 id="sky-scene-title"></h3><div id="sky-views" role="group" aria-label="空间观察方式">${[['local','地面'],['earth','地球外部'],['inside','抬头']].map(([v,t])=>`<button data-view="${v}">${t}</button>`).join('')}</div></div><p id="sky-identity" class="al-caption" hidden></p>
   <div id="sky-motion-views" class="button-row" hidden><button data-motion-view="oblique">空间全景</button><button data-motion-view="pole">从北极看</button><button data-motion-view="close">近看地球</button></div>
   <div class="scene-host" id="sky-scene" aria-label="可用鼠标或触摸转动的三维天空几何"></div><div id="sky-day-diagram" role="img" aria-label="差角辅助放大，实际场景角度不变" hidden></div><canvas class="plot-canvas" id="sky-main-plot" aria-label="整数历日与季节参照的累计差" hidden></canvas>
   <div id="sky-transport" class="sky-transport" aria-label="演示播放与时间"><div class="sky-transport-buttons"><button data-action="play">播放演示</button><button data-action="restart-demo">重置演示</button><label>速度<select data-key="speed" aria-label="演示速度"><option value="0.5">½×</option><option value="1">1×</option><option value="2">2×</option></select></label></div><div id="sky-timeline"></div><p id="sky-motion-status" role="status"></p></div>
@@ -50,12 +53,11 @@ export async function mount(el,{mode:requestedMode}={}){
   <div class="sky-reading button-row"><a href="/sources/sky.md">既有模型、目录与来源</a></div></div>`;
   const by=(id)=>el.querySelector('#'+id),host=by('sky-scene'),canvas=by('sky-plot');
   let lab=null,group=null,motionRenderer=null,sceneTask=null,modeRequest=0;
-  let unbind=()=>{},unbindTransport=()=>{},disposed=false,drawToken=0,timer=0,comparison=null,metricItems=[],spin=0,calendarUI,dayUI,pathUI,precessionUI,gnomonUI;
-  by('sky-scene').before(by('sky-transport'));
+  let unbind=()=>{},unbindTransport=()=>{},disposed=false,drawToken=0,timer=0,comparison=null,metricItems=[],spin=0,presentationUI;
   const isFlat=()=>state.tab==='measure'&&state.measureTask==='calendar';
   async function ensureScene(){
     if(lab)return;if(sceneTask)return sceneTask;
-    sceneTask=(async()=>{const [sceneModule,motionModule]=await Promise.all([import('../shared/scene.js'),import('./sky-motion-renderer.js')]);if(disposed)return;THREE=sceneModule.THREE;const makeScene=sceneModule.makeScene,makeSkyMotionRenderer=motionModule.makeSkyMotionRenderer;
+    sceneTask=(async()=>{const [sceneModule,motionModule]=sceneModules||(sceneModules=await loadSceneModules());if(disposed||signal?.aborted)return;THREE=sceneModule.THREE;const makeScene=sceneModule.makeScene,makeSkyMotionRenderer=motionModule.makeSkyMotionRenderer;
   lab=makeScene(host,{position:[7,6,8],target:[0,0,0],fov:42});lab.camera.near=.005;lab.camera.updateProjectionMatrix();
   group=new THREE.Group();lab.scene.add(group);lab.scene.background=new THREE.Color('#090f19');
   motionRenderer=makeSkyMotionRenderer(lab,catalogue);
@@ -66,18 +68,18 @@ export async function mount(el,{mode:requestedMode}={}){
   const f=(s)=>{const solar=solarEquatorial(s.longitude,s.obliquity),lst=wrap(solar.ra+(s.hour-12)*15),sun=horizontal(solar.ra,solar.dec,s.latitude,lst);return{solar,lst,sun,day:dayLength(s.latitude,solar.dec),shadow:gnomon(s.height,sun)};};
   function metric(items){metricItems=items;const rows=items.map(([a,b])=>`<div><small>${a}</small><strong>${b}</strong></div>`);by('sky-metrics').innerHTML=`<div class="sky-readings">${rows.slice(0,3).join('')}</div>${rows.length>3?`<details class="sky-extra-readings"><summary>其余读数与模型参照</summary><div class="sky-readings">${rows.slice(3).join('')}</div></details>`:''}`;drawComparison();}
   function sync(){for(const e of el.querySelectorAll('[data-key]')){if(e.type==='checkbox')e.checked=state[e.dataset.key];else e.value=state[e.dataset.key];const out=el.querySelector(`[data-value="${e.dataset.key}"]`);if(out)out.textContent=e.dataset.key==='dayHours'?decimal(state.dayHours,3):e.type==='range'?e.value:state[e.dataset.key];}
-    for(const b of el.querySelectorAll('[data-tab],[data-season],[data-blend],[data-view],[data-measure-task],[data-day-end],[data-precession],[data-shadow-cycle],[data-shadow-date]')){const d=b.dataset,active=d.tab?state.tab===d.tab:d.season!==undefined?Math.abs(state.longitude-Number(d.season))<.001:d.blend!==undefined?state.blend===Number(d.blend):d.view?state.view===d.view:d.shadowCycle?state.measureTask==='shadow'&&state.shadowCycle===d.shadowCycle:d.measureTask?state.measureTask===d.measureTask:d.dayEnd!==undefined?Math.abs(state.dayHours-Number(d.dayEnd))<1e-7:d.shadowDate?state.shadowDate===d.shadowDate:Math.abs(state.precessionYears-Number(d.precession))<1e-7;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));}
+    for(const b of el.querySelectorAll('[data-tab],[data-season],[data-blend],[data-view],[data-measure-task],[data-day-end],[data-precession],[data-shadow-cycle],[data-shadow-date]')){const d=b.dataset,active=d.navigationMode?d.navigationMode===(state.tab==='measure'&&state.measureTask==='calendar'?'calendar':state.tab):d.tab?state.tab===d.tab:d.season!==undefined?Math.abs(state.longitude-Number(d.season))<.001:d.blend!==undefined?state.blend===Number(d.blend):d.view?state.view===d.view:d.shadowCycle?state.measureTask==='shadow'&&state.shadowCycle===d.shadowCycle:d.measureTask?state.measureTask===d.measureTask:d.dayEnd!==undefined?Math.abs(state.dayHours-Number(d.dayEnd))<1e-7:d.shadowDate?state.shadowDate===d.shadowDate:Math.abs(state.precessionYears-Number(d.precession))<1e-7;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));}
     const play=el.querySelector('[data-action="play"]');if(play){play.textContent=state.playing?'暂停':state.tab==='day'?(state.dayHours===SIDEREAL_HOURS?'继续到太阳日':'播放一天'):state.tab==='stars'?'播放两步演示':state.tab==='precession'?'播放演示':state.tab==='measure'?(state.measureTask==='calendar'?'播放年长累计':state.shadowCycle==='year'?'播放一年正午':'播放一天影子'):'播放一天';play.setAttribute('aria-pressed',String(state.playing));}
     for(const box of el.querySelectorAll('[data-inside]'))box.hidden=state.view!=='inside';
   }
   function feedback(text){by('sky-feedback').textContent=text;}
   function condition(){if(state.tab==='sky'||state.tab==='measure'&&state.measureTask==='shadow')return`φ=${decimal(state.latitude,1)}°，λ=${decimal(state.longitude,1)}°，地方真太阳时${decimal(state.hour,2)}h${state.tab==='measure'?`，表高${decimal(state.height,1)}m`:''}`;if(state.tab==='stars')return`${state.group==='dipper'?'北斗':'毕宿'}，距离恢复${decimal(state.blend*100,0)}%，观察者横移${decimal(state.offset,1)}pc`;if(state.tab==='measure')return`${state.calendar==='365'?'365日年':state.calendar==='julian'?'四年一闰':'公历'}，${state.years}年`;if(state.tab==='day')return`从共同起点经过${decimal(state.dayHours,3)}小时`;return`${ERA+Math.round(state.precessionYears)}年示意（从2026近当前方向）`;}
   function drawComparison(){const box=by('sky-comparison');box.hidden=!comparison;if(!comparison)return;box.innerHTML=`<div class="sky-compare-head"><strong>保留一组读数对照</strong><button data-action="clear-compare">清除对照</button></div><p>保留：${comparison.condition}<br>当前：${condition()}</p><table><thead><tr><th>读数</th><th>保留</th><th>当前</th></tr></thead><tbody>${metricItems.slice(0,3).map(([name,value],i)=>`<tr><th>${name}</th><td>${comparison.items[i]?.[1]||'—'}</td><td>${value}</td></tr>`).join('')}</tbody></table>`;}
-  function motionViewButtons(){for(const b of el.querySelectorAll('[data-motion-view]')){const active=state.motionView===b.dataset.motionView;b.setAttribute('aria-pressed',String(active));b.classList.toggle('active',active);}by('sky-motion-views').setAttribute('aria-label',`空间观察方式，当前${state.motionView==='free'?'自由视角':state.motionView==='pole'?'北极俯视':state.motionView==='close'?'细看参照':'空间全景'}`);precessionUI?.view(state);}
+  function motionViewButtons(){for(const b of el.querySelectorAll('[data-motion-view]')){const active=state.motionView===b.dataset.motionView;b.setAttribute('aria-pressed',String(active));b.classList.toggle('active',active);}by('sky-motion-views').setAttribute('aria-label',`空间观察方式，当前${state.motionView==='free'?'自由视角':state.motionView==='pole'?'北极俯视':state.motionView==='close'?'细看参照':'空间全景'}`);}
   const freeCamera=()=>{if(['day','precession'].includes(state.tab)){state.motionView='free';motionViewButtons();}};
   
   function change(){if(disposed)return;sync();motionViewButtons();render();}
-  function camera(preset='oblique'){if(!lab)return;if(['day','precession'].includes(state.tab)){state.motionView=preset;motionRenderer.camera(state.tab,preset);motionViewButtons();return;}lab.camera.fov=42;lab.camera.updateProjectionMatrix();lab.controls.minDistance=0;lab.controls.maxDistance=Infinity;lab.controls.enabled=!(state.tab==='sky'&&state.view==='inside');if(state.tab==='measure'){lab.camera.position.set(9,7.5,10);lab.controls.target.set(0,1,0);}else if(state.tab==='stars'){const stars=catalogue.stars.filter(s=>s.group===state.group),center=stars.map(s=>starPosition(s,1)).reduce((a,v)=>a.map((x,i)=>x+v[i]/stars.length),[0,0,0]),map=p=>world(p.map((v,i)=>(v-center[i])*.25));const box=new THREE.Box3().setFromPoints([...stars.flatMap(s=>[map(starPosition(s,0)),map(starPosition(s,1))]),map([0,0,0]),map([0,15,0])]);const target=box.getCenter(new THREE.Vector3()),extent=box.getBoundingSphere(new THREE.Sphere()).radius;const dist=(extent+1)/Math.sin(21*DEG);lab.controls.target.copy(target);lab.camera.position.copy(target).add(new THREE.Vector3(.55,.35,.76).normalize().multiplyScalar(dist));}
+  function camera(preset='oblique'){if(!lab)return;if(['day','precession'].includes(state.tab)){state.motionView=preset;motionRenderer.camera(state.tab,preset);if(state.tab==='day'&&lab.camera.aspect<1.65){lab.camera.position.sub(lab.controls.target).multiplyScalar(1.65/lab.camera.aspect).add(lab.controls.target);lab.camera.updateMatrixWorld(true);lab.controls.update();}motionViewButtons();return;}lab.camera.fov=state.tab==='sky'&&state.view==='inside'?100:42;lab.camera.updateProjectionMatrix();lab.controls.minDistance=0;lab.controls.maxDistance=Infinity;lab.controls.enabled=!(state.tab==='sky'&&state.view==='inside');if(state.tab==='measure'){lab.camera.position.set(9,7.5,10);lab.controls.target.set(0,1,0);}else if(state.tab==='stars'){const stars=catalogue.stars.filter(s=>s.group===state.group),center=stars.map(s=>starPosition(s,1)).reduce((a,v)=>a.map((x,i)=>x+v[i]/stars.length),[0,0,0]),map=p=>world(p.map((v,i)=>(v-center[i])*.25));const box=new THREE.Box3().setFromPoints([...stars.flatMap(s=>[map(starPosition(s,0)),map(starPosition(s,1))]),map([0,0,0]),map([0,15,0])]);const target=box.getCenter(new THREE.Vector3()),extent=box.getBoundingSphere(new THREE.Sphere()).radius;const dist=(extent+1)/Math.sin(21*DEG);lab.controls.target.copy(target);lab.camera.position.copy(target).add(new THREE.Vector3(.55,.35,.76).normalize().multiplyScalar(dist));}
     else if(state.view==='inside'&&state.tab==='sky'){lab.camera.position.set(0,.015,0);const a=state.look*DEG,h=state.lookAltitude*DEG;lab.controls.target.set(Math.sin(a)*Math.cos(h)*4,Math.sin(h)*4,-Math.cos(a)*Math.cos(h)*4);lab.camera.lookAt(lab.controls.target);}
     else{lab.camera.position.set(...(state.view==='earth'&&state.tab==='sky'?[8,7,10]:[7,6,8]));lab.controls.target.set(0,0,0);}lab.camera.updateMatrixWorld(true);lab.controls.update();}
   function shadowDate(){state.shadowDate=dateAtDay(state.shadowDay);state.longitude=solarLongitudeAtDate(state.shadowDate);if(state.shadowCycle==='year')state.hour=12;}
@@ -85,7 +87,7 @@ export async function mount(el,{mode:requestedMode}={}){
     by('sky-timeline').innerHTML=timeline;
     unbindTransport=bindControls(by('sky-transport'),state,key=>{if(key==='speed'){state.speed=Number(state.speed);return;}state.playing=false;if(key==='starsProgress'){Object.assign(state,distanceSequence(state.starsProgress));state.motion=false;}if(key==='shadowDay')shadowDate();change();});
   }
-  function controls(){gnomonUI?.beforeControls();precessionUI?.beforeControls();pathUI?.beforeControls();dayUI?.beforeControls();calendarUI?.beforeControls();unbind();
+  function controls(){unbind();
     const seasons=`<div class="sky-control-caption">北半球分至 <span id="sky-season-reading">λ=${decimal(state.longitude,1)}°</span></div><div class="button-row sky-seasons">${[[0,'春分'],[90,'夏至'],[180,'秋分'],[270,'冬至']].map(([l,t])=>`<button data-season="${l}">${t}</button>`).join('')}</div>`;
     const latitude=range('latitude','纬度 φ / °（南为负）',-90,90,.1),hour=range('hour','地方真太阳时 / h',0,24,.05),longitude=range('longitude','太阳黄经 λ / °',0,359,.1);
     const advanced=body=>`<details class="sky-parameters"><summary>详细参数与参照</summary>${body}</details>`;
@@ -100,7 +102,7 @@ export async function mount(el,{mode:requestedMode}={}){
     transport();sync();unbind=bindControls(by('sky-controls'),state,(key)=>{if(['view','look','lookAltitude'].includes(key))camera();state.playing=false;if(key==='shadowDate'){if(!/^2026-\d{2}-\d{2}$/.test(state.shadowDate))state.shadowDate=dateAtDay(state.shadowDay);state.shadowDay=dayAtDate(state.shadowDate);shadowDate();}if(state.tab==='stars'){if(key==='motion'&&state.motion){state.offset=0;state.blend=1;}if(['offset','blend'].includes(key)){state.motion=false;state.starsProgress=state.offset===0?state.blend*.55:Math.min(1,.55+.45*Math.max(0,state.offset)/15);}if(key==='group'){state.selected=catalogue.stars.find(s=>s.group===state.group).hip;state.starsProgress=0;Object.assign(state,distanceSequence(0));controls();camera();}}change();});
   }
   function materialSphere(position,r,color){const m=new THREE.Mesh(new THREE.SphereGeometry(r,24,16),new THREE.MeshBasicMaterial({color}));m.position.copy(position);group.add(m);return m;}
-  function textAt(t,p,color,scale=1){const s=label(t,color,scale);s.position.copy(p);pathUI?.label(s,t,color);gnomonUI?.label(s,t,color);group.add(s);return s;}
+  function textAt(t,p,color,scale=1){const s=label(t,color,scale);s.position.copy(p);presentationUI?.label(s,t,color);group.add(s);return s;}
   function addCircle(points,color,alpha=1){group.add(line(points,color,alpha));}
   function skyScene(result){
     const {solar,lst,sun}=result,isEarth=state.view==='earth';
@@ -133,8 +135,8 @@ export async function mount(el,{mode:requestedMode}={}){
     metric([['此刻几何高度',decimal(sun.altitude)+'°'],['几何白昼',result.day.hours===null?result.day.kind:decimal(result.day.hours)+' h · '+result.day.kind],['北天极带符号高度',decimal(state.latitude,1)+'°'],['太阳赤纬',decimal(solar.dec)+'°'],['太阳方位（北→东）',sun.azimuth===null?'天顶处无定义':decimal(sun.azimuth)+'°'],['水平面直射几何因子',decimal(Math.max(0,sun.up),3)]]);
   }
   function skyPlot(result){
-    const curves=[[0,'分','#8aaedd'],[state.obliquity,'夏至','#ebc77e'],[-state.obliquity,'冬至','#a796d0'],[result.solar.dec,'当前','#71c8c7']];
-    plot(canvas,{series:[...curves.map(([dec,label,color])=>({points:Array.from({length:145},(_,i)=>{const h=i/6;return[h,horizontal(0,dec,state.latitude,(h-12)*15).altitude];}),label,color})),{points:[[state.hour,result.sun.altitude]],dots:true,color:'#71c8c7'}],xDomain:[0,24],yDomain:[-90,90],xLabel:'地方真太阳时 / h',yLabel:'太阳中心几何高度 / °'});
+    const curves=[[0,'分','#8aaedd',[3,4]],[state.obliquity,'夏至','#ebc77e',[9,4]],[-state.obliquity,'冬至','#a796d0',[2,3,8,3]],[result.solar.dec,'当前','#71c8c7',[]]];
+    plot(canvas,{series:[...curves.map(([dec,label,color,dash])=>({points:Array.from({length:145},(_,i)=>{const h=i/6;return[h,horizontal(0,dec,state.latitude,(h-12)*15).altitude];}),label,color,dash})),{points:[[state.hour,result.sun.altitude]],dots:true,color:'#71c8c7'}],xDomain:[0,24],yDomain:[-90,90],xLabel:'地方真太阳时 / h',yLabel:'太阳中心几何高度 / °'});
   }
   function starsScene(){
     const stars=catalogue.stars.filter(s=>s.group===state.group),center=stars.map(s=>starPosition(s,1)).reduce((a,v)=>a.map((x,i)=>x+v[i]/stars.length),[0,0,0]);
@@ -157,11 +159,12 @@ export async function mount(el,{mode:requestedMode}={}){
     const east=new THREE.Vector3(0,0,1).cross(central).normalize(),north=central.clone().cross(east).normalize();
     const points=positions.map(p=>vec(p.map((x,i)=>x-observer[i])).normalize()).map(v=>[Math.atan2(v.dot(east),v.dot(central))/DEG,Math.atan2(v.dot(north),v.dot(central))/DEG]);
     const xmax=Math.max(6,...points.map(p=>Math.abs(p[0])))+2,ymax=Math.max(5,...points.map(p=>Math.abs(p[1])))+2;
-    const result=plot(canvas,{series:[],xDomain:[xmax,-xmax],yDomain:[-ymax,ymax],xLabel:'视场切平面：东在左 / °',yLabel:'北向角度 / °'}),ctx=canvas.getContext('2d');
+    const signedTicks=radius=>{const rough=radius/2,power=10**Math.floor(Math.log10(rough)),step=[1,2,5,10].find(n=>n>=rough/power)*power;return[-2,-1,0,1,2].map(n=>n*step).filter(n=>Math.abs(n)<=radius);};
+    const result=plot(canvas,{series:[],xDomain:[xmax,-xmax],yDomain:[-ymax,ymax],xTicks:signedTicks(xmax),yTicks:signedTicks(ymax),xLabel:'视场切平面：东在左 / °',yLabel:'北向角度 / °',onFontReady:starsScenePlotOnly}),ctx=canvas.getContext('2d');
     // shared plot公开toPixel，沿用其DPR与坐标变换。
     const pixel=(p)=>result.toPixel(p[0],p[1]);
     const boxes=[];const ordered=stars.map((s,i)=>({s,i})).sort((a,b)=>(b.s.hip===Number(state.selected))-(a.s.hip===Number(state.selected)));
-    ordered.forEach(({s,i})=>{const p=pixel(points[i]);ctx.fillStyle=s.hip===Number(state.selected)?'#ebc77e':s.hip===21421?'#eea266':'#adc9e3';ctx.beginPath();ctx.arc(p[0],p[1],Math.max(3,7-s.hpMag),0,Math.PI*2);ctx.fill();ctx.font='11px sans-serif';const text=s.label.split(' · ')[0],w=ctx.measureText(text).width;
+    ordered.forEach(({s,i})=>{const p=pixel(points[i]);ctx.fillStyle=s.hip===Number(state.selected)?'#ebc77e':s.hip===21421?'#eea266':'#adc9e3';ctx.beginPath();ctx.arc(p[0],p[1],Math.max(3,7-s.hpMag),0,Math.PI*2);ctx.fill();ctx.font=getGraphicStyle(canvas).tickFont;const text=s.label.split(' · ')[0],w=ctx.measureText(text).width;
       let placement=null;for(const [dx,dy] of [[8,-7],[8,17],[-w-8,-7],[-w-8,17],[8,-25],[-w-8,-25],[8,32],[-w-8,32]]){const x=p[0]+dx,y=p[1]+dy,box=[x-2,y-12,x+w+2,y+3];if(x<58||x+w>result.width-23||y<41||y>result.height-45)continue;if(boxes.some(b=>box[0]<b[2]&&box[2]>b[0]&&box[1]<b[3]&&box[3]>b[1]))continue;placement={x,y,box};break;}if(placement){boxes.push(placement.box);ctx.fillText(text,placement.x,placement.y);}
       if(state.motion){const a=s.raDeg*DEG,d=s.decDeg*DEG,u=vec(equatorialVector(s.raDeg,s.decDeg)),mu=new THREE.Vector3(-Math.sin(a),Math.cos(a),0).multiplyScalar(s.pmRaMasYear).add(new THREE.Vector3(-Math.sin(d)*Math.cos(a),-Math.sin(d)*Math.sin(a),Math.cos(d)).multiplyScalar(s.pmDecMasYear));
         const cc=u.dot(central),ee=u.dot(east),nn=u.dot(north),dx=-.2*(cc*mu.dot(east)-ee*mu.dot(central))/(cc*cc+ee*ee),dy=-.2*(cc*mu.dot(north)-nn*mu.dot(central))/(cc*cc+nn*nn);ctx.strokeStyle='#ebc77e';ctx.beginPath();ctx.moveTo(...p);ctx.lineTo(p[0]+dx,p[1]+dy);ctx.stroke();}});
@@ -188,12 +191,12 @@ export async function mount(el,{mode:requestedMode}={}){
   function calendarScene(){
     const points=calendarDrift(state.years,state.calendar),average=state.calendar==='365'?365:state.calendar==='julian'?365.25:365.2425;
     by('sky-legend').textContent='从2000年起累加整数历日，再减去年数 × 365.2422日。闰日形成锯齿；固定近似不能预报真实春分或编制农历。';
-    plot(by('sky-main-plot'),{series:[{points,color:'#71c8c7',label:calendarUI?.active?'历日 − 季节参照':'整数历日 − 固定季节周期'}],xDomain:[0,Math.max(1,state.years)],yDomain:state.calendar==='365'?[-state.years*.25,2]:state.calendar==='julian'?[-1,Math.max(2,state.years*.009)]:[-1.2,1.8],xLabel:'从2000年开始的历年数',yLabel:'累计差 / 日'});
+    plot(by('sky-main-plot'),{series:[{points,color:getGraphicStyle(by('sky-main-plot')).accent,label:'历日 − 季节参照'}],xDomain:[0,Math.max(1,state.years)],yDomain:state.calendar==='365'?[-state.years*.25,2]:state.calendar==='julian'?[-1,Math.max(2,state.years*.009)]:[-1.2,1.8],xLabel:'从2000年开始的历年数',yLabel:'累计差 / 日'});
     metric([['累计历日差',decimal(points.at(-1)[1],3)+' d'],['当前规则长期平均',decimal(average,4)+' d / 年'],['季节参照近似','365.2422 d · 不恒定']]);
   }
   function guide(){
-    el.querySelector('.sky-pilot').dataset.mode=state.tab;
-    const content={sky:['旅行者换了纬度，天空哪里变了？','拖动纬度，看蓝色北天极相对绿色地平线的高度；再点冬至，比较太阳路径。'],stars:['看上去相邻的星，真的靠在一起吗？','点“目录距离”，看空间前后分开而方向图保持；再横移观察者，比较毕宿五与远处星点。'],measure:state.measureTask==='shadow'?['同一根竖表，为什么影长随季节改变？','固定北纬30°与正午，在夏至、冬至间切换；读影长，并看影端方向。']:['整数日，怎样跟上一个有小数的年？','在365日年、四年一闰、公历间切换，比较400年的累计差和闰日锯齿。'],day:['同一地面标记，为什么有两个“一天”的终点？','依次点两个终点：橙色标记先对齐固定远星，再多转约0.98°追上太阳。'],precession:['地轴慢慢转向，天极与天赤道怎样一起动？','点“四分之一周”，看蓝色地轴与天赤道一起转，金色黄道及白色背景方向保持固定。']};
+    el.querySelector('.sky-pilot').dataset.mode=state.tab==='measure'&&state.measureTask==='calendar'?'calendar':state.tab;
+    const content={sky:['旅行者换了纬度，天空哪里变了？','拖动纬度，看蓝色北天极相对绿色地平线的高度；再点冬至，比较太阳路径。'],stars:['看上去相邻的星，真的靠在一起吗？','点“目录距离”，看空间前后分开而方向图保持；再横移观察者，比较毕宿五与远处星点。'],measure:state.measureTask==='shadow'?['同一根竖表，为什么影长随季节改变？','固定北纬30°与正午，在夏至、冬至间切换；读影长，并看影端方向。']:['整数日，怎样跟上一个有小数的年？','在365日年、四年一闰、公历间切换，比较400年的累计差和闰日锯齿。'],day:['同一地面标记，为什么有两个“一天”的终点？','依次点两个终点：橙色标记先对齐固定远星，再多转约0.98°追上太阳。'],precession:['地轴慢慢转向，天极与天赤道怎样一起动？','点“6500年后”，看蓝色地轴与天赤道一起转，金色黄道及白色背景方向保持固定。']};
     by('sky-question').textContent=content[state.tab][0];by('sky-instruction').textContent=content[state.tab][1];
     by('sky-views').hidden=state.tab!=='sky';const flat=state.tab==='measure'&&state.measureTask==='calendar';host.hidden=flat;by('sky-day-diagram').hidden=state.tab!=='day';by('sky-main-plot').hidden=!flat;by('sky-chart').hidden=state.tab==='day'||flat;by('sky-motion-views').hidden=!['day','precession'].includes(state.tab);el.querySelector('[data-motion-view=close]').textContent=state.tab==='precession'?'轴与圆锥':'近看地球';
     by('sky-catalogue').hidden=state.tab!=='stars';by('sky-chart-summary').textContent=state.tab==='stars'?'展开同一星区的方向图':state.tab==='precession'?'展开天极的方位投影':state.tab==='measure'?'展开当前测影时间曲线':'展开太阳高度曲线';
@@ -225,17 +228,18 @@ export async function mount(el,{mode:requestedMode}={}){
     metric([['示意年代',Math.round(d.year).toLocaleString('zh-CN')+' 年'],['保持轴倾',decimal(d.tiltDegrees)+'°'],['岁差方位变化',decimal(d.phaseDegrees,1)+'°'],['进动周期','约26,000年 · 匀速模型'],['背景位置历元','1991.25 · 未外推'],['时代参考','2026近当前方向 · 非精密定向']]);return d;
   }
   function motionStatus(){let t;if(state.tab==='stars')t=`${distanceSequence(state.starsProgress).phase} · 参数还原与视点变化，非恒星真实运动`;else if(state.tab==='day')t=state.dayHours===SIDEREAL_HOURS?'已对齐远星，尚未再对齐太阳；继续播放看最后约236秒。':state.dayHours>=24?'平均太阳日终点：同一经线再次对齐太阳。':'从共同正午开始，自转一圈时地球也沿轨道前进。';else if(state.tab==='precession')t=`${Math.round(ERA+state.precessionYears)}年示意 · ${state.spinMode==='spin'?'轴向固定，只看自转':state.spinMode==='axis'?'自转标记固定，只看慢轴向':'快速自转与慢轴向，各自压缩时间'}`;else if(state.tab==='measure')t=state.measureTask==='calendar'?`从2000年至${2000+Math.floor(state.years)}年的累计差`:state.shadowCycle==='year'?`${state.shadowDate} · 正午12:00固定；日期变化`: `${state.shadowDate} · ${clockTime(state.hour)}地方真太阳时；日期固定`;else t=clockTime(state.hour)+'地方真太阳时';by('sky-motion-status').textContent=t;}
-  function render(){gnomonUI?.beforeMode(state);precessionUI?.beforeMode(state);pathUI?.beforeMode(state);dayUI?.beforeMode(state);calendarUI?.setMode(state);dayUI?.setMode(state);pathUI?.setMode(state);precessionUI?.setMode(state);gnomonUI?.setMode(state);release(group);motionRenderer?.hide();guide();const result=f(state);let demo=null;by('sky-data').hidden=state.tab!=='stars';by('sky-scene-title').textContent=state.tab==='stars'?'把目录距离放回星图':state.tab==='measure'?state.measureTask==='shadow'?'太阳方向、竖表与影端':'整数历日，追逐季节年':state.tab==='day'?'太阳、地球自转与公转 · 可转动视角':state.tab==='precession'?'快自转，慢轴向 · 倾斜地轴扫圆锥':'地平线、天轴与太阳路径';by('sky-plot-title').textContent=state.tab==='stars'?'同一批恒星从观察者看去的方向':state.tab==='precession'?'从黄道北极看天极轨迹':'同一纬度，一天中不同季节的太阳高度';
+  function render(){presentationUI?.setMode(state);release(group);motionRenderer?.hide();guide();const result=f(state);let demo=null;by('sky-data').hidden=state.tab!=='stars';by('sky-scene-title').textContent=state.tab==='stars'?'把目录距离放回星图':state.tab==='measure'?state.measureTask==='shadow'?'太阳方向、竖表与影端':'整数历日，追逐季节年':state.tab==='day'?'太阳、地球自转与公转 · 可转动视角':state.tab==='precession'?'快自转，慢轴向 · 倾斜地轴扫圆锥':'地平线、天轴与太阳路径';by('sky-plot-title').textContent=state.tab==='stars'?'同一批恒星从观察者看去的方向':state.tab==='precession'?'从黄道北极看天极轨迹':'同一纬度，一天中不同季节的太阳高度';
     const seasonReading=by('sky-season-reading');if(seasonReading)seasonReading.textContent=`λ=${decimal(state.longitude,1)}°`;
     if(state.tab==='stars')starsScene();else if(state.tab==='day')demo=dayMotion();else if(state.tab==='precession')demo=precessionMotion();else if(state.tab==='measure'){state.measureTask==='shadow'?measureScene(result):calendarScene();}else{skyScene(result);skyPlot(result);}copy(result);motionStatus();
     window.__lab={module:'sky',state,result,catalogue,physics:{solarEquatorial,horizontal,dayLength,gnomon,parallaxDistance},scene:lab,demo,motionRenderer,teachingGeometry:{dayGeometry,precessionGeometry,epochPrecession,solarLongitudeAtDate,distanceSequence}};
-    calendarUI?.render(state);dayUI?.render(state);pathUI?.render(state);precessionUI?.render(state);gnomonUI?.render(state);drawToken++;motionRenderer?.updateLabels();lab?.render();
+    presentationUI?.render(state);drawToken++;motionRenderer?.updateLabels();lab?.render();
   }
   const click=async e=>{const t=e.target.closest('button');if(!t)return;
-    if(t.dataset.tab||t.dataset.measureTask||t.dataset.shadowCycle){const request=++modeRequest,needsScene=t.dataset.tab?!(t.dataset.tab==='measure'&&state.measureTask==='calendar'):t.dataset.measureTask==='shadow'||Boolean(t.dataset.shadowCycle);
+    const navigationTask=t.dataset.navigationMode==='calendar'?'calendar':t.dataset.navigationMode==='measure'?'shadow':state.measureTask;
+    if(t.dataset.tab||t.dataset.measureTask||t.dataset.shadowCycle){const request=++modeRequest,needsScene=t.dataset.tab?!(t.dataset.tab==='measure'&&navigationTask==='calendar'):t.dataset.measureTask==='shadow'||Boolean(t.dataset.shadowCycle);
       if(needsScene&&!lab){const desired=t.dataset.tab==='measure'?'measure':t.dataset.tab||'measure';el.dataset.modeLoading=desired;try{await ensureScene();}catch(error){feedback('三维视图无法初始化：'+error.message+'。年长累计二维图仍可独立使用。');return;}finally{if(el.dataset.modeLoading===desired)delete el.dataset.modeLoading;}}if(disposed||request!==modeRequest)return;
     }
-    if(t.dataset.tab){state.tab=t.dataset.tab;state.playing=false;timer=0;comparison=null;if(state.tab==='measure'&&state.measureTask==='shadow')shadowDate();controls();camera();change();feedback(`已切换到${tabNames[state.tab]}。`);if(innerWidth<=700)requestAnimationFrame(()=>el.querySelector('.sky-tabs').scrollIntoView({block:'start'}));}
+    if(t.dataset.tab){state.tab=t.dataset.tab;if(t.dataset.navigationMode)state.measureTask=navigationTask;state.playing=false;timer=0;comparison=null;if(state.tab==='measure'&&state.measureTask==='shadow')shadowDate();controls();camera();change();feedback(`已切换到${tabNames[state.tab]}。`);if(e.isTrusted&&innerWidth<=700)requestAnimationFrame(()=>el.querySelector('.sky-mode-menu').scrollIntoView({block:'start'}));}
     if(t.dataset.measureTask){state.measureTask=t.dataset.measureTask;state.playing=false;comparison=null;controls();camera();change();feedback(`已切换到${state.measureTask==='shadow'?'一根竖表':'年长累计'}。`);}
     if(t.dataset.shadowCycle){state.measureTask='shadow';state.shadowCycle=t.dataset.shadowCycle;state.playing=false;if(state.shadowCycle==='year')state.shadowDay=0;shadowDate();controls();camera();change();}
     if(t.dataset.shadowDate){state.shadowDay=dayAtDate(t.dataset.shadowDate);state.playing=false;shadowDate();change();}
@@ -259,6 +263,7 @@ export async function mount(el,{mode:requestedMode}={}){
   };
   function resetMotion(){state.playing=false;timer=0;if(state.tab==='stars'){state.starsProgress=0;Object.assign(state,distanceSequence(0));state.motion=false;}else if(state.tab==='day')state.dayHours=0;else if(state.tab==='precession'){state.precessionYears=0;spin=0;}else if(state.tab==='measure'){if(state.measureTask==='calendar')state.years=0;else if(state.shadowCycle==='year'){state.shadowDay=0;shadowDate();}else {state.hour=0;shadowDate();}}else state.hour=0;}
   if(!isFlat())await ensureScene();
+  presentationUI=attachSkyPresentation(el,{state,redraw:change});
   el.addEventListener('click',click);controls();camera();render();
   const stopClock=startVisibleLoop(dt=>{motionRenderer?.updateLabels();if(!state.playing)return;if(state.tab==='precession'&&state.spinMode!=='axis'){spin+=dt*Math.PI/2*state.speed;motionRenderer.updatePrecession(state.precessionYears,spin);}timer+=dt;if(timer<.06)return;const step=timer*state.speed;timer=0;
     if(state.tab==='sky')state.hour=wrap(state.hour+step*.8,24);
@@ -269,11 +274,8 @@ export async function mount(el,{mode:requestedMode}={}){
     sync();render();});
   // canvas尺寸变化时，重新使用真实参数绘图；Observer仅属于本模块。
   const observer=new ResizeObserver(()=>{if(!disposed){if(state.tab==='stars')starsScenePlotOnly();else if(state.tab==='day')dayMotion();else if(state.tab==='precession')precessionPlot(epochPrecession(state.precessionYears));else if(state.tab==='measure'){state.measureTask==='calendar'?calendarScene():shadowPlot();}else if(state.tab==='sky')skyPlot(f(state));}});observer.observe(canvas);observer.observe(by('sky-day-diagram'));observer.observe(by('sky-main-plot'));
+  const sceneSize=new ResizeObserver(()=>{if(!disposed&&lab&&['day','precession'].includes(state.tab)&&state.motionView!=='free'){camera(state.motionView);lab.render();}});sceneSize.observe(host);
   function starsScenePlotOnly(){const stars=catalogue.stars.filter(s=>s.group===state.group);drawStars(stars,stars.map(s=>starPosition(s,state.blend)),[0,state.offset,0]);}
-  calendarUI=attachCalendarUI(el,{redraw:change});
-  dayUI=attachDayUI(el,{redraw:change});
-  pathUI=attachPathUI(el,{redraw:change,defaults});
-  precessionUI=attachPrecessionUI(el,{redraw:change});
-  gnomonUI=attachGnomonUI(el,{redraw:change});
-  return()=>{disposed=true;modeRequest++;gnomonUI.dispose();precessionUI.dispose();pathUI.dispose();dayUI.dispose();calendarUI.dispose();stopClock();unbind();unbindTransport();observer.disconnect();el.removeEventListener('click',click);lab?.controls.removeEventListener('start',freeCamera);release(group);motionRenderer?.dispose();lab?.dispose();if(window.__lab?.module==='sky')delete window.__lab;};
+  const disposeModel=registerExperimentModel(el,{getState:mode=>({version:1,kind:'sky-conditions',mode,obliquity:state.obliquity}),applyState(value){const mode=state.tab==='measure'&&state.measureTask==='calendar'?'calendar':state.tab,exact=validateExperimentModel('sky',mode,value);if(!exact)return false;state.obliquity=exact.obliquity;state.playing=false;controls();change();return true;}});
+  return()=>{disposed=true;modeRequest++;disposeModel();presentationUI.dispose();stopClock();unbind();unbindTransport();observer.disconnect();sceneSize.disconnect();el.removeEventListener('click',click);lab?.controls.removeEventListener('start',freeCamera);release(group);motionRenderer?.dispose();lab?.dispose();if(window.__lab?.module==='sky')delete window.__lab;};
 }

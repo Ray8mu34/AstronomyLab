@@ -8,6 +8,7 @@ import {attachFocus} from './stars-light-focus.mjs';
 import {hrExamples,hrRadius,hrComparison} from './stars-hr.mjs';
 import {drawHR} from './stars-hr-renderer.js';
 import {drawStructure} from './stars-structure.js';
+import {getGraphicStyle} from '../shared/presentation.js';
 import {attachHRUI} from './stars-hr-ui.js';
 import {attachIAUI} from './stars-ia-ui.js';
 import {attachPulsarUI} from './stars-pulsar-ui.js';
@@ -22,7 +23,7 @@ const copies={
  collapse:`<h3>核心向内，成功爆发中的外层向外</h3><p>拖动过程条，白色核心向内收缩；若选择成功推出外层，橙色物质随后向外展开。金色波前只是冲击位置示意。核心坍缩中，核心与外层的运动方向可以不同。白矮星的热核失控则属于另一类超新星机制。</p><p>核心失去支撑后，引力能释放巨大。冲击波却可能因拆解重核和辐射损耗停滞；中微子加热及多维流动会影响它能否重新推进。切换“未成功推出外层”，外壳不会自动飞散。开关用于比较两种结果；爆发能否成功取决于加热、输运与多维流动。</p><div class="formula">引力能量尺度 ≈ GM²/R<br>1.4 M☉、12 km → <span data-energy></span> J</div><p>这个能量尺度大部分与中微子通道相关，不能全算成可见光。动画的核心、外壳与过程坐标分别压缩了尺度；过程条不是秒表。真实核心坍缩常在亚秒尺度完成，冲击穿过广阔包层并形成明亮光信号要更久，取决于前身星。画面不求解流体、输运、核反应或相对论。</p><h3>视界与潮汐：两条不同的刻度</h3><p>下方调节非旋转黑洞质量及距离，以相同身体长度比较径向差异加速度。r<sub>s</sub> 随质量正比增大；在相同 r/r<sub>s</sub> 处，潮汐尺度反而随 M⁻² 减小。因果边界与物体是否被拉坏不是同一个问题。曲线展示给定质量与距离下的径向潮汐尺度。</p><div class="formula">r<sub>s</sub> = 2GM/c²； Δa ≈ 2GMℓ/r³</div><p>弱场公式只作尺度估计；在视界附近的值与 Schwarzschild 自由落体系中的径向潮汐本征尺度相符，却不能凭它计算全部强场轨迹。物体是否解体，还取决于自身引力、密度、强度和尺寸。黑洞阴影、视界和吸积盘的观测图像必须另用光线传播模型解释。</p>`
 };
 
-copies.ia=`<h3>标准化烛光：形状帮助校正亮度</h3><p>左图使用七个手选样本的人工光变模板；宽度参数 s 增大，曲线在时间上变宽。右图把同一组绝对峰值放在一起：灰点为校正前，金点为移除宽度与颜色项后的结果。移动校正滑杆时只调整右图峰值，左图保留原始合成光变，便于比较宽度。</p><p>每个样本按 M峰=−19.3−0.8(s−1)+2c+ε 生成；校正时移除宽度与颜色项。参考值、斜率、颜色参数和残差均为教学设定。标准差用七个合成峰值相对其均值计算；它只表示此例的散布，不能当作真实距离误差。</p><div class="formula">M合成=−19.3−0.8(s−1)+2c+ε<br>M校正=M合成+q[0.8(s−1)−2c]，0≤q≤1</div><p>校正后保留 ε，因此峰值不会完全重合。真实 Ia 的测距需要实际多波段光变、颜色和消光处理、独立距离标定以及模型不确定性；也不能把一种形成通道说成全部 Ia 的唯一机制。机制依据可参阅 <a href="https://arxiv.org/abs/astro-ph/9604143" target="_blank" rel="noopener">Riess、Press、Kirshner（1996）摘要</a>：该研究以真实训练样本建立多色光变形状与光度关系。本实验用简化公式展示宽度与颜色校正的作用。</p>`;
+copies.ia=`<h3>标准化烛光：形状帮助校正亮度</h3><p>左图使用七个手选样本的人工光变模板；宽度参数 s 增大，曲线在时间上变宽。右图把同一组绝对峰值放在一起：灰点为校正前，深色点为移除宽度与颜色项后的结果。移动校正滑杆时只调整右图峰值，左图保留原始合成光变，便于比较宽度。</p><p>每个样本按 M峰=−19.3−0.8(s−1)+2c+ε 生成；校正时移除宽度与颜色项。参考值、斜率、颜色参数和残差均为教学设定。标准差用七个合成峰值相对其均值计算；它只表示此例的散布，不能当作真实距离误差。</p><div class="formula">M合成=−19.3−0.8(s−1)+2c+ε<br>M校正=M合成+q[0.8(s−1)−2c]，0≤q≤1</div><p>校正后保留 ε，因此峰值不会完全重合。真实 Ia 的测距需要实际多波段光变、颜色和消光处理、独立距离标定以及模型不确定性；也不能把一种形成通道说成全部 Ia 的唯一机制。机制依据可参阅 <a href="https://arxiv.org/abs/astro-ph/9604143" target="_blank" rel="noopener">Riess、Press、Kirshner（1996）摘要</a>：该研究以真实训练样本建立多色光变形状与光度关系。本实验用简化公式展示宽度与颜色校正的作用。</p>`;
 
 function metric(label,value){return `<div><small>${label}</small><strong>${value}</strong></div>`;}
 function number(x,unit=''){return (Math.abs(x)>=1e5||Math.abs(x)>0&&Math.abs(x)<.01?x.toExponential(3):x.toLocaleString('zh-CN',{maximumFractionDigits:3}))+unit;}
@@ -32,7 +33,15 @@ function labelSprite(text,color='#d5e1ea'){
 }
 function line(points,color){return new THREE.Line(new THREE.BufferGeometry().setFromPoints(points.map(p=>new THREE.Vector3(...p))),new THREE.LineBasicMaterial({color}));}
 
-export async function mount(el,{mode:requestedMode}={}){
+export async function mount(el,{mode:requestedMode,signal}={}){
+ const requested=requestedMode||new URLSearchParams(location.search).get('mode');
+ async function loadTracks(fetchSignal){const response=await fetch('/data/stars/tracks.json',{signal:fetchSignal});if(!response.ok)throw new Error('MIST本地轨迹未载入');return response.json();}
+ let initialData,initialScene;
+ if(requested==='collapse'){
+  el.innerHTML='<p class="loading" role="status">正在载入工具…</p>';
+  [initialData,initialScene]=await Promise.all([loadTracks(signal),import('../shared/scene.js')]);
+  if(signal?.aborted||!el.isConnected)return;
+ }
  el.classList.add('stars-pilot');
  el.innerHTML=`<link rel="stylesheet" href="/modules/stars-pilot.css"><div class="lab-tabs" aria-label="恒星实验模式"><button data-mode="hr" aria-pressed="true">1 · 赫罗图</button><button data-mode="evolution" aria-pressed="false">2 · 演化与内部</button><button data-mode="pulsar" aria-pressed="false">脉冲星灯塔</button><button data-mode="collapse" aria-pressed="false">坍缩与潮汐</button><button data-mode="ia" aria-pressed="false">Ia 标准化</button></div>
  <div class="stars-start"><h2 data-intro-title></h2><p data-intro></p></div>
@@ -41,13 +50,13 @@ export async function mount(el,{mode:requestedMode}={}){
  <details class="stars-explanation"><summary>原理与公式</summary><section class="lab-copy" data-copy></section></details>
  <div class="stars-links"><a href="/sources/stars.md" target="_blank" rel="noopener">原模型、来源与限定 ↗</a></div>`;
  let disposed=false;
- const response=await fetch('/data/stars/tracks.json');if(!response.ok)throw new Error('MIST本地轨迹未载入');const data=await response.json();if(disposed)return;
+ const data=initialData||await loadTracks();if(disposed)return;
  const state={mode:'hr',hrExample:'sun',hrCompare:'none',mass:'1',index:352,play:false,alpha:45,zeta:45,width:12,period:.1,phase:0,
    progress:0,successful:true,bhMass:10,rsMultiple:3,collapseTask:'collapse',iaSample:4,iaCorrection:0};
  let view=null,evoGroup,pulseGroup,collapseGroup,beams,b1,b2,obsLine,observer,observerLabel,stellarCore,envelope,shock,inArrow,outArrow,sceneTask=null,modeRequest=0;
  async function ensureScene(){
   if(view)return; if(sceneTask)return sceneTask;
-  sceneTask=(async()=>{const sceneModule=await import('../shared/scene.js');if(disposed)return;THREE=sceneModule.THREE;const makeScene=sceneModule.makeScene;
+  sceneTask=(async()=>{const sceneModule=initialScene||await import('../shared/scene.js');if(disposed)return;THREE=sceneModule.THREE;const makeScene=sceneModule.makeScene;
  view=makeScene(el.querySelector('[data-scene]'),{position:[0,1.1,8],target:[-.5,0,0],fov:36});
  evoGroup=new THREE.Group();pulseGroup=new THREE.Group();collapseGroup=new THREE.Group();view.scene.add(evoGroup,pulseGroup,collapseGroup);
  const ns=new THREE.Mesh(new THREE.SphereGeometry(.55,48,24),new THREE.MeshBasicMaterial({color:'#c8d8eb',wireframe:true}));pulseGroup.add(ns);
@@ -64,7 +73,7 @@ export async function mount(el,{mode:requestedMode}={}){
  observerLabel=labelSprite('固定观察者',teal);pulseGroup.add(observerLabel);
  const axisLabel=labelSprite('磁轴与两束',gold);beams.add(axisLabel);axisLabel.position.set(0,-4.2,0);
  stellarCore=new THREE.Mesh(new THREE.SphereGeometry(1,40,24),new THREE.MeshBasicMaterial({color:'#f0e9d0'}));collapseGroup.add(stellarCore);
- envelope=new THREE.Mesh(new THREE.SphereGeometry(1,40,24),new THREE.MeshBasicMaterial({color:'#e99663',transparent:true,opacity:.20,wireframe:true}));collapseGroup.add(envelope);
+ envelope=new THREE.Mesh(new THREE.SphereGeometry(1,40,24),new THREE.MeshBasicMaterial({color:'#e99663',transparent:true,opacity:.58,wireframe:false}));collapseGroup.add(envelope);
  shock=new THREE.Mesh(new THREE.SphereGeometry(1,40,24),new THREE.MeshBasicMaterial({color:gold,transparent:true,opacity:.12,wireframe:true}));collapseGroup.add(shock);
  inArrow=new THREE.ArrowHelper(new THREE.Vector3(-1,0,0),new THREE.Vector3(1.3,0,0),.8,'#f0e9d0',.18,.12);
  outArrow=new THREE.ArrowHelper(new THREE.Vector3(1,0,0),new THREE.Vector3(2.0,0,0),1.0,'#e99663',.18,.12);collapseGroup.add(inArrow,outArrow);
@@ -103,7 +112,7 @@ export async function mount(el,{mode:requestedMode}={}){
    host.innerHTML=switches+(state.collapseTask==='tidal'?tidal+advanced(collapse):collapse+advanced(tidal));
   }else host.innerHTML=`<label class="control">当前合成样本<select data-key="iaSample">${syntheticIa.map(s=>`<option value="${s.id}">样本${s.id} · 宽度 s=${s.stretch.toFixed(2)}</option>`).join('')}</select></label>${slider('iaCorrection','移除宽度与颜色项',0,1,.05,'0=校正前；1=校正后')}<div class="stars-presets"><button data-ia-preset="before">校正前</button><button data-ia-preset="after">校正后</button></div>${advanced(`<p class="note">7个手选合成样本，统一比较绝对峰值。M峰=−19.3−0.8(s−1)+2c+ε；M校正=M峰+0.8(s−1)−2c。系数、颜色参数 c 与残差 ε 均为教学设定。</p><div data-ia-details></div>`)}`;
   if(state.mode==='evolution')host.querySelector('[data-key="index"]').closest('label').append(host.querySelector('[data-index-label]'));
-  unbind=bindControls(host,state,key=>{state.play=false;if(key==='hrExample')state.hrCompare='none';if(key==='mass'){state.index=clamp(state.index,0,track().rows.length-1);controls();resetCamera();}else if(key==='index')resetCamera();update();});
+  unbind=bindControls(host,state,key=>{state.play=false;if(key==='hrExample')state.hrCompare='none';if(key==='mass'){state.index=clamp(state.index,0,track().rows.length-1);q('[data-key="index"]').max=String(track().rows.length-1);resetCamera();}else if(key==='index')resetCamera();update();});
  }
  function update(){if(disposed)return;
   hrUI?.setMode(state.mode);
@@ -111,7 +120,7 @@ export async function mount(el,{mode:requestedMode}={}){
   pulsarUI?.setMode(state.mode);
   evolutionUI?.setMode(state.mode);
   collapseUI?.setMode(state.mode,state.collapseTask);
-  syncControls(['pulsar','evolution','collapse'].includes(state.mode)?el:q('[data-controls]'),state);
+  syncControls(['pulsar','evolution','collapse','ia'].includes(state.mode)?el:q('[data-controls]'),state);
   if(view){evoGroup.visible=false;pulseGroup.visible=state.mode==='pulsar';collapseGroup.visible=state.mode==='collapse';}q('[data-scene]').hidden=['hr','ia','evolution'].includes(state.mode);q('[data-structure-plot]').hidden=state.mode!=='evolution';q('[data-ia-plot]').hidden=state.mode!=='ia';q('[data-camera-reset]').hidden=['hr','ia','evolution'].includes(state.mode);
   const baseline=baselines[state.mode];let result,comparison='',primary='',secondary='';
   el.dataset.mode=state.mode;q('[data-selection]').hidden=state.mode!=='hr';
@@ -119,7 +128,7 @@ export async function mount(el,{mode:requestedMode}={}){
   q('[data-plot]').setAttribute('aria-label',state.mode==='hr'||state.mode==='evolution'?'赫罗图：表面温度向右递减，光度向上增加':'恒星关系图，读数见下方');
   if(state.mode==='hr'){
    const example=hrExamples.find(e=>e.id===state.hrExample),points=hrComparison(state.hrCompare,example);
-   hrDrawing=drawHR(canvas,{example:state.hrExample,comparison:state.hrCompare});
+   hrDrawing=drawHR(canvas,{example:state.hrExample,comparison:state.hrCompare,presentation:true});
    q('[data-plot-title]').textContent='赫罗图 · 一张温度与光度的地图';
    q('[data-plot-legend]').textContent='① 主序带　② 巨星　③ 超巨星　④ 白矮星。轮廓为示意；圆点为类别示例，☉ 为太阳名义参照。';
    const descriptions={none:example.description,temperature:'A 与 B 在同一条竖线上：都是 5772 K。B 的光度是 A 的100倍，半径是10倍；更亮来自更大的辐射表面积。',luminosity:'A 与 B 在同一条横线上：都是 1 L☉。B 位于更热的左侧，温度为 A 的2倍，半径只有1/4；小表面也能给出相同总功率。'};
@@ -133,7 +142,7 @@ export async function mount(el,{mode:requestedMode}={}){
    const structure=drawStructure(q('[data-structure-plot]'),p,tr.initial_mass_solar);q('[data-scene-title]').textContent='此刻的内部 · 组成与供能位置';
    q('[data-legend]').textContent=structure.title+'。'+structure.source+'。层的位置、厚度与圆大小均为示意；数值半径来自模型。';
    q('[data-plot-title]').textContent='MIST 单星演化轨迹 · 左热右冷';q('[data-plot-legend]').textContent='灰：指定初始质量的单星模型；金点：当前；蓝方块：基线。温度范围扩至20万K以容纳后AGB；轨迹未接白矮星冷却。';
-   hrDrawing=drawHR(canvas,{tracks:[{points:tr.rows.map(r=>[10**r[data.columns.indexOf('log_Teff')],10**r[data.columns.indexOf('log_L')]])}],current:{temperature:p.temperature,luminosity:p.luminosity},baseline:evolutionUI?.comparing?{temperature:prior.temperature,luminosity:prior.luminosity}:null});
+   hrDrawing=drawHR(canvas,{tracks:[{points:tr.rows.map(r=>[10**r[data.columns.indexOf('log_Teff')],10**r[data.columns.indexOf('log_L')]])}],current:{temperature:p.temperature,luminosity:p.luminosity},baseline:evolutionUI?.comparing?{temperature:prior.temperature,luminosity:prior.luminosity}:null,presentation:true});
    const age=p.star_age>=1e9?`${(p.star_age/1e9).toFixed(2)} 十亿年`:`${(p.star_age/1e6).toFixed(2)} 百万年`;
    primary=metric('当前半径',`${p.radius>=1000?p.radius.toExponential(2):p.radius.toFixed(2)} R☉`)+metric('表面温度',`${Math.round(p.temperature).toLocaleString()} K`)+metric('光度',`${p.luminosity>=1e4?p.luminosity.toExponential(2):p.luminosity.toFixed(2)} L☉`)+metric('模型年龄',age);
    secondary=metric('中央温度',number(p.centerTemperature,' K'))+metric('当前质量',number(p.star_mass,' M☉'))+metric('中央氢 / 氦质量分数',`${p.center_h1.toFixed(3)} / ${p.center_he4.toFixed(3)}`)+metric('He-rich / C-rich 核心质量',`${number(p.he_core_mass)} / ${number(p.c_core_mass)} M☉`);
@@ -166,11 +175,11 @@ export async function mount(el,{mode:requestedMode}={}){
    secondary=metric('非旋转视界半径',number(result.rsM/1000,' km'))+metric('距中心',number(result.rsM*state.rsMultiple/1000,' km'))+metric('径向差异加速度尺度',number(result.radialTidalAcceleration,' m/s²'))+metric('包层结果',state.successful?'选择：成功推出':'选择：未推出');
    comparison=`基线 ${Number(baseline.bhMass).toLocaleString()} M☉ / ${baseline.rsMultiple} rₛ → 潮汐尺度 ${(result.radialTidalAcceleration/compactScales(Number(baseline.bhMass),2,baseline.rsMultiple).radialTidalAcceleration).toExponential(2)} 倍`;
   }else{
-   const sample=syntheticIa.find(s=>s.id===Number(state.iaSample)),before=teachingIaScatter(0),after=teachingIaScatter(state.iaCorrection),prior=teachingIaScatter(baseline.iaCorrection);
+   const sample=syntheticIa.find(s=>s.id===Number(state.iaSample)),before=teachingIaScatter(0),after=teachingIaScatter(state.iaCorrection),prior=teachingIaScatter(baseline.iaCorrection),graphic=getGraphicStyle(canvas);
    q('[data-scene-title]').textContent='合成 Ia 光变 · 时间宽度不同';q('[data-legend]').textContent='灰：7 个合成样本；金：当前样本原始光变。纵轴向上更亮。';
-   plot(q('[data-ia-plot]'),{series:[...syntheticIa.map(s=>({points:teachingIaCurve(s),color:'#42566c'})),{points:teachingIaCurve(sample),color:gold}],xDomain:[-20,45],yDomain:[-14.5,-20.2],xLabel:'相对峰值时间 / 日 · 合成',yLabel:'合成绝对星等 · 上亮'});
-   q('[data-plot-title]').textContent='同一组合成样本 · 峰值校正前后';q('[data-plot-legend]').textContent='灰圆：校正前；金圆：当前校正；细线：同一样本的变化。编号标识合成样本。';
-   const iaDrawing=plot(canvas,{series:[...syntheticIa.map((s,i)=>({points:[[s.id,before.values[i]],[s.id,after.values[i]]],color:'#42566c'})),...syntheticIa.map((s,i)=>({points:[[s.id,before.values[i]]],color:'#99adc4',dots:true})),...syntheticIa.map((s,i)=>({points:[[s.id,after.values[i]]],color:gold,dots:true})),{points:[[.5,iaReference],[7.5,iaReference]],color:teal}],xDomain:[.5,7.5],yDomain:[-18.6,-19.9],xLabel:'合成样本编号',yLabel:'合成峰值 / mag · 上亮'});
+   plot(q('[data-ia-plot]'),{series:[...syntheticIa.map(s=>({points:teachingIaCurve(s),color:graphic.grid})),{points:teachingIaCurve(sample),color:graphic.text}],xDomain:[-20,45],yDomain:[-14.5,-20.2],xLabel:'相对峰值时间 / 日 · 合成',yLabel:'合成绝对星等 · 上亮'});
+   q('[data-plot-title]').textContent='同一组合成样本 · 峰值校正前后';q('[data-plot-legend]').textContent='灰圆：校正前；深色圆：当前校正；细线：同一样本的变化。编号标识合成样本。';
+   const iaDrawing=plot(canvas,{series:[...syntheticIa.map((s,i)=>({points:[[s.id,before.values[i]],[s.id,after.values[i]]],color:graphic.grid})),...syntheticIa.map((s,i)=>({points:[[s.id,before.values[i]]],color:graphic.muted,dots:true})),...syntheticIa.map((s,i)=>({points:[[s.id,after.values[i]]],color:graphic.text,dots:true})),{points:[[.5,iaReference],[7.5,iaReference]],color:graphic.accent,dash:[6,5]}],xDomain:[.5,7.5],yDomain:[-18.6,-19.9],xLabel:'合成样本编号',yLabel:'合成峰值 / mag · 上亮'});
    primary=metric('峰值样本散布 σ',after.rms.toFixed(3)+' mag')+metric('校正前散布 σ',before.rms.toFixed(3)+' mag')+metric('当前样本峰值',teachingIaPeak(sample,state.iaCorrection).toFixed(3)+' mag');
    secondary=metric('宽度参数 s',sample.stretch.toFixed(2))+metric('人工颜色参数 c',sample.color.toFixed(2))+metric('人工残差 ε',sample.residual.toFixed(2)+' mag');
    comparison=`基线 σ ${prior.rms.toFixed(3)} → 当前 ${after.rms.toFixed(3)} mag；保留人工残差，校正后不会完全重合`;
@@ -217,7 +226,7 @@ export async function mount(el,{mode:requestedMode}={}){
   else if(b.hasAttribute('data-reset')){baselines[state.mode]={...defaults,mode:state.mode};apply(defaults);say('已复位本模式、基线与视角，播放暂停。');}
  };
  const pickHR=e=>{if(state.mode!=='hr'||!hrDrawing)return;const r=canvas.getBoundingClientRect(),id=hrDrawing.pick(e.clientX-r.left,e.clientY-r.top);if(id){state.hrExample=id;state.hrCompare='none';update();}};
- const requested=requestedMode||new URLSearchParams(location.search).get('mode');await changeMode(Object.hasOwn(modeKeys,requested)?requested:'hr',{initial:true});
+ await changeMode(Object.hasOwn(modeKeys,requested)?requested:'hr',{initial:true});
  canvas.addEventListener('click',pickHR);
  el.addEventListener('click',click);const toggle=()=>update();el.addEventListener('toggle',toggle,true);
  const ro=new ResizeObserver(()=>{if(!disposed)update();});ro.observe(canvas);ro.observe(q('[data-ia-plot]'));ro.observe(q('[data-structure-plot]'));
@@ -235,5 +244,6 @@ export async function mount(el,{mode:requestedMode}={}){
  pulsarUI=attachPulsarUI(el,{redraw:update,getScene:()=>({view,pulseGroup})});
  evolutionUI=attachEvolutionUI(el,{redraw:update});
  collapseUI=attachCollapseUI(el,{redraw:update,getScene:()=>({view,collapseGroup,stellarCore,envelope,shock,inArrow,outArrow})});
+ if(requested==='collapse')update();
  return()=>{disposed=true;modeRequest++;stopClock();canvas.removeEventListener('click',pickHR);hrUI.dispose();iaUI.dispose();pulsarUI.dispose();evolutionUI.dispose();collapseUI.dispose();disposeFocus();ro.disconnect();unbind();el.removeEventListener('click',click);el.removeEventListener('toggle',toggle,true);view?.dispose();el.classList.remove('stars-pilot');delete el.dataset.view;delete el.dataset.mode;if(window.__lab?.module==='stars')delete window.__lab;};
 }

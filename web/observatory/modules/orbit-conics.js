@@ -1,6 +1,7 @@
 import { EARTH } from './orbits-physics.mjs';
 import { conicState, propagateConic, conicPoint, traceConic } from './orbit-conics-physics.mjs';
 import {validateExperimentModel} from '../shared/experiment-state.js';
+import {getGraphicStyle,observeGraphicFonts} from '../shared/presentation.js';
 const TAU=2*Math.PI;
 const n=(v,d=3)=>Number.isFinite(v)?v.toLocaleString('zh-CN',{maximumFractionDigits:d}):'无';
 const hours=s=>n(s/3600,s<3600?3:2)+' h';
@@ -9,7 +10,7 @@ export function mountConics(slot){
  const initial=conicState(200,7.79),state={mode:'orbit',height:200,speed:initial.vc,totalHours:2,rateHours:.1,elapsed:0,progress:0,play:false,view:'whole'};
  const defaults={...state};let active=true,info,frame,last=0,lastPaint=0,result,background=[],viewport;
  slot.innerHTML=`<link rel="stylesheet" href="/modules/orbit-conics.css"><section class="conics-lab">
- <div class="conic-heading"><div><strong data-conic-kind></strong><span data-conic-class></span></div><div class="conic-views" aria-label="轨道视角"><button data-conic-view="whole">整体轨道</button><button data-conic-view="near">近地点</button></div></div>
+ <div class="conic-heading"><div><h1>轨道与速度</h1><strong data-conic-kind></strong><span data-conic-class></span></div><div class="conic-views" aria-label="轨道视角"><button data-conic-view="whole">整体轨道</button><button data-conic-view="near">近地点</button></div></div>
  <div class="conic-workbench"><div class="conic-visual"><canvas class="conic-canvas" aria-label="地球位于焦点的解析轨道；虚线为完整轨道，亮线为已走轨迹"></canvas>
  <div class="conic-transport"><button data-conic-action="play" class="conic-play">▶ 播放</button><button data-conic-action="reset">↺ 重置</button><output data-conic-time></output></div>
  <label class="conic-timeline"><span>经过时间 <output data-conic-value="progress"></output></span><input type="range" min="0" max="1" step=".0001" value="0" data-conic-key="progress" aria-label="拖动经过时间"></label>
@@ -68,7 +69,7 @@ export function mountConics(slot){
   if(!info||!active||!canvas.clientWidth)return;
   const w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(2,devicePixelRatio||1);
   if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}
-  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);ctx.fillStyle='#08131e';ctx.fillRect(0,0,w,h);
+  const style=getGraphicStyle(slot);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);ctx.fillStyle=style.background;ctx.fillRect(0,0,w,h);
   const v=viewport,pad=32,scale=Math.min((w-2*pad)/Math.max(v.xmax-v.xmin,EARTH.radius*2),(h-2*pad)/(v.ymax*2));
   const cx=w/2-(v.xmin+v.xmax)/2*scale,cy=h/2;
   const screen=p=>[cx+p.x*scale,cy-p.y*scale];
@@ -76,7 +77,7 @@ export function mountConics(slot){
   function dot(p,r,color){const [x,y]=screen(p);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fillStyle=color;ctx.fill();}
   function arrow(x,y,dx,dy,color){const l=Math.hypot(dx,dy);if(!l)return;dx/=l;dy/=l;ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-dx*12-dy*5,y-dy*12+dx*5);ctx.lineTo(x,y);ctx.lineTo(x-dx*12+dy*5,y-dy*12-dx*5);ctx.stroke();}
   ctx.save();ctx.beginPath();ctx.rect(12,12,w-24,h-24);ctx.clip();
-  ctx.strokeStyle='#152a3a';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(w,cy);ctx.moveTo(cx,0);ctx.lineTo(cx,h);ctx.stroke();
+  ctx.strokeStyle=style.grid;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(w,cy);ctx.moveTo(cx,0);ctx.lineTo(cx,h);ctx.stroke();
   if(background.length)line(background,'#719ba5',1.6,[5,5]);
   if(state.elapsed>0){
    let trail;
@@ -106,13 +107,13 @@ export function mountConics(slot){
    }
    for(const idx of [0,background.length-1]){const p=background[idx],next=background[idx===0?1:idx-1];if(p&&next){const a=screen(p),b=screen(next);if(inside(a))arrow(a[0],a[1],a[0]-b[0],a[1]-b[1],'#87b8bd');}}
   }
-  ctx.restore();ctx.font='12px "Microsoft YaHei",sans-serif';ctx.fillStyle='#bdd3db';
+  ctx.restore();ctx.font=style.tickFont;ctx.fillStyle=style.text;
   if(cx>=4&&cx<w-4){ctx.textAlign=cx<w/2?'left':'right';ctx.fillText(earthR<3?'地球焦点（指示放大）':'地球 · 焦点',Math.max(12,Math.min(w-12,cx+(cx<w/2?8:-8))),Math.min(h-18,cy+(earthR<3?40:earthR+20)));}
-  ctx.textAlign='left';ctx.fillStyle='#e0c17b';ctx.fillText(state.view==='near'?'近地点视窗':'整体轨道',14,23);
-  ctx.fillStyle='#91abb8';const bar=64;ctx.fillRect(14,h-26,bar,1);ctx.fillText(n(bar/scale,0)+' km',14,h-10);
+  ctx.textAlign='left';ctx.fillStyle=style.text;ctx.fillText(state.view==='near'?'近地点视窗':'整体轨道',14,23);
+  ctx.fillStyle=style.muted;const bar=64;ctx.fillRect(14,h-26,bar,1);ctx.fillText(n(bar/scale,0)+' km',14,h-10);
   if(px<16||px>w-16||py<16||py>h-16){ctx.textAlign='right';ctx.fillStyle='#ffda8f';ctx.fillText('飞行器在画面外',w-14,23);}
   // A focus-size indicator is deliberately explicit; never enlarge the physical Earth silently.
-  if(state.view==='near'&&info.alpha>0&&info.e>.85){ctx.textAlign='right';ctx.fillStyle='#91abb8';ctx.fillText('远地点 '+n(info.apo/EARTH.radius,0)+' R⊕',w-14,h-12);}
+  if(state.view==='near'&&info.alpha>0&&info.e>.85){ctx.textAlign='right';ctx.fillStyle=style.muted;ctx.fillText('远地点 '+n(info.apo/EARTH.radius,0)+' R⊕',w-14,h-12);}
  }
  function input(e){const key=e.target.dataset.conicKey;if(!key)return;let value=Number(e.target.value);if(!Number.isFinite(value))return;
   if(key==='totalHours'||key==='rateHours'){if(value<Number(e.target.min)||value>Number(e.target.max))return;state[key]=value;state.play=false;}
@@ -138,6 +139,9 @@ export function mountConics(slot){
   const {version,kind,...parameters}=saved;Object.assign(state,parameters,{play:false});
   info=conicState(state.height,state.speed);geometry();update();draw();return true;
  }
- slot.addEventListener('input',input);slot.addEventListener('click',click);const resize=new ResizeObserver(()=>draw());resize.observe(canvas);rebuild();frame=requestAnimationFrame(loop);
- return { state,getState,applyState,get result(){return result;},setActive(value){active=value;slot.hidden=!value;if(!value)state.play=false;else{update();draw();}},dispose(){cancelAnimationFrame(frame);resize.disconnect();slot.removeEventListener('input',input);slot.removeEventListener('click',click);earthImage.onload=null;} };
+ const stopFonts=observeGraphicFonts(slot,draw);slot.addEventListener('input',input);slot.addEventListener('click',click);const resize=new ResizeObserver(()=>draw());resize.observe(canvas);rebuild();frame=requestAnimationFrame(loop);
+ return { state,getState,applyState,get result(){return result;},setActive(value){active=value;slot.hidden=!value;if(!value)state.play=false;else{update();draw();}},dispose(){stopFonts();cancelAnimationFrame(frame);resize.disconnect();slot.removeEventListener('input',input);slot.removeEventListener('click',click);earthImage.onload=null;} };
 }
+
+
+

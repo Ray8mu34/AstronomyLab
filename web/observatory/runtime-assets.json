@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "createdAt": "2026-10-19T06:27:28.319Z",
-  "buildId": "r1-20261005-8071f8831008",
+  "createdAt": "2026-10-19T08:28:22.942Z",
+  "buildId": "r1-20261005-ad7992e8d7e2",
   "baselineHead": "1e8a77642b489c990e917a4791c0eb83851fadd1",
   "product": "AstronomyLab R1",
   "publicDistribution": "blocked_pending_licenses",
@@ -14,8 +14,8 @@
     {
       "url": "/app.js",
       "source": "web/observatory/app.js",
-      "bytes": 7803,
-      "sha256": "a63e73fb8c417544621bea0dfd4b7265048de3c8131d21b638a45bbc56db0100",
+      "bytes": 8576,
+      "sha256": "46c4cb5577c28a15ab95a2bf90746ff21d92f780e9eb6eddcedc926833e544a5",
       "role": "runtime"
     },
     {
@@ -159,6 +159,34 @@
       "role": "science-data-or-record"
     },
     {
+      "url": "/data/home/assets.json",
+      "source": "web/observatory/data/home/assets.json",
+      "bytes": 4342,
+      "sha256": "abab00ee1fc64e04201a938b7e6996c33fde6cae086e8c9547e8c136761946b5",
+      "role": "entry-image-or-attribution"
+    },
+    {
+      "url": "/data/home/moon-first-quarter-1024.webp",
+      "source": "web/observatory/data/home/moon-first-quarter-1024.webp",
+      "bytes": 69712,
+      "sha256": "9ecb994f6545d64f0591ec70dd2a0cd8b4e672a042d167468c9c27e01181651b",
+      "role": "entry-image-or-attribution"
+    },
+    {
+      "url": "/data/home/moon-first-quarter-640.webp",
+      "source": "web/observatory/data/home/moon-first-quarter-640.webp",
+      "bytes": 30660,
+      "sha256": "6e059cd6daa0ea08117178144d9a068bf43e6756455c84a62c23ebe3b62961b4",
+      "role": "entry-image-or-attribution"
+    },
+    {
+      "url": "/data/home/pillars-640.webp",
+      "source": "web/observatory/data/home/pillars-640.webp",
+      "bytes": 115206,
+      "sha256": "033c837f1818a4bea4a3da7613675c6177e68605daa867b9aac4ae121ae92876",
+      "role": "entry-image-or-attribution"
+    },
+    {
       "url": "/data/imaging/502-linear.f32",
       "source": "web/observatory/data/imaging/502-linear.f32",
       "bytes": 409600,
@@ -259,15 +287,15 @@
     {
       "url": "/index.html",
       "source": "web/observatory/index.html",
-      "bytes": 1274,
-      "sha256": "2f5d54e67a4776ef8162c9685cdedf1ef111183feb358f950bbb4de895562a86",
+      "bytes": 2053,
+      "sha256": "e38f4bf8d4948fbd4d522637d52fb49e9bef48181c0402a2051fefdc2c889816",
       "role": "runtime"
     },
     {
       "url": "/labs/earth-moon/app.js",
       "source": "web/earth-moon/app.js",
-      "bytes": 44893,
-      "sha256": "950ee685116780f7e5ed90555f2c3fa00da5fd3146275c8a35c6730cd109048b",
+      "bytes": 47408,
+      "sha256": "1e1efe066096267cdc9377c52d8a2781656f3f8de5caa27ec901ab4c89c3a982",
       "role": "runtime"
     },
     {
@@ -278,52 +306,24 @@
       "role": "runtime"
     },
     {
-      "url": "/labs/earth-moon/eclipse-ui.css",
-      "source": "web/earth-moon/eclipse-ui.css",
-      "bytes": 12877,
-      "sha256": "e400f2ab08ac5720b337c7779acec54e38ea6c24bd5b667210ae48bc5fae362b",
-      "role": "runtime"
-    },
-    {
-      "url": "/labs/earth-moon/eclipse-ui.js",
-      "source": "web/earth-moon/eclipse-ui.js",
-      "bytes": 16735,
-      "sha256": "bc51936f836603e065fda471fe588e8fca5c07e9e88909463e2a8d0b943bdb05",
-      "role": "runtime"
-    },
-    {
       "url": "/labs/earth-moon/index.html",
       "source": "web/earth-moon/index.html",
-      "bytes": 11238,
-      "sha256": "e5f2188b0c4329d3f3b740ba59eef88faa7ed9a38d949066391658087b36e898",
-      "role": "runtime"
-    },
-    {
-      "url": "/labs/earth-moon/period-ui.css",
-      "source": "web/earth-moon/period-ui.css",
-      "bytes": 7321,
-      "sha256": "0238c7e6fe99ae44f04a25977b2cdc4911b3afe7946f4d1ec943a95796fcf33f",
-      "role": "runtime"
-    },
-    {
-      "url": "/labs/earth-moon/period-ui.js",
-      "source": "web/earth-moon/period-ui.js",
-      "bytes": 7472,
-      "sha256": "866b098e99b94fe69dcc8abf27a6f0196122fd68a41b9e4805b74d09176c6a14",
+      "bytes": 11092,
+      "sha256": "39dec21e05bcc11c701bd77428a380c905a59a8adc016751f5174d4c839cbf81",
       "role": "runtime"
     },
     {
       "url": "/labs/earth-moon/phase-ui.css",
       "source": "web/earth-moon/phase-ui.css",
-      "bytes": 14432,
-      "sha256": "ed42632d7706bb15c8199700190c3cb08670f589540f8849aa2d9bc171fdf051",
+      "bytes": 25677,
+      "sha256": "b4685bc7070f646830a62c256370c3b4002c07e265a32b2a1ae493a8df9b04c7",
       "role": "runtime"
     },
     {
       "url": "/labs/earth-moon/phase-ui.js",
       "source": "web/earth-moon/phase-ui.js",
-      "bytes": 12861,
-      "sha256": "bd8eb5e3da39cf8b8eb257fbc326ba36354933d0f8735fb7503247ca33117d23",
+      "bytes": 16798,
+      "sha256": "88b8753e650cf506e5a789f583c519b3b9240ad87a96a41c1a2384eed213084e",
       "role": "runtime"
     },
     {
@@ -352,20 +352,6 @@
       "source": "web/earth-moon/SOURCES.md",
       "bytes": 8357,
       "sha256": "6f295d99e27274b80ae1665b2c7bbb57cf5edca5eab8af2117fc37123ec1867f",
-      "role": "runtime"
-    },
-    {
-      "url": "/labs/earth-moon/spin-ui.css",
-      "source": "web/earth-moon/spin-ui.css",
-      "bytes": 8567,
-      "sha256": "f7a901c97eb41dacc04515cf6c6655a3b80a9e7510d7f1a238d34d1a9d3f11f6",
-      "role": "runtime"
-    },
-    {
-      "url": "/labs/earth-moon/spin-ui.js",
-      "source": "web/earth-moon/spin-ui.js",
-      "bytes": 7168,
-      "sha256": "772ca5c6dcad972d3ad28aa80342881a7eebb345b639c9e76f214df040fba637",
       "role": "runtime"
     },
     {
@@ -476,8 +462,8 @@
     {
       "url": "/labs/solar-system/index.html",
       "source": "web/solar-system/index.html",
-      "bytes": 8839,
-      "sha256": "0bd48c4975f8f0ee22ea58708aa8fe7bc49f206659a3fc67af629b890ab261e3",
+      "bytes": 8337,
+      "sha256": "dcd96ae2a9786176b20dcad09f3ac25c92ef473352773a4f60eaff900958272c",
       "role": "runtime"
     },
     {
@@ -546,8 +532,8 @@
     {
       "url": "/labs/solar-system/style.css",
       "source": "web/solar-system/style.css",
-      "bytes": 32093,
-      "sha256": "3050da121c8397e68372d507beafc36c83ecfbea1ace4cdafe5bfd83bd3ff0fd",
+      "bytes": 17594,
+      "sha256": "bf4b0ce888c5fd51908d1f59dce50e4075c415587aae6ed77f0f07b268f61f2b",
       "role": "runtime"
     },
     {
@@ -670,17 +656,17 @@
       "role": "runtime"
     },
     {
-      "url": "/modules/alignments-mars-ui.css",
-      "source": "web/observatory/modules/alignments-mars-ui.css",
-      "bytes": 8136,
-      "sha256": "510c779b9a05281d8fb7299aba82cafd60cf3ae34eb4c939b6e27def213098e2",
+      "url": "/modules/alignments-atlas-ui.css",
+      "source": "web/observatory/modules/alignments-atlas-ui.css",
+      "bytes": 13210,
+      "sha256": "df05b7d40c504db5399cc4fb4b1241a0156e733a6205c5f1fef4850b56caa1e9",
       "role": "runtime"
     },
     {
-      "url": "/modules/alignments-mars-ui.js",
-      "source": "web/observatory/modules/alignments-mars-ui.js",
-      "bytes": 9531,
-      "sha256": "497818c97d781a387743a92d7b23447d3f6705dd9e064fa8aa1156d7d91bd6e4",
+      "url": "/modules/alignments-atlas-ui.js",
+      "source": "web/observatory/modules/alignments-atlas-ui.js",
+      "bytes": 15240,
+      "sha256": "974772beeb0914c33a16a4a47ac48a5ad34be3bf7b0f92567700f21cd59e0b5d",
       "role": "runtime"
     },
     {
@@ -691,87 +677,59 @@
       "role": "runtime"
     },
     {
-      "url": "/modules/alignments-pilot.css",
-      "source": "web/observatory/modules/alignments-pilot.css",
-      "bytes": 5179,
-      "sha256": "5de2c5b2a7cd2c03edf9ab018085a3b82c87bef3da0c6e7eab0ea9865f6cb945",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/alignments-transit-ui.css",
-      "source": "web/observatory/modules/alignments-transit-ui.css",
-      "bytes": 8403,
-      "sha256": "c4857d3233fef9e2a4e0406c7c56bfe5b52faae3eca6a80472dcb09f7207f759",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/alignments-transit-ui.js",
-      "source": "web/observatory/modules/alignments-transit-ui.js",
-      "bytes": 10270,
-      "sha256": "fe8429a6b7cf1dd581210f5d8f00776c87f240c089cf3fa50baefd071c2f732f",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/alignments-venus-ui.css",
-      "source": "web/observatory/modules/alignments-venus-ui.css",
-      "bytes": 8409,
-      "sha256": "eb2a201d39857eb9274a879bc5be512ddc7c1fdd99c66d8148cfc3887ba21bb0",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/alignments-venus-ui.js",
-      "source": "web/observatory/modules/alignments-venus-ui.js",
-      "bytes": 6640,
-      "sha256": "0ed4c2abe404414021465d09998034f818998bafb898bb178d46213b02b34e21",
-      "role": "runtime"
-    },
-    {
       "url": "/modules/alignments.js",
       "source": "web/observatory/modules/alignments.js",
-      "bytes": 18510,
-      "sha256": "9019a703c4e3c77762438d77f2b1e0e76eefcc9222e23e6b810166c29d7551a8",
+      "bytes": 18635,
+      "sha256": "365466e9d957b2bfdacc10f1e82c090932206ad70851090580a96893bfba3255",
       "role": "runtime"
     },
     {
       "url": "/modules/galaxy-cmb-spectrum-ui.css",
       "source": "web/observatory/modules/galaxy-cmb-spectrum-ui.css",
-      "bytes": 7945,
-      "sha256": "7a22b78ad72387190841dd8d278e5f6a3c82a07b25d9f69b2cddaf84ae46a831",
+      "bytes": 12666,
+      "sha256": "285b90da65734cf5c113c5ef5290d01d3b5ed9eb3a3f392b97fa13967a8c1727",
       "role": "runtime"
     },
     {
       "url": "/modules/galaxy-cmb-spectrum-ui.js",
       "source": "web/observatory/modules/galaxy-cmb-spectrum-ui.js",
-      "bytes": 6010,
-      "sha256": "e7f88af5a0b36829d221a4e6a2b9406855141197c359608c293ba7c3cc846413",
+      "bytes": 8911,
+      "sha256": "65cb179d359177b556a2ce25e062b6f1c72379af322058e30520ea451db419e3",
       "role": "runtime"
     },
     {
       "url": "/modules/galaxy-cmb-ui.css",
       "source": "web/observatory/modules/galaxy-cmb-ui.css",
-      "bytes": 10373,
-      "sha256": "8ccbaaedda3853101c8042cc9818ae8e46c78023e4c4097a13ed0408c86ec739",
+      "bytes": 5767,
+      "sha256": "5adb2be9040d17b53a28a297b9bb333263ae328cdd372d8afdbf423da1e06a9d",
       "role": "runtime"
     },
     {
       "url": "/modules/galaxy-cmb-ui.js",
       "source": "web/observatory/modules/galaxy-cmb-ui.js",
-      "bytes": 6690,
-      "sha256": "17428b9ec7cb7d1de8fe6f96b673cd165a96fc99825b132c6edc6d89ca736076",
+      "bytes": 7381,
+      "sha256": "4866b86e7b9d422687b29c44e308e7fa13cabe9262954ca62dd0837f1e00a127",
+      "role": "runtime"
+    },
+    {
+      "url": "/modules/galaxy-firas-renderer.js",
+      "source": "web/observatory/modules/galaxy-firas-renderer.js",
+      "bytes": 3366,
+      "sha256": "a8018d12be08b96daf37bbf4ff2411439a524f886613b0bb41c578e5edeea348",
       "role": "runtime"
     },
     {
       "url": "/modules/galaxy-galaxy-ui.css",
       "source": "web/observatory/modules/galaxy-galaxy-ui.css",
-      "bytes": 15412,
-      "sha256": "114f8b92d2b1aa30443309ea341e669339fb87aaefc63ed4666cef26d3941c8b",
+      "bytes": 6195,
+      "sha256": "77f29bcc212e495567782d7d148755d9f73f6c66a9ad8c68db6b12cd3b40828e",
       "role": "runtime"
     },
     {
       "url": "/modules/galaxy-galaxy-ui.js",
       "source": "web/observatory/modules/galaxy-galaxy-ui.js",
-      "bytes": 9604,
-      "sha256": "ff40c149d9b4823431c712e06dc8a727fe8bd209033ad3e538c651813b1791b7",
+      "bytes": 10294,
+      "sha256": "8cf26dfa9ba9b7d107220cbf0c5a5604bf43e620ff877f68f8460bf468d7c808",
       "role": "runtime"
     },
     {
@@ -791,8 +749,8 @@
     {
       "url": "/modules/galaxy.js",
       "source": "web/observatory/modules/galaxy.js",
-      "bytes": 39967,
-      "sha256": "34c07e66a9e78282905e1f914e4a08e427569d9bff00583ef9a2ff166a34f7cc",
+      "bytes": 40209,
+      "sha256": "6dc990d7712240f937accc817acc3ae057f71d7eb5d86662cb645e955e0e1bb8",
       "role": "runtime"
     },
     {
@@ -812,8 +770,8 @@
     {
       "url": "/modules/imaging-pilot.css",
       "source": "web/observatory/modules/imaging-pilot.css",
-      "bytes": 9685,
-      "sha256": "3923e1cbaf08052ec4e31b8466ebb618da37c2f72b127fa3ebd44875d3e4559c",
+      "bytes": 5758,
+      "sha256": "a654196dd19ac33bf0302dbba4981313aaa76918783fd8a74b402cb0108a1194",
       "role": "runtime"
     },
     {
@@ -840,22 +798,22 @@
     {
       "url": "/modules/imaging.js",
       "source": "web/observatory/modules/imaging.js",
-      "bytes": 31580,
-      "sha256": "bd0c373df5d9c151ecf35a50ed0ed5dc05a2fb673329ec68b793b43ced0cad72",
+      "bytes": 34607,
+      "sha256": "040129f558c67f2c46ad745450cceb5e9bb68fa09246dba3d02c8554678d5f71",
       "role": "runtime"
     },
     {
       "url": "/modules/landing-staging-lab.css",
       "source": "web/observatory/modules/landing-staging-lab.css",
-      "bytes": 7790,
-      "sha256": "051269a56e1d7be0a657c69c8128e58591053bafa34b702ad5693b3c7360a3b2",
+      "bytes": 5389,
+      "sha256": "984e68ed71e5d32cf6add8d6977445823bc5c9bcfdc98a25dede2ae48b483ff4",
       "role": "runtime"
     },
     {
       "url": "/modules/landing-staging-lab.js",
       "source": "web/observatory/modules/landing-staging-lab.js",
-      "bytes": 24079,
-      "sha256": "edcd95632778e4f9b3a9e9f7a8770c69fa887b0eb9b2f716813210fbec8ec6ef",
+      "bytes": 24239,
+      "sha256": "f3509eddf766ed608df3a90fd874e276b19f08a97275da469ce35076c567148f",
       "role": "runtime"
     },
     {
@@ -866,59 +824,52 @@
       "role": "runtime"
     },
     {
-      "url": "/modules/landing-staging-ui.css",
-      "source": "web/observatory/modules/landing-staging-ui.css",
-      "bytes": 7570,
-      "sha256": "a5894088d4407ebc1946bd97a16b49b8bd0164f3aa8d0019e662f290216a9ab1",
-      "role": "runtime"
-    },
-    {
       "url": "/modules/landing-staging-ui.js",
       "source": "web/observatory/modules/landing-staging-ui.js",
-      "bytes": 5452,
-      "sha256": "868c90a4a68e75019c960558df218db45d47d348969d74a1f6fa11f684a11f7c",
+      "bytes": 949,
+      "sha256": "091dbd42e6bbed49ac06e55a89525a464ccc0c8489cf31ededad8298fe2dd90d",
       "role": "runtime"
     },
     {
       "url": "/modules/light-magnitude-ui.css",
       "source": "web/observatory/modules/light-magnitude-ui.css",
-      "bytes": 9410,
-      "sha256": "7483ea98cd9bb1a5f7563dea4a3a4603177ce253be0d1222798e0875d4373212",
+      "bytes": 1903,
+      "sha256": "6e2337080768f08922b5c981639d60235cd04055cc5218e4c0685e80fb43ed9f",
       "role": "runtime"
     },
     {
       "url": "/modules/light-magnitude-ui.js",
       "source": "web/observatory/modules/light-magnitude-ui.js",
-      "bytes": 6191,
-      "sha256": "f39cbc9b0231bb3bb352638356baf174f74ce6eea1eed9bf5406b34ef83244aa",
+      "bytes": 6774,
+      "sha256": "b9617edca908b71995e03e1b58d22c54633a0782efff392b074761e0ba88b60f",
       "role": "runtime"
     },
     {
       "url": "/modules/light-motion-ui.css",
       "source": "web/observatory/modules/light-motion-ui.css",
-      "bytes": 11012,
-      "sha256": "9f71da09cbeb08312617448a72fd5f98e946bae66f82884355bee51fdc40069c",
+      "bytes": 3667,
+      "sha256": "3e946bbe15a4b7a024ccd9bc956dee95398f6b8d99673f403e6a8a0b21dec4ae",
       "role": "runtime"
     },
     {
       "url": "/modules/light-motion-ui.js",
       "source": "web/observatory/modules/light-motion-ui.js",
-      "bytes": 6885,
-      "sha256": "27ec2dd9cdeed5a9437463ddfbf59b1f936d40887f8506d498068689add926af",
+      "bytes": 7563,
+      "sha256": "f9d1e10020494fad5e81449ed98ac1bfadebe36dfdce526a216dd6de91827da1",
       "role": "runtime"
     },
     {
       "url": "/modules/light-observing-ui.css",
       "source": "web/observatory/modules/light-observing-ui.css",
-      "bytes": 8984,
-      "sha256": "13af8222a5822d75fd548d3ccd1ece65fe3053c34359da03e022cfe20479adbf",
+      "bytes": 3152,
+      "sha256": "ef11c4eec791b392a1d6c9e30fe2aae3e37d1f89fa16991ff54362c87d6373d7",
       "role": "runtime"
     },
     {
       "url": "/modules/light-observing-ui.js",
       "source": "web/observatory/modules/light-observing-ui.js",
-      "bytes": 6354,
-      "sha256": "6f1f1c4a7475a8f2d0239483745d964e5f0fefcb05ad9791aac2d10a1335749d",
+      "bytes": 7041,
+      "sha256": "901cbb9a82c2e27569f15f8b5a6d544efa8876b0fe22a597a82ce59d831e37cd",
       "role": "runtime"
     },
     {
@@ -936,6 +887,13 @@
       "role": "runtime"
     },
     {
+      "url": "/modules/light-presentation.css",
+      "source": "web/observatory/modules/light-presentation.css",
+      "bytes": 4732,
+      "sha256": "9fb06eecd4a2b938d4ad091dea8840400664274b25e1a707cf109697e5bc0212",
+      "role": "runtime"
+    },
+    {
       "url": "/modules/light-teaching.mjs",
       "source": "web/observatory/modules/light-teaching.mjs",
       "bytes": 1186,
@@ -945,36 +903,36 @@
     {
       "url": "/modules/light-thermal-ui.css",
       "source": "web/observatory/modules/light-thermal-ui.css",
-      "bytes": 14090,
-      "sha256": "4db45286d6dc97ba60e91a06297e97223d2c9409ad77ec1d4aa31aba23722109",
+      "bytes": 2722,
+      "sha256": "98d5843af88be27a361096fe904b4041eb89e4ca3d93361061a8ef128c7ac2eb",
       "role": "runtime"
     },
     {
       "url": "/modules/light-thermal-ui.js",
       "source": "web/observatory/modules/light-thermal-ui.js",
-      "bytes": 7935,
-      "sha256": "419a4ce224a505b6f17c1f73161ea8ad109a5ec4e982aafcff3ed12165f98717",
+      "bytes": 8692,
+      "sha256": "cd612d5dd2ee0600e65b4724106b199c6f8cda0f8636c940f450c88a1fc724cf",
       "role": "runtime"
     },
     {
       "url": "/modules/light.js",
       "source": "web/observatory/modules/light.js",
-      "bytes": 28640,
-      "sha256": "10512f1c5b0ccefc6634384ee0f0a2848642ecd460fe32cbd38dd1b76986c2d9",
+      "bytes": 30082,
+      "sha256": "59d215ff8ec43e04885bb376300d28e4f7a13568157488964d5a836883acf10d",
       "role": "runtime"
     },
     {
-      "url": "/modules/measure-distance-ui.css",
-      "source": "web/observatory/modules/measure-distance-ui.css",
-      "bytes": 6010,
-      "sha256": "94a6b95b1fb53e87e79a7fea4918276c6b2d9e217846b7651df41f5d0bf567a5",
+      "url": "/modules/measure-atlas-ui.js",
+      "source": "web/observatory/modules/measure-atlas-ui.js",
+      "bytes": 9052,
+      "sha256": "86c6cb2f306e192d5dbeaace24beb67ba25c7529578902d0442bc6385a804038",
       "role": "runtime"
     },
     {
-      "url": "/modules/measure-distance-ui.js",
-      "source": "web/observatory/modules/measure-distance-ui.js",
-      "bytes": 6060,
-      "sha256": "15da9b919f666b4acc32526939fc0329db96b225721076be10d934ec52d9e6c6",
+      "url": "/modules/measure-atlas.css",
+      "source": "web/observatory/modules/measure-atlas.css",
+      "bytes": 8402,
+      "sha256": "c718dd226bbee7951a40b922579c888a7aa9c4fa692dabc45460e55112b181b2",
       "role": "runtime"
     },
     {
@@ -992,38 +950,10 @@
       "role": "runtime"
     },
     {
-      "url": "/modules/measure-shadow-ui.css",
-      "source": "web/observatory/modules/measure-shadow-ui.css",
-      "bytes": 7733,
-      "sha256": "41b174455d34b6edc6ee1ec6da5f1dec32c46684daa290dc9193b67bf2e9fd65",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/measure-shadow-ui.js",
-      "source": "web/observatory/modules/measure-shadow-ui.js",
-      "bytes": 5160,
-      "sha256": "7999ba0db67d9dcbb33bd23183ac4c69c75a3e4b8aa919743ebe48fddc3354cb",
-      "role": "runtime"
-    },
-    {
       "url": "/modules/measure.js",
       "source": "web/observatory/modules/measure.js",
-      "bytes": 34719,
-      "sha256": "6374d3fafa3fdb6bda230a2629391814bd5eb9edaa3091111f7e61f12c264ca5",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/optics-imaging-ui.css",
-      "source": "web/observatory/modules/optics-imaging-ui.css",
-      "bytes": 9524,
-      "sha256": "53210b31ad714c15d7a6846e1aadddbd056f96ffd3f860880c858d9d8117517b",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/optics-imaging-ui.js",
-      "source": "web/observatory/modules/optics-imaging-ui.js",
-      "bytes": 7193,
-      "sha256": "43a327eb21c83852b6ac13cd5844197b5a1dd1ab8ec1a92e60cedbc59d2a2e5c",
+      "bytes": 34714,
+      "sha256": "b10f9f2bb6368a490c461dcf7c1a7b7f270741bc2ad5cbf94d205d94a70e3c7f",
       "role": "runtime"
     },
     {
@@ -1041,38 +971,24 @@
       "role": "runtime"
     },
     {
-      "url": "/modules/optics-resolution-ui.css",
-      "source": "web/observatory/modules/optics-resolution-ui.css",
-      "bytes": 11583,
-      "sha256": "093ca54f9726529147c68308da6895a04d1a16752f4d39ecac04d0fd9fb526ff",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/optics-resolution-ui.js",
-      "source": "web/observatory/modules/optics-resolution-ui.js",
-      "bytes": 5722,
-      "sha256": "b7cb54c84666b85ccbd44d65e6dabb64f7b01d56e4f3a77a6476265742b59dc2",
-      "role": "runtime"
-    },
-    {
       "url": "/modules/optics-sampling-ui.css",
       "source": "web/observatory/modules/optics-sampling-ui.css",
-      "bytes": 8208,
-      "sha256": "fb78f39a4ab58ff20183b90b5708832208e61d2373d6c79adf1165d62e0c6eb1",
+      "bytes": 8622,
+      "sha256": "d14fc1c8a3e4a552e54514234734de055ce81b97b80e41aeb2f73e7b9782a574",
       "role": "runtime"
     },
     {
       "url": "/modules/optics-sampling-ui.js",
       "source": "web/observatory/modules/optics-sampling-ui.js",
-      "bytes": 3987,
-      "sha256": "05fc2c9e11035e12f4775e60e357a059531b1cc989eb5bed45f6a7b033f79501",
+      "bytes": 16839,
+      "sha256": "554ec59970b5949e573aee4809e4d9e152dab29d0ae5337882dd765d7f085a06",
       "role": "runtime"
     },
     {
       "url": "/modules/optics.js",
       "source": "web/observatory/modules/optics.js",
-      "bytes": 32094,
-      "sha256": "3c619f1f1627064934d5a782061b78e3cd3772e5de9dacc6875eb03508db655b",
+      "bytes": 32500,
+      "sha256": "30283701ee28a90d7b11062d5fd76dd4b7f9f1ac47e9396c414bba3e9e297d8d",
       "role": "runtime"
     },
     {
@@ -1085,15 +1001,15 @@
     {
       "url": "/modules/orbit-conics.css",
       "source": "web/observatory/modules/orbit-conics.css",
-      "bytes": 4603,
-      "sha256": "636fff3512aad93f0d3f3b69e187c6f8f43c3a0614e705853e137e502198d19b",
+      "bytes": 2775,
+      "sha256": "04672dbfd0f7e7cabece11de1b7799625cf63a9c117a976bb5321ad8ac5ce991",
       "role": "runtime"
     },
     {
       "url": "/modules/orbit-conics.js",
       "source": "web/observatory/modules/orbit-conics.js",
-      "bytes": 17417,
-      "sha256": "30c6c97a71ada60ad9e82d86801823bc48c72580d80293f4f9f16514fbe4ed78",
+      "bytes": 17612,
+      "sha256": "00491790d3fb920d306f1f31d7805f9f90be4268b9af32b5fdd17c358c7d10d2",
       "role": "runtime"
     },
     {
@@ -1106,57 +1022,29 @@
     {
       "url": "/modules/orbits-pilot.css",
       "source": "web/observatory/modules/orbits-pilot.css",
-      "bytes": 5562,
-      "sha256": "8250e05fbb0ef0b6d4e7f99bbc4d58e867d52317c94597865cab410310745f95",
+      "bytes": 2408,
+      "sha256": "af0b6e5dd9f4425bddb7e67b05199982ca56cf68fa1215b7887e55456d66cc81",
       "role": "runtime"
     },
     {
       "url": "/modules/orbits-transfer-ui.css",
       "source": "web/observatory/modules/orbits-transfer-ui.css",
-      "bytes": 6134,
-      "sha256": "bdbe9aced2555da96a4c14f4adc0a22a83d75662c437a0bc829879c98b7052d1",
+      "bytes": 2205,
+      "sha256": "89772a5fe18dbe0fc3e6ddc2eebb26703b144be0364d6f6e14b7fc93b1cc3418",
       "role": "runtime"
     },
     {
       "url": "/modules/orbits-transfer-ui.js",
       "source": "web/observatory/modules/orbits-transfer-ui.js",
-      "bytes": 6351,
-      "sha256": "594f093c28960dd270145c9d88442484e59a1d40925bd8c2aea751f7bd8b4e92",
+      "bytes": 4654,
+      "sha256": "bf5ccf1f9b3dbf960d62b2e355994639c80ca49b992d607cc0c4c0948e741c99",
       "role": "runtime"
     },
     {
       "url": "/modules/orbits.js",
       "source": "web/observatory/modules/orbits.js",
-      "bytes": 31783,
-      "sha256": "3968195b64f300919c9e6ce641ba22c79249a550925deec3259f63f29816c96f",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/sky-calendar-ui.css",
-      "source": "web/observatory/modules/sky-calendar-ui.css",
-      "bytes": 7776,
-      "sha256": "87c17426fe74c554af3490be18c91206af15b67abb7ae6e955324c4d3602d8e8",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/sky-calendar-ui.js",
-      "source": "web/observatory/modules/sky-calendar-ui.js",
-      "bytes": 4810,
-      "sha256": "344909c8538a3fbf13ce20f5c3b69680d50d34fe998cdbb152af55297cee2938",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/sky-day-ui.css",
-      "source": "web/observatory/modules/sky-day-ui.css",
-      "bytes": 6518,
-      "sha256": "f0998ecc69a3199990bcd07906d6422b5a0c4e7684cc75acf28ca20bed89c5ca",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/sky-day-ui.js",
-      "source": "web/observatory/modules/sky-day-ui.js",
-      "bytes": 5121,
-      "sha256": "e2d484ec675deb8e5c28b66fb752d8154c01a28fbba6864a44678ad8dda58a7c",
+      "bytes": 32644,
+      "sha256": "d44117851f6f3a935b1b28118f38aa7e78178ad638dfee3a729ade3c9e008c35",
       "role": "runtime"
     },
     {
@@ -1164,20 +1052,6 @@
       "source": "web/observatory/modules/sky-demo-geometry.mjs",
       "bytes": 2201,
       "sha256": "44b8a21fedfe40e6d5adcd92eabce13b5a7e2cb53f6cc2068e1752b61a3762b6",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/sky-measure-ui.css",
-      "source": "web/observatory/modules/sky-measure-ui.css",
-      "bytes": 7525,
-      "sha256": "b4755b6d75d4b0ac62d44565a5aa3e711ddd0a8d3f48f720cd31659d2801df22",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/sky-measure-ui.js",
-      "source": "web/observatory/modules/sky-measure-ui.js",
-      "bytes": 8200,
-      "sha256": "5d77549c56bdd39d001959ec44ee9bc759e2e52940839c07885b8518f890e6ea",
       "role": "runtime"
     },
     {
@@ -1209,94 +1083,87 @@
       "role": "runtime"
     },
     {
-      "url": "/modules/sky-pilot.css",
-      "source": "web/observatory/modules/sky-pilot.css",
-      "bytes": 10947,
-      "sha256": "de5908f00e5e6bc47241c6a4556f41b0a1fd3e371ef92faaccd9ac4bda5c7937",
+      "url": "/modules/sky-presentation.css",
+      "source": "web/observatory/modules/sky-presentation.css",
+      "bytes": 9016,
+      "sha256": "71aeb214711f3bf871b673910facf24fde3971dadc82052b8fa1aea511d751e5",
       "role": "runtime"
     },
     {
-      "url": "/modules/sky-precession-ui.css",
-      "source": "web/observatory/modules/sky-precession-ui.css",
-      "bytes": 7060,
-      "sha256": "d8a6e68111fb12c36f08b9877402c07b8239b259da5db900d28e58572367bf9d",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/sky-precession-ui.js",
-      "source": "web/observatory/modules/sky-precession-ui.js",
-      "bytes": 5967,
-      "sha256": "ce427665f320da1f1f9617c25101d3040c4f542f24203de28939744c888a40c4",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/sky-sky-ui.css",
-      "source": "web/observatory/modules/sky-sky-ui.css",
-      "bytes": 7971,
-      "sha256": "461bdd3c83d07930aae87e4bc1625bac572f85aa89d5106724da09468c08d062",
-      "role": "runtime"
-    },
-    {
-      "url": "/modules/sky-sky-ui.js",
-      "source": "web/observatory/modules/sky-sky-ui.js",
-      "bytes": 8947,
-      "sha256": "3de288e3a5741f609c7c454bf42202f6658ea615eeca0aead9495ed9d63c4f49",
+      "url": "/modules/sky-presentation.js",
+      "source": "web/observatory/modules/sky-presentation.js",
+      "bytes": 5662,
+      "sha256": "e8492d71e6733856e74c64b71bebf23fc73080b59ff1e295e285d76b46be88c7",
       "role": "runtime"
     },
     {
       "url": "/modules/sky.js",
       "source": "web/observatory/modules/sky.js",
-      "bytes": 65128,
-      "sha256": "3285d4b0dca1e8b2f26f5c5dc00b1b587215a626797897d55d02566e1e601170",
+      "bytes": 66813,
+      "sha256": "4a60d6a3bc2f039368ba6e24e8af4676e3b91e73c3090cd6f55a5088343ddb81",
+      "role": "runtime"
+    },
+    {
+      "url": "/modules/stars-atlas-ui.js",
+      "source": "web/observatory/modules/stars-atlas-ui.js",
+      "bytes": 925,
+      "sha256": "640dc18b77ba7e8e7184064cabf73bc14367310a5ccb180dc97ba6ba4a4c8c38",
+      "role": "runtime"
+    },
+    {
+      "url": "/modules/stars-atlas.css",
+      "source": "web/observatory/modules/stars-atlas.css",
+      "bytes": 16110,
+      "sha256": "cc648446a3a32339eb608c9510851164f79fa320aefa8a5b464ce83e696c1de7",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-collapse-ui.css",
       "source": "web/observatory/modules/stars-collapse-ui.css",
-      "bytes": 9016,
-      "sha256": "ba95f8d4894c6bfb8aaf230c903bc760951b5f4e97bffb2264b5b86e726c3c35",
+      "bytes": 106,
+      "sha256": "777c8b23455e8aec6a3bdfd3360ace8d46f25ba451bedf075a717d1ff5c7016f",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-collapse-ui.js",
       "source": "web/observatory/modules/stars-collapse-ui.js",
-      "bytes": 14283,
-      "sha256": "c387b07851dfe3774bc056bacfaaea60d70e95ab1759ccef9dfafb5cd8ede3d0",
+      "bytes": 14216,
+      "sha256": "d86baeb7cf45917bd9138c56af15e0a712d0f29bbf231cdc4a5b5768241f27a4",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-evolution-ui.css",
       "source": "web/observatory/modules/stars-evolution-ui.css",
-      "bytes": 10408,
-      "sha256": "27615bbafc3840cc61d997ef9a682fa5f1701c792739f1a3092f625376c7d307",
+      "bytes": 106,
+      "sha256": "777c8b23455e8aec6a3bdfd3360ace8d46f25ba451bedf075a717d1ff5c7016f",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-evolution-ui.js",
       "source": "web/observatory/modules/stars-evolution-ui.js",
-      "bytes": 7644,
-      "sha256": "d9df88151a39e681f3c7ae7dff74effae4b4d849f4cf6e9826ff791951dc4846",
+      "bytes": 7754,
+      "sha256": "697fdad8a95fd76a4d927fa95d88fd20ced799277c51a935186c4032dae3f52e",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-hr-renderer.js",
       "source": "web/observatory/modules/stars-hr-renderer.js",
-      "bytes": 4890,
-      "sha256": "ec573a66a4426cce878e229408843ce4c9584b64eb546cdaea8990cfd6aa2cf1",
+      "bytes": 6060,
+      "sha256": "9e98cea967ac2e2324bd2df84811383e114762d02666ed541c3eacf40486bd8f",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-hr-ui.css",
       "source": "web/observatory/modules/stars-hr-ui.css",
-      "bytes": 14077,
-      "sha256": "8cd2929a6b577f2dfc58ce7770a440d1e65395a6c80bd1764a8bc1b888c2bc5e",
+      "bytes": 14842,
+      "sha256": "b02a23dcbc872c0602633d50f08733f8c0e9bcb8a286fe42967537e0068960db",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-hr-ui.js",
       "source": "web/observatory/modules/stars-hr-ui.js",
-      "bytes": 11480,
-      "sha256": "bdb443004b5befae26e0a840ed105085b7b7d008f3166d500e2155941625f89d",
+      "bytes": 10354,
+      "sha256": "2617cf68ce906d6abeb8955139413acd8d32c3623233260e05d67656be176d30",
       "role": "runtime"
     },
     {
@@ -1309,15 +1176,15 @@
     {
       "url": "/modules/stars-ia-ui.css",
       "source": "web/observatory/modules/stars-ia-ui.css",
-      "bytes": 6501,
-      "sha256": "7ce82b143e6330c56a51d8d33b6000caf0db18bd433a4392119acae6027415a6",
+      "bytes": 106,
+      "sha256": "777c8b23455e8aec6a3bdfd3360ace8d46f25ba451bedf075a717d1ff5c7016f",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-ia-ui.js",
       "source": "web/observatory/modules/stars-ia-ui.js",
-      "bytes": 6842,
-      "sha256": "a0ee600a03bffc51575ff547075f83ab3dbf7aae7f5a93365623576f112f2875",
+      "bytes": 6107,
+      "sha256": "100558ede6f96d99629b2db28d1befe9a912ab27ba62da17826eac0e35d0334a",
       "role": "runtime"
     },
     {
@@ -1351,22 +1218,22 @@
     {
       "url": "/modules/stars-pulsar-ui.css",
       "source": "web/observatory/modules/stars-pulsar-ui.css",
-      "bytes": 7439,
-      "sha256": "cebee64575c763448a1b1b6c0ea5076630276585bc54b9c1fe8e9cb1cceb27f4",
+      "bytes": 106,
+      "sha256": "777c8b23455e8aec6a3bdfd3360ace8d46f25ba451bedf075a717d1ff5c7016f",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-pulsar-ui.js",
       "source": "web/observatory/modules/stars-pulsar-ui.js",
-      "bytes": 10203,
-      "sha256": "5934e571ddc4a1f93f041a046452c73f9b624801cbb59985563e4e5e7a079c32",
+      "bytes": 10142,
+      "sha256": "496921bd636a2209f10c0f8aabd8f51a2a7f606a4604095c5be3e60dcf99d3b9",
       "role": "runtime"
     },
     {
       "url": "/modules/stars-structure.js",
       "source": "web/observatory/modules/stars-structure.js",
-      "bytes": 4122,
-      "sha256": "8d75748fdd06c3b518fec0dc31c05228b0c546cad232768df74c154d75113166",
+      "bytes": 4242,
+      "sha256": "f8d6ece35f4c9ab8a718d17a792b1414b7064bac81bb9ee25a0436ba966d8366",
       "role": "runtime"
     },
     {
@@ -1379,15 +1246,15 @@
     {
       "url": "/modules/stars.js",
       "source": "web/observatory/modules/stars.js",
-      "bytes": 45235,
-      "sha256": "e56437a68b721fee58e3b6616e12bb7d556d067c0f0d9273fc0a717e69d02227",
+      "bytes": 45899,
+      "sha256": "dd18c1184588253278117795ad767ef0f88205814ed92cfe8d788ad0dcdff689",
       "role": "runtime"
     },
     {
       "url": "/navigation.css",
       "source": "web/observatory/navigation.css",
-      "bytes": 5285,
-      "sha256": "1e394c8003f98d4ca6dd46a9785c25c0fceb2ba44a273a8d48572f1d6889fafc",
+      "bytes": 4241,
+      "sha256": "bad5cac6e006931363ae0f8c61976a983e42fd49fd567124f336e6d93bba7ab4",
       "role": "runtime"
     },
     {
@@ -1400,57 +1267,148 @@
     {
       "url": "/shared/editorial-labs.js",
       "source": "web/observatory/shared/editorial-labs.js",
-      "bytes": 7484,
-      "sha256": "4c9c2226e153292a2906740278ebb440f13f13febfa5ae1dd3af73c6d79e858d",
+      "bytes": 7549,
+      "sha256": "4a8023e53ebcef6b6cb3b4db990462c0b2333571333f7921b30d3190c35951eb",
       "role": "runtime"
     },
     {
       "url": "/shared/editorial.css",
       "source": "web/observatory/shared/editorial.css",
-      "bytes": 67045,
-      "sha256": "86a3d507a81df17653c0f47b5751f78897ed2d3a16af5c647d048704845cf8b4",
+      "bytes": 70974,
+      "sha256": "33e888fa564eb8847191d2f94c4633b725d94a775c9a019b5b85f8f505ad8d45",
       "role": "runtime"
     },
     {
       "url": "/shared/editorial.js",
       "source": "web/observatory/shared/editorial.js",
-      "bytes": 625,
-      "sha256": "a81b6a466ded4be8298092b64efe4a7faddaebb9c8cbbfa577244682211fb8d1",
+      "bytes": 1105,
+      "sha256": "615aece983f92f847794e8ac6081a1440f75aa8aeba95aec99465ad723ca21fe",
       "role": "runtime"
     },
     {
       "url": "/shared/experiment-state.js",
       "source": "web/observatory/shared/experiment-state.js",
-      "bytes": 20268,
-      "sha256": "3a4e1fa3e6d832fdfc2b747ca7f638a7ce78d5d739209d0b7cf3c8babdbd9ee9",
+      "bytes": 21187,
+      "sha256": "85e62cadbd31952a5e195b319d8a7c8abc889aa06fe46dd7a4fb2368fec06746",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/fonts/ALabSans-Extended.woff2",
+      "source": "web/observatory/shared/fonts/ALabSans-Extended.woff2",
+      "bytes": 266496,
+      "sha256": "2cd051546294ac7c3888f81f9ba6946590034f40f4e77f9578fc0c563b0fc8ea",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/fonts/ALabSans.woff2",
+      "source": "web/observatory/shared/fonts/ALabSans.woff2",
+      "bytes": 131992,
+      "sha256": "b30d57d41e3c3b7aec844cc5c08a2a8c6a084d17429bcbf4fbc7299d56d81429",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/fonts/FONT_MANIFEST.json",
+      "source": "web/observatory/shared/fonts/FONT_MANIFEST.json",
+      "bytes": 33453,
+      "sha256": "24016d658c37a4ed437079afbb6af59569eb5ca59e757176c0f873eb17f966ae",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/fonts/font-faces.css",
+      "source": "web/observatory/shared/fonts/font-faces.css",
+      "bytes": 11591,
+      "sha256": "48cfbdfce3635d48fc5008504ee7664b77dd752a1707eaa423629c1f3e254da4",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/fonts/IBMPlexMono-OFL.txt",
+      "source": "web/observatory/shared/fonts/IBMPlexMono-OFL.txt",
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/fonts/IBMPlexMono-Regular.woff2",
+      "source": "web/observatory/shared/fonts/IBMPlexMono-Regular.woff2",
+      "bytes": 39176,
+      "sha256": "13b16cd770a73f60304510221c3e7186d396ba6ca5d64c52b5c6fb983d0e900a",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/fonts/NotoSansSC-OFL.txt",
+      "source": "web/observatory/shared/fonts/NotoSansSC-OFL.txt",
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/home.css",
+      "source": "web/observatory/shared/home.css",
+      "bytes": 8699,
+      "sha256": "e9fd1607235029ce2fc42b1da476f806fd9516c61d82cd9010c3b82b7d498a16",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/home.js",
+      "source": "web/observatory/shared/home.js",
+      "bytes": 4310,
+      "sha256": "e1517acab28c59abdc60b8c3f26d289d6b3dcac94bc308c9607d1384afe0019e",
       "role": "runtime"
     },
     {
       "url": "/shared/mode-context.js",
       "source": "web/observatory/shared/mode-context.js",
-      "bytes": 27101,
-      "sha256": "c05370d8040e05a11370b0e8afcb0ce5cec66ec11d1ee8348f12572d7eeffcdf",
+      "bytes": 27065,
+      "sha256": "4652a10892b5d2dd88a42a77cde19edac073108e35d861a3a52f9a17fb435e9a",
       "role": "runtime"
     },
     {
       "url": "/shared/mode-entry.js",
       "source": "web/observatory/shared/mode-entry.js",
-      "bytes": 2064,
-      "sha256": "c63e31eb9602e431d54f3f88012e03f74efd73e50ab1cf28955ea84261ef9d88",
+      "bytes": 2153,
+      "sha256": "9ab92bc76ad25130023b59018b3d4fc1393c416c2094087166ecbefa6b597ce2",
       "role": "runtime"
     },
     {
       "url": "/shared/navigation.js",
       "source": "web/observatory/shared/navigation.js",
-      "bytes": 1635,
-      "sha256": "3742e1202f2316351749790c54672b250e6e1a74087a9ea3e7fa972433d992b1",
+      "bytes": 3672,
+      "sha256": "e665faa6477fdd22c27810723c94c3e443299d6d6eda236af914ae7fbef26058",
       "role": "runtime"
     },
     {
       "url": "/shared/plot.js",
       "source": "web/observatory/shared/plot.js",
-      "bytes": 2299,
-      "sha256": "7b5dd34d1983cf7783e081d473a6d904971d0b3deff4eeb69ef6a16a6a83e8a0",
+      "bytes": 5269,
+      "sha256": "0d65771208dc0da467e382ec6b89d5e76447313599fc2517e18d6b63276cd917",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/presentation-tokens.css",
+      "source": "web/observatory/shared/presentation-tokens.css",
+      "bytes": 2272,
+      "sha256": "0f0e47f5d1626da59716c9d2bc83729d33150d1e7ae180a8181ceab2e79da43d",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/presentation.css",
+      "source": "web/observatory/shared/presentation.css",
+      "bytes": 8362,
+      "sha256": "58d9e24c864a7921edb9d2bcd7eb532e471ca4782e8c99a5e5eaf4409d5d530a",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/presentation.js",
+      "source": "web/observatory/shared/presentation.js",
+      "bytes": 7566,
+      "sha256": "362f4aae52aa2ecfca6c0efd3e9cb558239d4f924bb6fbcf40ae9d9ce6c0fba6",
+      "role": "runtime"
+    },
+    {
+      "url": "/shared/route-presentation.js",
+      "source": "web/observatory/shared/route-presentation.js",
+      "bytes": 4866,
+      "sha256": "fbd0a89d61cf274085c052c89b689f49d0d5aadd9c998d52d910084d04d205cc",
       "role": "runtime"
     },
     {
@@ -1484,8 +1442,8 @@
     {
       "url": "/shared/tool-start.js",
       "source": "web/observatory/shared/tool-start.js",
-      "bytes": 1075,
-      "sha256": "f79d274ff59e1a72648e864d832c9b9ab6cf14837c4cdec0697cd8b35b21c422",
+      "bytes": 1728,
+      "sha256": "7f62d1f7126642825d76c410e433cb3d42f248fcbd6949ea045a96a4097b3907",
       "role": "runtime"
     },
     {

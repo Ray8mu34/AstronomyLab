@@ -1,0 +1,40 @@
+import {applyPresentation,bindDisclosures} from '../shared/presentation.js';
+import {mountWorkspaceNavigation} from '../shared/navigation.js';
+
+// Composition only: the stable original controls, ruler and state retain their owners.
+export function attachMeasureAtlas(root,{redraw}){
+ const q=s=>root.querySelector(s),slots=new Map();let ready=false,active=null,disposed=false,release=()=>{},latest=null;
+ const style=document.createElement('link');style.rel='stylesheet';style.href='/modules/measure-atlas.css';root.append(style);
+ const shell=document.createElement('section');shell.className='measure-atlas';shell.hidden=true;
+ shell.innerHTML=`<details class="measure-mode-menu"><summary data-mode-name></summary><div data-mode-menu></div></details><div class="measure-atlas-heading"><p data-measure-identity></p><h1></h1><p data-measure-action></p></div><div class="measure-atlas-inputs"></div><div class="measure-atlas-observation"><section class="measure-atlas-subject"><div data-measure-subject></div><div data-measure-results></div><div data-measure-geometry></div></section><section class="measure-atlas-relation"><div data-measure-plot-title></div><div data-measure-plot></div><p class="measure-atlas-current" aria-live="polite"></p></section></div><div class="measure-atlas-actions"></div><p class="measure-atlas-boundary"></p><div data-measure-feedback></div><div class="measure-atlas-tools"><div data-measure-conditions></div><details class="measure-scale"><summary>共同距离标尺怎样传递？</summary><p>保持角直径、角轨道、周期与通量，独立改变共同采用的距离。</p><div data-measure-factor></div><p data-measure-scale-result></p><div data-measure-scale-preset></div></details><details class="measure-atlas-compare"><summary>读数对照</summary><div data-measure-compare></div></details><details class="measure-atlas-info"><summary>完整读数、模型与来源</summary><div data-measure-info></div></details></div>`;
+ root.append(shell);const s=x=>shell.querySelector(x);
+ const names={shadow:'影子测高',jupiter:'木星质量',s2:'银心 S2',distance:'距离标尺'};
+ const questions={shadow:'量一段山影，怎样知道山有多高？',jupiter:'木星的质量，怎样藏在卫星轨道里？',s2:'银心距离改变，黑洞质量会跟着变多少？',distance:'视差小了一半，距离会怎样改变？'};
+ const identities={shadow:'合成测影 · 公里标尺',jupiter:'木卫一近圆轨道 · NASA 默认参数',s2:'S2 开普勒椭圆 · 圆整教学参数',distance:'正值视差 · 独立距离实验'};
+ const actions={shadow:'拖动金色测量端点到影尖，再改变太阳高度。',jupiter:'记下当前读数，再把半长轴增加 10%。',s2:'保持角半长轴与周期，把采用距离增加 10%。',distance:'沿倒数曲线读出当前视差对应的几何距离。'};
+ function move(node,target){if(!node||slots.has(node))return;const marker=document.createComment('measure return');node.before(marker);slots.set(node,marker);target.append(node);}
+ function suspend(){if(!active)return;release();release=()=>{};for(const[node,marker]of [...slots].reverse())marker.replaceWith(node);slots.clear();s('.measure-geometry-current')?.remove();root.classList.remove('measure-atlas-active');delete root.dataset.measureAtlas;document.body.classList.remove('measure-atlas-observing');shell.hidden=true;active=null;latest=null;}
+ function setMode(mode){if(!ready||disposed)return;if(active===mode)return;suspend();active=mode;root.classList.add('measure-atlas-active');root.dataset.measureAtlas=mode;document.body.classList.add('measure-atlas-observing');shell.hidden=false;
+  s('[data-mode-name]').textContent=names[mode];s('h1').textContent=questions[mode];s('[data-measure-identity]').textContent=identities[mode];s('[data-measure-action]').textContent=actions[mode];
+  move(q('.lab-tabs'),s('[data-mode-menu]'));const presentation=applyPresentation(root,{surface:mode==='distance'?'paper':'scene',redraw}),navigation=mountWorkspaceNavigation(shell,{modeNav:s('.measure-mode-menu'),label:'测量实验导航'}),disclosures=bindDisclosures(shell);release=()=>{disclosures();navigation();presentation();};
+  const controls=q('#measure-controls');for(const label of [...controls.querySelectorAll(':scope>label')])if(!(mode==='distance'&&label.querySelector('[data-key=factor]')))move(label,s('.measure-atlas-inputs'));
+  move(controls.querySelector('details'),s('[data-measure-conditions]'));
+  const presets=controls.querySelector('.button-row');if(mode==='distance')move(presets,s('[data-measure-scale-preset]'));else move(presets,s('.measure-atlas-actions'));
+  if(mode==='distance')move(q('[data-key=factor]')?.closest('label'),s('[data-measure-factor]'));
+  move(q('#measure-plot-title'),s('[data-measure-plot-title]'));move(q('#measure-plot'),s('[data-measure-plot]'));
+  if(mode==='shadow'){move(q('#measure-shadow'),s('[data-measure-subject]'));move(q('#measure-geometry'),s('[data-measure-geometry]'));}
+  if(['jupiter','s2'].includes(mode)){move(q('#measure-scene'),s('[data-measure-subject]'));let key=s('.measure-orbit-key');if(!key){key=document.createElement('p');key.className='measure-orbit-key';s('[data-measure-subject]').append(key);}key.textContent=mode==='jupiter'?'中央：木星　·　金色标记：木卫一':'蓝灰标记：引力焦点　·　金色标记：S2';}else s('.measure-orbit-key')?.remove();
+  move(q('#measure-outcomes'),s('[data-measure-results]'));move(q('#measure-play'),s('.measure-atlas-actions'));move(q('#measure-defaults'),s('.measure-atlas-actions'));move(q('#measure-compare'),s('.measure-atlas-actions'));move(q('#measure-clear'),s('[data-measure-compare]'));move(q('#measure-comparison'),s('[data-measure-compare]'));move(q('#measure-feedback'),s('[data-measure-feedback]'));
+  for(const node of[q('#measure-metrics'),q('#measure-ladder'),q('.measure-guide'),q('#measure-title'),q('#measure-legend'),q('#measure-copy'),q('#measure-figure')?.closest('.lab-copy'),...root.querySelectorAll('.measure-pilot>.experiment-explanation'),q('[data-mode-boundary]')])move(node,s('[data-measure-info]'));
+  s('.measure-scale').hidden=mode!=='distance';for(const button of shell.querySelectorAll('button'))button.classList.add('al-button');for(const details of shell.querySelectorAll('details:not(.measure-mode-menu)'))details.classList.add('al-disclosure');for(const label of shell.querySelectorAll('label.control'))label.classList.add('al-parameter');
+ }
+ function geometry(){if(active!=='shadow'||!latest)return;const svg=q('#measure-geometry svg'),compact=shell.clientWidth<=600;if(!svg)return;svg.setAttribute('viewBox',compact?'0 0 350 140':'0 0 680 140');svg.classList.toggle('measure-geometry-compact',compact);let label=s('.measure-geometry-current');if(!label){label=document.createElement('p');label.className='measure-geometry-current';s('[data-measure-geometry]').append(label);}label.hidden=!compact;label.textContent=`α ${latest.state.alpha.toFixed(1)}° · l ${latest.state.length.toFixed(1)} km · h ${latest.result.height.toFixed(3)} km`;}
+ function render({state,result}){if(!active||!result)return;latest={state,result};const mode=state.mode;geometry();
+  s('.measure-atlas-current').textContent=mode==='shadow'?`当前 α ${state.alpha.toFixed(1)}° · 高度 ${result.height.toFixed(3)} ± ${result.sigma.toFixed(3)} km`:mode==='jupiter'?`a ${(state.a/1000).toFixed(3)} 千 km → M ${result.mass.toExponential(4)} kg`:mode==='s2'?`d ${state.distance.toFixed(0)} pc → M ${(result.solar/1e6).toFixed(3)} 百万 M☉`:`p ${state.p.toFixed(1)} mas → d ${result.parallax.distance.toFixed(1)} ± ${result.parallax.sigma.toFixed(1)} pc`;
+  s('[data-measure-scale-result]').textContent=mode==='distance'?`距离 ${state.factor.toFixed(3)} 倍 → 半径 ${result.scale.radius.toFixed(3)} · 光度 ${result.scale.luminosity.toFixed(3)} · 轨道质量 ${result.scale.mass.toFixed(3)} 倍`:'';
+  s('.measure-atlas-boundary').textContent=mode==='shadow'?'影尖固定在 10 km；平地、平行太阳光。三角形横纵使用相同长度比例。':mode==='jupiter'?'木卫一标记放大；木星与轨道使用同一长度比例。动画每 8 秒一周，参数周期以日计。':mode==='s2'?'e = 0.88 固定；中心与恒星标记放大。无相对论进动。动画每 16 秒一周，参数周期以年计。':'正值且高信噪比的视差样例。阴影为独立小误差的一阶传播；亮度测距与共同标尺另行调整。';
+ }
+ const click=e=>{if(e.target.closest('[data-mode]'))s('.measure-mode-menu').open=false;if(e.target.closest('#measure-compare')){s('.measure-atlas-compare').open=true;}};shell.addEventListener('click',click);
+ const responsive=new ResizeObserver(geometry);responsive.observe(shell);const frame=requestAnimationFrame(()=>{ready=true;if(!disposed)redraw();});
+ return{setMode,beforeControls:suspend,render,dispose(){disposed=true;cancelAnimationFrame(frame);responsive.disconnect();suspend();shell.removeEventListener('click',click);shell.remove();style.remove();}};
+}

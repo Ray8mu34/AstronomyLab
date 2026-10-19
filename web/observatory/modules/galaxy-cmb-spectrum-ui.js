@@ -1,36 +1,58 @@
-// Presentation only: the native module owns every input, plot and saved state.
+import {applyPresentation,bindDisclosures} from '../shared/presentation.js';
+import {mountWorkspaceNavigation} from '../shared/navigation.js';
+
 export function attachCmbSpectrumUI(root,{redraw}){
- const q=s=>root.querySelector(s),slots=new Map();let ready=false,active=false,disposed=false,status='loading',dataState={rows:0,product:null},last=null;
+ const q=selector=>root.querySelector(selector),slots=new Map();
+ let ready=false,active=false,disposed=false,dataState={status:'loading',rows:0,product:null},last=null,disposeNavigation=null,disposePresentation=null,disposeDisclosures=null;
  const style=document.createElement('link');style.rel='stylesheet';style.href='/modules/galaxy-cmb-spectrum-ui.css';root.append(style);
- const shell=document.createElement('section');shell.className='firas-shell';shell.hidden=true;shell.setAttribute('aria-label','CMB平均谱观察工作区');
- shell.innerHTML=`<header class="firas-header"><a href="/">← Lab</a><h1>CMB 平均谱</h1><span>FIRAS · Bν</span><details class="firas-modes"><summary>平均谱 ⌄</summary><div data-firas-modes></div></details></header><div class="firas-body"><div class="firas-identity"><span data-firas-identity>FIRAS 平均谱 · 正在加载</span><span>全天平均谱</span></div><div class="firas-data-state" role="status" aria-live="polite"></div><div class="firas-measurements"><div data-firas-spectrum></div><div class="firas-frequency"><div data-firas-frequency></div><p data-firas-model></p></div><section class="firas-residual" aria-label="发布残差与一倍标准差"><h2>放大看偏离黑体的部分 <span>发布残差 ±1σ · kJy/sr</span></h2><div data-firas-residual></div></section></div><details class="firas-teaching"><summary>独立温差如何改变谱形？ ⌄</summary><div class="firas-disclosure"><div class="firas-detail-head"><p>教学模型 · 不来自方向图像素，也不改变 FIRAS 点或残差</p><button type="button" data-firas-close>关闭教学谱差 ×</button></div><div data-firas-delta></div><div data-firas-differential></div><div data-firas-presets></div><p data-firas-teaching-read></p></div></details><details class="firas-info"><summary>读图与来源 ⌄</summary><div class="firas-disclosure"><button type="button" data-firas-close>关闭说明 ×</button><div data-firas-info></div></div></details></div>`;
- root.append(shell);const s=x=>shell.querySelector(x);
+ const shell=document.createElement('section');shell.className='firas-shell al-surface';shell.hidden=true;shell.setAttribute('aria-label','CMB 平均谱');
+ shell.innerHTML=`<div class="firas-heading"><div><p class="firas-kicker" data-firas-identity>COBE / FIRAS</p><h2>宇宙背景，接近怎样的黑体？</h2><p class="firas-intro">选择频率，对照平均谱与放大的残差。</p></div><details class="firas-modes al-disclosure"><summary>切换观察 ⌄</summary><div data-firas-modes></div></details></div>
+ <div class="firas-data-state al-status" role="status" aria-live="polite"></div>
+ <div class="firas-measurements"><div class="firas-observation">
+ <aside class="firas-frequency"><div class="firas-selection-label"><span class="firas-marker-key" aria-hidden="true"></span>比较频率</div><div data-firas-frequency></div><div class="firas-model-read"><span>2.725 K 黑体参考</span><p data-firas-model class="al-number"></p><span class="firas-read-unit">MJy/sr</span></div><p class="firas-control-help">点选谱图，或用方向键每次移动 1 GHz。</p></aside>
+ <div class="firas-plate"><figure class="firas-spectrum-figure"><figcaption><span>平均谱</span><span>谱辐射亮度 Bν / MJy sr⁻¹</span></figcaption><div data-firas-spectrum></div></figure><figure class="firas-residual"><figcaption><span>观测 − 黑体</span><span>发布残差 ±1σ / kJy sr⁻¹</span></figcaption><div data-firas-residual></div></figure></div>
+ <aside class="firas-published-reading"><h3>邻近发布点</h3><p class="firas-row-frequency al-number" data-firas-row-frequency></p><p class="firas-row-value al-number" data-firas-row-value></p><p class="firas-read-unit">残差 ±1σ · kJy/sr</p><p class="firas-neighbor-note">圆点位于发布频率；虚线表示比较频率。</p><div class="firas-legend"><span><i class="firas-data-key"></i>FIRAS 发布点</span><span><i class="firas-model-key"></i>2.725 K 黑体</span><span><i class="firas-error-key">↕</i>一倍标准差</span></div></aside>
+ </div><p class="firas-source-line">数据：NASA LAMBDA · COBE/FIRAS <a href="/data/galaxy/firas_monopole_spec_v1.txt" target="_blank" rel="noopener">发布原表 ↗</a></p></div>
+ <details class="firas-teaching al-disclosure"><summary>温差怎样改变谱形？</summary><div class="firas-disclosure"><div class="firas-detail-head"><p>给黑体增加一个温差，比较相对谱差。</p><button class="al-button" type="button" data-firas-close>收起</button></div><div data-firas-delta></div><div data-firas-differential></div><div data-firas-presets class="al-mode-nav"></div><p data-firas-teaching-read class="al-number"></p><p class="al-caption">教学温差与全天方向图独立；FIRAS 发布点保持原值。</p></div></details>
+ <details class="firas-info al-disclosure"><summary>读图与来源</summary><div class="firas-disclosure"><button class="al-button" type="button" data-firas-close>收起</button><div class="firas-reading-copy"><p>FIRAS 的发布平均谱由 2.725 K 黑体谱加报告残差组成。上图以 MJy/sr 表示总谱，下图将残差放大，以 kJy/sr 表示；误差条为一倍标准差。</p><p>平均谱描述天空的平均辐射。不同方向的微小起伏由全天方向图呈现。独立教学温差通过黑体公式计算频谱变化。</p><p class="firas-formula al-number">Bν(T) = (2hν³/c²) / (e^(hν/kT) − 1)</p><p>Bν 在约 160 GHz 处达到峰值。按单位波长表示的 Bλ 具有不同的峰值位置。</p><p data-firas-residual-summary></p><p><a href="https://lambda.gsfc.nasa.gov/product/cobe/firas_monopole_spect.html" target="_blank" rel="noopener">NASA LAMBDA · 产品说明 ↗</a> · <a href="/sources/galaxy.md" target="_blank" rel="noopener">模型与来源 ↗</a></p></div></div></details>`;
+ root.append(shell);const s=selector=>shell.querySelector(selector);
  function move(node,target){if(!node||slots.has(node))return;const slot=document.createComment('FIRAS return');node.before(slot);slots.set(node,slot);target.append(node);}
- function suspend(){if(!active)return;active=false;for(const[node,slot]of [...slots].reverse())slot.replaceWith(node);slots.clear();s('.firas-reset-note')?.remove();root.classList.remove('firas-active');document.body.classList.remove('firas-observing');shell.hidden=true;}
- function setMode(on){if(!ready||disposed)return;if(!on){suspend();return;}if(active)return;active=true;root.classList.add('firas-active');document.body.classList.add('firas-observing');shell.hidden=false;
-  move(q('#galaxy-cmb-spectrum'),s('[data-firas-spectrum]'));
+ function suspend(){if(!active)return;active=false;disposeNavigation?.();disposeNavigation=null;disposeDisclosures?.();disposeDisclosures=null;disposePresentation?.();disposePresentation=null;for(const [node,slot] of [...slots].reverse())slot.replaceWith(node);slots.clear();root.classList.remove('firas-active');document.body.classList.remove('firas-observing');shell.hidden=true;}
+ function setMode(on){
+  if(!ready||disposed)return;if(!on){suspend();return;}if(active)return;
+  active=true;root.classList.add('firas-active');document.body.classList.add('firas-observing');shell.hidden=false;
+  disposePresentation=applyPresentation(shell,{surface:'paper',redraw});disposeDisclosures=bindDisclosures(shell);
+  move(q('#galaxy-spectrum'),s('[data-firas-spectrum]'));move(q('#galaxy-residual'),s('[data-firas-residual]'));
   move(q('[data-key="frequency"]').closest('label'),s('[data-firas-frequency]'));
-  move(q('#galaxy-residual').parentElement,s('[data-firas-residual]'));
-  move(q('[data-key="delta"]').closest('label'),s('[data-firas-delta]'));
-  move(q('#galaxy-differential').parentElement,s('[data-firas-differential]'));
+  move(q('[data-key="delta"]').closest('label'),s('[data-firas-delta]'));move(q('#galaxy-differential'),s('[data-firas-differential]'));
   move(q('#galaxy-cmb-controls .galaxy-presets'),s('[data-firas-presets]'));
-  move(q('.galaxy-topics'),s('[data-firas-modes]'));move(q('[data-cmb-views]'),s('[data-firas-modes]'));
-  const reset=q('[data-reset]');move(reset,s('[data-firas-modes]'));
-  const resetNote=document.createElement('p');resetNote.className='firas-reset-note';resetNote.textContent='重置实验返回银河盘外俯瞰；全部 CMB 参数回到 100 µK、160 GHz。';s('[data-firas-modes]').append(resetNote);
-  for(const node of [q('.galaxy-head'),q('#galaxy-metrics'),q('#galaxy-details-cmb > .galaxy-caption'),q('#galaxy-copy').closest('details'),q('.galaxy-pilot > div.galaxy-more'),q('[data-mode-boundary]'),q('#galaxy-feedback')])move(node,s('[data-firas-info]'));
+  s('[data-firas-presets] .galaxy-presets').classList.add('al-mode-nav');
+  move(q('.galaxy-topics'),s('[data-firas-modes]'));move(q('[data-cmb-views]'),s('[data-firas-modes]'));move(q('[data-reset]'),s('[data-firas-modes]'));
+  for(const node of s('[data-firas-modes]').querySelectorAll('.button-row'))node.classList.add('al-mode-nav');
+  disposeNavigation=mountWorkspaceNavigation(shell,{modeNav:s('.firas-modes'),label:'CMB 实验导航'});
+  q('[data-key="frequency"]').setAttribute('aria-label','比较频率 / GHz');
+  q('[data-key="delta"]').setAttribute('aria-label','教学温差 / µK');
  }
- function render(data=last){if(!data||!active)return;last=data;const {state,result}=data,loaded=status==='ready';
-  s('.firas-measurements').hidden=!loaded;s('.firas-teaching').hidden=!loaded;
-  s('[data-firas-identity]').textContent=loaded?`青点 · ${dataState.product.version} · ${dataState.rows} 行发布谱　／　金线 · 2.725 K 黑体参考`:'FIRAS 观测数据尚未加载';
-  const message=s('.firas-data-state');message.hidden=loaded;message.setAttribute('role',status==='failed'?'alert':'status');
-  message.textContent=status==='failed'?'FIRAS 数据未能加载，平均谱与残差暂不可用。请重新加载页面。':status==='empty'?'FIRAS 数据为空，暂时无法绘制平均谱与残差。请重新加载页面。':'正在加载 FIRAS 平均谱…';
-  s('[data-firas-model]').textContent=`${state.frequency} GHz · 黑体参考 ${result.blackbody.toFixed(2)} MJy/sr（非 FIRAS 点读数）`;
-  s('[data-firas-teaching-read]').textContent=`${state.frequency} GHz · 教学 ΔT = ${state.delta} µK → 相对谱差 ${result.relativeSpectrumPPM.toFixed(1)} ppm`;
+ function render(data=last){
+  if(data)last=data;if(!last||!active)return;
+  const {state,result,rows=[]}=last,loaded=dataState.status==='ready';
+  for(const section of [s('.firas-measurements'),s('.firas-teaching')]){section.style.visibility=loaded?'visible':'hidden';section.inert=!loaded;section.setAttribute('aria-hidden',String(!loaded));}
+  s('[data-firas-identity]').textContent=loaded?`COBE / FIRAS · ${dataState.rows} 个观测点`:'COBE / FIRAS';
+  const message=s('.firas-data-state');message.hidden=loaded;message.setAttribute('role',dataState.status==='failed'?'alert':'status');
+  message.textContent=dataState.status==='failed'?'FIRAS 数据未能加载，平均谱与残差暂不可用。请重新加载页面。':'正在加载 FIRAS 平均谱…';
+  s('[data-firas-model]').textContent=result.blackbody.toFixed(2);
+  s('[data-firas-teaching-read]').textContent=`${state.frequency} GHz · ΔT = ${state.delta} µK → 相对谱差 ${result.relativeSpectrumPPM.toFixed(1)} ppm`;
+  if(loaded&&rows.length){
+   const near=rows.reduce((best,row)=>Math.abs(row.frequencyGHz-state.frequency)<Math.abs(best.frequencyGHz-state.frequency)?row:best,rows[0]);
+   s('[data-firas-row-frequency]').textContent=`${near.frequencyGHz.toFixed(2)} GHz`;
+   s('[data-firas-row-value]').textContent=`${near.residual>0?'+':''}${near.residual} ± ${near.sigma}`;
+   const tail=rows.at(-1);s('[data-firas-residual-summary]').textContent=`最高频发布点 ${tail.frequencyGHz.toFixed(2)} GHz，残差 ${tail.residual} ± ${tail.sigma} kJy/sr。`;
+  }
  }
- const close=details=>{if(!details?.open)return;details.open=false;details.querySelector('summary').focus({preventScroll:true});if(details!==s('.firas-modes')&&s('.firas-identity').getBoundingClientRect().top<0)s('.firas-identity').scrollIntoView({block:'start'});};
- const click=e=>{if(e.target.closest('[data-firas-close]'))close(e.target.closest('details'));if(e.target.closest('[data-topic],[data-cmb-view],[data-reset]'))close(s('.firas-modes'));};
- const key=e=>{if(e.key!=='Escape'||!active)return;const open=[...shell.querySelectorAll('details[open]')];if(open.length){e.preventDefault();close(open.at(-1));}};
- root.addEventListener('click',click);root.addEventListener('keydown',key);
- const frame=requestAnimationFrame(()=>{if(disposed)return;ready=true;redraw();});
- return{setMode,render,setDataStatus(value){dataState=value;status=value.status;render();},dispose(){disposed=true;cancelAnimationFrame(frame);suspend();root.removeEventListener('click',click);root.removeEventListener('keydown',key);shell.remove();style.remove();}};
+ function close(details){if(!details?.open)return;details.open=false;details.querySelector('summary').focus({preventScroll:true});}
+ const click=event=>{if(event.target.closest('[data-firas-close]'))close(event.target.closest('details'));if(event.target.closest('[data-topic],[data-cmb-view],[data-reset]'))close(s('.firas-modes'));};
+ const toggle=event=>{if(active&&event.target.matches('details'))redraw();};
+ root.addEventListener('click',click);shell.addEventListener('toggle',toggle,true);
+ let frame=0;const activate=()=>{if(disposed||ready||frame)return;frame=requestAnimationFrame(()=>{frame=0;if(disposed)return;ready=true;redraw();});};style.addEventListener('load',activate,{once:true});if(style.sheet)activate();
+ return {setMode,render,setDataStatus(value){dataState=value;render();},dispose(){disposed=true;style.removeEventListener('load',activate);cancelAnimationFrame(frame);suspend();root.removeEventListener('click',click);shell.removeEventListener('toggle',toggle,true);shell.remove();style.remove();}};
 }

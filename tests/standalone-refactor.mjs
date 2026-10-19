@@ -1,5 +1,6 @@
 import {moonClick,moonReveal} from './moon-disclosure.mjs';
 import {imagingClick,imagingReveal} from './imaging-disclosure.mjs';
+import {installVisiblePlotTextProbe,verifyPresentationContext} from './frontend-mode-context.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -17,6 +18,7 @@ const output=path.resolve(option('--out','build/qa/lab-refactor/standalone'));
 const packageRoot=path.resolve(option('--package','dist/lab'));
 const part=option('--part','all');
 const checkFilter=option('--check-filter','');
+const presentationV2=option('--presentation','legacy')==='v2';
 const modulePath=option('--playwright',process.env.PLAYWRIGHT_MODULE||'playwright');
 const browserPath=option('--browser',process.env.BROWSER_EXECUTABLE);
 const minutes=Number(option('--stability-minutes','30'));
@@ -32,6 +34,7 @@ const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const enabled=name=>part==='all'||part.split(',').includes(name);
 async function context(viewport={width:1366,height:768},{storageFault=false,webglFault=false,lifecycle=false}={}){
  const ctx=await browser.newContext({viewport});
+ if(presentationV2)await installVisiblePlotTextProbe(ctx);
  await ctx.route('**/*',route=>{
   const url=new URL(route.request().url());
   if(coursePath.test(url.pathname)){blocked.push({url:url.pathname,at:new Date().toISOString()});return route.abort('blockedbyclient');}
@@ -64,7 +67,7 @@ async function check(name,fn,page=null){
  finally{save();}
 }
 function save(){
- fs.writeFileSync(path.join(output,part+'-checks.json'),JSON.stringify({checked_at:new Date().toISOString(),started_at:started.toISOString(),base,package_root:packageRoot,package_runtime_manifest_sha256:initialManifestHash,part,check_filter:checkFilter||null,node_version:process.version,state:checks.some(c=>c.state==='failed')?'failed':'in-progress',checks,coverage,screenshots,blocked_course_requests:blocked,page_errors:pageErrors,requests,environment,visual_review:'pending — images and recordings must be actually viewed separately'},null,2));
+ fs.writeFileSync(path.join(output,part+'-checks.json'),JSON.stringify({checked_at:new Date().toISOString(),started_at:started.toISOString(),base,package_root:packageRoot,package_runtime_manifest_sha256:initialManifestHash,part,presentation:presentationV2?'v2':'legacy',check_filter:checkFilter||null,node_version:process.version,state:checks.some(c=>c.state==='failed')?'failed':'in-progress',checks,coverage,screenshots,blocked_course_requests:blocked,page_errors:pageErrors,requests,environment,visual_review:'pending — images and recordings must be actually viewed separately'},null,2));
 }
 async function ready(page){
  if(new URL(page.url()).pathname.includes('/earth-moon/'))await page.waitForFunction(()=>window.earthMoon?.state?.ready,{timeout:30000});
@@ -73,7 +76,7 @@ async function ready(page){
 }
 async function modeOf(page,slug){return page.evaluate(async slug=>{const{currentExperimentMode}=await import('/shared/experiment-state.js');return currentExperimentMode(slug,document);},slug);}
 async function shot(page,name,fullPage=false){const file=path.join(output,name+'.png');await page.screenshot({path:file,fullPage});screenshots.push({name,path:file,visual_review:'pending'});return file;}
-async function disclose(locator){const page=locator.page();if(new URL(page.url()).pathname.includes('/earth-moon/')){const selector=await locator.evaluate(e=>e.id?'#'+e.id:null);if(selector){await moonReveal(page,selector);if(await locator.isVisible())return;}}if(new URL(page.url()).pathname==='/lab/imaging'){const selector=await locator.evaluate(e=>e.id?'#'+e.id:e.hasAttribute('data-key')?'[data-key="'+e.dataset.key+'"]':null);if(selector){await imagingReveal(page,selector);return;}}if(await page.locator('#mode-entry').isVisible()&&await locator.evaluate(el=>!!el.closest('#condition-menu'))&&!await page.locator('#condition-menu').isVisible())await page.locator('#condition-entry').click();for(const item of await locator.locator('xpath=ancestor::details').all())if(!await item.evaluate(node=>node.open))await item.locator(':scope > summary').click();}
+async function disclose(locator){const page=locator.page();if(new URL(page.url()).pathname.includes('/earth-moon/')){const selector=await locator.evaluate(e=>e.id?'#'+e.id:null);if(selector){await moonReveal(page,selector);if(await locator.isVisible())return;}}if(new URL(page.url()).pathname==='/lab/imaging'){const selector=await locator.evaluate(e=>e.id?'#'+e.id:e.hasAttribute('data-key')?'[data-key="'+e.dataset.key+'"]':null);if(selector){await imagingReveal(page,selector);return;}}if(await page.locator('#mode-entry').isVisible()&&await locator.evaluate(el=>!!el.closest('#condition-menu'))&&!await page.locator('#condition-menu').isVisible())await page.locator('#condition-entry').click();for(const item of await locator.locator('xpath=ancestor::details').all())if(!await item.evaluate(node=>node.open)){if(presentationV2&&await item.getAttribute('id')==='alignment-information'){await page.locator('button[aria-controls=alignment-information]:visible').click();assert(await item.isVisible(),'Authored alignment conditions must be visible');}else await item.locator(':scope > summary').click();}}
 async function executeStep(page,step){
  const prerequisites=[];
  // Use the public view switch when a responsive or topic-specific control is intentionally hidden.
@@ -163,11 +166,13 @@ try{
   for(const viewport of [{width:1366,height:768},{width:390,height:844}]){
    await page.setViewportSize(viewport);
    for(const[slug,modes]of Object.entries(confirmedModes))for(const mode of modes){
-    const item={slug,mode,viewport,level:['earth-moon','imaging'].includes(slug)?'deep-pilot-candidate':'basic-adaptation',visual_review:'pending'};coverage.push(item);
+    const item={slug,mode,viewport,level:presentationV2?'full-mode-migration-candidate':['earth-moon','imaging'].includes(slug)?'deep-pilot-candidate':'basic-adaptation',visual_review:'pending'};coverage.push(item);
     const passed=await check('Direct '+slug+'/'+mode+' at '+viewport.width,async()=>{
      await page.goto(base+experimentURL(slug,mode));await ready(page);await pause(page,slug);
      await page.evaluate(()=>scrollTo({top:0,left:0,behavior:'instant'}));
      assert.equal(await modeOf(page,slug),mode,'URL mode must select the requested public mode');
+     if(presentationV2)item.presentationContext=await verifyPresentationContext(page,slug,mode);
+     else{
      const reducedPhase=slug==='earth-moon'&&mode==='phase';if(reducedPhase){await moonClick(page,'#condition-entry');await page.locator('.interpretation summary').click();}
      if(slug==='earth-moon'&&mode==='spin'){await page.locator('#spin-information-entry').click();await disclose(page.locator('.experiment-guide'));}
      if(slug==='earth-moon'&&mode==='period'){await page.locator('#period-info-entry').click();await disclose(page.locator('.experiment-guide'));}
@@ -214,11 +219,31 @@ try{
      if(slug==='alignments'&&mode==='mars')await page.locator('.mars-info [data-mars-close]').click();
      if(slug==='alignments'&&mode==='transit')await page.locator('.transit-info [data-transit-close]').click();
      if(slug==='alignments'&&mode==='venus')await page.locator('.venus-info [data-venus-close]').click();
+     }
      const extent=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}));assert(extent.scroll<=extent.width+1,JSON.stringify(extent));
-      const visualSelector=slug==='solar-system'&&mode==='compare'?'#comparison-view:visible':slug==='solar-system'&&mode==='axes'?'#axes-view:visible':slug==='alignments'?'.alignment-workspace':slug==='orbits'&&['staging','landing'].includes(mode)?'#orbit-landing-staging-slot':slug==='measure'&&mode==='distance'?'#measure-plot:visible':'canvas:visible,svg:visible';
+      const eclipseComposite=presentationV2&&slug==='earth-moon'&&mode==='eclipse';
+      if(eclipseComposite){
+       const {view,observe}=await page.evaluate(()=>({view:window.earthMoon.state.view,observe:window.earthMoon.state.observe})),appearance=observe==='sun'?'#solar-disc':'#moon-render canvas';
+       const selectors=view==='observer'?[appearance]:view==='space'?['#space canvas']:view==='shadow'?['#shadow-svg']:[appearance,'#space canvas','#shadow-svg'];
+       item.compoundGraphics={view,scope:'Current same-instant Moon/Sun appearance, spatial geometry and shadow diagram; each required child must remain present and nonzero. Object/label boundaries are separately checked by Moon geometry/task evidence.',children:[]};
+       for(const selector of selectors){const child=page.locator(selector);assert(await child.isVisible(),'Missing compound scientific child '+selector);const rect=await child.boundingBox();assert(rect&&rect.width>0&&rect.height>0,'Collapsed compound scientific child '+selector);item.compoundGraphics.children.push({selector,rect});}
+      }
+      const cmbComposite=presentationV2&&slug==='galaxy'&&mode==='cmb';
+      if(cmbComposite){
+       item.compoundGraphics={scope:'The equirectangular map retains its scientific 2:1 aspect, together with its axes, selected direction and same-direction sphere reference; both graphics are mandatory.',children:[]};
+       for(const selector of ['#galaxy-cmbmap','#galaxy-scene canvas']){const node=page.locator(selector);assert(await node.isVisible(),'Missing CMB scientific view '+selector);const rect=await node.boundingBox();assert(rect&&rect.width>0&&rect.height>0,'Collapsed CMB view '+selector);if(selector==='#galaxy-cmbmap')assert(Math.abs(rect.width/rect.height-2)<1e-6,'Equirectangular aspect changed');item.compoundGraphics.children.push({selector,rect});}
+      }
+      const shadowComposite=presentationV2&&slug==='measure'&&mode==='shadow';
+      if(shadowComposite){
+       item.compoundGraphics={scope:'Top-down ruler, authoritative measurements and same-scale side triangle; excludes title, controls and downstream relation plot. Single SVG heights are recorded, not claimed to meet the original whole-stage minimum.',children:[]};
+       for(const selector of ['#measure-shadow svg','#measure-geometry svg']){const node=page.locator(selector);assert(await node.isVisible(),'Missing measuring geometry '+selector);const rect=await node.boundingBox();assert(rect&&rect.width>0&&rect.height>0,'Collapsed measuring geometry '+selector);item.compoundGraphics.children.push({selector,rect});}
+       const outcomes=page.locator('#measure-outcomes');assert(await outcomes.isVisible(),'Authoritative shadow measurements missing');assert((await outcomes.innerText()).trim().length>0,'Authoritative shadow measurements empty');
+      }
+      const migratedPrimary=presentationV2&&slug==='measure'&&['jupiter','s2'].includes(mode)?'.measure-atlas-subject canvas:visible':presentationV2&&slug==='sky'&&mode==='stars'?'#sky-scene canvas:visible':null;
+      const visualSelector=eclipseComposite?'#phase-ui .phase-stage:visible':cmbComposite?'.cmb-map-ready:visible':shadowComposite?'.measure-atlas-subject:visible':migratedPrimary|| (slug==='solar-system'&&mode==='compare'?'#comparison-view:visible':slug==='solar-system'&&mode==='axes'?'#axes-view:visible':slug==='alignments'?(presentationV2?'.alignment-atlas canvas:visible,.alignment-atlas svg:visible':'.alignment-workspace'):slug==='orbits'&&['staging','landing'].includes(mode)?'#orbit-landing-staging-slot':slug==='measure'&&mode==='distance'?'#measure-plot:visible':'canvas:visible,svg:visible');
      assert(await page.locator(visualSelector).count()>0,'Tool main visual is present');
      const stage=await page.locator(visualSelector).evaluateAll(nodes=>nodes.map(node=>{const b=node.getBoundingClientRect();return{x:b.x,y:b.y,width:b.width,height:b.height,area:b.width*b.height};}).sort((a,b)=>b.area-a.area)[0]||null);
-     assert(stage&&stage.width>=Math.min(250,viewport.width*.7)&&stage.height>=180,'Scientific stage must remain meaningfully sized');
+     item.stage=stage;assert(stage&&stage.width>=Math.min(250,viewport.width*.7)&&stage.height>=180,'Scientific stage must remain meaningfully sized');
      assert(stage.y<viewport.height-120,'Scientific stage must begin inside the first viewport');item.stage=stage;
      item.screenshot=await shot(page,slug+'-'+mode+'-'+viewport.width);
      const definition=getModeContext(slug,mode);assert(definition?.testPath?.length,'Every mode must have an actual reproducible independent path');
@@ -362,7 +387,7 @@ try{
    await moonFailures.route('**/textures/moon.jpg',route=>route.fulfill({status:404,body:'missing texture'}));await mf.goto(base+'/labs/earth-moon/?mode=spin');await mf.locator('#startup-error:visible').waitFor();assert(/图像未能加载/.test(await mf.locator('#startup-message').innerText()));assert(await mf.locator('#play').isDisabled());assert(await mf.locator('a[href="/"]:visible').count()>0);await moonFailures.unroute('**/textures/moon.jpg');await mf.locator('#retry').click();await ready(mf);assert.equal(await modeOf(mf,'earth-moon'),'spin');await shot(mf,'moon-texture-retry');
   },mf);
   await check('Moon actual WebGL context loss pauses and reload retry recovers',async()=>{
-   await mf.goto(base+'/labs/earth-moon/?mode=phase');await ready(mf);await mf.locator('#play').click();const lost=await mf.locator('canvas').first().evaluate(canvas=>{const gl=canvas.getContext('webgl2')||canvas.getContext('webgl');const extension=gl?.getExtension('WEBGL_lose_context');if(!extension)return false;extension.loseContext();return true;});assert(lost,'Software WebGL exposes real loss extension');await mf.locator('#startup-error:visible').waitFor();assert(/画面已中断/.test(await mf.locator('#startup-message').innerText()));assert(await mf.locator('#play').isDisabled());assert.equal(await mf.evaluate(()=>window.earthMoon.state.ready),false);await mf.locator('#retry').click();await ready(mf);assert.equal(await modeOf(mf,'earth-moon'),'phase');await shot(mf,'moon-context-loss-retry');
+   await mf.goto(base+'/labs/earth-moon/?mode=phase');await ready(mf);await mf.locator('#play').click();const lost=await mf.locator('#space canvas').evaluate(canvas=>{const gl=canvas.getContext('webgl2')||canvas.getContext('webgl');const extension=gl?.getExtension('WEBGL_lose_context');if(!extension)return false;extension.loseContext();return true;});assert(lost,'Software WebGL exposes real loss extension');await mf.locator('#startup-error:visible').waitFor();assert(/画面已中断/.test(await mf.locator('#startup-message').innerText()));assert(await mf.locator('#play').isDisabled());assert.equal(await mf.evaluate(()=>window.earthMoon.state.ready),false);await mf.locator('#retry').click();await ready(mf);assert.equal(await modeOf(mf,'earth-moon'),'phase');await shot(mf,'moon-context-loss-retry');
   },mf);await moonFailures.close();
  }
  if(enabled('stability')){

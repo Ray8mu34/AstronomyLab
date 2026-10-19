@@ -1,66 +1,102 @@
-/* Only the spectral mode. Colors inherit the native plot and FIRAS identities. */
-body.firas-observing{--fs-bg:#0b1420;--fs-ink:#c5d5e2;--fs-muted:#93a9ba;--fs-line:#263645;--fs-data:#76c7ce;--fs-model:#e8c57a;background:var(--fs-bg);color:var(--fs-ink);scrollbar-color:var(--fs-muted) var(--fs-bg)}
-body.firas-observing #site-navigation,body.firas-observing #app>.tool-heading,body.firas-observing #mode-context,body.firas-observing .site-footer{display:none}
-body.tool-site.editorial.firas-observing #app[data-page=lab]{max-width:none;margin:0;padding:0}
-/* Hide the inactive native workbench while its original DOM is safely retained. */
+/* FIRAS spectral plate; shared presentation owns color, type and control states. */
+body.firas-observing{background:var(--al-page);color:var(--al-text)}
 #lab-mount.firas-active>:not(.firas-shell):not(link){display:none!important}
-body.firas-observing #app #lab-mount.firas-active{color:var(--fs-ink);--text:var(--fs-ink);--muted:var(--fs-muted);--line:var(--fs-line);--gold:var(--fs-model);--teal:var(--fs-data);font-family:"Microsoft YaHei",system-ui,sans-serif;font-variant-numeric:tabular-nums}
-body.firas-observing #app #lab-mount.firas-active [hidden]{display:none!important} /* Retain native hidden semantics despite editorial display rules. */
-body.firas-observing #app #lab-mount.firas-active :is(button,summary,a,input){font:inherit;color:inherit}
-body.firas-observing #app #lab-mount.firas-active :is(button,summary,a){cursor:pointer}
-body.firas-observing #app #lab-mount.firas-active :is(button,summary,a):hover{color:var(--fs-data)}
-body.firas-observing #app #lab-mount.firas-active :is(button,summary,a,input,canvas):focus-visible{outline:2px solid var(--fs-data);outline-offset:3px}
-body.firas-observing #app #lab-mount.firas-active button{border:1px solid var(--fs-line);border-radius:0;background:transparent;box-shadow:none;min-height:42px;padding:8px 12px}
-body.firas-observing #app #lab-mount.firas-active .firas-header{display:flex;align-items:center;gap:25px;border-bottom:1px solid var(--fs-line);padding:0 32px;min-height:62px}
-body.firas-observing #app #lab-mount.firas-active .firas-header h1{font:500 23px Georgia,"SimSun",serif;margin:0}
-body.firas-observing #app #lab-mount.firas-active .firas-header :is(a,span){font-size:13px;text-decoration:none;color:var(--fs-muted)}
-body.firas-observing #app #lab-mount.firas-active .firas-modes{margin-left:auto;position:relative}
-body.firas-observing #app #lab-mount.firas-active summary{list-style:none;display:flex;align-items:center;min-height:44px;cursor:pointer;font-size:14px}
-body.firas-observing #app #lab-mount.firas-active summary::-webkit-details-marker{display:none}
-body.firas-observing #app #lab-mount.firas-active [data-firas-modes]{position:absolute;z-index:3;right:0;top:100%;width:min(300px,80vw);background:var(--fs-bg);border:1px solid var(--fs-line);padding:14px}
-body.firas-observing #app #lab-mount.firas-active [data-firas-modes] .button-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0;border:0}
-body.firas-observing #app #lab-mount.firas-active [data-firas-modes] [aria-pressed=true]{color:var(--fs-data);border-color:var(--fs-data)}
-body.firas-observing #app #lab-mount.firas-active .firas-reset-note{font-size:12px;line-height:1.7;color:var(--fs-muted);margin:10px 0 0}
-body.firas-observing #app #lab-mount.firas-active .firas-body{max-width:1460px;margin:auto;padding:12px 24px 30px}
-body.firas-observing #app #lab-mount.firas-active .firas-identity{display:flex;justify-content:space-between;gap:20px;font-size:13px;line-height:1.8;color:var(--fs-muted);padding:3px 40px 12px}
-body.firas-observing #app #lab-mount.firas-active #galaxy-spectrum{display:block;width:100%;height:350px;cursor:crosshair}
-body.firas-observing #app #lab-mount.firas-active #galaxy-cmb-spectrum>.galaxy-caution{display:none}
-body.firas-observing #app #lab-mount.firas-active .firas-frequency{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:8px 40px 10px}
-body.firas-observing #app #lab-mount.firas-active .control{font-size:14px;margin:0;padding:0;display:block}
-body.firas-observing #app #lab-mount.firas-active .control input[type=range]{display:block;width:100%;height:30px;accent-color:var(--fs-data);cursor:pointer;margin:4px 0 0}
-body.firas-observing #app #lab-mount.firas-active .control output{color:var(--fs-model)}
-body.firas-observing #app #lab-mount.firas-active .control small{display:block;font-size:12px;color:var(--fs-muted)}
-body.firas-observing #app #lab-mount.firas-active [data-firas-model]{font-size:13px;line-height:1.7;margin:0;color:var(--fs-model);max-width:350px}
-body.firas-observing #app #lab-mount.firas-active .firas-residual{border-top:1px solid var(--fs-line);padding-top:10px}
-body.firas-observing #app #lab-mount.firas-active .firas-residual h2{display:flex;justify-content:space-between;gap:12px;margin:0 40px 5px;font-size:14px;font-weight:400}
-body.firas-observing #app #lab-mount.firas-active .firas-residual h2 span{color:var(--fs-data);font-size:13px}
-body.firas-observing #app #lab-mount.firas-active #galaxy-residual{display:block;width:100%;height:210px}
-body.firas-observing #app #lab-mount.firas-active :is(.note,.galaxy-caption){font-size:13px;line-height:1.8;color:var(--fs-muted);margin:5px 40px 12px}
-body.firas-observing #app #lab-mount.firas-active :is(.firas-teaching,.firas-info){border-top:1px solid var(--fs-line);margin:0 40px}
-body.firas-observing #app #lab-mount.firas-active .firas-disclosure{padding:12px 0 20px}
-body.firas-observing #app #lab-mount.firas-active .firas-detail-head{display:flex;align-items:center;justify-content:space-between;gap:20px}
-body.firas-observing #app #lab-mount.firas-active .firas-detail-head p{font-size:13px;color:var(--fs-muted);margin:0}
-body.firas-observing #app #lab-mount.firas-active [data-firas-delta]{max-width:650px;margin:15px 0}
-body.firas-observing #app #lab-mount.firas-active #galaxy-differential{width:100%;height:250px;display:block}
-body.firas-observing #app #lab-mount.firas-active [data-firas-teaching-read]{font-size:14px;color:var(--fs-model)}
-body.firas-observing #app #lab-mount.firas-active #galaxy-metrics{display:none}
-body.firas-observing #app #lab-mount.firas-active .firas-data-state{min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;font-size:16px;line-height:2;color:var(--fs-model)}
-@media(max-width:700px){
- body.firas-observing #app #lab-mount.firas-active .firas-header{padding:0 14px;gap:14px;min-height:58px}
- body.firas-observing #app #lab-mount.firas-active .firas-header h1{font-size:19px}
- body.firas-observing #app #lab-mount.firas-active .firas-header>span{display:none}
- body.firas-observing #app #lab-mount.firas-active .firas-body{padding:8px 8px 20px}
- body.firas-observing #app #lab-mount.firas-active .firas-identity{display:block;padding:3px 12px 6px;font-size:12px}
- body.firas-observing #app #lab-mount.firas-active .firas-identity span{display:block}
- body.firas-observing #app #lab-mount.firas-active #galaxy-spectrum{height:280px}
- body.firas-observing #app #lab-mount.firas-active .firas-frequency{display:block;padding:4px 12px 10px}
- body.firas-observing #app #lab-mount.firas-active [data-firas-model]{font-size:12px;margin-top:8px}
- body.firas-observing #app #lab-mount.firas-active .firas-residual h2{display:block;margin:0 12px 5px}
- body.firas-observing #app #lab-mount.firas-active .firas-residual h2 span{display:block;margin-top:4px}
- body.firas-observing #app #lab-mount.firas-active #galaxy-residual{height:230px}
- body.firas-observing #app #lab-mount.firas-active :is(.note,.galaxy-caption){margin:5px 12px 12px;font-size:12px}
- body.firas-observing #app #lab-mount.firas-active :is(.firas-teaching,.firas-info){margin:0 12px}
- body.firas-observing #app #lab-mount.firas-active .firas-detail-head{display:block}
- body.firas-observing #app #lab-mount.firas-active .firas-detail-head button{margin-top:10px}
- body.firas-observing #app #lab-mount.firas-active .firas-data-state{min-height:650px;padding:18px}
+body.firas-observing #app #lab-mount.firas-active{min-width:0;color:var(--al-text);--text:var(--al-text);--muted:var(--al-muted);--line:var(--al-line);--gold:var(--al-action);--teal:var(--al-action);font-family:var(--al-font);font-size:var(--al-body)}
+body.firas-observing #app #lab-mount.firas-active .firas-shell{display:flow-root;position:relative;max-width:1360px;margin:0 auto;padding:12px 32px 36px;background:var(--al-page);color:var(--al-text)}
+body.firas-observing #app #lab-mount.firas-active .firas-shell [hidden]{display:none!important}
+body.firas-observing #app #lab-mount.firas-active .firas-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin:0 0 26px}
+body.firas-observing #app #lab-mount.firas-active .firas-kicker{font:400 var(--al-tick)/1.6 var(--al-numeric);color:var(--al-muted);margin:0 0 7px}
+body.firas-observing #app #lab-mount.firas-active .firas-heading h2{font:600 var(--al-title-tool)/1.4 var(--al-font);letter-spacing:.01em;margin:0;color:var(--al-text)}
+body.firas-observing #app #lab-mount.firas-active .firas-intro{font:400 var(--al-label)/1.7 var(--al-font);color:var(--al-muted);margin:10px 0 0}
+body.firas-observing #app #lab-mount.firas-active .firas-modes{position:relative;flex:none;margin-top:6px}
+body.firas-observing #app #lab-mount.firas-active .firas-modes>summary{min-height:44px;cursor:pointer;white-space:nowrap}
+body.firas-observing #app #lab-mount.firas-active [data-firas-modes]{position:absolute;z-index:5;right:0;top:100%;width:min(300px,80vw);padding:16px;background:var(--al-page);border:1px solid var(--al-line);border-radius:var(--al-radius-layer)}
+body.firas-observing #app #lab-mount.firas-active [data-firas-modes] [data-reset]{display:block;margin-top:14px;min-height:44px}
+body.firas-observing #app #lab-mount.firas-active .firas-observation{display:grid;grid-template-columns:minmax(0,1fr) 244px;column-gap:36px;grid-template-rows:auto 1fr;align-items:start}
+body.firas-observing #app #lab-mount.firas-active .firas-plate{grid-column:1;grid-row:1 / 3;min-width:0}
+body.firas-observing #app #lab-mount.firas-active .firas-shell figure{margin:0;min-width:0}
+body.firas-observing #app #lab-mount.firas-active .firas-shell figcaption{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:0 24px 0 72px;font:400 var(--al-tick)/1.6 var(--al-font);color:var(--al-muted)}
+body.firas-observing #app #lab-mount.firas-active .firas-shell figcaption>span:first-child{color:var(--al-text);font-weight:600}
+body.firas-observing #app #lab-mount.firas-active #galaxy-spectrum{display:block;width:100%;height:300px;cursor:crosshair;touch-action:pan-y}
+body.firas-observing #app #lab-mount.firas-active #galaxy-residual{display:block;width:100%;height:206px;cursor:crosshair;touch-action:pan-y}
+body.firas-observing #app #lab-mount.firas-active .firas-residual{margin-top:16px}
+body.firas-observing #app #lab-mount.firas-active .firas-frequency{grid-column:2;grid-row:1;border-left:1px solid var(--al-line);padding-left:24px}
+body.firas-observing #app #lab-mount.firas-active .firas-selection-label{display:flex;align-items:center;gap:8px;font-size:var(--al-label);font-weight:600}
+body.firas-observing #app #lab-mount.firas-active .firas-marker-key{height:16px;border-left:2px dashed var(--al-focus)}
+body.firas-observing #app #lab-mount.firas-active [data-firas-frequency] .control{display:block;font-size:0;margin:8px 0 0;padding:0;color:var(--al-text)}
+body.firas-observing #app #lab-mount.firas-active [data-firas-frequency] output{font:400 2rem/1.25 var(--al-numeric);color:var(--al-text)}
+body.firas-observing #app #lab-mount.firas-active [data-firas-frequency] output:after{content:' GHz';font-size:var(--al-label);color:var(--al-muted)}
+body.firas-observing #app #lab-mount.firas-active .firas-shell .control input[type=range]{display:block;width:100%;height:44px;margin:8px 0 0;cursor:pointer;accent-color:var(--al-action)}
+body.firas-observing #app #lab-mount.firas-active .firas-shell .control small{display:none}
+body.firas-observing #app #lab-mount.firas-active .firas-model-read{margin-top:14px;font-size:var(--al-label);color:var(--al-muted)}
+body.firas-observing #app #lab-mount.firas-active [data-firas-model]{font:400 1.75rem/1.4 var(--al-numeric);color:var(--al-text);margin:4px 0 0}
+body.firas-observing #app #lab-mount.firas-active .firas-read-unit{font:400 var(--al-tick)/1.6 var(--al-numeric);color:var(--al-muted);margin:0}
+body.firas-observing #app #lab-mount.firas-active :is(.firas-control-help,.firas-neighbor-note){font:400 var(--al-tick)/1.7 var(--al-font);color:var(--al-muted)}
+body.firas-observing #app #lab-mount.firas-active .firas-published-reading{grid-column:2;grid-row:2;border-left:1px solid var(--al-line);padding:20px 0 0 24px}
+body.firas-observing #app #lab-mount.firas-active .firas-published-reading h3{font:600 var(--al-label)/1.5 var(--al-font);margin:0 0 10px}
+body.firas-observing #app #lab-mount.firas-active .firas-row-frequency{min-height:1.7em;font-size:var(--al-label);margin:0 0 8px;color:var(--al-muted)}
+body.firas-observing #app #lab-mount.firas-active .firas-row-value{min-height:1.4em;font-size:1.75rem;line-height:1.4;margin:0;color:var(--al-text)}
+body.firas-observing #app #lab-mount.firas-active .firas-legend{display:grid;gap:12px;margin-top:22px;font-size:var(--al-tick)}
+body.firas-observing #app #lab-mount.firas-active .firas-legend>span{display:flex;align-items:center;gap:10px}
+body.firas-observing #app #lab-mount.firas-active .firas-legend i{display:inline-block;width:24px;flex:none}
+body.firas-observing #app #lab-mount.firas-active .firas-data-key:after{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--al-text);margin:auto}
+body.firas-observing #app #lab-mount.firas-active .firas-model-key{border-top:2px solid var(--al-reference)}
+body.firas-observing #app #lab-mount.firas-active .firas-error-key{font-style:normal;text-align:center;color:var(--al-text)}
+body.firas-observing #app #lab-mount.firas-active .firas-source-line{font-size:var(--al-tick);line-height:1.7;color:var(--al-muted);margin:18px 0 20px 72px}
+body.firas-observing #app #lab-mount.firas-active .firas-shell a{color:var(--al-action);text-underline-offset:4px}
+body.firas-observing #app #lab-mount.firas-active :is(.firas-teaching,.firas-info){border-top:1px solid var(--al-line);margin:0}
+body.firas-observing #app #lab-mount.firas-active :is(.firas-teaching,.firas-info)>summary{min-height:52px;display:flex;align-items:center;font-size:var(--al-label);cursor:pointer}
+body.firas-observing #app #lab-mount.firas-active .firas-disclosure{padding:8px 0 24px}
+body.firas-observing #app #lab-mount.firas-active .firas-detail-head{display:flex;justify-content:space-between;align-items:center;gap:20px}
+body.firas-observing #app #lab-mount.firas-active .firas-detail-head p{margin:0;color:var(--al-muted);font-size:var(--al-label)}
+body.firas-observing #app #lab-mount.firas-active [data-firas-delta]{max-width:600px;margin:20px 0 10px}
+body.firas-observing #app #lab-mount.firas-active [data-firas-delta] .control{font:400 var(--al-label)/1.7 var(--al-font)}
+body.firas-observing #app #lab-mount.firas-active [data-firas-delta] output{font-family:var(--al-numeric)}
+body.firas-observing #app #lab-mount.firas-active #galaxy-differential{display:block;width:100%;height:260px}
+body.firas-observing #app #lab-mount.firas-active [data-firas-presets]{margin:12px 0}
+body.firas-observing #app #lab-mount.firas-active .al-mode-nav>button{color:var(--al-muted);background:transparent;border:0;border-bottom:2px solid transparent;border-radius:0;min-height:var(--al-touch-target);font:400 var(--al-label)/1.5 var(--al-font)}
+body.firas-observing #app #lab-mount.firas-active .al-mode-nav>button:is(.active,[aria-pressed=true],[aria-selected=true]){color:var(--al-text);background:var(--al-surface);border-bottom-color:var(--al-action)}
+body.firas-observing #app #lab-mount.firas-active .al-mode-nav>button:hover{color:var(--al-text);background:var(--al-surface)}
+body.firas-observing #app #lab-mount.firas-active [data-firas-teaching-read]{font-size:var(--al-label);line-height:1.7}
+body.firas-observing #app #lab-mount.firas-active .firas-reading-copy{max-width:78ch;font-size:var(--al-body);line-height:1.85}
+body.firas-observing #app #lab-mount.firas-active .firas-reading-copy p{margin:16px 0}
+body.firas-observing #app #lab-mount.firas-active .firas-formula{overflow-wrap:anywhere}
+body.firas-observing #app #lab-mount.firas-active .firas-data-state{position:absolute;inset:200px 32px auto;min-height:490px;display:flex;align-items:center;justify-content:center;max-width:76ch;margin:auto;text-align:center;line-height:1.9}
+body.firas-observing #app #lab-mount.firas-active .firas-data-state[role=alert]{color:var(--al-error)}
+body.firas-observing #app #lab-mount.firas-active .firas-shell :is(button,summary,a,input,canvas):focus-visible{outline:3px solid var(--al-focus);outline-offset:3px}
+@media(max-width:900px){
+ body.firas-observing #app #lab-mount.firas-active .firas-observation{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto}
+ body.firas-observing #app #lab-mount.firas-active .firas-heading{gap:12px;margin-bottom:20px}
+ body.firas-observing #app #lab-mount.firas-active .firas-frequency{grid-column:1;grid-row:1;border:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:22px;align-items:center;margin-bottom:14px}
+ body.firas-observing #app #lab-mount.firas-active .firas-selection-label{grid-column:1;grid-row:1}
+ body.firas-observing #app #lab-mount.firas-active [data-firas-frequency]{grid-column:1;grid-row:2}
+ body.firas-observing #app #lab-mount.firas-active [data-firas-frequency] output{font-size:1.5rem}
+ body.firas-observing #app #lab-mount.firas-active [data-firas-frequency] .control{margin-top:0}
+ body.firas-observing #app #lab-mount.firas-active .firas-model-read{grid-column:2;grid-row:1 / 3;margin:0}
+ body.firas-observing #app #lab-mount.firas-active [data-firas-model]{font-size:1.5rem}
+ body.firas-observing #app #lab-mount.firas-active .firas-control-help{display:none}
+ body.firas-observing #app #lab-mount.firas-active .firas-plate{grid-column:1;grid-row:2}
+ body.firas-observing #app #lab-mount.firas-active .firas-published-reading{grid-column:1;grid-row:3;display:grid;grid-template-columns:1fr 1fr;column-gap:20px;border:0;border-top:1px solid var(--al-line);padding:16px 0;margin-top:4px}
+ body.firas-observing #app #lab-mount.firas-active .firas-published-reading :is(h3,.firas-row-frequency,.firas-row-value,.firas-read-unit){grid-column:1}
+ body.firas-observing #app #lab-mount.firas-active .firas-neighbor-note{grid-column:2;grid-row:1 / 4;margin:0}
+ body.firas-observing #app #lab-mount.firas-active .firas-legend{grid-column:2;margin-top:0;gap:8px}
+ body.firas-observing #app #lab-mount.firas-active .firas-source-line{margin-left:0}
+}
+@media(max-width:540px){
+ body.firas-observing #app #lab-mount.firas-active .firas-shell{padding:4px 16px 28px}
+ body.firas-observing #app #lab-mount.firas-active .firas-heading{display:block}
+ body.firas-observing #app #lab-mount.firas-active .firas-modes{margin:10px 0 0}
+ body.firas-observing #app #lab-mount.firas-active .firas-modes>summary{min-height:44px}
+ body.firas-observing #app #lab-mount.firas-active [data-firas-modes]{left:0;right:auto}
+ body.firas-observing #app #lab-mount.firas-active .firas-shell figcaption{padding:0 18px 0 58px;font-size:var(--al-tick);gap:2px}
+ body.firas-observing #app #lab-mount.firas-active .firas-shell figcaption>span{display:block}
+ body.firas-observing #app #lab-mount.firas-active #galaxy-spectrum{height:236px}
+ body.firas-observing #app #lab-mount.firas-active #galaxy-residual{height:198px}
+ body.firas-observing #app #lab-mount.firas-active .firas-frequency{column-gap:16px}
+ body.firas-observing #app #lab-mount.firas-active .firas-model-read{font-size:var(--al-tick)}
+ body.firas-observing #app #lab-mount.firas-active .firas-legend{display:flex;flex-wrap:wrap;grid-column:1 / 3;margin-top:12px;gap:12px}
+ body.firas-observing #app #lab-mount.firas-active .firas-legend i{width:14px}
+ body.firas-observing #app #lab-mount.firas-active .firas-row-value{font-size:1.5rem}
+ body.firas-observing #app #lab-mount.firas-active .firas-detail-head{align-items:flex-start}
+ body.firas-observing #app #lab-mount.firas-active .firas-data-state{min-height:460px}
 }

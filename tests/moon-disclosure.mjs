@@ -3,6 +3,21 @@
 export async function moonReveal(page,selector){
  await page.waitForFunction(()=>document.querySelector('#phase-ui'));
  const target=page.locator(selector);
+ if(await page.locator('body[class*="atlas-"]').count()){
+  const owner=await target.count()?await target.first().evaluate(e=>e.closest('#condition-menu')?'condition':e.closest('#phase-menu')?'phase':null):null;
+  // A learner first closes the current popover before reaching a control in
+  // another layer. Visibility alone does not detect a top-layer interception.
+  if(owner!=='condition'&&selector!=='#condition-entry'&&await page.locator('#condition-menu').isVisible())await page.locator('[aria-label="关闭条件"]').click();
+  if(owner!=='phase'&&selector!=='#phase-entry'&&await page.locator('#phase-menu').isVisible())await page.locator('#phase-entry').click();
+  if(!await target.isVisible()&&await target.count()){
+   const menu=await target.first().evaluate(e=>e.closest('#condition-menu')?'condition':e.closest('#phase-menu')?'phase':null);
+   if(menu==='condition'&&!await page.locator('#condition-menu').isVisible())await page.locator('#condition-entry').click();
+   if(menu==='phase'&&!await page.locator('#phase-menu').isVisible())await page.locator('#phase-entry').click();
+   for(const detail of await target.first().locator('xpath=ancestor::details').all())if(!await detail.evaluate(e=>e.open))await detail.locator(':scope > summary').click();
+  }
+  if(!await target.isVisible())throw Error('Atlas control remains inaccessible after authored disclosure: '+selector);
+  return target;
+ }
  if(!await target.isVisible()&&await page.locator('body.eclipse-observing').count()){
   if(selector.includes('[data-mode'))await page.locator('#eclipse-modes').evaluate(el=>el.open=true);
   else if(selector.includes('[data-preset')||selector.includes('[data-guide-action="eclipse'))await page.locator('#eclipse-presets').evaluate(el=>el.open=true);

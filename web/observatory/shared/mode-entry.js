@@ -2,8 +2,9 @@ import {confirmedModes} from './tool-registry.js';
 // Frozen modules retain their own controls and model state. Route entry uses
 // the same public buttons as a learner; it never assigns scientific state.
 const recipes={
- sky:{sky:['[data-tab="sky"]'],stars:['[data-tab="stars"]'],measure:['[data-tab="measure"]','[data-measure-task="shadow"]'],calendar:['[data-tab="measure"]','[data-measure-task="calendar"]'],day:['[data-tab="day"]'],precession:['[data-tab="precession"]']},
+ sky:{sky:['[data-tab="sky"]'],stars:['[data-tab="stars"]'],measure:['[data-tab="measure"]','[data-measure-task="shadow"]'],calendar:['[data-navigation-mode="calendar"]'],day:['[data-tab="day"]'],precession:['[data-tab="precession"]']},
  imaging:{real:['[data-dataset="real"]'],teaching:['[data-dataset="teaching"]']},
+ optics:Object.fromEntries(['imaging','resolution','sampling'].map(mode=>[mode,[`[data-task="${mode}"]`]])),
  galaxy:{galaxy:['[data-topic="galaxy"]'],cmb:['[data-topic="cmb"]','[data-cmb-view="map"]'],'cmb-spectrum':['[data-topic="cmb"]','[data-cmb-view="spectrum"]']},
  orbits:Object.fromEntries(['orbit','transfer','staging','landing'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),
  measure:Object.fromEntries(['shadow','jupiter','s2','distance'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),

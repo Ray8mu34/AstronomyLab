@@ -1,0 +1,67 @@
+/* Runtime token owner. DESIGN.md documents this file; science colour scales
+   and coordinate transforms remain with their scientific renderers. */
+:root {
+  --al-black: #070a0e;
+  --al-slate: #18212b;
+  --al-paper: #f2f4f4;
+  --al-ink: #202c36;
+  --al-silver: #b7c6d1;
+  --al-brass: #cba66c;
+  --al-font: "ALab Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Segoe UI Symbol", "Cambria Math", sans-serif;
+  --al-numeric: "IBM Plex Mono", "ALab Sans", "Noto Sans SC", "Segoe UI Symbol", "Cambria Math", monospace;
+  --al-title-home: clamp(2.125rem, 4.7vw, 4.5rem);
+  --al-title-tool: clamp(1.5rem, 2.1vw, 1.875rem);
+  --al-body: 1rem;
+  --al-label: .9375rem;
+  --al-tick: .875rem;
+  --al-readout: 1.625rem;
+  --al-leading: 1.7;
+  --al-radius-control: 4px;
+  --al-radius-layer: 8px;
+  --al-touch-target: 44px;
+  --al-motion-feedback: 150ms;
+  --al-motion-disclosure: 220ms;
+  --al-motion-camera: 500ms;
+  --al-plot-line-width: 2;
+  --al-plot-reference-width: 1.25;
+  --al-plot-point-radius: 3.5;
+}
+:root, [data-al-surface="paper"] {
+  color-scheme: light;
+  --al-page: var(--al-paper);
+  --al-surface: #ffffff;
+  --al-text: var(--al-ink);
+  --al-muted: #566674;
+  --al-line: #b8c3cb;
+  --al-control-border: #6b7c89;
+  --al-action: var(--al-ink);
+  --al-on-action: var(--al-paper);
+  --al-focus: #285a80;
+  --al-error: #962f2f;
+  --al-reference: #246574;
+  --al-scroll-thumb: #697986;
+  --al-scroll-track: var(--al-paper);
+}
+[data-al-surface="scene"], [data-al-surface="image"], [data-al-surface="hr"],
+html:has(> body[data-al-surface="scene"]), html:has(> body[data-al-surface="image"]), html:has(> body[data-al-surface="hr"]) {
+  color-scheme: dark;
+  --al-page: var(--al-black);
+  --al-surface: var(--al-slate);
+  --al-text: var(--al-paper);
+  --al-muted: var(--al-silver);
+  --al-line: #455767;
+  --al-control-border: #758a9b;
+  --al-action: var(--al-brass);
+  --al-on-action: var(--al-black);
+  --al-focus: #b7d9ff;
+  --al-error: #f1aba5;
+  --al-reference: #85c8d6;
+  --al-scroll-thumb: #8b9dac;
+  --al-scroll-track: var(--al-black);
+}
+@media (max-width: 600px) {
+  :root { --al-tick: .8125rem; --al-label: .9375rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --al-motion-feedback: 0ms; --al-motion-disclosure: 0ms; --al-motion-camera: 0ms; }
+}

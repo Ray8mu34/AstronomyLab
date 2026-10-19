@@ -1,9 +1,9 @@
 let THREE;
 import {assetURL,bindControls,syncControls} from '../shared/core-controls.js';
 import {plot} from '../shared/plot.js';
+import {getGraphicStyle} from '../shared/presentation.js';
 import {registerExperimentModel,validateExperimentModel} from '../shared/experiment-state.js';
-import {attachShadowUI} from './measure-shadow-ui.js';
-import {attachDistanceUI} from './measure-distance-ui.js';
+import {attachMeasureAtlas} from './measure-atlas-ui.js';
 import {CONSTANTS,shadowHeight,dynamicalMass,s2Mass,distanceModulus,parallaxDistance,scalePropagation} from './measure-physics.mjs';
 const F=(v,n=2)=>Number.isFinite(v)?v.toFixed(n):'无效';
 const input=(key,label,value,min,max,step)=>`<label class="control"><span>${label} <output data-value="${key}">${value}</output></span><input aria-label="${label}" type="range" data-key="${key}" value="${value}" min="${min}" max="${max}" step="${step}"></label>`;
@@ -21,9 +21,9 @@ export async function mount(el,{mode:requestedMode}={}){
  <div class="lab-grid measure-workspace"><section class="viz-panel"><div class="panel-title" id="measure-title"></div><div id="measure-shadow" class="measure-shadow"></div><div class="scene-host" id="measure-scene" aria-label="可旋转的教学轨道模型"></div><div id="measure-ladder" hidden></div><div id="measure-outcomes" class="measure-outcomes"></div></section>
  <aside class="measure-desk"><section class="lab-controls" id="measure-controls" aria-label="本项测量主控"></section><div class="button-row"><button id="measure-play">播放轨道动画</button><button id="measure-defaults">恢复本项默认值</button><button id="measure-compare">记下当前读数</button><button id="measure-clear" hidden>清除对照</button></div><p id="measure-feedback" class="measure-feedback" role="status"></p><div id="measure-comparison" class="measure-comparison" hidden></div></aside></div>
  <div class="legend" id="measure-legend"></div>
- <details class="measure-analysis"><summary>展开几何、敏感度曲线与完整读数</summary><div id="measure-geometry"></div><div class="panel-title" id="measure-plot-title"></div><canvas class="plot-canvas" id="measure-plot" aria-label="当前输入的敏感度曲线和假设一阶误差"></canvas><div class="metrics" id="measure-metrics"></div></details><article class="lab-copy" id="measure-copy"></article><div class="lab-copy"><h3>测量关系与资料</h3><p><a href="/labs/earth-moon/">日地月：照明几何</a> · <a href="/lab/sky">天空坐标：视差与真实空间</a> · <a href="/lab/galaxy">银河内外：从太阳位置到银心</a> · <a href="/lab/orbits">航天：给定质量预测轨道</a> · <a href="/sources/measure.md">本页数据、计算方法和核验记录</a></p><figure id="measure-figure"></figure></div></div>`;
+ <details class="measure-analysis"><summary>展开几何、敏感度曲线与完整读数</summary><div id="measure-geometry"></div><div class="panel-title" id="measure-plot-title"></div><canvas class="plot-canvas" id="measure-plot" aria-label="当前输入的敏感度曲线和假设一阶误差"></canvas><div class="metrics" id="measure-metrics"></div></details><article class="lab-copy" id="measure-copy"></article><div class="lab-copy"><h3>测量关系与资料</h3><p><a href="/labs/earth-moon/">日地月：照明几何</a> · <a href="/lab/sky">天空坐标：视差与真实空间</a> · <a href="/lab/galaxy">银河内外：从太阳位置到银心</a> · <a href="/lab/orbits">航天：给定质量预测轨道</a> · <a href="/sources/measure.md">本页数据与计算方法</a></p><figure id="measure-figure"></figure></div></div>`;
  const defaults={...state};let view=null,group=null,jupiterTexture=null,sceneTask=null,disposed=false,modeRequest=0;
- let unBind=()=>{},current=null,lastPlot=null,orbiter=null,comparison=null,dragPointer=null,shadowUI,distanceUI;const api={module:'measure',state,getState,applyState,get result(){return current;}};window.__lab=api;
+ let unBind=()=>{},current=null,lastPlot=null,orbiter=null,comparison=null,dragPointer=null,measureUI;const api={module:'measure',state,getState,applyState,get result(){return current;}};window.__lab=api;
  function getState(){if(state.mode!=='jupiter')return null;const {a,period,errorA,errorP,phase}=state;return {version:1,kind:'jupiter-mass',a,period,errorA,errorP,phase};}
  function applyState(candidate){
   const saved=validateExperimentModel('measure','jupiter',candidate);if(!saved||state.mode!=='jupiter')return false;
@@ -41,7 +41,7 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
  function clear(){if(!group)return;for(const o of [...group.children]){group.remove(o);o.traverse(n=>{n.geometry?.dispose();if(n.material)for(const material of Array.isArray(n.material)?n.material:[n.material])material.dispose();});}orbiter=null;}
  function line(points,color){const l=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points.map(p=>new THREE.Vector3(...p))),new THREE.LineBasicMaterial({color}));group.add(l);return l;}
  function mesh(geometry,color){const m=new THREE.Mesh(geometry,new THREE.MeshStandardMaterial({color,roughness:.7}));group.add(m);return m;}
- function controls(){shadowUI?.beforeControls();distanceUI?.beforeControls();unBind();const s=state;let html='';
+ function controls(){measureUI?.beforeControls();unBind();const s=state;let html='';
   if(s.mode==='shadow')html=input('length','标尺读得影长 km',s.length,1,20,.1)+input('alpha','太阳高度 °',s.alpha,2,60,.1)+'<details><summary>误差假设</summary>'+input('sigmaLength','假设影长 1σ误差 km',s.sigmaLength,0,2,.05)+input('sigmaAlpha','假设太阳高度 1σ误差 °',s.sigmaAlpha,0,1,.05)+'<p id="measure-error-factors" class="measure-error-parts"></p></details><div class="button-row"><button data-preset="remeasure">重新量影长</button><button data-preset="angle">角度误差主导</button></div>';
   if(s.mode==='jupiter')html=input('a','真实轨道半长轴 km',s.a,300000,550000,100)+input('period','周期 日',s.period,1.3,2.5,.000001)+'<details><summary>误差假设</summary>'+input('errorA','假设半长轴相对 1σ误差 %',s.errorA,0,5,.1)+input('errorP','假设周期相对 1σ误差 %',s.errorP,0,2,.05)+'</details><div class="button-row"><button data-preset="io10">半长轴增加10%</button></div>';
   if(s.mode==='s2')html=input('theta','圆整角半长轴 mas',s.theta,80,180,.1)+input('distance','采用银心距离 pc',s.distance,6000,10000,10)+input('s2Period','轨道周期 年',s.s2Period,12,20,.1)+'<details><summary>误差假设</summary>'+input('errorTheta','假设角半长轴相对 1σ误差 %',s.errorTheta,0,5,.1)+input('errorDistance','假设距离相对 1σ误差 %',s.errorDistance,0,5,.1)+input('errorS2P','假设周期相对 1σ误差 %',s.errorS2P,0,3,.1)+'</details><div class="button-row"><button data-preset="s2distance">距离增加10%</button></div>';
@@ -49,7 +49,7 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
   el.querySelector('#measure-controls').innerHTML=html;unBind=bindControls(el.querySelector('#measure-controls'),state,()=>{refresh();feedback('输入已更新；读数和图形同步。');});
  }
  function camera(extent,target=[0,0,0]){extent*=Math.max(1,1.35/view.camera.aspect);view.controls.target.set(...target);view.camera.position.set(target[0]+extent*.7,target[1]+extent*.7,target[2]+extent*1.1);view.controls.update();}
- function band(curve,sigma){return [{points:curve,color:'#71c8c7',label:'推算值'},{points:curve.map(([x,y])=>[x,y+sigma(x,y)]),color:'#6c819c',label:'+1σ（假设）'},{points:curve.map(([x,y])=>[x,Math.max(0,y-sigma(x,y))]),color:'#6c819c',label:'−1σ（假设）'}];}
+ function band(curve,sigma){const style=getGraphicStyle(el),paper=state.mode==='distance',curveColor=paper?style.accent:'#71c8c7',errorColor=paper?style.muted:'#6c819c';return [{points:curve,color:curveColor,label:'推算值'},{points:curve.map(([x,y])=>[x,y+sigma(x,y)]),color:errorColor,label:'+1σ（假设）'},{points:curve.map(([x,y])=>[x,Math.max(0,y-sigma(x,y))]),color:errorColor,label:'−1σ（假设）'}];}
  function refresh(){clear();const s=state,sceneHost=el.querySelector('#measure-scene'),ladder=el.querySelector('#measure-ladder');sceneHost.hidden=['distance','shadow'].includes(s.mode);ladder.hidden=s.mode!=='distance';el.querySelector('#measure-shadow').hidden=s.mode!=='shadow';
   for(const b of el.querySelectorAll('[data-mode]')){b.classList.toggle('active',b.dataset.mode===s.mode);b.setAttribute('aria-pressed',String(b.dataset.mode===s.mode));}el.querySelector('#measure-copy').innerHTML=content[s.mode];el.querySelector('#measure-play').hidden=!['jupiter','s2'].includes(s.mode);
   let metrics='',legend='',title='',chartTitle='',plotOptions,figure='';
@@ -81,7 +81,7 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
   el.querySelector('#measure-title').textContent=title;el.querySelector('#measure-plot-title').textContent=chartTitle;el.querySelector('#measure-metrics').innerHTML=metrics;el.querySelector('#measure-legend').textContent=legend;el.querySelector('#measure-figure').innerHTML=figure;
   // 当前输入以金点接回扫描曲线；曲线是敏感度实验，不冒充观测。
   const selected={shadow:[s.alpha,current.height],jupiter:[s.a/1000,current.mass/1e27],s2:[s.distance,current.solar/1e6],distance:[s.p,current.parallax?.distance]}[s.mode];
-  plotOptions.series.push({points:[selected],color:'#ebc77e',dots:true,label:'当前输入'});
+  plotOptions.series.push({points:[selected],color:s.mode==='distance'?getGraphicStyle(el).text:'#ebc77e',dots:true,label:'当前输入'});
   if(s.mode==='shadow')plotOptions.series.forEach((line,i)=>{line.label=['h(α)','+1σ','−1σ','当前α'][i];});
   if(s.mode==='distance')plotOptions.series.forEach((line,i)=>{line.label=['d(p)','+1σ','−1σ','当前p'][i];});
   lastPlot=plotOptions;plot(el.querySelector('#measure-plot'),plotOptions);position();renderUI();
@@ -92,7 +92,7 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
   if(s.mode==='s2')return `距离 ${s.distance} pc · 中心质量 ${F(q.solar/1e6,3)} 百万M☉`;
   return `视差 ${F(s.p,1)} mas → ${F(q.parallax.distance,1)} pc · 半径/光度/质量 ${F(q.scale.radius,3)} / ${F(q.scale.luminosity,3)} / ${F(q.scale.mass,3)}`;
  }
- function renderUI(){shadowUI?.setMode(state.mode);distanceUI?.setMode(state.mode);syncControls(el,state);const s=state;
+ function renderUI(){measureUI?.setMode(state.mode);syncControls(el,state);const s=state;
   // Readouts describe the mass model, including off-grid mathematical presets;
   // the adjacent native range still uses its declared keyboard/dragging step.
   if(s.mode==='jupiter')for(const key of ['a','period','errorA','errorP']){
@@ -112,8 +112,7 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
   el.querySelector('#measure-outcomes').innerHTML=outcomes;const geometry=el.querySelector('#measure-geometry');geometry.hidden=s.mode!=='shadow';if(s.mode==='shadow')geometry.innerHTML=geometrySVG();
   const box=el.querySelector('#measure-comparison');box.hidden=!comparison;el.querySelector('#measure-clear').hidden=!comparison;
   if(comparison){box.replaceChildren();for(const text of ['已记下：'+comparison,'现在：'+headline()]){const p=document.createElement('p');p.textContent=text;box.append(p);}}
-  shadowUI?.render({state,result:current});
-  distanceUI?.render({state,result:current});
+  measureUI?.render({state,result:current});
  }
  // Original teaching geometry. The ruler represents ground km; no photograph calibration is implied.
  function shadowSVG(){const x=60+state.length*28;
@@ -154,8 +153,7 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
  if(['shadow','jupiter','s2','distance'].includes(requestedMode))state.mode=requestedMode;if(['jupiter','s2'].includes(state.mode))await ensureScene();
  el.addEventListener('click',click);controls();refresh();
  const observer=new ResizeObserver(()=>{if(lastPlot)plot(el.querySelector('#measure-plot'),lastPlot);});observer.observe(el.querySelector('#measure-plot'));
- shadowUI=attachShadowUI(el,{redraw:refresh});
- distanceUI=attachDistanceUI(el,{redraw:refresh});
+ measureUI=attachMeasureAtlas(el,{redraw:refresh});
  const unregisterModel=registerExperimentModel(el,{getState:mode=>mode==='jupiter'?getState():null,applyState});
- return ()=>{unregisterModel();disposed=true;modeRequest++;shadowUI.dispose();distanceUI.dispose();unBind();shadowHost.removeEventListener('pointerdown',pointerDown);shadowHost.removeEventListener('pointermove',pointerMove);shadowHost.removeEventListener('pointerup',pointerUp);shadowHost.removeEventListener('pointercancel',pointerUp);shadowHost.removeEventListener('keydown',keydown);el.removeEventListener('click',click);observer.disconnect();clear();jupiterTexture?.dispose();view?.dispose();if(window.__lab===api)delete window.__lab;};
+ return ()=>{unregisterModel();disposed=true;modeRequest++;measureUI.dispose();unBind();shadowHost.removeEventListener('pointerdown',pointerDown);shadowHost.removeEventListener('pointermove',pointerMove);shadowHost.removeEventListener('pointerup',pointerUp);shadowHost.removeEventListener('pointercancel',pointerUp);shadowHost.removeEventListener('keydown',keydown);el.removeEventListener('click',click);observer.disconnect();clear();jupiterTexture?.dispose();view?.dispose();if(window.__lab===api)delete window.__lab;};
 }

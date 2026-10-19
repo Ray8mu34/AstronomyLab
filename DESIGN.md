@@ -1,27 +1,116 @@
 ---
 version: alpha
-name: AstronomyLab approved UI references
-description: 三个已人工批准样板的发现索引；下列颜色仅属于月相，运行时 token 保持类型专属。
+name: AstronomyLab interactive observing atlas
+description: 可亲手操作的天文观测图册。运行时CSS token拥有值，本文记录用途、科学图形变体和共享呈现所有者。
 colors:
-  background: "#080e16"
-  foreground: "#eef3f7"
-  muted: "#9daab8"
-  border: "#334353"
-  primary: "#b7ced8"
-  overlay: "#101924"
+  background: "#f2f4f4"
+  foreground: "#202c36"
+  muted: "#566674"
+  border: "#b8c3cb"
+  primary: "#202c36"
+  scene: "#070a0e"
+  sceneSurface: "#18212b"
+  sceneMuted: "#b7c6d1"
+  sceneAction: "#cba66c"
+  focus: "#285a80"
+  error: "#962f2f"
 typography:
   sans:
-    fontFamily: "Microsoft YaHei, system-ui, sans-serif"
+    fontFamily: "ALab Sans, Noto Sans SC, PingFang SC, Microsoft YaHei, Segoe UI Symbol, Cambria Math, sans-serif"
+    fontSize: "16px"
+    lineHeight: "1.7"
+  numeric:
+    fontFamily: "IBM Plex Mono, ALab Sans, Noto Sans SC, Segoe UI Symbol, Cambria Math, monospace"
+rounded:
+  control: "4px"
+  layer: "8px"
 omitted:
-  - section: rounded
-    reason: 方形 overlay 和文字按钮沿用已验收 CSS，不建立跨模式圆角系统。
   - section: spacing
-    reason: 精确响应式几何由 phase-ui.css 拥有，不把单个模式的定位规则推广全站。
+    reason: 主体和必要参照决定各模式构图，间距由专属布局拥有；共享呈现只统一控件目标和文字尺度。
   - section: components
-    reason: 移动原控件并保留其行为，不引入新的组件库。
+    reason: 下面Canonical UI Map记录原生控件与薄呈现文件的所有权，不引入框架组件库。
 ---
 
-# AstronomyLab 已批准 UI 样板与规则索引
+# AstronomyLab 交互观测图册
+
+## Overview
+
+2026-10-19 用户明确授权完整前端重构，并要求直接完成11工具43模式。当前任务以第二前端包及用户最新指令为依据：首页、月相、采样、FIRAS先行，HR和真实成像核查异质性，再按完整模式矩阵推广。原来的局部视觉冻结、只移动DOM、禁止新字体/共享呈现、共享绘图样式不得改等限制由本次授权覆盖。历史批准与证据保留在本文后半，不再限制本轮已经授权的呈现。已经删除的旧设计文档不恢复。
+
+辨识度来自同一个对象随着操作显出关系：月面对应同刻照明几何，星像位置不变而像元尺度改变，光谱与残差用同一频率对应。首页采用黑场月面接明亮工具目录；工具是产品工作区，以可观察对象和第一反馈为先，保持准确的中文与安静的控制。科学主体承担视觉表现，不使用装饰星空、霓虹仪表盘、玻璃卡片或虚构播放。
+
+第一科学包的模型、独立数值预算、精确状态、像元积分、共享角坐标、速度参考系与FIRAS产品验证继续有效。图形美化允许改变镜头、笔触和构图，不改变物理量、轴方向、数据身份、许可结论或发布权限。工程、独立视觉审查、科学核查、真人使用和实体设备分别记录。
+
+## Colors
+
+唯一运行时值源是 `web/observatory/shared/presentation-tokens.css`。采用runtime canonical的Model B：该文件→CSS语义变量→原生呈现及`getGraphicStyle()`→Canvas/SVG；本文frontmatter镜像已经接受的值与用途。不能在模块复制另一套界面palette。
+
+`data-al-surface="paper"`用于目录、热谱、FIRAS与量距图版；`scene`和`image`用于空间、月面与图像主体；`hr`保留承托星色的深底。它们是任务表面，不是新增主题切换器。浅底正文用深墨，次文字用灰蓝；金色只做深底操作强调，不承担浅底小字。科学色标由科学绘图器拥有，不为配合界面改染。
+
+必要控件边界使用`--al-control-border`（paper `#6b7c89`、深底 `#758a9b`），与图网格/分隔线`--al-line`分开，不能通过提亮全部网格来补控件可辨识度。
+
+## Typography
+
+标题和正文使用Noto Sans SC派生的ALab Sans 400–600可变字体；数值与单位使用IBM Plex Mono 400。首页问题约34–72px，工具标题24–30px，正文16px，主控15px，必要刻度桌面14px、窄屏13px，主读数26px。投影可按现场任务调整，不将浏览器放大当现场验收。
+
+`shared/fonts/font-faces.css`由`tools/build-presentation-fonts.py`生成：主页/导航字汇核心与扩展字汇采用不重叠unicode-range，同一家族按实际字符加载。首页仅预载核心字汇一次。源17.7MB字库仅在本机build/qa维护，不进入运行包。两份完整OFL随字体保留，来源、变换、字符与SHA在`shared/fonts/FONT_MANIFEST.json`。新增中文后运行生成器及`--check`；不支持的少量科学符号使用可靠系统回退，不假称字体覆盖全部Unicode。
+
+Canvas/SVG从`getGraphicStyle(element)`读取font字符串、字号与笔触；`observeGraphicFonts(element, redraw)`在字体ready/loadingdone后合并到一帧重画，返回dispose。模块顶层呈现owner负责重画完整图层并在卸载时清理。共享plot仅调用显式`onFontReady`完整回调，默认不会回放局部底图。字体失败仍以系统中文和数学字体显示，不能用空白等待代替内容。
+
+## Layout
+
+主体/第一操作/当前结果/必要参照构成一个观察单元。月相保留大圆盘与可主动比较的同刻几何，采样共用天空窗口，FIRAS主谱和残差同横轴，HR保留左热右冷与双对数。各模式拥有专属构图，不能机械复制多栏模板。手机重新组织比较关系，控制条占真实布局空间并计入safe area；200%可自然重排，不能用整页overflow隐藏功能。
+
+## Elevation & Depth
+
+图像与科学图版无卡片大外壳。边界只区分任务职责；浮层仅在菜单/dialog中使用轻阴影并保持焦点可见。真实光照和星色属于科学主体，界面不叠加改变读图的装饰光晕。
+
+## Shapes
+
+参数/按钮4px、浮层8px圆角。天体、点和range手柄可为圆形。主触控目标44px是本项目舒适目标，不等同于WCAG AA的24px条款；原生range/键盘与非拖动等效操作保留。
+
+## Components
+
+| 能力 | Canonical owner | 契约与变体 | 验证 |
+| --- | --- | --- | --- |
+| Token与字体 | `shared/presentation-tokens.css`、`shared/fonts/font-faces.css` | paper/scene/image/hr；字体核心/扩展按字加载 | computed值、字体网络字节、缺字/失败回退 |
+| 全局/紧凑工作区导航 | `shared/navigation.js`、`navigation.css`、共享presentation CSS | 原路由、四主题11工具、原生details、Escape归summary；`mountWorkspaceNavigation`为单一紧凑变体 | 键盘、窄屏展开/关闭、历史导航、只有一个活动导航owner |
+| 路由初始呈现 | `shared/route-presentation.js`、共享presentation CSS | 小型同步声明仅登记已迁移模式；app消费同一resolve/apply/clear；声明默认与ID以测试对registry校验 | 直接URL/未知mode/经典入口/前进后退/来源页与错误退出；真实FCP/LCP/CLS |
+| 工具header与模式选择 | `app.js`的`.tool-heading`、原模块mode按钮 | `.al-mode-nav`只管文字选择组呈现，不复制mode事件 | mode ID/URL与实际选择一致 |
+| 参数与选项 | `shared/core-controls.js`及原模块事件 | `.al-parameter`、原生range/select/number；`.al-button/.al-action` | 步长、上下界、可信拖动与键盘 |
+| 披露与dialog | 原生details/dialog、原模块交互owner | `.al-disclosure`只视觉；保留关闭/焦点/展开状态 | Tab/Escape/焦点归还与遮挡 |
+| 加载/失败 | 原模块实际数据状态、共享CSS | `.al-status/.al-error`、原status/alert与重试入口，不另建toast框架 | pending/error/empty/恢复路径 |
+| 科学绘图呈现 | `shared/plot.js`及`shared/presentation.js` | computed字体/字号/线宽；显式ticks/dash/connect/margins/bounds；模块保留数据/域/轴向/图例身份 | 科学oracle、同轴、逆温与双log、字体后重绘 |
+| 科学状态与历史 | 原模块getState/applyState、`shared/experiment-state.js` | 第一包精确model为权威，UI展开和渲染状态分离 | capture/刷新/前进后退与坏快照 |
+| Scrollbar/焦点/减少动效 | `shared/presentation.css`及tokens | 全document滚动条；focus-visible；reduced-motion只关非必要位移 | computed/键盘/高对比/真实偏好 |
+
+公共呈现入口`/shared/presentation.css`在原全局样式之后加载；各文档body使用`al-app`。`applyPresentation(root,{surface,redraw})`仅设置视觉scope/字体观察，返回dispose并归还原属性。它不保存科学值、不创建时钟、不接管路由。`plot()`保留`width/height/toPixel`，额外返回`bounds/style/xTicks/yTicks`，支持显式刻度及离散点/虚线；两幅图使用相同margins即可保持同轴。
+
+`mountWorkspaceNavigation(container,{modeNav,actions,source,label})`移动原生模式/动作/来源节点而不复制事件，品牌返回由shared navigation生成；临时隐藏全局nav与工具heading并在dispose后原位归还，移动时保留可见焦点。手机两行和桌面一行是同一业务紧凑变体，各模式不再自造平行header。`bindDisclosures(root)`关闭当前最近披露并归还summary，range内Escape可关闭所在披露；文本/日期等编辑器、select和原生dialog保留自身Escape处理。旧editorial CSS只在`editorial-legacy`标记下生效，呈现owner进入即退出旧层，离开可归还；`applyEditorial`不再重排已接新owner的工作区。迁移时同时退役旧hide和重复header。
+
+`route-presentation.js`在初始解析时确定已迁移路由的真实workspace/surface；加载状态保持可见，不隐藏整页或阻塞模块依赖来改进指标。其`loadStyles(href)`按同一声明等待实际CSS依赖ready再mount，按URL去重，load/error及有界超时均结算；路由owner在await后检查取消状态，旧页面不能迟到挂载。主体、mount使用明确格式上下文，首子标题外边距不穿透到body。workspace的app几何由共享层拥有，专属内边距只放模块shell；退出、来源页和错误恢复标准外壳。`applyPresentation`同步并归还`#lab-mount`表面，壳外必要科学说明使用同一语义文字颜色。
+
+日地月与太阳系独立入口同样消费共享字体、表面和紧凑导航。太阳系专属构图由`web/solar-system/style.css`拥有，原生模式/资料节点由`shared/tool-start.js`接入公共导航；沙盘材质、近似位置、相机能力、固定正交半径、JPL指标与轴向投影继续由原科学owner拥有。
+
+日地月四模式统一由`web/earth-moon/phase-ui.js/.css`拥有呈现，退役旧spin/period/eclipse六份适配文件；原app/physics/scene-state继续拥有模型与时钟。月盘、真实太阳mesh及四条方向箭头保持完整；双周期共用真实二维周期关系，食的太阳或月面、同刻空间和影锥组成科学观察单元，局部小时与模型日分别具名。320px和低高度可自然重排，不能只量总外框而省略任何当前应展示子图、单位或控制。
+
+行星对齐三模式统一由`modules/alignments-atlas-ui.js/.css`拥有呈现，退役旧三个adapter及pilot样式七文件。金星相位与轨道、火星轨道与方向曲线、凌星遮挡与光变各有专属同步构图；`x/R★`指投影位置，扫描速率不冒充观测时间。原来源节点进入可达资料披露，compact导航和事件均只有一个owner。精确day仅由版本化mode/day模型契约保存；sky倾角、银河方向及observing固定样本seed各按自身科学契约保存，旧无model快照保留实际量化值，不由预设名称猜回科学状态。
+
+活动`applyPresentation`注册统一拥有body/html表面；隐藏的预创建adapter不决定全局表面。注册以独立token分层，旧owner的异步dispose不能覆盖较新owner，嵌套root/mount按剩余层归还；没有活动owner时读取当前路由声明，URL仍由原路由owner拥有。
+
+在plot之后追加误差条/选点等图层的模块，通过根呈现owner的`redraw`重画完整图层；或提供`onFontReady`完整回调。`onFontReady:false`可明确表示归根owner管理。共享plot绝不默认自行回放底图，避免擦掉科学标记。
+
+## Do's and Don'ts
+
+界面只放观察对象、操作、现象、单位、数据身份、必要科学条件和来源。开发备注、版本/验收进度、自证或防御性解释只进内部交接，不展示给学习者。加载失败说明当前状态和恢复办法；不把未加载数据藏在一条漂亮理论曲线后。
+
+不重建框架、不复制模型状态、不在模块复制字体和界面色常量、不补造观测点、不改精确预设或科学容差。替换局部适配器时同时移除被替代的布局覆盖；历史源码和证据已有可逆备份，不能靠无限append叠加新风格。
+
+本轮视觉、字体和共享绘图变化是用户新授权，科学状态与数据继续按第一包验证。不得将旧182项成绩当新前端结果，不将模拟手机、AI设计审稿或软件WebGL当实体设备、真人理解或硬件验收。当前任务未授权提交、推送或部署。
+
+## 历史批准与迁移记录（2026-10-19整体重构之前）
+
+以下保留当时的批准、候选与限制原文，仅作历史证据；其中旧视觉冻结和已删除文档链接不再作为本轮实施入口。当前范围、值源与owner以上文为准。
 
 稳定执行规范为 [AstronomyLab UI Design System / Design Direction v1](ASTRONOMYLAB-UI-DESIGN-DIRECTION.md)。全局规则在其 D01–D14，类型规则为 S（空间动态）、I（二维图像）、R（二维坐标）；后续 Codex 先读该文件，再按明确授权选具体页面。本索引保留批准样板的所有者和现有数值，不产生第二套全局 token。
 

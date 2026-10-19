@@ -1,5 +1,37 @@
 # AstronomyLab R1 重构进度与交接
 
+## 2026-10-19 第二轮发布授权与准备（执行中）
+
+用户在本地验收完成后明确授权把第二轮重构推送到GitHub并部署，覆盖下节本地验收阶段的“不提交、推送、部署”限制。本轮仅限AstronomyLab，许可仍为blocked_pending_licenses，不改其他站点、Nginx或全局服务。发布前fetch确认main与origin/main均为46668aa、ahead/behind为0/0；GitHub Actions和仓库webhook均0。项目外发布checkpoint位于D:/Users/ZJUAAA/2026/AstronomyLab-backups/release-frontend-round2-20261019-2026-10-19T08-53-13-293Z，含852个当前文件（包括已验zip）、55项删除索引及Git bundle。851份拟公开文件的凭据/私有路径/95MiB以上扫描均0命中，223份运行源与最终包SHA仍匹配。当前只是本地发布准备，实际推送、生产版本与回执将以完成后的记录更新；本机证据位于build/qa/release-frontend-round2-20261019/。
+
+## 2026-10-19 第二前端包（本地软件迁移完成）
+
+首页、来源及全部11工具43模式已按第二包矩阵完成迁移，模式ID、原科学模型、来源许可、实际预设/对照/状态恢复继续保留。共享呈现token、字体、DOM/Canvas样式与紧凑导航统一，逐工具使用单一呈现owner，退出旧叠加适配；月相四模式、会合三模式、光学/真实图像、FIRAS和HR分别保留其科学观察结构。新增精确状态只扩展已授权的银道方向、噪声seed、会合day及地轴倾角契约；版本校验与旧快照路径仍实测。过程End与真实播放终点等价、分辨率固定天空窗、精确原生预设均复核。前端不展示开发/验收措辞。
+
+开工前HEAD为46668aa96d23b31b282de3573b54b846daffedfb，复制前后Git均clean；812文件、约178.12MB与SHA/删除索引位于项目外 D:/Users/ZJUAAA/2026/AstronomyLab-backups/frontend-round2-20261019-2026-10-19T06-41-21-453Z，详见本机 baseline/checkpoint.json。原始输入包、私有资料及QA均未加入Git，既有删除未恢复。本轮未提交、推送、部署、连接线上或重启其他项目。回退前先备份当前修改，再按checkpoint索引逐文件选择恢复并重新构建，禁止reset/clean或盲目覆盖。
+
+统一最终预览为 http://127.0.0.1:4382/ （Node PID70024，session82938）；重启命令为 node deploy/lab/web/observatory/server.mjs --port 4382。最终运行包由构建器生成，未手改：r1-20261005-ad7992e8d7e2，238运行资源/226包文件；runtime manifest SHA256 b5866a98b611f8c616f1e54e1b4898112bf4f08c2770d31a1dbf9ac4ba4086a6，zip SHA256 d09772dd069d33626793bbc04a60c669084f8574a310b850eab04c5a962d8fb1。完整223源SHA及命令记录见本机 [总INDEX](../build/qa/frontend-round2-20261019/INDEX.json)、[43模式账本](../build/qa/frontend-round2-20261019/migration-ledger.json)和integration/frozen-package.json。包仍为 blocked_pending_licenses，完整署名及待核许可没有升级。
+
+| 证据 | 实际结果与范围 |
+| --- | --- |
+| 功能/历史/故障 | 冻结包2完整182运行181通过；测影唯一harness误映射经独立审查，以真实俯视尺＋权威读数＋同尺度三角形观察组复核2/2。最后包只改sky.js/stars.js/stars-collapse-ui.js三源，另220源SHA相同；最终包补sky19＋stale1、collapse桌面/手机/历史及7路原生200。组合适用182门槛通过，**不是最终包单次182全绿**。原失败与源版本关联全部保留。 |
+| 科学 | 最终对应未变科学源：原生精确预设16/16；End与实际播放4/4；固定分辨天空窗/重进/刷新通过；FIRAS24坏响应/恢复通过；三速度场景×桌手机Canvas验证通过。采样66049栅格字节误差0，角度映射最大误差1.137e-13。原oracle/物理文件保护与独立数值预算未放宽。 |
+| 响应式/任务/视觉 | 43矩阵任务逐项有实际步骤/结果、五规定视口截图与完整原片，独立任务审查43/43、open P1/P2=0。四代表页桌面/手机图已实际查看，索引如下；原片版本及1×回看身份按owner/review索引，不把早期源码视频冒称最终包新录片。 |
+| 原生缩放/可访问 | 真实tabs.setZoom(2)，DPR2/CSSzoom1、668×336，43模式＋首页补测及最后7受影响路线通过。修复演化select重建失焦、Ia/transfer抢滚动、可见读数同步；collapse过程滑杆具名。60观察AX命名/可见开发备注/横向溢出无遗留；不声称完整WCAG或真人读屏验收。 |
+| 性能/字体 | 无并行QA测试浏览器的冷观察：50未变页＋最后10复核，合计12路线×5视口；最大LCP 696ms、最大CLS 0.067480，均在2500ms/.1预算内。首页五视口CLS0，核心字体131992B、图像184918B；全部字体437664B，缺失CJK0，19非CJK符号有明确系统回退。真实采样拖动median7.6/p9510.1/max12.6ms。localhost、无CPU/网络节流、SwiftShader，非实体硬件或field INP。 |
+| 工程/边界 | 最终95语法/103Node通过，保护334项＝332原哈希＋2前轮精确授权变更，226包文件校验、source drift/forbidden均0。DESIGN lint0错误/0警告；canonical modules premium strict仍12条历史发现、新增0，退出1，不称clean或全站审计。 |
+
+测试适配只映射真实呈现结构和可达控件：命名科学主体/量与真实来源替换旧字数门槛；eclipse/CMB/测影分别验证所有应显示子图，保留原整组尺寸和首屏预算。390px的CMB单图171.5px、测影单SVG约141.94px，不声称各自满足旧单图180px；Canvas累计fillText只证明标签出现，不证明当前帧或无遮挡。最终复验还保留一次collapse同URL恢复tidal后测试前置条件不符的失败；fresh390完整任务及独立history通过。详情见integration/test-adaptations.json、review/shadow-composite/review.json和review/native200-final/review.json。
+
+| 代表页 | 桌面 / 手机截图 | 完整原片 |
+| --- | --- | --- |
+| 首页 | [桌面](../build/qa/frontend-round2-20261019/integration/cold-performance-final2/home-1440x900.png) / [手机](../build/qa/frontend-round2-20261019/integration/cold-performance-final2/home-390x844.png) | [完整操作](http://127.0.0.1:4398/?file=home/browser-round2/recordings/page@af4fa9880b497e47eff684172991f9f7.webm) |
+| 月相 | [桌面](../build/qa/frontend-round2-20261019/integration/cold-performance-final2/phase-1440x900.png) / [手机](../build/qa/frontend-round2-20261019/integration/cold-performance-final2/phase-390x844.png) | [完整操作](http://127.0.0.1:4398/?file=earth-moon/p0-final02/390x844-operations.webm) |
+| 采样 | [桌面](../build/qa/frontend-round2-20261019/integration/cold-performance-final2/sampling-1440x900.png) / [手机](../build/qa/frontend-round2-20261019/integration/cold-performance-final2/sampling-390x844.png) | [完整操作](http://127.0.0.1:4398/?file=optics-imaging/p0/performance/operations-uncut.webm) |
+| FIRAS | [桌面](../build/qa/frontend-round2-20261019/integration/cold-performance-final2/firas-1440x900.png) / [手机](../build/qa/frontend-round2-20261019/integration/cold-performance-final2/firas-390x844.png) | [完整操作](http://127.0.0.1:4398/?file=galaxy/round1/recording-final/mobile-complete-uncut.webm) |
+
+原片只读播放器4398为PID26708/session12972；只读第一科学包基线4390和源码诊断4392另有明确用途，均不代表最终包。实体手机、课堂投影、真人首次使用/随机A/B、真人科学审校与读屏试验继续待验，不能用软件WebGL或agent审查替代。
+
 ## 2026-10-19 GitHub源码推送回执（未部署）
 
 用户在六项修复本地验收后明确授权“推送到github，不过不部署”。此前的文案整理、第一科学包修复、测试、生成运行包、设计/主交接更新和明确删除已提交为 [`0e63e3e`](https://github.com/Ray8mu34/AstronomyLab/commit/0e63e3e530e43db2d9616cf1eb40516a9c2291fe)，并通过 `git push origin main` 成功快进；`git ls-remote origin refs/heads/main` 已核对远端完整SHA为 `0e63e3e530e43db2d9616cf1eb40516a9c2291fe`。本节是后续文档回执，不将自己的提交hash写入自身。

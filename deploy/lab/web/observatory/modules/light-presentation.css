@@ -1,0 +1,37 @@
+/* Light experiment controls share canonical tokens; each task owns composition. */
+#app #lab-mount .light-surface{max-width:1440px;margin:auto;padding:0 32px 40px;color:var(--al-text);background:var(--al-page);font:400 var(--al-body)/var(--al-leading) var(--al-font);--text:var(--al-text);--muted:var(--al-muted);--line:var(--al-line)}
+#app #lab-mount .light-surface [hidden]{display:none!important}
+#app #lab-mount .light-surface>header{margin:24px 0 20px;display:block}
+#app #lab-mount .light-surface>header h2{font:600 var(--al-title-tool)/1.4 var(--al-font);margin:0 0 8px}
+#app #lab-mount .light-surface>header>span{font-size:var(--al-label);color:var(--al-muted)}
+#app #lab-mount .light-surface .al-workspace-modes>details{position:relative}
+#app #lab-mount .light-surface .al-workspace-modes>details>div{position:absolute;z-index:5;left:0;top:100%;width:min(320px,80vw);padding:16px;background:var(--al-page);border:1px solid var(--al-control-border);border-radius:var(--al-radius-layer)}
+#app #lab-mount .light-surface .light-workbench{display:block;padding:0;margin:0;border:0;background:transparent;min-width:0}
+#app #lab-mount .light-surface .light-visual{padding:0;margin:0;border:0;background:transparent;min-width:0}
+#app #lab-mount .light-surface #light-title{display:none}
+#app #lab-mount .light-surface #light-plot{display:block;width:100%;height:100%;background:var(--al-page)}
+#app #lab-mount .light-surface .light-controls{display:block;border:0;padding:0;margin:0;background:transparent;min-width:0}
+#app #lab-mount .light-surface .control{display:block;margin:12px 0 16px;padding:0;font:400 var(--al-label)/1.7 var(--al-font);color:var(--al-text)}
+#app #lab-mount .light-surface .control output{font:400 var(--al-readout)/1.4 var(--al-numeric);margin-left:12px;color:var(--al-text)}
+#app #lab-mount .light-surface .control small{display:block;font:400 var(--al-tick)/1.7 var(--al-font);color:var(--al-muted)}
+#app #lab-mount .light-surface input[type=range]{display:block;width:100%;min-height:var(--al-touch-target);accent-color:var(--al-action);margin:4px 0}
+#app #lab-mount .light-surface input[type=checkbox]{accent-color:var(--al-action);width:20px;height:20px;margin:4px 8px 4px 0}
+#app #lab-mount .light-surface select{color:var(--al-text);background:var(--al-surface);border:1px solid var(--al-control-border);min-height:var(--al-touch-target);font:inherit;max-width:100%}
+#app #lab-mount .light-surface button{font:400 var(--al-label)/1.5 var(--al-font);color:var(--al-text);background:transparent;border:1px solid var(--al-control-border);border-radius:var(--al-radius-control);padding:8px 12px;min-height:var(--al-touch-target);cursor:pointer}
+#app #lab-mount .light-surface button:is(.active,[aria-pressed=true]){background:var(--al-surface);color:var(--al-text);border-color:var(--al-action)}
+#app #lab-mount .light-surface .al-mode-nav{display:flex;flex-wrap:wrap;gap:8px 12px;margin:12px 0}
+#app #lab-mount .light-surface .al-mode-nav button{white-space:normal}
+#app #lab-mount .light-surface :is(.note,.light-feedback,.light-compare,.legend,.lab-copy,.light-check){font:400 var(--al-tick)/1.8 var(--al-font);color:var(--al-muted)}
+#app #lab-mount .light-surface .light-feedback:empty{display:none}
+#app #lab-mount .light-surface .lab-copy{max-width:80ch}
+#app #lab-mount .light-surface :is(.light-explanation,.light-advanced,.light-auxiliary){padding:0;margin:12px 0;background:transparent;border-color:var(--al-line)}
+#app #lab-mount .light-surface .metrics{display:flex;flex-wrap:wrap;gap:20px;margin:16px 0}
+#app #lab-mount .light-surface .metrics>div{padding:0;border:0;background:none}
+#app #lab-mount .light-surface .metrics small{font:400 var(--al-tick)/1.6 var(--al-font);color:var(--al-muted)}
+#app #lab-mount .light-surface .metrics strong{display:block;font:400 var(--al-label)/1.6 var(--al-numeric);color:var(--al-text)}
+#app #lab-mount .light-surface .light-table{border-collapse:collapse;width:100%;font-size:var(--al-tick)}
+#app #lab-mount .light-surface .light-table :is(td,th){padding:8px;border-bottom:1px solid var(--al-line);text-align:left}
+#app #lab-mount .light-surface #light-aux{display:block;width:100%;height:260px;background:var(--al-page)}
+#app #lab-mount .light-surface :is(button,summary,a,input,canvas,select):focus-visible{outline:3px solid var(--al-focus);outline-offset:3px}
+#app #lab-mount .light-surface :is(.thermal-info-body,.motion-info-body,[data-magnitude-info],[data-observing-info]){padding:16px 0 24px}
+@media(max-width:700px){#app #lab-mount .light-surface{padding:0 16px 28px}#app #lab-mount .light-surface>header{margin-top:20px}#app #lab-mount .light-surface .control output{font-size:1.5rem}#app #lab-mount .light-surface .metrics{gap:14px}}

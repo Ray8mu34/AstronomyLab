@@ -10,6 +10,7 @@ function learningGuide(node,question,instruction){
 // Reorganize existing interface nodes. Rendering, physical state and event handlers
 // stay with the original modules; details keep optional material within reach.
 export function editorialLab(app){
+ if(app.querySelector('[data-presentation-owner]'))return()=>{};
  const slug=location.pathname.split('/').pop(),host=app.querySelector('#lab-mount');host.classList.add('editorial-lab');host.dataset.lab=slug;
  app.querySelector('.page-lead')?.remove();
  const guides={sky:'.sky-guide',optics:'.optics-guide',light:'.light-question',stars:'.stars-question',galaxy:'.galaxy-head',orbits:'.orbits-guide',measure:'.measure-guide',alignments:'.alignment-guide'};

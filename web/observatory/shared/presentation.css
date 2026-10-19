@@ -1,0 +1,100 @@
+@import url('./presentation-tokens.css');
+@import url('./fonts/font-faces.css');
+
+html { background: var(--al-page); scrollbar-gutter: stable; scrollbar-color: var(--al-scroll-thumb) var(--al-scroll-track); scrollbar-width: auto; }
+* { scrollbar-color: var(--al-scroll-thumb) var(--al-scroll-track); }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--al-scroll-track); }
+::-webkit-scrollbar-thumb { background: var(--al-scroll-thumb); border: 3px solid var(--al-scroll-track); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--al-text); }
+body.al-app, .al-surface {
+  font-family: var(--al-font); font-size: var(--al-body); line-height: var(--al-leading);
+  color: var(--al-text); background: var(--al-page);
+}
+.al-app { margin: 0; display: flow-root; }
+.al-app > #app { display: flow-root; }
+.al-app #lab-mount { display: flow-root; }
+.al-app :is(h1,h2,h3,h4,button,input,select,summary) { font-family: var(--al-font); }
+.al-app :is(h1,h2,h3,h4) { font-weight: 600; letter-spacing: 0; }
+.al-app :is(button,input,select) { font-size: var(--al-label); }
+.al-app a { color: inherit; text-underline-offset: .25em; }
+.al-app a:hover { text-decoration: underline; }
+.al-app :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--al-focus); outline-offset: 3px;
+  scroll-margin: 1rem;
+}
+.al-app [hidden] { display: none !important; }
+.al-number { font-family: var(--al-numeric); font-weight: 400; font-variant-numeric: tabular-nums; }
+.al-caption { color: var(--al-muted); font-size: var(--al-tick); line-height: 1.65; }
+.al-credit { color: var(--al-muted); font-size: var(--al-tick); line-height: 1.6; overflow-wrap: anywhere; }
+.al-app .al-button, .al-app .al-action {
+  box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: var(--al-touch-target); padding: .6rem 1rem;
+  border: 1px solid var(--al-control-border); border-radius: var(--al-radius-control);
+  color: var(--al-text); background: transparent;
+  font: 400 var(--al-label)/1.45 var(--al-font); text-decoration: none; cursor: pointer;
+  transition: border-color var(--al-motion-feedback), background-color var(--al-motion-feedback), color var(--al-motion-feedback);
+}
+.al-app .al-action { color: var(--al-on-action); background: var(--al-action); border-color: var(--al-action); font-weight: 600; }
+.al-app .al-button:hover, .al-app .al-button[aria-pressed="true"], .al-app .al-button[aria-selected="true"] { border-color: var(--al-text); color: var(--al-text); background: var(--al-surface); text-decoration: none; }
+.al-app .al-action:hover { box-shadow: 0 0 0 2px var(--al-line); text-decoration: none; color: var(--al-on-action); }
+.al-app .al-action:active, .al-app .al-button:active { opacity: .85; }
+.al-app .al-button:disabled, .al-app .al-action:disabled { opacity: .5; cursor: default; box-shadow: none; }
+.al-parameter { display: grid; grid-template-columns: minmax(0,1fr); gap: .35rem; min-width: 0; font: 400 var(--al-label)/1.55 var(--al-font); }
+.al-parameter > :is(span,label) { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .25rem 1rem; }
+.al-parameter output { font: 400 var(--al-label)/1.55 var(--al-numeric); color: var(--al-text); white-space: nowrap; }
+.al-app input[type="range"] { min-height: var(--al-touch-target); width: 100%; margin: 0; accent-color: var(--al-action); cursor: pointer; }
+.al-app :is(input[type="number"],input[type="search"],input[type="date"],select) {
+  min-height: var(--al-touch-target); max-width: 100%; padding: .45rem .65rem;
+  background: var(--al-surface); color: var(--al-text); border: 1px solid var(--al-control-border); border-radius: var(--al-radius-control);
+}
+.al-app input[type="checkbox"] { accent-color: var(--al-action); }
+.al-disclosure { border-top: 1px solid var(--al-line); min-width: 0; }
+.al-disclosure > summary { display: list-item; min-height: var(--al-touch-target); padding: .65rem 0; cursor: pointer; color: var(--al-text); font: 400 var(--al-label)/1.6 var(--al-font); }
+.al-disclosure > summary:hover { text-decoration: underline; text-underline-offset: .25em; }
+.al-disclosure[open] > summary { margin-bottom: .75rem; }
+.al-mode-nav { display: flex; align-items: center; flex-wrap: wrap; gap: .25rem 1.5rem; border-bottom: 1px solid var(--al-line); }
+.al-mode-nav > button { min-height: var(--al-touch-target); padding: .65rem 0; border: 0; border-bottom: 2px solid transparent; border-radius: 0; color: var(--al-muted); background: transparent; cursor: pointer; }
+.al-mode-nav > button:hover { color: var(--al-text); }
+.al-mode-nav > button:is([aria-pressed="true"],[aria-selected="true"],.active) { color: var(--al-text); border-bottom-color: var(--al-action); }
+.al-workspace-navigation { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: .5rem 1.75rem; min-height: 64px; padding: .5rem 0; border-bottom: 1px solid var(--al-line); color: var(--al-text); font: 400 var(--al-label)/1.5 var(--al-font); }
+.al-workspace-brand { min-height: var(--al-touch-target); display: inline-flex; align-items: center; color: var(--al-text); font-weight: 600; white-space: nowrap; }
+.al-workspace-modes { min-width: 0; }
+.al-workspace-modes > * { margin: 0; }
+.al-workspace-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; }
+.al-workspace-actions > :is(a,button,details) { font-size: var(--al-tick); }
+.al-workspace-actions > a { display: inline-flex; align-items: center; min-height: var(--al-touch-target); }
+@media (max-width: 700px) {
+  .al-workspace-navigation { grid-template-columns: minmax(0,1fr) auto; column-gap: 1rem; row-gap: 0; padding: .35rem 0; }
+  .al-workspace-brand { font-size: var(--al-tick); min-height: var(--al-touch-target); }
+  .al-workspace-modes { grid-column: 1 / -1; grid-row: 2; }
+  .al-workspace-actions { grid-column: 2; grid-row: 1; }
+}
+@media (max-width: 380px) {
+  .al-workspace-navigation:has(.al-workspace-actions > :nth-child(2)) { grid-template-columns: minmax(0,1fr); }
+  .al-workspace-navigation:has(.al-workspace-actions > :nth-child(2)) .al-workspace-brand { grid-column: 1; grid-row: 1; }
+  .al-workspace-navigation:has(.al-workspace-actions > :nth-child(2)) .al-workspace-modes { grid-column: 1; grid-row: 2; }
+  .al-workspace-navigation:has(.al-workspace-actions > :nth-child(2)) .al-workspace-actions { grid-column: 1; grid-row: 3; }
+}
+.al-status, .al-error { margin: .5rem 0; font-size: var(--al-tick); line-height: 1.65; }
+.al-status { color: var(--al-muted); }
+.al-error { color: var(--al-error); }
+.al-app dialog { font-family: var(--al-font); color: var(--al-text); background: var(--al-page); border: 1px solid var(--al-line); border-radius: var(--al-radius-layer); }
+.al-app dialog::backdrop { background: rgb(7 10 14 / .72); }
+.al-app .tool-heading h1 { font: 600 var(--al-title-tool)/1.4 var(--al-font); }
+.al-app .tool-heading a { min-height: var(--al-touch-target); display: inline-flex; align-items: center; font-size: var(--al-tick); }
+.al-app .tool-model-boundary { font: 400 var(--al-tick)/1.7 var(--al-font); color: var(--al-muted); }
+/* Route bootstrap reserves the final workspace shell before module loading.
+   The visible status and final module share the same origin and viewport floor. */
+html[data-al-route-layout="workspace"] #site-navigation,
+html[data-al-route-layout="workspace"] #app > :is(.tool-heading,.tool-mode-context) { display: none; }
+html[data-al-route-layout="workspace"] body.al-app { background: var(--al-page); color: var(--al-text); }
+html[data-al-route-layout="workspace"] body.al-app #app[data-page="lab"] { margin: 0; padding: 0; max-width: none; }
+html[data-al-route-layout="workspace"] body.al-app #app[aria-busy="true"] { min-height: 100svh; margin: 0; padding: 0; max-width: none; box-sizing: border-box; }
+html[data-al-route-layout="workspace"] #app[aria-busy="true"] #lab-mount { margin: 0; min-height: 100svh; }
+html[data-al-route-layout="workspace"] #app[aria-busy="true"] .loading { margin: 0; padding: 1rem 2rem; }
+@media (forced-colors: active) {
+  html, * { scrollbar-color: auto; }
+  .al-button, .al-action { color: ButtonText; background: ButtonFace; border-color: ButtonText; }
+  .al-app :focus-visible { outline-color: Highlight; }
+}

@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "file": "moon-first-quarter-640.webp",
+      "url": "/data/home/moon-first-quarter-640.webp",
+      "resourceId": "R02",
+      "sourceFile": "original-images/moon-first-quarter.jpg",
+      "sourceSHA256": "79c65e29374d56ffd0c952c947a7d49e20092586d852b2d7eae2f929f89ce113",
+      "sha256": "6e059cd6daa0ea08117178144d9a068bf43e6756455c84a62c23ebe3b62961b4",
+      "size": [
+        640,
+        640
+      ],
+      "bytes": 30660,
+      "operations": "Uncropped RGB resize with Pillow LANCZOS; WebP quality 86 method 6; no recoloring or retouching.",
+      "title": "First quarter Moon — official named-phase example",
+      "kind": "rendered scientific visualization, not a photograph and not a time-matched 2026 frame",
+      "credit": "NASA Scientific Visualization Studio",
+      "sourcePage": "https://svs.gsfc.nasa.gov/5587/",
+      "sourceURL": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005048/phase_first_quarter.2091_print.jpg",
+      "permission": "NASA Media Usage Guidelines permit factual educational/informational use with source acknowledgement; no NASA endorsement. No separate copyright notice appears for this item.",
+      "policy": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "license": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "use": "Static homepage discovery image; not an experiment output."
+    },
+    {
+      "file": "moon-first-quarter-1024.webp",
+      "url": "/data/home/moon-first-quarter-1024.webp",
+      "resourceId": "R02",
+      "sourceFile": "original-images/moon-first-quarter.jpg",
+      "sourceSHA256": "79c65e29374d56ffd0c952c947a7d49e20092586d852b2d7eae2f929f89ce113",
+      "sha256": "9ecb994f6545d64f0591ec70dd2a0cd8b4e672a042d167468c9c27e01181651b",
+      "size": [
+        1024,
+        1024
+      ],
+      "bytes": 69712,
+      "operations": "Uncropped RGB resize with Pillow LANCZOS; WebP quality 86 method 6; no recoloring or retouching.",
+      "title": "First quarter Moon — official named-phase example",
+      "kind": "rendered scientific visualization, not a photograph and not a time-matched 2026 frame",
+      "credit": "NASA Scientific Visualization Studio",
+      "sourcePage": "https://svs.gsfc.nasa.gov/5587/",
+      "sourceURL": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005048/phase_first_quarter.2091_print.jpg",
+      "permission": "NASA Media Usage Guidelines permit factual educational/informational use with source acknowledgement; no NASA endorsement. No separate copyright notice appears for this item.",
+      "policy": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "license": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "use": "Static homepage discovery image; not an experiment output."
+    },
+    {
+      "file": "pillars-640.webp",
+      "url": "/data/home/pillars-640.webp",
+      "resourceId": "R05",
+      "sourceFile": "original-images/pillars-of-creation.jpg",
+      "sourceSHA256": "fd1e98f53a2e6574a1329267d6295822dc63dd16b6e9540c7e61ba1d0b4019ac",
+      "sha256": "033c837f1818a4bea4a3da7613675c6177e68605daa867b9aac4ae121ae92876",
+      "size": [
+        640,
+        599
+      ],
+      "bytes": 115206,
+      "operations": "Uncropped RGB resize with Pillow LANCZOS; WebP quality 86 method 6; no recoloring or retouching.",
+      "title": "Pillars of Creation — NIRCam and MIRI Composite Image",
+      "kind": "infrared observations mapped to visible color and composited; not naked-eye colors",
+      "credit": "NASA, ESA, CSA, STScI, J. DePasquale (STScI), A. Pagan (STScI), A. M. Koekemoer (STScI)",
+      "sourcePage": "https://esawebb.org/images/pillarsofcreation_composite/",
+      "sourceURL": "https://cdn.esawebb.org/archives/images/screen/pillarsofcreation_composite.jpg",
+      "permission": "ESA/Webb explicitly publishes images under CC BY 4.0 unless stated otherwise; this image page has no exception. Show complete unchanged credit clearly alongside the image with active source/license links. No ESA/Webb endorsement.",
+      "policy": "https://esawebb.org/copyright/",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "use": "Static homepage discovery image; not an experiment output."
+    }
+  ]
+}

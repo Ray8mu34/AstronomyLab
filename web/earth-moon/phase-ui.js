@@ -1,105 +1,71 @@
-// Approved B-reduced presentation for phase only. The model and its public API
-// remain owned by app.js; this adapter moves the original controls, never copies them.
 import * as THREE from 'three';
 import {decodeRecipe} from './scene-state.js';
+import {getGraphicStyle,observeGraphicFonts,bindDisclosures} from '/shared/presentation.js';
+import {mountWorkspaceNavigation} from '/shared/navigation.js';
 
-export function installPhaseUI(lab) {
- if (!lab?.state.ready) return;
- const $=id=>document.getElementById(id),body=document.body;
- const ui=document.createElement('div');ui.id='phase-ui';ui.hidden=true;
- ui.innerHTML=`<header class="reduced-header"><a class="reduced-brand" href="/">AstronomyLab <span>/ 日地月</span></a><button id="mode-entry" popovertarget="mode-menu">月相 <span aria-hidden="true">⌄</span></button><button id="condition-entry" popovertarget="condition-menu">条件 <span aria-hidden="true">＋</span></button></header>
- <section id="mode-menu" class="overlay mode-menu" popover="auto" aria-label="选择模式"></section>
- <section id="phase-menu" class="overlay phase-menu" popover="auto" aria-label="月相预设"><p class="overlay-label">跳到月相</p></section>
- <section id="condition-menu" class="overlay condition-menu" popover="manual" aria-label="参数与条件"><div class="overlay-heading"><strong>条件与观察</strong><button class="close-control" popovertarget="condition-menu" popovertargetaction="hide" aria-label="关闭条件">×</button></div></section>
- <div class="subject-caption"><span class="caption-label">地心方向所见</span><button id="phase-entry" popovertarget="phase-menu"><span id="reduced-phase"></span><span class="small-chevron" aria-hidden="true">⌄</span></button><span class="caption-label">固定黄道北向上 · 月面按视场放大</span></div>
- <p class="reduced-boundary">普通月相不是地球影子。</p><div class="reduced-transport" aria-label="时间控制"></div>`;
+export function installPhaseUI(lab){
+ if(!lab||document.getElementById('phase-ui'))return;
+ const $=id=>document.getElementById(id),body=document.body,originalMain=document.querySelector('main');originalMain.classList.add('phase-original-main');
+ const ui=document.createElement('main');ui.id='phase-ui';ui.hidden=true;
+ ui.innerHTML=`<header class="phase-navigation"><button class="al-button" id="condition-entry" popovertarget="condition-menu">条件与视角</button></header>
+ <div class="phase-introduction"><h1>月相</h1><p>月亮为什么会改变形状？</p></div>
+ <section class="phase-stage" aria-label="月面与同刻空间关系"><div class="phase-moon-zone"><div class="subject-caption"><div class="phase-observer-label"><span class="caption-label">地球所见</span><span class="caption-label">黄道北向上</span></div><button id="phase-entry" popovertarget="phase-menu"><span id="reduced-phase"></span><span class="small-chevron" aria-hidden="true">⌄</span></button><span class="phase-illumination">受光 <strong id="phase-light"></strong></span></div></div><div class="atlas-period-zone"></div><div class="phase-geometry-zone"><p class="phase-geometric-note">改变月球位置，对照地球所见的月面。</p></div></section>
+ <div class="atlas-endpoints" hidden></div><footer class="reduced-transport" aria-label="模型时间控制"></footer>
+ <section id="phase-menu" class="overlay phase-menu" popover="auto" aria-label="月相预设"><p class="overlay-label">观察一种月相</p></section>
+ <section id="condition-menu" class="overlay condition-menu" popover="manual" aria-label="条件与视角"><div class="overlay-heading"><h2>条件与视角</h2><button class="al-button close-control" popovertarget="condition-menu" popovertargetaction="hide" aria-label="关闭条件">关闭</button></div></section>`;
  body.append(ui);
- const subjectCaption=ui.querySelector('.subject-caption'),phaseBoundary=ui.querySelector('.reduced-boundary'),views=document.querySelector('.views'),transport=ui.querySelector('.reduced-transport');
- const modes=document.querySelector('.experiments'),controls=document.querySelector('.controls'),geometry=$('geometry-settings'),metrics=document.querySelector('.metrics'),speed=document.querySelector('.speed-label'),viewTools=document.querySelector('.view-tools'),viewSwitch=document.querySelector('.view-switch'),heading=document.querySelector('.space-view .view-title'),headingText=heading.querySelector('span'),timeLabel=document.querySelector('.time-label'),status=$('status');
- const guide=document.querySelector('.experiment-guide'),boundary=$('mode-boundary'),interpretation=document.querySelector('.interpretation');
- const originals={heading:headingText.innerHTML,time:timeLabel.firstChild.textContent,dayDescription:$('day').getAttribute('aria-describedby'),resetTitle:$('reset').getAttribute('title'),geometryOpen:geometry.open};
- const homes=new Map();
- for(const el of [modes,$('guide-actions'),controls,metrics,speed,viewTools,viewSwitch,$('presentation'),$('plane-note'),$('scene-caption'),$('sources'),$('play'),timeLabel,$('reset'),$('day'),status,guide,boundary]){const marker=document.createComment('phase-ui original position');el.before(marker);homes.set(el,marker);}
- const viewSettings=document.createElement('details');viewSettings.className='view-settings';viewSettings.innerHTML='<summary>播放与显示</summary>';
- const compare=document.createElement('button');compare.id='compare-entry';compare.setAttribute('aria-pressed','false');compare.textContent='展开比较 ↗';
- const rate=document.createElement('span');rate.className='time-rate';
- const hint=document.createElement('span');hint.className='clock-hint';hint.innerHTML='<span>−1天</span><span class="clock-basis" id="clock-basis"></span><span>60天</span>';
- const hidden=[document.querySelector('header.lab-header'),document.querySelector('.workspace-bar'),$('site-navigation'),document.querySelector('.observer-view>.view-title'),document.querySelector('.observer-caption'),...document.querySelectorAll('#preset-summary,.controls>.fineprint')].filter(el=>el!==boundary);
- const labelStyles=new Map(['earth-label','moon-label'].map(id=>[$(id),$(id).getAttribute('style')]));
- const reference=document.createElementNS('http://www.w3.org/2000/svg','svg');reference.classList.add('solar-reference');reference.setAttribute('aria-label','指向太阳的方向参照；边缘标志不表示太阳距离');reference.setAttribute('role','img');reference.innerHTML='<line id="solar-ray" stroke-dasharray="4 5"/><path id="solar-arrow"/><circle id="solar-dot" r="4"/><text id="solar-word">太阳方向</text>';reference.hidden=true;$('space').append(reference);
- const solar=lab.scene.children.find(node=>node.isGroup&&node.children.some(child=>child.isMesh&&child.material?.color?.getHex()===0xf9cc6e)),sunMesh=solar?.children.find(child=>child.isMesh),point=new THREE.Vector3();
- let active=false,comparing=false,frame=0,suspended=false;
+ const modes=document.querySelector('.experiments'),controls=document.querySelector('.controls'),geometry=$('geometry-settings'),metrics=document.querySelector('.metrics'),speed=document.querySelector('.speed-label'),viewTools=document.querySelector('.view-tools'),viewSwitch=document.querySelector('.view-switch'),heading=document.querySelector('.space-view .view-title'),headingText=heading.querySelector('span'),timeLabel=document.querySelector('.time-label'),status=$('status'),spaceView=document.querySelector('.space-view'),observerView=document.querySelector('.observer-view'),guide=document.querySelector('.experiment-guide'),boundary=$('mode-boundary'),interpretation=document.querySelector('.interpretation');
+ const viewSettings=document.createElement('details');viewSettings.className='view-settings al-disclosure';viewSettings.innerHTML='<summary>显示与场景</summary>';
+ const compare=document.createElement('button');compare.id='compare-entry';compare.setAttribute('aria-pressed','false');compare.textContent='展开几何 ↗';
+ const hint=document.createElement('span');hint.className='clock-hint';hint.innerHTML='<span>−1 天</span><span class="clock-basis" id="clock-basis"></span><span>60 天</span>';
+ const rate=document.createElement('span');rate.className='phase-rate';
+ const hidden=[document.querySelector('header.lab-header'),document.querySelector('.workspace-bar'),...document.querySelectorAll('#preset-summary,.controls>.fineprint')].filter(el=>el!==boundary);
+ const reference=document.createElementNS('http://www.w3.org/2000/svg','svg');reference.classList.add('solar-reference');reference.setAttribute('aria-label','指向太阳的方向');reference.setAttribute('role','img');reference.innerHTML='<line id="solar-ray" stroke-dasharray="5 5"/><path id="solar-arrow"/><circle id="solar-dot" r="3"/><text id="solar-word">太阳方向</text>';$('space').append(reference);
+ let solar=lab.scene.children.find(node=>node.isGroup&&node.children.some(child=>child.isMesh&&child.material?.color?.getHex()===0xf9cc6e)),sunMesh=solar?.children.find(child=>child.isMesh),point=new THREE.Vector3();
+ let active=false,comparing=false,frame=0,suspended=false,disposeNavigation=()=>{};
  function closeMenus(){for(const el of ui.querySelectorAll('[popover]'))if(el.matches(':popover-open'))el.hidePopover();}
- function clockSemantics(){
-  if(!active)return;
-  rate.textContent='播放速率 '+$('speed').selectedOptions[0].textContent;
-  let origin='本次载入起点';
-  try{const entry=history.state?.astronomy?.entryId,saved=JSON.parse(sessionStorage.getItem('astronomy:moon-scene:v1:'+entry));if(saved?.origin)origin='载入起点 '+decodeRecipe(saved.origin).days.toFixed(3)+' 天';}catch{/* Unavailable storage must leave real controls usable. */}
-  $('clock-basis').textContent='模型时间 · 复位回'+origin+'并暂停';$('reset').title='返回'+origin+'（包括载入条件与视角）并暂停';
+ function clockSemantics(){if(!active)return;let origin='载入起点';try{const entry=history.state?.astronomy?.entryId,saved=JSON.parse(sessionStorage.getItem('astronomy:moon-scene:v1:'+entry));if(saved?.origin)origin='起点 '+decodeRecipe(saved.origin).days.toFixed(3)+' 天';}catch{}$('clock-basis').textContent=(lab.state.mode==='eclipse'?'局部小时以新 / 满月为 0 · 复位回':'模型时间 · 复位回')+origin+'并暂停';rate.textContent=$('speed').selectedOptions[0].textContent;$('reset').title='返回'+origin+'（包括条件与视角）并暂停';}
+ function measureChrome(){if(!active)return;const transport=ui.querySelector('.reduced-transport'),shadowParent=(matchMedia('(max-width:900px)').matches||matchMedia('(max-height:700px)').matches)?ui.querySelector('.phase-stage'):ui.querySelector('.phase-geometry-zone');if($('shadow-panel').parentElement!==shadowParent)shadowParent.append($('shadow-panel'));if(matchMedia('(max-width:900px)').matches){if(speed.parentElement!==viewSettings)viewSettings.prepend(speed);}else if(speed.parentElement!==transport)$('reset').before(speed);const chrome=ui.querySelector('.atlas-endpoints').getBoundingClientRect().height+ui.querySelector('.phase-navigation').getBoundingClientRect().height+ui.querySelector('.phase-introduction').getBoundingClientRect().height+transport.getBoundingClientRect().height+6;body.style.setProperty('--phase-chrome-height',chrome+'px');body.style.setProperty('--phase-transport-height',transport.getBoundingClientRect().height+'px');lab.resize();}
+ function sync(){if(!active){active=true;ui.hidden=false;body.classList.add('reduced');
+  ui.querySelector('.phase-stage').prepend($('startup-error'));modes.classList.add('al-mode-nav');disposeNavigation=mountWorkspaceNavigation(ui.querySelector('.phase-navigation'),{modeNav:modes,actions:[$('condition-entry')],label:'日地月实验导航'});$('phase-menu').append($('guide-actions'));$('condition-menu').append(controls);ui.querySelector('.subject-caption').append(metrics);ui.querySelector('.phase-moon-zone').prepend(observerView);ui.querySelector('.phase-geometry-zone').prepend(spaceView);spaceView.append($('scene-caption'));
+  ui.querySelector('.atlas-period-zone').append($('annual-inset'));ui.querySelector('.atlas-endpoints').append($('period-controls'));ui.querySelector('.phase-geometry-zone').append($('shadow-panel'));ui.querySelector('.subject-caption').append($('observe-toggle'));viewSettings.append(viewTools,viewSwitch,$('presentation'),$('plane-note'));controls.append(viewSettings,$('sources'));$('explanation').before(guide);interpretation.append(boundary);headingText.textContent='空间中的光照关系';heading.append(compare);
+  ui.querySelector('.reduced-transport').append($('play'),timeLabel,speed,$('reset'),$('day'),$('local-time'),hint,status);timeLabel.append(rate);timeLabel.firstChild.textContent='模型第 ';$('day').setAttribute('aria-describedby','clock-basis');status.classList.add('phase-status');$('play').classList.add('al-action');$('reset').classList.add('al-button');for(const el of hidden)el.classList.add('legacy-hidden');
+ lab.resize();}
+  reference.style.display=active?'':'none';if(active){modePresentation();clockSemantics();}
  }
- function sync(){
-  const phase=lab.state.mode==='phase';
-  if(phase!==active){
-   active=phase;ui.hidden=!active;body.classList.toggle('reduced',active);body.classList.toggle('comparing',active&&comparing);
-   if(active){
-    views.append(subjectCaption,phaseBoundary);
-    $('mode-menu').append(modes);$('phase-menu').append($('guide-actions'));$('condition-menu').append(metrics,controls);
-    viewSettings.append(speed,viewTools,viewSwitch,$('presentation'),$('plane-note'),$('scene-caption'));controls.append(viewSettings,$('sources'));$('explanation').before(guide);interpretation.append(boundary);
-    headingText.innerHTML='空间关系 <small>· 拖动月球</small>';heading.append(compare);
-    ui.querySelector('.reduced-transport').append($('play'),timeLabel,$('reset'),$('day'),hint,status);
-    timeLabel.firstChild.textContent='模型第 ';timeLabel.append(rate);$('day').setAttribute('aria-describedby','clock-basis');status.classList.add('phase-status');
-    for(const el of hidden)el.classList.add('legacy-hidden');
-   }else{
-    ui.append(subjectCaption,phaseBoundary);
-    closeMenus();for(const [el,marker]of homes)marker.after(el);
-    viewSettings.remove();compare.remove();rate.remove();hint.remove();headingText.innerHTML=originals.heading;timeLabel.firstChild.textContent=originals.time;status.classList.remove('phase-status');
-    for(const el of hidden)el.classList.remove('legacy-hidden');
-    for(const [el,value]of labelStyles)value===null?el.removeAttribute('style'):el.setAttribute('style',value);
-    for(const [el,key,attr]of [[$('day'),'dayDescription','aria-describedby'],[$('reset'),'resetTitle','title']])originals[key]===null?el.removeAttribute(attr):el.setAttribute(attr,originals[key]);
-    geometry.open=originals.geometryOpen;
-   }
-   lab.resize();
-  }
-  reference.style.display=active?'':'none';
-  if(active){geometry.open=true;$('reduced-phase').textContent=$('phase-name').textContent;compare.hidden=lab.state.view!=='paired';clockSemantics();}
+
+ const context=document.createElement('p');context.className='atlas-observer-context';ui.querySelector('.phase-moon-zone').prepend(context);
+ const modelTitles={phase:['月相','月亮为什么会改变形状？'],spin:['自转','同一面朝向地球，需要怎样的自转？'],period:['两种周期','回到恒星方向后，为什么月相还没重复？'],eclipse:['日月食','新月与满月，为什么不总发生食？']};
+ let renderedMode='';
+ function modePresentation(){
+  const mode=lab.state.mode;for(const id of Object.keys(modelTitles))body.classList.toggle('atlas-'+id,mode===id);
+  const annualHeading=$('annual-inset').querySelector('.view-title');(mode==='period'&&lab.state.view==='reference'?annualHeading:heading).append(compare);const [title,question]=modelTitles[mode];ui.querySelector('h1').textContent=title;ui.querySelector('.phase-introduction p').textContent=question;
+  $('phase-menu').setAttribute('aria-label',mode==='phase'?'月相预设':mode==='eclipse'?'食象预设':'方式与时刻');ui.querySelector('.overlay-label').textContent={phase:'观察一种月相',spin:'自转方式与跳到时刻',period:'跳到回归时刻',eclipse:'载入一种对齐条件'}[mode];
+  $('reduced-phase').textContent=mode==='spin'?(lab.state.spin==='sync'?'同步自转':'不自转'):mode==='period'?'跳到时刻':$('phase-name').textContent||'载入月面';
+  hint.firstElementChild.textContent=mode==='eclipse'?'−6 小时':'−1 天';hint.lastElementChild.textContent=mode==='eclipse'?'6 小时':'60 天';$('phase-light').textContent=(['eclipse','period'].includes(mode)?$('metric3'):$('metric1')).textContent;ui.querySelector('.phase-illumination').firstChild.textContent=mode==='eclipse'?(lab.state.observe==='sun'?'遮挡 ':'入影 '):'受光 ';
+  geometry.open=true;compare.hidden=!['paired','reference'].includes(lab.state.view);metrics.hidden=mode==='phase';ui.querySelector('.atlas-endpoints').hidden=mode!=='period';
+  const solar=mode==='eclipse'&&lab.state.observe==='sun';context.hidden=mode!=='eclipse';context.textContent=solar?'观察太阳 · 随月下点移动的教学地面点 · 东偏 '+lab.state.east.toFixed(1)+'° / 北偏 '+lab.state.north.toFixed(1)+'°':'观察月球 · 地心方向 · 黄道北向上';
+  ui.querySelector('.phase-observer-label').firstElementChild.textContent=mode==='eclipse'?(solar?'地面所见太阳':'地心所见月球'):'地球所见';
+  if(mode==='eclipse'){$('observer-label').textContent='地面点';$('observer-label').hidden=!solar;}else $('observer-label').hidden=true;ui.querySelector('.phase-geometric-note').textContent=mode==='spin'?'金点固定在月面；虚线指向地球。':mode==='eclipse'?'金点表示随月下点移动的教学地面点。':'改变月球位置，对照地球所见的月面。';
+  if(mode==='eclipse'){$('shadow-panel').querySelector('.view-title').textContent=solar?'太阳 → 月球 → 地球 · 影锥剖面':'太阳 → 地球 → 月球 · 影锥剖面';$('shadow-panel').setAttribute('data-atlas-shadow','');}
+  if(renderedMode!==mode){renderedMode=mode;closeMenus();body.classList.remove('comparing');comparing=false;compare.textContent='展开几何 ↗';compare.setAttribute('aria-pressed','false');measureChrome();}
  }
- compare.addEventListener('click',()=>{if(!active||!lab.state.ready)return;comparing=!comparing;body.classList.toggle('comparing',comparing);compare.textContent=comparing?'收起比较 ↙':'展开比较 ↗';compare.setAttribute('aria-pressed',String(comparing));lab.resize();if(matchMedia('(max-width:800px)').matches)window.scrollTo({top:0,behavior:'instant'});});
- // The original clock can wrap as its loaded-origin text changes. Reserve its
- // measured height, including safe-area padding, rather than an assumed footer.
- const transportSize=new ResizeObserver(()=>{if(!active)return;const height=transport.getBoundingClientRect().height;body.style.setProperty('--phase-transport-height',height+'px');lab.resize();});transportSize.observe(transport);
- document.addEventListener('keydown',e=>{if(active&&e.key==='Escape'&&$('condition-menu').matches(':popover-open')&&!document.querySelector('dialog[open]')){e.preventDefault();$('condition-menu').hidePopover();$('condition-entry').focus();}});
- for(const id of ['mode-entry','phase-entry'])$(id).addEventListener('click',()=>{if($('condition-menu').matches(':popover-open'))$('condition-menu').hidePopover();});
- modes.addEventListener('click',e=>{if(e.target.closest('[data-mode]'))closeMenus();});
- $('guide-actions').addEventListener('click',e=>{if(e.target.closest('button')&&$('phase-menu').matches(':popover-open'))$('phase-menu').hidePopover();});
+ compare.addEventListener('click',()=>{if(!active)return;comparing=!comparing;body.classList.toggle('comparing',comparing);compare.textContent=comparing?'收起几何 ↙':'展开几何 ↗';compare.setAttribute('aria-pressed',String(comparing));lab.resize();});
+ const disposeDisclosures=bindDisclosures(ui);const errorObserver=new MutationObserver(()=>{if(!$('startup-error').hidden)closeMenus();});errorObserver.observe($('startup-error'),{attributes:true,attributeFilter:['hidden']});document.addEventListener('keydown',e=>{if(active&&!e.defaultPrevented&&e.key==='Escape'&&$('condition-menu').matches(':popover-open')&&!document.querySelector('dialog[open]')){e.preventDefault();$('condition-menu').hidePopover();$('condition-entry').focus();}});
+ modes.addEventListener('click',e=>{if(e.target.closest('[data-mode]'))closeMenus();});$('guide-actions').addEventListener('click',e=>{if(e.target.closest('button')&&$('phase-menu').matches(':popover-open'))$('phase-menu').hidePopover();});
  for(const menu of ui.querySelectorAll('[popover]')){const trigger=ui.querySelector(`[popovertarget="${menu.id}"]`);trigger.setAttribute('aria-expanded','false');trigger.setAttribute('aria-controls',menu.id);menu.addEventListener('toggle',e=>{trigger.setAttribute('aria-expanded',String(e.newState==='open'));if(e.newState==='open')menu.scrollTop=0;});}
+ $('phase-entry').addEventListener('click',()=>{if($('condition-menu').matches(':popover-open'))$('condition-menu').hidePopover();});
  $('speed').addEventListener('change',clockSemantics);
- const modeObserver=new MutationObserver(sync);modeObserver.observe(body,{attributes:true,attributeFilter:['data-experiment-mode','data-stage-view']});
- const mirror=new MutationObserver(()=>{if(active){$('reduced-phase').textContent=$('phase-name').textContent;clockSemantics();}});for(const el of [$('phase-name'),$('day-value'),status])mirror.observe(el,{childList:true,characterData:true,subtree:true});
- const geometryDisplay=new MutationObserver(()=>{if(active&&!geometry.open)geometry.open=true;});geometryDisplay.observe(geometry,{attributes:true,attributeFilter:['open']});
- function projected(position,w,h){const p=position.clone().project(lab.camera);return {x:(p.x+1)*w/2,y:(1-p.y)*h/2,z:p.z};}
- function scientificLabels(){
-  if(!active||!lab.state.ready||!sunMesh)return;
-  const w=$('space').clientWidth,h=$('space').clientHeight;if(!w||!h)return;
-  const earth=projected(new THREE.Vector3(),w,h),moon=projected(lab.moon.position,w,h),sun=projected(sunMesh.getWorldPosition(point),w,h);
-  const dx=sun.x-earth.x,dy=sun.y-earth.y,border=24;
-  const scale=Math.min(1,dx>0?(w-border-earth.x)/dx:dx<0?(border-earth.x)/dx:1,dy>0?(h-border-earth.y)/dy:dy<0?(border-earth.y)/dy:1);
-  const anchor={x:earth.x+dx*Math.max(0,scale),y:earth.y+dy*Math.max(0,scale)},direction=Math.atan2(dy,dx),tip={x:anchor.x-Math.cos(direction)*12,y:anchor.y-Math.sin(direction)*12};
-  const ray=$('solar-ray');ray.setAttribute('x1',earth.x);ray.setAttribute('y1',earth.y);ray.setAttribute('x2',tip.x);ray.setAttribute('y2',tip.y);
-  $('solar-dot').setAttribute('cx',anchor.x);$('solar-dot').setAttribute('cy',anchor.y);
-  const back={x:tip.x-Math.cos(direction)*8,y:tip.y-Math.sin(direction)*8};$('solar-arrow').setAttribute('d',`M${back.x+Math.sin(direction)*4},${back.y-Math.cos(direction)*4} L${tip.x},${tip.y} L${back.x-Math.sin(direction)*4},${back.y+Math.cos(direction)*4}`);
-  let sx=Math.max(12,Math.min(w-112,anchor.x-40)),sy=Math.max(22,Math.min(h-10,anchor.y+(anchor.y>h/2?-17:25)));
-  const place=(id,p,other)=>{
-   const el=$(id),width=el.offsetWidth||42,height=el.offsetHeight||26;let x=Math.max(width/2+10,Math.min(w-width/2-10,p.x)),y=p.y-32;
-   if(y<12)y=p.y+24;if(Math.abs(x-other.x)<width+16&&Math.abs(y-other.y)<38)y=p.y+28;
-   if(Math.abs(x-(sx+45))<width/2+55&&Math.abs(y-sy)<30)y=p.y+28;y=Math.max(14,Math.min(h-height-8,y));
-   el.hidden=p.z>1||p.z< -1||p.x<0||p.x>w||p.y<0||p.y>h;el.style.left=x+'px';el.style.top=y+'px';return {x,y};
-  };
-  const earthLabel=place('earth-label',earth,moon),moonLabel=place('moon-label',moon,earthLabel);
-  if(Math.abs(moonLabel.x-(sx+45))<80&&Math.abs(moonLabel.y-sy)<30)sy=Math.max(22,Math.min(h-10,sy+(sy>h/2?-36:36)));
-  $('solar-word').setAttribute('x',sx);$('solar-word').setAttribute('y',sy);
+ const modeObserver=new MutationObserver(sync);modeObserver.observe(body,{attributes:true,attributeFilter:['data-experiment-mode','data-stage-view']});const mirror=new MutationObserver(sync);for(const el of [$('phase-name'),$('day-value'),$('metric1'),$('metric2'),$('metric3'),status])mirror.observe(el,{childList:true,characterData:true,subtree:true});
+ const chromeObserver=new ResizeObserver(measureChrome);for(const el of ui.querySelectorAll('.phase-navigation,.phase-introduction,.reduced-transport,.atlas-endpoints'))chromeObserver.observe(el);const disposeFontObserver=observeGraphicFonts($('space'),()=>{if(active)measureChrome();});
+ function projected(position,w,h){const p=position.clone().project(lab.camera);return{x:(p.x+1)*w/2,y:(1-p.y)*h/2,z:p.z};}
+ function scientificLabels(){if(!active||!lab.state.ready)return;if(!sunMesh){solar=lab.scene.children.find(node=>node.isGroup&&node.children.some(child=>child.isMesh&&child.material?.color?.getHex()===0xf9cc6e));sunMesh=solar?.children.find(child=>child.isMesh);}if(!sunMesh)return;const w=$('space').clientWidth,h=$('space').clientHeight;if(!w||!h)return;const earth=projected(new THREE.Vector3(),w,h),moon=projected(lab.moon.position,w,h),sun=projected(sunMesh.getWorldPosition(point),w,h),dx=sun.x-earth.x,dy=sun.y-earth.y,border=24,scale=Math.min(1,dx>0?(w-border-earth.x)/dx:dx<0?(border-earth.x)/dx:1,dy>0?(h-border-earth.y)/dy:dy<0?(border-earth.y)/dy:1),anchor={x:earth.x+dx*Math.max(0,scale),y:earth.y+dy*Math.max(0,scale)},direction=Math.atan2(dy,dx),tip={x:anchor.x-Math.cos(direction)*12,y:anchor.y-Math.sin(direction)*12};
+  const ray=$('solar-ray');for(const [key,value]of Object.entries({x1:earth.x,y1:earth.y,x2:tip.x,y2:tip.y}))ray.setAttribute(key,value);$('solar-dot').setAttribute('cx',anchor.x);$('solar-dot').setAttribute('cy',anchor.y);const back={x:tip.x-Math.cos(direction)*8,y:tip.y-Math.sin(direction)*8};$('solar-arrow').setAttribute('d',`M${back.x+Math.sin(direction)*4},${back.y-Math.cos(direction)*4} L${tip.x},${tip.y} L${back.x-Math.sin(direction)*4},${back.y+Math.cos(direction)*4}`);
+  const positioned=[['earth-label',earth],['moon-label',moon]];if(lab.state.mode==='eclipse'&&lab.state.observe==='sun'){const site=lab.scene.children.find(n=>n.isMesh&&n.geometry?.parameters?.radius===.055);if(site)positioned.push(['observer-label',projected(site.position,w,h)]);}const occupied=[];for(const [id,p]of positioned){const el=$(id),ew=el.offsetWidth||42,eh=el.offsetHeight||26,candidates=[[0,-30],[0,30],[40,0],[-40,0],[0,-52],[0,52]].map(([dx,dy])=>({x:Math.max(ew/2+8,Math.min(w-ew/2-8,p.x+dx)),y:Math.max(eh/2+4,Math.min(h-eh/2-5,p.y+dy))})),chosen=candidates.find(q=>occupied.every(r=>Math.abs(r.x-q.x)>(r.w+ew)/2+8||Math.abs(r.y-q.y)>(r.h+eh)/2+5))||candidates.at(-1);el.style.left=chosen.x+'px';el.style.top=chosen.y+'px';el.hidden=p.z>1||p.z< -1||p.x<0||p.x>w||p.y<0||p.y>h;occupied.push({...chosen,w:ew,h:eh});}
+  const word=$('solar-word'),style=getGraphicStyle($('space'));word.style.fontFamily=style.fontFamily;word.style.fontSize=style.tickSize+'px';const tw=word.getBBox().width||90,th=style.tickSize||14,choices=[{x:anchor.x-tw/2,y:anchor.y-18},{x:anchor.x-tw/2,y:anchor.y+28},{x:12,y:24},{x:w-tw-12,y:24},{x:12,y:h-12},{x:w-tw-12,y:h-12}],candidates=choices.map(p=>({x:Math.max(8,Math.min(w-tw-8,p.x)),y:Math.max(th+5,Math.min(h-8,p.y))})),chosen=candidates.find(p=>occupied.every(r=>p.x+tw+8<r.x-r.w/2||p.x-8>r.x+r.w/2||p.y+5<r.y-r.h/2||p.y-th-5>r.y+r.h/2))||candidates.at(-1);word.setAttribute('x',chosen.x);word.setAttribute('y',chosen.y);body.classList.add('atlas-model-ready');
  }
- function presentationFrame(){if(suspended||!lab.state.ready||!lab.renderer.domElement.isConnected){frame=0;return;}scientificLabels();frame=requestAnimationFrame(presentationFrame);}
- window.addEventListener('pagehide',e=>{suspended=true;cancelAnimationFrame(frame);frame=0;if(!e.persisted){modeObserver.disconnect();mirror.disconnect();geometryDisplay.disconnect();transportSize.disconnect();}});
- window.addEventListener('pageshow',e=>{if(e.persisted&&lab.state.ready){suspended=false;sync();if(!frame)frame=requestAnimationFrame(presentationFrame);}});
- sync();frame=requestAnimationFrame(presentationFrame);
+ function presentationFrame(){if(suspended||!lab.renderer.domElement.isConnected){frame=0;return;}scientificLabels();frame=requestAnimationFrame(presentationFrame);}
+ window.addEventListener('pagehide',e=>{suspended=true;cancelAnimationFrame(frame);frame=0;if(!e.persisted){disposeNavigation();disposeDisclosures();errorObserver.disconnect();modeObserver.disconnect();mirror.disconnect();chromeObserver.disconnect();disposeFontObserver();}});window.addEventListener('pageshow',e=>{if(e.persisted&&lab.state.ready){suspended=false;sync();if(!frame)frame=requestAnimationFrame(presentationFrame);}});sync();measureChrome();frame=requestAnimationFrame(presentationFrame);
 }
+
+

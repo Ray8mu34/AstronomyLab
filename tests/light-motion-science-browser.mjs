@@ -28,7 +28,7 @@ async function capture(stage,vr,width=1440){
   await page.goto(base+'/lab/light?mode=motion');
   await page.waitForFunction(()=>window.__lab?.state?.mode==='motion'&&document.querySelector('#lab-mount')?.classList.contains('motion-active'));
   // Enter through visible disclosures and real native controls.
-  await page.locator('.motion-info>summary').click();await page.locator('.light-auxiliary>summary').click();
+  if(!await page.locator('#light-aux').isVisible()){await page.locator('.motion-info>summary').click();await page.locator('.light-auxiliary>summary').click();}
   for(const[k,v]of Object.entries({veq:120,vr}))await page.locator(`[data-key=${k}]`).evaluate((e,v)=>{e.value=v;e.dispatchEvent(new Event('input',{bubbles:true}));},v);
   await page.locator('[data-key=vr]').focus();await page.keyboard.press('ArrowRight');await page.keyboard.press('ArrowLeft');
   await page.waitForTimeout(160);

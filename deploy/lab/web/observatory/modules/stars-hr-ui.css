@@ -1,112 +1,128 @@
-/* Only stars/hr. The existing chart owns its scientific colors and geometry. */
-body.hr-observing{--hr-bg:#0b1420;--hr-ink:#d5e1ea;--hr-muted:#9bb0c2;--hr-line:#263747;--hr-a:#ebc77e;--hr-b:#71c8c7;background:var(--hr-bg);color:var(--hr-ink);scrollbar-color:var(--hr-muted) var(--hr-bg)}
-body.hr-observing #site-navigation,body.hr-observing #app>.tool-heading,body.hr-observing #mode-context,body.hr-observing .site-footer{display:none}
+/* HR composes the scientific plate; shared presentation owns type and controls. */
+body.hr-observing{background:var(--al-black);color:var(--al-paper)}
+body.hr-observing :is(#mode-context,.site-footer){display:none}
 body.tool-site.editorial.hr-observing #app[data-page=lab]{max-width:none;padding:0;margin:0}
 #lab-mount.hr-active>:not(.hr-shell):not(link){display:none!important}
-body.hr-observing #app #lab-mount.hr-active .hr-shell[hidden]{display:none!important}
-body.hr-observing #app #lab-mount.hr-active .hr-shell{display:grid;grid-template-rows:54px auto minmax(380px,1fr) auto;height:100svh;min-height:620px;max-width:100%;color:var(--hr-ink);font-family:"Microsoft YaHei",system-ui,sans-serif;--text:var(--hr-ink);--muted:var(--hr-muted);--line:var(--hr-line)}
-body.hr-observing #app #lab-mount.hr-active .hr-shell button,body.hr-observing #app #lab-mount.hr-active .hr-shell summary,body.hr-observing #app #lab-mount.hr-active .hr-shell select,body.hr-observing #app #lab-mount.hr-active .hr-shell a{color:inherit;font:inherit;cursor:pointer}
-body.hr-observing #app #lab-mount.hr-active .hr-shell button,body.hr-observing #app #lab-mount.hr-active .hr-shell select{background:transparent;border:1px solid var(--hr-line);border-radius:0;box-shadow:none}
-body.hr-observing #app #lab-mount.hr-active .hr-shell button:hover,body.hr-observing #app #lab-mount.hr-active .hr-shell summary:hover,body.hr-observing #app #lab-mount.hr-active .hr-shell a:hover{color:var(--hr-a)}
-body.hr-observing #app #lab-mount.hr-active .hr-shell :is(button,summary,select,a):focus-visible{outline:2px solid var(--hr-a);outline-offset:4px}
-body.hr-observing #app #lab-mount.hr-active .hr-header{display:flex;align-items:center;gap:22px;padding:0 30px;border-bottom:1px solid var(--hr-line);min-width:0}
-body.hr-observing #app #lab-mount.hr-active .hr-header a{font-size:14px;text-decoration:none;color:var(--hr-muted)}
-body.hr-observing #app #lab-mount.hr-active .hr-header h1{font-family:"Microsoft JhengHei","Microsoft YaHei",sans-serif;font-size:21px;font-weight:500;letter-spacing:.1em;margin:0;white-space:nowrap}
-body.hr-observing #app #lab-mount.hr-active .hr-axis-key{font-size:13px;color:var(--hr-muted)}
-body.hr-observing #app #lab-mount.hr-active .hr-mode-menu{margin-left:auto}
-body.hr-observing #app #lab-mount.hr-active .hr-shell summary{list-style:none;min-height:40px;display:flex;align-items:center;font-size:14px;gap:8px}
+#lab-mount.hr-active .hr-shell[hidden]{display:none!important}
+#lab-mount.hr-active .hr-shell{--hr-a:#ebc77e;--hr-b:#71c8c7;--text:var(--al-text);--muted:var(--al-muted);--line:var(--al-line);display:block;min-height:100svh;max-width:1600px;margin:auto;padding:0 32px 20px;box-sizing:border-box;color:var(--al-text);font:400 var(--al-body)/1.65 var(--al-font)}
+body.hr-observing #app #lab-mount.hr-active .hr-shell *{box-sizing:border-box}
+body.hr-observing #app #lab-mount.hr-active .hr-shell :is(button,select,summary){font:inherit;color:inherit;cursor:pointer}
+body.hr-observing #app #lab-mount.hr-active .hr-shell :is(button,select){box-shadow:none}
+body.hr-observing #app #lab-mount.hr-active .hr-shell :is(button,select,summary,a):focus-visible{outline:3px solid var(--al-focus);outline-offset:3px}
+body.hr-observing #app #lab-mount.hr-active .hr-shell [hidden]{display:none!important}
+body.hr-observing #app #lab-mount.hr-active .hr-mode-menu{margin-left:auto;position:relative}
+body.hr-observing #app #lab-mount.hr-active .hr-shell summary{display:flex;align-items:center;gap:12px;list-style:none;min-height:44px;font-size:15px}
 body.hr-observing #app #lab-mount.hr-active .hr-shell summary::-webkit-details-marker{display:none}
-body.hr-observing #app #lab-mount.hr-active .hr-shell summary:after{content:'⌄';color:var(--hr-muted)}
+body.hr-observing #app #lab-mount.hr-active .hr-shell summary:after{content:'⌄';color:var(--al-muted)}
 body.hr-observing #app #lab-mount.hr-active .hr-shell details[open]>summary:after{content:'⌃'}
-body.hr-observing #app #lab-mount.hr-active .hr-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:52px auto;column-gap:20px;align-items:center;padding:0 30px;position:relative;z-index:4}
-body.hr-observing #app #lab-mount.hr-active .hr-toolbar>[data-hr-controls]{flex:1;min-width:0}
-body.hr-observing #app #lab-mount.hr-active [data-controls]{display:flex;align-items:center;gap:24px;min-width:0}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-choice{display:flex!important;align-items:center;gap:12px;font-size:13px!important;margin:0!important;white-space:nowrap;color:var(--hr-muted)}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-choice[hidden],body.hr-observing #app #lab-mount.hr-active .hr-shell [hidden]{display:none!important}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-choice select{min-width:210px;max-width:290px;width:auto;min-height:38px;margin:0;padding:4px 8px;font-size:14px;color:var(--hr-ink);color-scheme:dark}
-body.hr-observing #app #lab-mount.hr-active .hr-comparing{font-size:14px;color:var(--hr-a)}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-exit{font-size:13px;min-height:38px;padding:4px 10px;margin-left:auto}
-body.hr-observing #app #lab-mount.hr-active .hr-compare-menu,body.hr-observing #app #lab-mount.hr-active .hr-info,body.hr-observing #app #lab-mount.hr-active .hr-mode-menu{position:relative}
-body.hr-observing #app #lab-mount.hr-active .hr-menu-body{position:absolute;top:100%;right:0;width:310px;max-width:calc(100vw - 24px);max-height:70svh;overflow:auto;background:var(--hr-bg);border:1px solid var(--hr-line);padding:18px;z-index:8;box-sizing:border-box;scrollbar-color:var(--hr-muted) var(--hr-bg);scrollbar-width:thin}
+body.hr-observing #app #lab-mount.hr-active .hr-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;padding:23px 0 17px}
+body.hr-observing #app #lab-mount.hr-active .hr-eyebrow{margin:0 0 5px;font-size:14px;color:var(--al-muted)}
+body.hr-observing #app #lab-mount.hr-active .hr-heading h1{margin:0;font:600 var(--al-title-tool)/1.45 var(--al-font)}
+body.hr-observing #app #lab-mount.hr-active .hr-axis-key{margin:0 0 4px;font-size:14px;line-height:1.65;color:var(--al-muted);text-align:right}
+body.hr-observing #app #lab-mount.hr-active .hr-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 24px;align-items:center;position:relative;margin-bottom:5px}
+body.hr-observing #app #lab-mount.hr-active .hr-toolbar [data-controls]{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-choice{display:flex;gap:12px;align-items:center;margin:0;padding:0;min-width:0;font-size:15px;color:var(--al-muted)}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-choice select{width:245px;max-width:100%;margin:0;background:var(--al-surface);color:var(--al-text);color-scheme:dark;min-height:44px;padding:7px 11px;border:1px solid var(--al-control-border);border-radius:var(--al-radius-control);font-size:15px}
+body.hr-observing #app #lab-mount.hr-active .hr-comparing{font-size:15px;color:var(--hr-a)}
+body.hr-observing #app #lab-mount.hr-active .hr-compare-menu{position:relative}
+body.hr-observing #app #lab-mount.hr-active .hr-compare-menu>summary{font-size:15px}
+body.hr-observing #app #lab-mount.hr-active .hr-menu-body{position:absolute;top:100%;right:0;z-index:10;width:330px;max-width:calc(100vw - 30px);max-height:65svh;overflow:auto;border:1px solid var(--al-line);border-radius:var(--al-radius-layer);padding:18px;background:var(--al-page);color:var(--al-text)}
 body.hr-observing #app #lab-mount.hr-active .hr-compare-menu .hr-menu-body{left:0;right:auto}
-body.hr-observing #app #lab-mount.hr-active .hr-menu-body p{font-size:14px;line-height:1.8;color:var(--hr-muted);margin:0 0 14px}
-body.hr-observing #app #lab-mount.hr-active .hr-menu-body .stars-presets,body.hr-observing #app #lab-mount.hr-active .hr-menu-body .lab-tabs{display:flex;flex-direction:column;gap:8px;padding:0;margin:0;border:0;overflow:visible}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-menu-body button{min-height:44px;padding:8px 12px;text-align:left;white-space:normal;width:100%}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-menu-body [aria-pressed=true]{color:var(--hr-a);border-color:var(--hr-a)}
+body.hr-observing #app #lab-mount.hr-active .hr-menu-body p{font-size:15px;line-height:1.75;color:var(--al-muted);margin:0 0 14px}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-menu-body :is(.stars-presets,.lab-tabs){display:flex;flex-direction:column;gap:8px;padding:0;margin:0;overflow:visible;border:0}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-menu-body button{min-height:44px;width:100%;padding:9px 12px;background:transparent;color:var(--al-text);font-size:15px;text-align:left;white-space:normal;border:1px solid var(--al-line);border-radius:var(--al-radius-control)}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-menu-body button[aria-pressed=true]{border-color:var(--hr-a);color:var(--hr-a)}
 body.hr-observing #app #lab-mount.hr-active .hr-info{display:contents}
 body.hr-observing #app #lab-mount.hr-active .hr-info>summary{grid-column:2;grid-row:1}
-body.hr-observing #app #lab-mount.hr-active .hr-info .hr-menu-body{position:static;grid-column:1/-1;grid-row:2;width:100%;max-width:none;max-height:160px;margin:0 0 8px;border-width:1px 0;padding:10px 0 14px}
-body.hr-observing #app #lab-mount.hr-active .hr-info .hr-menu-body>[data-hr-close-info]{width:auto;min-height:36px;padding:4px 10px;float:right}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info :is(h2,h3){font-size:17px;line-height:1.6;margin:14px 0 8px;font-weight:500;color:var(--hr-ink)}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info details{margin-top:18px}
+body.hr-observing #app #lab-mount.hr-active .hr-info .hr-menu-body{position:static;grid-column:1/-1;grid-row:2;width:auto;max-width:none;max-height:280px;margin:0 0 12px;border-width:1px 0;border-radius:0;padding:12px 0}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info [data-hr-close-info]{width:auto;float:right;margin:0 0 10px 16px}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info :is(h2,h3){font-size:20px;line-height:1.5;margin:16px 0 10px;color:var(--al-text)}
 body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info .stars-question{padding:0;display:block}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info .stars-actions{display:grid;gap:8px}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info .stars-actions{display:flex;flex-wrap:wrap;gap:8px}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info .stars-actions button{width:auto}
 body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info .metrics{display:block}
 body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info .metrics>div{margin:10px 0}
-body.hr-observing #app #lab-mount.hr-active .hr-stage{position:relative;min-height:0;margin:0 22px}
-body.hr-observing #app #lab-mount.hr-active .hr-canvas-area{position:relative;width:100%;height:100%;min-height:380px}
+body.hr-observing #app #lab-mount.hr-active .hr-stage{position:relative}
+body.hr-observing #app #lab-mount.hr-active .hr-canvas-area{position:relative;width:100%;height:max(490px,calc(100svh - 285px))}
 body.hr-observing #app #lab-mount.hr-active .hr-canvas-area .stars-chart-panel{margin:0;padding:0;border:0;background:none;width:100%;height:100%}
-body.hr-observing #app #lab-mount.hr-active .hr-canvas-area .panel-title,body.hr-observing #app #lab-mount.hr-active .hr-canvas-area .legend{display:none!important}
+body.hr-observing #app #lab-mount.hr-active .hr-canvas-area :is(.panel-title,.legend){display:none!important}
 body.hr-observing #app #lab-mount.hr-active .hr-canvas-area canvas{display:block;width:100%;height:100%;aspect-ratio:auto}
-body.hr-observing #app #lab-mount.hr-active .hr-point-labels{position:absolute;inset:0;pointer-events:none}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-point-labels button{position:absolute;pointer-events:auto;font-size:14px;line-height:1.5;border:0;padding:0 2px;background:var(--hr-bg);color:var(--hr-muted);white-space:nowrap;min-height:24px}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-point-labels button[aria-pressed=true]{color:var(--hr-a);font-weight:600}
-body.hr-observing #app #lab-mount.hr-active .hr-point-labels button:hover{text-decoration:underline}
-body.hr-observing #app #lab-mount.hr-active .hr-context{position:absolute;width:250px;padding:9px 12px;border-left:1px solid var(--hr-a);background:var(--hr-bg);z-index:2;box-sizing:border-box}
-body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true],body.hr-observing #app #lab-mount.hr-active .hr-context:has(.hr-relation[open]){width:300px}
-body.hr-observing #app #lab-mount.hr-active .hr-context-head h2{font-size:18px;line-height:1.5;font-weight:500;color:var(--hr-a);margin:0 0 2px}
-body.hr-observing #app #lab-mount.hr-active .hr-context-kind{font-size:12px;color:var(--hr-muted)}
-body.hr-observing #app #lab-mount.hr-active .hr-values{margin-top:9px;font-variant-numeric:tabular-nums}
-body.hr-observing #app #lab-mount.hr-active .hr-values p{display:flex;flex-wrap:wrap;gap:3px 10px;margin:0 0 8px;font-size:14px;line-height:1.65}
-body.hr-observing #app #lab-mount.hr-active .hr-value-name{width:100%;color:var(--hr-a)}
+body.hr-observing #app #lab-mount.hr-active .hr-point-labels{position:absolute;inset:0;pointer-events:none;z-index:2}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-point-labels button{position:absolute;pointer-events:auto;min-height:30px;margin:0;padding:2px 5px;border:0;border-radius:3px;font-size:14px;line-height:1.5;background:var(--al-page);color:var(--al-muted);white-space:nowrap}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-point-labels button[aria-pressed=true]{font-weight:600;color:var(--hr-a)}
+body.hr-observing #app #lab-mount.hr-active .hr-point-labels button:hover{text-decoration:underline;text-underline-offset:3px}
+body.hr-observing #app #lab-mount.hr-active .hr-context{position:absolute;z-index:3;width:250px;padding:12px 16px;border-left:2px solid var(--hr-a);background:var(--al-page)}
+body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true]{width:430px}
+body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true] .hr-values{display:flex;gap:20px}
+body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true] .hr-value{flex:1;min-width:0}
+body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true] .hr-value+.hr-value{margin:0;padding:0 0 0 18px;border-top:0;border-left:1px solid var(--al-line)}
+body.hr-observing #app #lab-mount.hr-active .hr-context-head h2{margin:0 0 4px;font-size:20px;line-height:1.4;font-weight:600;color:var(--hr-a)}
+body.hr-observing #app #lab-mount.hr-active .hr-context-kind{font-size:13px;color:var(--al-muted)}
+body.hr-observing #app #lab-mount.hr-active .hr-values{margin-top:10px}
+body.hr-observing #app #lab-mount.hr-active .hr-value{margin:0}
+body.hr-observing #app #lab-mount.hr-active .hr-value+.hr-value{margin-top:16px;padding-top:10px;border-top:1px solid var(--al-line)}
+body.hr-observing #app #lab-mount.hr-active .hr-value-name{margin:0 0 5px;font-size:14px;color:var(--hr-a)}
 body.hr-observing #app #lab-mount.hr-active .hr-value-b .hr-value-name{color:var(--hr-b)}
-body.hr-observing #app #lab-mount.hr-active .hr-values strong{font-weight:500;color:var(--hr-ink)}
-body.hr-observing #app #lab-mount.hr-active .hr-relation>summary{font-size:13px;min-height:32px;color:var(--hr-muted)}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-relation .stars-selection{font-size:14px;line-height:1.75;margin:6px 0;color:var(--hr-ink)}
-body.hr-observing #app #lab-mount.hr-active .hr-formula{font-size:13px;line-height:1.7;margin:8px 0 0;color:var(--hr-muted)}
-body.hr-observing #app #lab-mount.hr-active .hr-leader{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-body.hr-observing #app #lab-mount.hr-active .hr-leader path{fill:none;stroke:var(--hr-a);stroke-width:1;opacity:.7}
-body.hr-observing #app #lab-mount.hr-active .hr-footer{display:flex;gap:24px;justify-content:space-between;align-items:center;padding:9px 30px 12px;font-size:12px;line-height:1.6;color:var(--hr-muted)}
-body.hr-observing #app #lab-mount.hr-active .hr-footer .tool-model-boundary{margin:0;padding:0;color:var(--hr-muted);font-size:12px;line-height:1.6;max-width:60%}
-@media(max-width:1000px){
-body.hr-observing #app #lab-mount.hr-active .hr-header,body.hr-observing #app #lab-mount.hr-active .hr-toolbar{padding-left:14px;padding-right:14px}
-body.hr-observing #app #lab-mount.hr-active .hr-header{gap:16px}
-body.hr-observing #app #lab-mount.hr-active .hr-stage{margin:0 6px}
-body.hr-observing #app #lab-mount.hr-active .hr-footer{padding-left:14px;padding-right:14px}
-body.hr-observing #app #lab-mount.hr-active .hr-shell{height:auto;min-height:100svh;grid-template-rows:54px auto auto auto}
-body.hr-observing #app #lab-mount.hr-active .hr-canvas-area{height:470px;min-height:470px}
-body.hr-observing #app #lab-mount.hr-active .hr-context,body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true],body.hr-observing #app #lab-mount.hr-active .hr-context:has(.hr-relation[open]){position:relative;left:auto!important;top:auto!important;width:auto;margin:0 16px 0 44px;padding:10px 12px;background:none}
+body.hr-observing #app #lab-mount.hr-active .hr-value-item{display:grid;grid-template-columns:1fr auto 30px;align-items:baseline;gap:8px;margin:3px 0;font-size:13px;color:var(--al-muted)}
+body.hr-observing #app #lab-mount.hr-active .hr-value-item strong{font-size:19px;font-weight:400;color:var(--al-text);line-height:1.5}
+body.hr-observing #app #lab-mount.hr-active .hr-value-item:last-child strong{color:var(--hr-a)}
+body.hr-observing #app #lab-mount.hr-active .hr-value-b .hr-value-item:last-child strong{color:var(--hr-b)}
+body.hr-observing #app #lab-mount.hr-active .hr-unit{font-size:13px;white-space:nowrap}
+body.hr-observing #app #lab-mount.hr-active .hr-leader{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+body.hr-observing #app #lab-mount.hr-active .hr-leader path{fill:none;stroke:var(--hr-a);stroke-width:1.2;opacity:.75}
+body.hr-observing #app #lab-mount.hr-active .hr-reading{margin:6px 30px 0 76px}
+body.hr-observing #app #lab-mount.hr-active .hr-chart-key{margin:0 0 10px;font-size:14px;color:var(--al-muted)}
+body.hr-observing #app #lab-mount.hr-active .hr-relation{max-width:900px}
+body.hr-observing #app #lab-mount.hr-active .hr-relation>summary{font-size:15px}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-relation .stars-selection{font-size:16px;line-height:1.8;margin:6px 0;color:var(--al-text)}
+body.hr-observing #app #lab-mount.hr-active .hr-formula{margin:12px 0;font-size:15px;color:var(--al-muted)}
+body.hr-observing #app #lab-mount.hr-active .hr-footer{margin:16px 30px 0 76px}
+body.hr-observing #app #lab-mount.hr-active .hr-footer .tool-model-boundary{max-width:none;margin:0;padding:0;font-size:14px;line-height:1.7;color:var(--al-muted)}
+
+@media(max-width:1000px){#lab-mount.hr-active .hr-shell{padding:0 20px 24px}
+body.hr-observing #app #lab-mount.hr-active .hr-heading{gap:16px}
+body.hr-observing #app #lab-mount.hr-active .hr-axis-key{font-size:13px}
+body.hr-observing #app #lab-mount.hr-active .hr-canvas-area{height:auto}
+body.hr-observing #app #lab-mount.hr-active .hr-canvas-area .stars-chart-panel{height:490px}
+body.hr-observing #app #lab-mount.hr-active .hr-context,body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true]{position:relative;left:auto!important;top:auto!important;width:auto;margin:6px 25px 16px 76px;padding:10px 16px}
+body.hr-observing #app #lab-mount.hr-active .hr-values{display:flex;gap:30px}
+body.hr-observing #app #lab-mount.hr-active .hr-value{flex:1}
+body.hr-observing #app #lab-mount.hr-active .hr-value+.hr-value{margin:0;padding:0 0 0 24px;border-top:0;border-left:1px solid var(--al-line)}
+body.hr-observing #app #lab-mount.hr-active .hr-value-item{grid-template-columns:1fr auto 30px;gap:8px;max-width:340px}
 body.hr-observing #app #lab-mount.hr-active .hr-leader{display:none}
-body.hr-observing #app #lab-mount.hr-active .hr-axis-key{font-size:12px}}
-@media(max-width:700px){
-body.hr-observing #app #lab-mount.hr-active .hr-shell{height:auto;min-height:100svh;grid-template-rows:auto auto auto auto}
-body.hr-observing #app #lab-mount.hr-active .hr-header{min-height:58px;gap:12px;flex-wrap:wrap;padding:10px 14px}
-body.hr-observing #app #lab-mount.hr-active .hr-header h1{font-size:20px}
-body.hr-observing #app #lab-mount.hr-active .hr-axis-key{width:100%;order:4;font-size:12px}
-body.hr-observing #app #lab-mount.hr-active .hr-mode-menu{margin-left:auto}
-body.hr-observing #app #lab-mount.hr-active .hr-toolbar{padding:6px 14px;gap:0 12px;grid-template-rows:auto 40px auto}
-body.hr-observing #app #lab-mount.hr-active .hr-toolbar>[data-hr-controls]{grid-column:1/-1;grid-row:1}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-choice{gap:8px}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-choice select{min-width:0;width:200px;max-width:calc(100vw - 125px)}
-body.hr-observing #app #lab-mount.hr-active [data-controls]{gap:12px;flex-wrap:wrap}
-body.hr-observing #app #lab-mount.hr-active .hr-compare-menu{margin-left:auto}
-body.hr-observing #app #lab-mount.hr-active .hr-info>summary{grid-column:2;grid-row:2;margin-left:auto}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-exit{margin-left:0}
-body.hr-observing #app #lab-mount.hr-active .hr-comparing{font-size:13px}
-body.hr-observing #app #lab-mount.hr-active .hr-compare-menu .hr-menu-body{left:auto;right:0;width:280px}
-body.hr-observing #app #lab-mount.hr-active .hr-info .hr-menu-body{grid-row:3;max-height:220px}
-body.hr-observing #app #lab-mount.hr-active .hr-stage{margin:0 4px}
-body.hr-observing #app #lab-mount.hr-active .hr-canvas-area{height:470px;min-height:470px}
-body.hr-observing #app #lab-mount.hr-active .hr-context,body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true],body.hr-observing #app #lab-mount.hr-active .hr-context:has(.hr-relation[open]){position:relative;left:auto!important;top:auto!important;width:auto;margin:0 16px 0 44px;padding:10px 12px;background:none}
-body.hr-observing #app #lab-mount.hr-active .hr-context-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-body.hr-observing #app #lab-mount.hr-active .hr-context-head h2{font-size:17px;margin:0}
-body.hr-observing #app #lab-mount.hr-active .hr-values{margin-top:5px}
-body.hr-observing #app #lab-mount.hr-active .hr-values p{font-size:14px;margin-bottom:4px}
-body.hr-observing #app #lab-mount.hr-active .hr-leader{display:none}
-body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-point-labels button{font-size:12px;min-height:24px}
-body.hr-observing #app #lab-mount.hr-active .hr-footer{display:block;padding:14px 16px;font-size:12px}
-body.hr-observing #app #lab-mount.hr-active .hr-footer span{display:block;margin-bottom:5px}
-body.hr-observing #app #lab-mount.hr-active .hr-footer .tool-model-boundary{max-width:none;margin:5px 0 0}
+body.hr-observing #app #lab-mount.hr-active .hr-reading{margin-top:12px}
 }
-@media(prefers-reduced-motion:reduce){
-body.hr-observing #app #lab-mount.hr-active .hr-shell *{scroll-behavior:auto}}
+
+@media(max-width:600px){#lab-mount.hr-active .hr-shell{padding:0 12px 20px}
+body.hr-observing #app #lab-mount.hr-active .hr-heading{display:block;padding:16px 2px 12px}
+body.hr-observing #app #lab-mount.hr-active .hr-eyebrow{display:none}
+body.hr-observing #app #lab-mount.hr-active .hr-heading h1{font-size:26px;line-height:1.4;max-width:16em}
+body.hr-observing #app #lab-mount.hr-active .hr-axis-key{margin:10px 0 0;text-align:left;font-size:13px}
+body.hr-observing #app #lab-mount.hr-active .hr-axis-key br{display:none}
+body.hr-observing #app #lab-mount.hr-active .hr-toolbar{grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+body.hr-observing #app #lab-mount.hr-active .hr-toolbar>[data-hr-controls]{display:contents}
+body.hr-observing #app #lab-mount.hr-active .hr-toolbar [data-controls]{display:contents}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-choice{width:100%;grid-column:1/-1;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-size:14px}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-choice select{width:100%;font-size:14px;grid-column:auto}
+body.hr-observing #app #lab-mount.hr-active .hr-compare-menu{margin-right:auto;grid-column:1;grid-row:2}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-exit{grid-column:2;grid-row:2;font-size:14px;min-height:44px;padding:7px 10px}
+body.hr-observing #app #lab-mount.hr-active .hr-info>summary{grid-column:2;grid-row:2;font-size:14px}
+body.hr-observing #app #lab-mount.hr-active .hr-compare-menu>summary{font-size:14px}
+body.hr-observing #app #lab-mount.hr-active .hr-comparing{grid-column:1/-1;font-size:14px;width:100%}
+body.hr-observing #app #lab-mount.hr-active .hr-shell:has(.hr-exit:not([hidden])) .hr-info>summary{grid-row:3}
+body.hr-observing #app #lab-mount.hr-active .hr-shell:has(.hr-exit:not([hidden])) .hr-info .hr-menu-body{grid-row:4}
+body.hr-observing #app #lab-mount.hr-active .hr-info .hr-menu-body{grid-row:3;max-height:260px}
+body.hr-observing #app #lab-mount.hr-active .hr-compare-menu .hr-menu-body{width:290px;max-width:calc(100vw - 24px);left:0;right:auto}
+body.hr-observing #app #lab-mount.hr-active .hr-canvas-area .stars-chart-panel{height:440px}
+body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-point-labels button{font-size:13px;min-height:30px;padding:2px 4px}
+body.hr-observing #app #lab-mount.hr-active .hr-context,body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true]{margin:4px 12px 14px 52px;padding:8px 12px}
+body.hr-observing #app #lab-mount.hr-active .hr-context-head h2{font-size:20px}
+body.hr-observing #app #lab-mount.hr-active .hr-context-kind{font-size:13px}
+body.hr-observing #app #lab-mount.hr-active .hr-values,body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true] .hr-values{display:block;margin-top:7px}
+body.hr-observing #app #lab-mount.hr-active .hr-value+.hr-value,body.hr-observing #app #lab-mount.hr-active .hr-context[data-comparing=true] .hr-value+.hr-value{margin-top:12px;padding:10px 0 0;border-left:0;border-top:1px solid var(--al-line)}
+body.hr-observing #app #lab-mount.hr-active .hr-value-item{font-size:13px;grid-template-columns:1fr auto 28px;gap:5px}
+body.hr-observing #app #lab-mount.hr-active .hr-value-item strong{font-size:20px}
+body.hr-observing #app #lab-mount.hr-active .hr-reading,body.hr-observing #app #lab-mount.hr-active .hr-footer{margin-left:52px;margin-right:12px}
+body.hr-observing #app #lab-mount.hr-active .hr-chart-key,body.hr-observing #app #lab-mount.hr-active .hr-footer .tool-model-boundary{font-size:13px}
+body.hr-observing #app #lab-mount.hr-active .hr-formula{font-size:13px;overflow-wrap:anywhere}
+}

@@ -7,11 +7,10 @@
   <title>太阳系 · 一张正在运动的地图</title>
   <link rel="stylesheet" href="style.css">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
-<link rel="icon" href="data:,"><link rel="stylesheet" href="/navigation.css"></head>
-<body class="integrated-legacy"><div id="site-navigation"></div>
+<link rel="icon" href="data:,"><link rel="stylesheet" href="/navigation.css"><link rel="stylesheet" href="/shared/presentation.css"></head>
+<body class="integrated-legacy al-app solar-module" data-al-surface="scene" data-presentation-owner="atlas"><div id="site-navigation" hidden></div>
   <header class="topbar">
-    <a class="brand" href="./" aria-label="太阳系沙盘首页"><svg viewBox="0 0 36 36" aria-hidden="true"><ellipse cx="18" cy="18" rx="16" ry="6" transform="rotate(-32 18 18)"/><circle cx="18" cy="18" r="5"/><circle cx="30" cy="10" r="2"/></svg><span>天文知识地图<small>天体、尺度与运动</small></span></a>
-    <nav class="modes" aria-label="地图视图">
+    <nav class="modes al-mode-nav" aria-label="地图视图">
       <button data-mode="explore" aria-pressed="true">宇宙沙盘</button>
       <button data-mode="distance" aria-pressed="false">轨道距离</button>
       <button data-mode="sizes" aria-pressed="false">尺寸比较</button>
@@ -22,7 +21,7 @@
   </header>
 
   <section class="experiment-bar" aria-label="当前观察与主控">
-    <div class="experiment-prompt"><strong id="experiment-question">同一个太阳系，为什么需要三种比例？</strong><p id="observation-hint">试试轨道距离，再回到沙盘；看地球轨道所在的小区域。</p></div>
+    <div class="experiment-prompt"><h1 id="experiment-question">同一个太阳系，为什么需要三种比例？</h1><p id="observation-hint">试试轨道距离，再回到沙盘；看地球轨道所在的小区域。</p></div>
     <div class="experiment-actions"><div id="presets" class="presets" aria-label="观察预设"></div><button id="hint-toggle" aria-expanded="true" aria-controls="observation-hint">收起提示</button><button id="reset-experiment">重置本视图</button></div>
     <div id="comparison-controls" class="comparison-controls" hidden><label>共同指标 <select id="comparison-metric"><option value="radius">平均半径</option><option value="mass">质量</option><option value="density">平均密度</option></select></label><label>横轴 <select id="comparison-scale"><option value="linear">线性刻度</option><option value="log">对数刻度</option></select></label></div>
     <div id="notice" class="notice" role="status" hidden></div>
@@ -43,11 +42,6 @@
       <div id="labels" aria-hidden="false"></div>
       <section id="comparison-view" class="comparison-view" aria-label="八行星共同指标比较" hidden><div class="comparison-heading"><strong id="comparison-title"></strong><span id="comparison-unit"></span></div><div id="comparison-axis" class="comparison-axis" aria-hidden="true"></div><div id="comparison-rows" class="comparison-rows"></div><p id="comparison-caption" class="comparison-caption"></p></section>
       <section id="axes-view" class="axes-view" aria-label="固定参照的自转轴对照" hidden><div class="axis-reference"><strong>↑ 公转角动量正向</strong><span>每颗行星均从自己的轨道北侧看：公转 ↺</span></div><div id="axis-grid" class="axis-grid"></div><details class="axis-notes"><summary>轴的方向、观察位置与真实周期</summary><p>金色箭头是按右手定则定义的自转角动量正向；灰色竖线是各自公转轨道面的正向法线。倾角取 0–180°，超过 90° 即逆行。此处将各轨道法线对齐作比较，省略实际轨道倾角与极轴方位，并非从同一真实观测位置拍到的画面。</p><p>所有球体等大，轴方位为教学示意。几何箭头决定顺逆行；恒星自转周期只报告时长的绝对值。沙盘球面同速慢放，不能据动画推读真实周期，巨行星还存在差异自转。</p></details></section>
-      <div class="scene-heading">
-        <div class="eyebrow"><span class="tiny-line"></span> 知识地图 01 / 太阳系</div>
-        <h1>一张正在<br>运动的地图<span>。</span></h1>
-        <p>八颗行星只是入口。<br>空间里，藏着它们共同的起源与不同的命运。</p>
-      </div>
       <div class="view-tools" aria-label="视角控制">
         <button id="home-view" title="返回整体视角" aria-label="返回整体视角">⌂</button>
         <button id="top-view" title="从黄道北侧俯视" aria-label="从黄道北侧俯视">俯视</button>

@@ -1,3 +1,4 @@
+import {getGraphicStyle} from '/shared/presentation.js';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import * as P from './physics.mjs';
@@ -110,12 +111,20 @@ function refresh(){
 function drawAnnual(o){
  const canvas=$('year-orbit'),w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;
  const dpr=Math.min(devicePixelRatio,2);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);const c=canvas.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
- const narrow=w<440,font=narrow?13:17;c.font=font+'px Microsoft YaHei';c.lineWidth=2;c.textAlign='center';
+ const narrow=w<440,style=getGraphicStyle(canvas),font=narrow?style.tickSize:style.labelSize;c.font='400 '+font+'px '+style.fontFamily;c.lineWidth=2;c.textAlign='center';
  const drawLine=(x,y,dx,dy,color,dash=false)=>{c.strokeStyle=color;c.setLineDash(dash?[7,6]:[]);c.beginPath();c.moveTo(x,y);c.lineTo(x+dx,y+dy);c.stroke();c.setLineDash([]);};
  const circle=(x,y,r,color)=>{c.fillStyle=color;c.beginPath();c.arc(x,y,r,0,P.TAU);c.fill();};
+ if(h<240){
+  const cy=h*.49,r=Math.min(w*.17,h*.22),hx=w*.25,gx=w*.72,ang=o.solarLongitude+Math.PI,ex=hx+r*Math.cos(ang),ey=cy-r*Math.sin(ang),moonAngle=Math.atan2(o.moon[1],o.moon[0]);
+  c.strokeStyle='#405b71';for(const x of[hx,gx]){c.beginPath();c.arc(x,cy,r,0,P.TAU);c.stroke();}
+  circle(hx,cy,5,'#ebc77e');circle(ex,ey,5,'#71c8c7');drawLine(hx,cy,ex-hx,ey-cy,'#71c8c7');c.fillStyle=style.text;c.fillText('日心',hx,16);c.fillText('地心',gx,16);c.fillStyle='#71c8c7';c.fillText('地球',Math.max(18,Math.min(w-18,ex)),Math.min(h-22,ey+font+8));
+  circle(gx,cy,5,'#71c8c7');drawLine(gx,cy,r,0,'#8b9db2',true);drawLine(gx,cy,Math.cos(o.solarLongitude)*r*1.1,-Math.sin(o.solarLongitude)*r*1.1,'#ebc77e');drawLine(gx,cy,Math.cos(moonAngle)*r,-Math.sin(moonAngle)*r,'#71c8c7');circle(gx+Math.cos(moonAngle)*r,cy-Math.sin(moonAngle)*r,5,'#d3dce7');
+  c.fillStyle=style.muted;c.fillText('虚线：恒星起点',w*.2,h-4);c.fillStyle='#ebc77e';c.fillText('太阳方向',w*.55,h-4);c.fillStyle='#71c8c7';c.fillText('月球方向',w*.84,h-4);
+  $('annual-angle').textContent='地球前进 '+(o.solarLongitude/P.RAD).toFixed(1)+'°';$('period-event').textContent=Math.abs(state.days-P.C.sidereal)<.005?'恒星方向已回到起点；太阳方向仍差约27°':Math.abs(state.days-P.SYNODIC)<.005?'太阳相对方向也回到起点：再次新月':state.days<P.C.sidereal?'先追踪月球回到恒星起点':'继续追上已移动的太阳方向';return;
+ }
  const cy=h*.33,r=Math.min(w*.23,h*.2),cx=w*.5,ang=o.solarLongitude+Math.PI;
  c.strokeStyle='#405b71';c.beginPath();c.arc(cx,cy,r,0,P.TAU);c.stroke();circle(cx,cy,10,'#ebc77e');c.fillStyle='#ebc77e';c.fillText('太阳',cx,cy+font+13);
- const ex=cx+r*Math.cos(ang),ey=cy-r*Math.sin(ang);circle(cx-r,cy,4,'#657b91');drawLine(cx,cy,-r,0,'#657b91',true);circle(ex,ey,9,'#71c8c7');c.fillStyle='#71c8c7';c.fillText('地球',ex,ey-font-9);drawLine(ex,ey,cx-ex,cy-ey,'#ebc77e');c.fillStyle='#a7b7c9';c.fillText('日心：地球沿轨道前进',cx,28);
+ const ex=cx+r*Math.cos(ang),ey=cy-r*Math.sin(ang);circle(cx-r,cy,4,'#657b91');drawLine(cx,cy,-r,0,'#657b91',true);circle(ex,ey,9,'#71c8c7');c.fillStyle='#71c8c7';c.fillText('地球',ex,ey-font-9);drawLine(ex,ey,cx-ex,cy-ey,'#ebc77e');c.fillStyle='#a7b7c9';c.fillText('日心：地球沿轨道前进',cx,16);
  const lx=w*.5,ly=h*.77,rr=Math.min(w*.31,h*.17);c.strokeStyle='#3e5568';c.beginPath();c.arc(lx,ly,rr,0,P.TAU);c.stroke();circle(lx,ly,8,'#71c8c7');
  const moonAngle=Math.atan2(o.moon[1],o.moon[0]),sx=Math.cos(o.solarLongitude)*rr,sy=-Math.sin(o.solarLongitude)*rr,mx=Math.cos(moonAngle)*rr,my=-Math.sin(moonAngle)*rr;
  drawLine(lx,ly,rr,0,'#8b9db2',true);
@@ -123,7 +132,7 @@ function drawAnnual(o){
  // gold endpoint is a direction marker, not a heliocentric distance sample.
  c.lineWidth=4;drawLine(lx,ly,sx*1.1,sy*1.1,'#ebc77e');c.lineWidth=2;drawLine(lx,ly,mx,my,'#71c8c7');circle(lx+sx*1.1,ly+sy*1.1,4,'#ebc77e');circle(lx+mx,ly+my,8,'#d3dce7');
  c.fillStyle='#a7b7c9';c.fillText('地心：参照原点是地球',lx,h*.54);c.fillText('虚线 恒星起点',lx-rr*.2,ly+font+15);
- const callout=(text,endX,endY,y,color)=>{const x=w*.82,left=x-c.measureText(text).width/2-7;c.strokeStyle=color;c.lineWidth=1;c.setLineDash([2,3]);c.beginPath();c.moveTo(endX,endY);c.lineTo(left-12,y-6);c.lineTo(left,y-6);c.stroke();c.setLineDash([]);c.fillStyle='#080e16';c.fillRect(left+2,y-font-2,c.measureText(text).width+10,font+6);c.fillStyle=color;c.fillText(text,x,y);c.lineWidth=2;};
+ const callout=(text,endX,endY,y,color)=>{const x=w*.82,left=x-c.measureText(text).width/2-7;c.strokeStyle=color;c.lineWidth=1;c.setLineDash([2,3]);c.beginPath();c.moveTo(endX,endY);c.lineTo(left-12,y-6);c.lineTo(left,y-6);c.stroke();c.setLineDash([]);c.fillStyle=style.background;c.fillRect(left+2,y-font-2,c.measureText(text).width+10,font+6);c.fillStyle=color;c.fillText(text,x,y);c.lineWidth=2;};
  callout('太阳方向',lx+sx*1.1,ly+sy*1.1,ly-rr+font,'#ebc77e');callout('月球方向',lx+mx,ly+my,h-14,'#71c8c7');
  $('annual-angle').textContent='地球前进 '+(o.solarLongitude/P.RAD).toFixed(1)+'°';
  $('period-event').textContent=Math.abs(state.days-P.C.sidereal)<.005?'恒星方向已回到起点；太阳方向仍差约27°':Math.abs(state.days-P.SYNODIC)<.005?'太阳相对方向也回到起点：再次新月':state.days<P.C.sidereal?'先追踪月球回到恒星起点':'继续追上已移动的太阳方向';
@@ -135,24 +144,25 @@ function drawSolar(s){
  if(s.horizon<=0){ctx.fillStyle='#080d15e8';ctx.fillRect(0,0,w,h);ctx.fillStyle='#93a5b8';ctx.font='12px Microsoft YaHei';ctx.textAlign='center';ctx.fillText('太阳位于几何地平线下',cx,cy);return;}
  // East is displayed left when looking along the Sun direction, north stays up.
  const mx=cx-s.x*factor,my=cy-s.y*factor,mr=s.moonRadius*factor;
- if(Math.abs(mx-cx)<w/2+mr&&Math.abs(my-cy)<h/2+mr){ctx.fillStyle='#070b12';ctx.beginPath();ctx.arc(mx,my,mr,0,P.TAU);ctx.fill();ctx.strokeStyle='#5b697d66';ctx.lineWidth=.8;ctx.stroke();}else if(!document.body.classList.contains('eclipse-observing')){ctx.fillStyle='#a7b7c9';ctx.font='15px Microsoft YaHei';ctx.textAlign='center';ctx.fillText(`月球圆面在视场外，角距 ${(s.separation/P.RAD).toFixed(2)}°`,cx,h*.82);}
- ctx.strokeStyle='#5f7186';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx-r,cy+r+19);ctx.lineTo(cx+r,cy+r+19);ctx.stroke();ctx.fillStyle='#93a5b8';ctx.font='15px Microsoft YaHei';ctx.textAlign='center';ctx.fillText(`${(s.sunRadius*2/P.RAD).toFixed(3)}°`,cx,cy+r+32);
+ if(Math.abs(mx-cx)<w/2+mr&&Math.abs(my-cy)<h/2+mr){ctx.fillStyle='#070b12';ctx.beginPath();ctx.arc(mx,my,mr,0,P.TAU);ctx.fill();ctx.strokeStyle='#5b697d66';ctx.lineWidth=.8;ctx.stroke();}else if(!document.body.classList.contains('eclipse-observing')){ctx.fillStyle='#a7b7c9';ctx.font=getGraphicStyle(solarCanvas).labelFont;ctx.textAlign='center';ctx.fillText(`月球圆面在视场外，角距 ${(s.separation/P.RAD).toFixed(2)}°`,cx,h*.82);}
+ ctx.strokeStyle='#5f7186';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx-r,cy+r+19);ctx.lineTo(cx+r,cy+r+19);ctx.stroke();ctx.fillStyle='#93a5b8';ctx.font=getGraphicStyle(solarCanvas).labelFont;ctx.textAlign='center';ctx.fillText(`${(s.sunRadius*2/P.RAD).toFixed(3)}°`,cx,cy+r+32);
 }
 function drawShadow(o,observer){
+ const svg=$('shadow-svg'),width=Math.max(260,svg.clientWidth||1000),compact=svg.clientHeight<160,height=compact?110:200,centreY=compact?45:95,amplitude=compact?30:72,start=compact?25:75,span=width-start*2;svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
  const type=state.observe==='sun'?'solar':'lunar',s=P.shadowSection(o,type);
- if(s.x<=0){$('shadow-svg').innerHTML='<text x="500" y="100" text-anchor="middle" fill="#93a5b8" font-size="15">目标在遮挡体的向阳侧，不在背光影锥中。</text>';$('shadow-info').textContent='切换太阳/月面视角，或回到相应的新月/满月附近。';return;}
+ if(s.x<=0){$('shadow-svg').innerHTML=`<text x="${width/2}" y="${height/2}" text-anchor="middle" fill="#93a5b8" font-size="15">目标在遮挡体的向阳侧，不在背光影锥中。</text>`;$('shadow-info').textContent='切换太阳/月面视角，或回到相应的新月/满月附近。';return;}
  const maxX=Math.max(200000,s.x+2*s.Rtarget),includeApex=s.apex<maxX*1.35,xEnd=includeApex?Math.max(maxX,s.apex*1.06):maxX;
- const extent=Math.max(10000,s.rho+1.5*s.Rtarget,P.shadow(P.C.sunRadius,s.Rblock,s.d,xEnd).penumbra*1.15),x=t=>75+t/xEnd*830,y=t=>95-t/extent*72;
+ const extent=Math.max(10000,s.rho+1.5*s.Rtarget,P.shadow(P.C.sunRadius,s.Rblock,s.d,xEnd).penumbra*1.15),x=t=>start+t/xEnd*span,y=t=>centreY-t/extent*amplitude;
  const a=P.shadow(P.C.sunRadius,s.Rblock,s.d,0),b=P.shadow(P.C.sunRadius,s.Rblock,s.d,xEnd),cap=Math.min(xEnd,s.apex),uc=P.shadow(P.C.sunRadius,s.Rblock,s.d,cap),path=points=>points.map((p,i)=>`${i?'L':'M'}${x(p[0]).toFixed(2)},${y(p[1]).toFixed(2)}`).join(' ')+' Z';
  let html=`<defs><linearGradient id="pen-grad"><stop stop-color="#cfb775" stop-opacity=".08"/><stop offset="1" stop-color="#cfb775" stop-opacity=".21"/></linearGradient></defs><path d="${path([[0,a.penumbra],[xEnd,b.penumbra],[xEnd,-b.penumbra],[0,-a.penumbra]])}" fill="url(#pen-grad)"/><path d="${path([[0,a.umbra],[cap,uc.umbra],[cap,-uc.umbra],[0,-a.umbra]])}" fill="#748bb6" fill-opacity=".25"/>`;
  if(s.apex<xEnd)html+=`<path d="${path([[s.apex,0],[xEnd,-b.umbra],[xEnd,b.umbra]])}" fill="#71c8c7" fill-opacity=".19"/>`;
  const boundaries=[[a.penumbra,b.penumbra,'#c9b97a'],[-a.penumbra,-b.penumbra,'#c9b97a'],[a.umbra,b.umbra,'#7393b9'],[-a.umbra,-b.umbra,'#7393b9']];for(const [y1,y2,color]of boundaries)html+=`<path d="M ${x(0)},${y(y1)} L ${x(xEnd)},${y(y2)}" stroke="${color}" stroke-opacity=".65" stroke-width=".8"/>`;
- html+=`<path d="M 25,95 H 950" stroke="#6d8196" stroke-opacity=".35" stroke-dasharray="3 5"/><text x="22" y="185" fill="#ebc77e" font-size="10">太阳在左侧画外 →</text>`;
- html+=`<ellipse cx="${x(0)}" cy="${y(0)}" rx="${Math.max(2,s.Rblock/xEnd*830)}" ry="${s.Rblock/extent*72}" fill="${type==='solar'?'#b7bdc7':'#548eb1'}"/><ellipse cx="${x(s.x)}" cy="${y(s.rho)}" rx="${Math.max(2,s.Rtarget/xEnd*830)}" ry="${s.Rtarget/extent*72}" fill="${type==='solar'?'#548eb1':'#b7bdc7'}" stroke="#b3c9dc" stroke-opacity=".6"/>`;
- html+=`<text x="${x(0)}" y="${Math.min(171,y(-s.Rblock)-0+17)}" text-anchor="middle" fill="#d5dfea" font-size="11">${type==='solar'?'月球':'地球'}</text><text x="${x(s.x)}" y="${Math.max(15,y(s.rho+s.Rtarget)-12)}" text-anchor="middle" fill="#d5dfea" font-size="11">${type==='solar'?'地球':'月球'}</text>`;
- if(s.apex<xEnd){html+=`<circle cx="${x(s.apex)}" cy="95" r="2" fill="#ebc77e"/><text x="${x(s.apex)}" y="135" text-anchor="middle" fill="#a7b7c9" font-size="9">本影顶点</text>`;}
- if(type==='solar'){const v=P.sub(observer,s.blocker),siteX=P.dot(v,s.axis),sitePerp=P.sub(v,P.scale(s.axis,siteX)),side=s.rho>1e-5?P.unit(s.perp):P.length(sitePerp)>1e-5?P.unit(sitePerp):[0,0,1],siteY=P.dot(v,side),offPlane=P.length(P.sub(sitePerp,P.scale(side,siteY)));html+=`<circle id="section-observer" data-radial-km="${siteY}" data-off-plane-km="${offPlane}" cx="${x(siteX)}" cy="${y(siteY)}" r="3.2" fill="#ebc77e"/><text x="${x(siteX)+8}" y="${y(siteY)+4}" fill="#ebc77e" font-size="9">观测点${offPlane>.01?'投影':''}</text>`;}
- $('shadow-svg').innerHTML=html;$('shadow-info').textContent=`本影顶点距${type==='solar'?'月':'地'}心 ${(s.apex/10000).toFixed(1)}万 km${s.apex>xEnd?'（画外）':''} · 目标偏离影轴 ${Math.round(s.rho)} km`;
+ html+=`<path d="M 12,${centreY} H ${width-12}" stroke="#6d8196" stroke-opacity=".35" stroke-dasharray="3 5"/><text x="22" y="${height-5}" fill="#ebc77e" font-size="11">太阳在左侧画外 →</text>`;
+ html+=`<ellipse cx="${x(0)}" cy="${y(0)}" rx="${Math.max(2,s.Rblock/xEnd*span)}" ry="${s.Rblock/extent*amplitude}" fill="${type==='solar'?'#b7bdc7':'#548eb1'}"/><ellipse cx="${x(s.x)}" cy="${y(s.rho)}" rx="${Math.max(2,s.Rtarget/xEnd*span)}" ry="${s.Rtarget/extent*amplitude}" fill="${type==='solar'?'#548eb1':'#b7bdc7'}" stroke="#b3c9dc" stroke-opacity=".6"/>`;
+ html+=`<text x="${x(0)}" y="${Math.min(height-20,y(-s.Rblock)-0+17)}" text-anchor="middle" fill="#d5dfea" font-size="11">${type==='solar'?'月球':'地球'}</text><text x="${x(s.x)}" y="${Math.max(15,y(s.rho+s.Rtarget)-12)}" text-anchor="middle" fill="#d5dfea" font-size="11">${type==='solar'?'地球':'月球'}</text>`;
+ if(s.apex<xEnd){html+=`<circle cx="${x(s.apex)}" cy="${centreY}" r="2" fill="#ebc77e"/><text x="${x(s.apex)}" y="${height-24}" text-anchor="middle" fill="#a7b7c9" font-size="11">本影顶点</text>`;}
+ if(type==='solar'){const v=P.sub(observer,s.blocker),siteX=P.dot(v,s.axis),sitePerp=P.sub(v,P.scale(s.axis,siteX)),side=s.rho>1e-5?P.unit(s.perp):P.length(sitePerp)>1e-5?P.unit(sitePerp):[0,0,1],siteY=P.dot(v,side),offPlane=P.length(P.sub(sitePerp,P.scale(side,siteY)));html+=`<circle id="section-observer" data-radial-km="${siteY}" data-off-plane-km="${offPlane}" cx="${x(siteX)}" cy="${y(siteY)}" r="3.2" fill="#ebc77e"/><text x="${x(siteX)+8}" y="${y(siteY)+4}" fill="#ebc77e" font-size="11">观测点${offPlane>.01?'投影':''}</text>`;}
+ $('shadow-svg').innerHTML=html;for(const text of svg.querySelectorAll('text')){const box=text.getBBox(),dx=box.x<4?4-box.x:box.x+box.width>width-4?width-4-box.x-box.width:0,dy=box.y<2?2-box.y:box.y+box.height>height-2?height-2-box.y-box.height:0;if(dx)text.setAttribute('x',Number(text.getAttribute('x'))+dx);if(dy)text.setAttribute('y',Number(text.getAttribute('y'))+dy);}$('shadow-info').textContent=`本影顶点距${type==='solar'?'月':'地'}心 ${(s.apex/10000).toFixed(1)}万 km${s.apex>xEnd?'（画外）':''} · 目标偏离影轴 ${Math.round(s.rho)} km`;
 }
 function renderMode(){
  document.dispatchEvent(new CustomEvent('moon-ui-before-mode',{detail:{mode:state.mode}}));
@@ -206,7 +216,7 @@ $('sources').onclick=()=>{pause();$('source-dialog').showModal();};
 for(const b of document.querySelectorAll('[data-close]'))b.onclick=()=>b.closest('dialog').close();
 for(const [id,label]of [['space','空间中的日地月关系，空格播放或暂停'],['observed','地心方向所见，空格播放或暂停']]){$(id).tabIndex=0;$(id).setAttribute('role','region');$(id).setAttribute('aria-label',label);}
 function onSpace(e){if(e.code!=='Space'||e.repeat||document.querySelector('dialog[open]')||e.target.isContentEditable||e.target.closest('input,select,button,textarea,summary,a[href],[role="button"],[role="textbox"],[role="slider"]'))return;if(e.target!==document.body&&!e.target.closest('#space,#observed'))return;e.preventDefault();togglePlay();}document.addEventListener('keydown',onSpace);
-function resize(){const w=space.clientWidth,h=space.clientHeight;if(w&&h){renderer.setSize(w,h);camera.aspect=w/h;camera.zoom=Math.min(1,camera.aspect/1.2);camera.updateProjectionMatrix();}const ow=$('observed').clientWidth,oh=$('observed').clientHeight;if(ow&&oh){viewer.setSize(ow,oh);const a=ow/oh;const extent=Math.max(1.25,1.15/a);observerCamera.left=-extent*a;observerCamera.right=extent*a;observerCamera.top=extent;observerCamera.bottom=-extent;observerCamera.updateProjectionMatrix();}if(state.ready)refresh();}
+function resize(){const w=space.clientWidth,h=space.clientHeight;if(w&&h){renderer.setSize(w,h);camera.aspect=w/h;camera.zoom=.8*Math.min(1,camera.aspect/1.2);camera.updateProjectionMatrix();}const ow=$('observed').clientWidth,oh=$('observed').clientHeight;if(ow&&oh){viewer.setSize(ow,oh);const a=ow/oh;const extent=Math.max(1.08,1.08/a);observerCamera.left=-extent*a;observerCamera.right=extent*a;observerCamera.top=extent;observerCamera.bottom=-extent;observerCamera.updateProjectionMatrix();}if(state.ready)refresh();}
 
 const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(space);resizeObserver.observe($('observed'));resizeObserver.observe($('year-orbit'));
 let last=performance.now(),settling=0;
@@ -214,7 +224,7 @@ controls.addEventListener('change',()=>{dirty=true;settling=40;persist();});
 function frame(now){if(disposed)return;frameId=requestAnimationFrame(frame);const dt=Math.min((now-last)/1000,.08);last=now;if(document.hidden)return;
  if(state.playing&&state.ready){state.guidePreset=null;state.days+=dt*state.speed;if(playUntil!==null&&state.days>=playUntil){state.days=playUntil;pause();$('status').textContent='已到参照终点并暂停，可继续。';}if(state.days>60){state.days=60;pause();}refresh();}
  if(!state.playing&&!dirty&&settling<=0)return;controls.update();settling--;dirty=false;
- if(state.ready){if(!document.querySelector('.space-view').hidden){renderer.render(scene,camera);label('earth-label',earth.position,-35);label('moon-label',moon.position,-24);label('sun-label',new THREE.Vector3(state.trueScale?66.5:9.5,0,0).applyAxisAngle(zAxis,P.orbit(state.days,state).solarLongitude),-26);label('observer-label',siteMarker.position,17);$('observer-label').hidden=state.mode!=='eclipse'||$('observer-label').hidden;}if(!document.querySelector('.observer-view').hidden&&!moonArea.hidden)viewer.render(observerScene,observerCamera);}
+ if(state.ready){if(!document.querySelector('.space-view').hidden){renderer.render(scene,camera);if(!document.body.classList.contains('reduced')){label('earth-label',earth.position,-35);label('moon-label',moon.position,-24);label('sun-label',new THREE.Vector3(state.trueScale?66.5:9.5,0,0).applyAxisAngle(zAxis,P.orbit(state.days,state).solarLongitude),-26);label('observer-label',siteMarker.position,17);$('observer-label').hidden=state.mode!=='eclipse'||$('observer-label').hidden;}}if(!document.querySelector('.observer-view').hidden&&!moonArea.hidden)viewer.render(observerScene,observerCamera);}
 }
 function exportRecipe(){return encodeRecipe(getState());}
 function importRecipe(value){const clean=decodeRecipe(value);applyState(clean);resetOrigin=getState();updateURL();$('status').textContent='已导入配方并暂停；复位返回此起点。';return getState();}
@@ -236,4 +246,5 @@ function onEscape(e){if(e.key==='Escape'&&document.body.classList.contains('pres
 for(const el of [renderer.domElement,viewer.domElement])el.addEventListener('webglcontextlost',e=>{e.preventDefault();pause();state.ready=false;$('play').disabled=true;$('startup-error').hidden=false;$('startup-message').textContent='三维画面已中断，请重试。';$('retry').onclick=()=>location.reload();});
 function onStateInput(){dirty=true;persist();}for(const type of ['input','change','click'])document.addEventListener(type,onStateInput);
 const requestedMode=new URLSearchParams(location.search).get('mode');mode(MODES.includes(requestedMode)?requestedMode:'phase');
+window.dispatchEvent(new Event('moon-ui-ready'));
 await init();if(state.ready){restore();persist();requestAnimationFrame(frame);}

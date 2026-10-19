@@ -11,10 +11,18 @@ function add(source,url,role='runtime'){const file=path.join(root,source);if(!fs
 function directory(dir,url,{recursive=true,filter=()=>true}={}){for(const e of fs.readdirSync(path.join(root,dir),{withFileTypes:true})){if(e.isDirectory()&&recursive)directory(dir+'/'+e.name,url+'/'+e.name,{recursive,filter});else if(e.isFile()&&filter(e.name,dir))add(dir+'/'+e.name,url+'/'+e.name);}}
 for(const file of ['index.html','app.js','site.css','navigation.css','tool-layout.css'])add('web/observatory/'+file,'/'+file);
 const excluded=new Set(['course-map.js','course-map.css','learning-paths.js','reading-state.js','load-content.js','lab.js']);
-directory('web/observatory/shared','/shared',{filter:f=>/\.(m?js|css)$/.test(f)&&!excluded.has(f)});
-directory('web/observatory/modules','/modules',{filter:f=>/\.(m?js|css)$/.test(f)});
+directory('web/observatory/shared','/shared',{filter:(f,dir)=>/\.(m?js|css)$/.test(f)&&!excluded.has(f)||dir.startsWith('web/observatory/shared/fonts')&&/\.(woff2?|ttf|txt|json)$/.test(f)});
+// Retained historical source adapters have no active importer after the single
+// sky-presentation owner migration. Keep their source files, omit their URLs.
+const retiredModules=new Set([
+ 'sky-sky-ui.js','sky-sky-ui.css','sky-day-ui.js','sky-day-ui.css',
+ 'sky-measure-ui.js','sky-measure-ui.css','sky-calendar-ui.js','sky-calendar-ui.css',
+ 'sky-precession-ui.js','sky-precession-ui.css','sky-pilot.css',
+]);
+directory('web/observatory/modules','/modules',{filter:f=>/\.(m?js|css)$/.test(f)&&!retiredModules.has(f)});
 for(const slug of ['alignments','sky','optics','light','imaging','stars','galaxy','orbits','measure','sky-motion','orbit-conics','landing-staging-sources'])add('web/observatory/sources/'+slug+'.md','/sources/'+slug+'.md','source-record');
 for(const d of ['sky/stars.json','sky/hip2-subset.tsv','sky/hip2-ReadMe.txt','sky/hip1-ReadMe.txt','sky/vizier-license.html','stars/tracks.json','stars/interpolator-source.html','stars/interpolator-result.html','galaxy/planck-equirectangular.jpg','galaxy/2mass-allsky.jpg','galaxy/firas_monopole_spec_v1.txt','galaxy/manifest.json','imaging/502-linear.f32','imaging/656-linear.f32','imaging/673-linear.f32','imaging/m17-metadata.json','orbits/parameters.json','measure/parameters.json'])add('web/observatory/data/'+d,'/data/'+d,'science-data-or-record');
+for(const file of ['moon-first-quarter-640.webp','moon-first-quarter-1024.webp','pillars-640.webp','assets.json'])add('web/observatory/data/home/'+file,'/data/home/'+file,'entry-image-or-attribution');
 for(const slug of ['solar-system','earth-moon']){
  const base='web/'+slug;directory(base,'/labs/'+slug,{recursive:false,filter:f=>/^(index\.html|app\.js|phase-ui\.js|phase-ui\.css|style\.css|content\.js|physics\.mjs|scene-state\.js|references\.html|SOURCES\.md)$/.test(f)||(slug==='earth-moon'&&/^(spin|period|eclipse)-ui\.(js|css)$/.test(f))});
  directory(base+'/vendor','/labs/'+slug+'/vendor');directory(base+'/textures','/labs/'+slug+'/textures');
@@ -37,6 +45,9 @@ const files=[...entries.values()].sort((a,b)=>a.url.localeCompare(b.url));
 const buildId='r1-20261005-'+hash(Buffer.from(JSON.stringify(files.map(f=>[f.url,f.sha256])))).slice(0,12);
 const manifest={version:1,createdAt:new Date().toISOString(),buildId,baselineHead:'1e8a77642b489c990e917a4791c0eb83851fadd1',product:'AstronomyLab R1',publicDistribution:'blocked_pending_licenses',requires:['Node >=22','HTTP localhost','WebGL2 for spatial tools'],files};
 fs.writeFileSync(path.join(root,'web/observatory/runtime-assets.json'),JSON.stringify(manifest,null,2));
+// Source servers read this allowlist at startup. During coordinated development,
+// refreshing it need not copy/zip another complete, non-frozen candidate package.
+if(process.argv.includes('--manifest-only')){console.log(JSON.stringify({manifestOnly:true,source:root,resources:manifest.files.length,buildId:manifest.buildId,publicDistribution:manifest.publicDistribution}));process.exit(0);}
 fs.mkdirSync(out,{recursive:true});
 // Existing output is never recursively deleted. Unexpected stale files fail a build.
 const expected=new Set(manifest.files.map(f=>f.source));for(const f of ['web/observatory/server.mjs','web/observatory/compat/lectures-server.mjs','web/observatory/runtime-assets.json','README.md','package.json','distribution-manifest.json'])expected.add(f);

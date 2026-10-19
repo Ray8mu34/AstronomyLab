@@ -15,7 +15,7 @@ const cases=[['stationary rotating',0,120,90],['whole disk receding',150,120,90]
 for(const[name,vr,veq,inclination]of cases)test(`Observer-frame velocity colors: ${name}`,()=>{
  const state={vr,veq,inclination,epsilon:.6,resolution:40000},result=lineProfile(state),pixels=[],labels=[];
  const ctx={fillStyle:'',strokeStyle:'',fillRect(x,y,w,h){pixels.push({x,y,color:this.fillStyle});},fillText(text){labels.push(text);},beginPath(){},moveTo(){},lineTo(){},stroke(){}};
- vm.runInNewContext(renderer+';disk();',{state,result,P:{clamp},f:(x,n=2)=>Number(x).toFixed(n),auxBase:()=>({ctx,w:600,h:220})});
+ vm.runInNewContext(renderer+';disk();',{state,result,P:{clamp},f:(x,n=2)=>Number(x).toFixed(n),auxBase:()=>({ctx,w:600,h:220,style:{text:'#f2f4f4'}})});
  assert(pixels.length>4000,'Exercise the full disk, not one selected pixel');
  const radius=220*.34,projected=veq*Math.sin(inclination*Math.PI/180);
  let negative=0,positive=0;

@@ -1,1 +1,32 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>天文学实验室 · 演示工具</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/site.css"><link rel="stylesheet" href="/navigation.css"><link rel="stylesheet" href="/tool-layout.css"><script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script></head><body class="tool-site"><div id="site-navigation"></div><main id="app"><p class="loading" role="status">正在打开工具目录…</p></main><footer class="site-footer"><a href="/sources">来源与模型</a><span>天文学实验室</span></footer><script type="module">import('/app.js').catch(()=>{document.getElementById('app').innerHTML='<section role="alert"><h1>工具界面未能载入</h1><p>请重新加载页面，或返回工具目录。</p><button id="startup-retry">重新加载</button><a href="/labs/solar-system/">太阳系入口 →</a></section>';document.getElementById('startup-retry').onclick=()=>location.reload();});</script><noscript><p>交互演示需要 JavaScript。请在浏览器中启用 JavaScript 后重新加载。</p></noscript></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>天文学实验室 · 从一个问题开始</title>
+  <link rel="icon" href="data:,">
+  <script src="/shared/route-presentation.js"></script>
+  <link rel="preload" href="/shared/fonts/ALabSans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/navigation.css">
+  <link rel="stylesheet" href="/tool-layout.css">
+  <link id="editorial-style" rel="stylesheet" href="/shared/editorial.css">
+  <link rel="stylesheet" href="/shared/presentation.css">
+  <link rel="stylesheet" href="/shared/home.css">
+  <script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
+</head>
+<body class="tool-site al-app">
+  <div id="site-navigation" data-al-surface="scene"></div>
+  <main id="app" tabindex="-1" data-page="loading" aria-busy="true"><p class="loading" role="status">正在打开工具目录…</p></main>
+  <footer class="site-footer"><a href="/sources">来源与模型</a><span>天文学实验室</span></footer>
+  <script type="module">
+    import('/app.js').catch(()=>{
+      document.documentElement.dataset.alRouteLayout='standard';document.documentElement.dataset.alSurface='paper';document.body.dataset.alSurface='paper';
+      const host=document.getElementById('app');host.dataset.page='error';host.removeAttribute('aria-busy');
+      host.innerHTML='<section role="alert"><h1>工具界面未能载入</h1><p>请重新加载页面，或返回工具目录。</p><button id="startup-retry">重新加载</button><a href="/">返回工具目录 →</a><a href="/labs/solar-system/">太阳系入口 →</a></section>';
+      document.getElementById('startup-retry').onclick=()=>location.reload();
+    });
+  </script>
+  <noscript><p>交互演示需要 JavaScript。请在浏览器中启用 JavaScript 后重新加载。</p></noscript>
+</body>
+</html>

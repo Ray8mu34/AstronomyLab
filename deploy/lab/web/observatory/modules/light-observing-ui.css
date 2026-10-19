@@ -1,73 +1,27 @@
-body.noise-observing{--no-bg:#0a1422;--no-ink:#d5e1ea;--no-muted:#9bb0c2;--no-line:#263747;--no-current:#71c8c7;background:var(--no-bg);color:var(--no-ink);scrollbar-color:var(--no-muted) var(--no-bg)}
-body.noise-observing :is(#site-navigation,#mode-context,.site-footer),body.noise-observing #app>.tool-heading{display:none}
-body.tool-site.editorial.noise-observing #app[data-page=lab]{max-width:none;margin:0;padding:0}
+@import url('./light-presentation.css');
 #lab-mount.observing-active>:not(.observing-shell):not(link):not(.c-focus){display:none!important}
-body.noise-observing #app #lab-mount.observing-active{--text:var(--no-ink);--muted:var(--no-muted);--line:var(--no-line);color:var(--no-ink);font-family:"Microsoft YaHei",system-ui,sans-serif;font-variant-numeric:tabular-nums}
-body.noise-observing #app #lab-mount.observing-active [hidden]{display:none!important}
-body.noise-observing #app #lab-mount.observing-active :is(button,summary,a,input,select){font:inherit;color:inherit}
-body.noise-observing #app #lab-mount.observing-active :is(button,summary,a){cursor:pointer}
-body.noise-observing #app #lab-mount.observing-active button{min-height:42px;border:1px solid var(--no-line);border-radius:0;background:none;box-shadow:none;padding:9px 14px}
-body.noise-observing #app #lab-mount.observing-active :is(button,summary,a):hover{color:var(--no-current)}
-body.noise-observing #app #lab-mount.observing-active :is(button,summary,a,input,select):focus-visible{outline:2px solid var(--no-current);outline-offset:4px}
-body.noise-observing #app #lab-mount.observing-active summary{list-style:none;min-height:42px;display:flex;align-items:center;font-size:14px}
-body.noise-observing #app #lab-mount.observing-active summary::-webkit-details-marker{display:none}
-body.noise-observing #app #lab-mount.observing-active .observing-header{display:flex;align-items:center;gap:24px;padding:0 30px;min-height:58px;border-bottom:1px solid var(--no-line)}
-body.noise-observing #app #lab-mount.observing-active .observing-header h1{margin:0;font-size:21px;font-weight:500}
-body.noise-observing #app #lab-mount.observing-active .observing-header a{text-decoration:none;color:var(--no-muted);font-size:14px}
-body.noise-observing #app #lab-mount.observing-active .observing-modes{margin-left:auto;position:relative}
-body.noise-observing #app #lab-mount.observing-active [data-observing-modes]{position:absolute;top:100%;right:0;z-index:5;width:260px;max-width:calc(100vw - 30px);background:var(--no-bg);padding:14px;border:1px solid var(--no-line)}
-body.noise-observing #app #lab-mount.observing-active .lab-tabs{display:grid;gap:8px;border:0;padding:0;margin:0}
-body.noise-observing #app #lab-mount.observing-active .light-workbench{display:block;border:0;padding:0;margin:0}
-body.noise-observing #app #lab-mount.observing-active .light-visual{padding:0 22px;border:0;background:none}
-body.noise-observing #app #lab-mount.observing-active #light-title{display:none}
-body.noise-observing #app #lab-mount.observing-active .observing-head{padding:12px 42px 4px;line-height:1.8;font-size:13px}
-body.noise-observing #app #lab-mount.observing-active .observing-head p{margin:0}
-body.noise-observing #app #lab-mount.observing-active .observing-current{font-size:18px;color:#ebc77e}
-body.noise-observing #app #lab-mount.observing-active .observing-key{color:var(--no-muted)}
-body.noise-observing #app #lab-mount.observing-active #light-plot{width:100%;height:calc(100svh - 340px);min-height:220px;max-height:620px;aspect-ratio:auto;display:block}
-body.noise-observing #app #lab-mount.observing-active .light-controls{display:block!important;border:0!important;background:none;padding:0 64px!important;width:auto;max-width:none}
-body.noise-observing #app #lab-mount.observing-active .light-controls>#light-controls{display:none}
-body.noise-observing #app #lab-mount.observing-active .observing-primary{display:grid;grid-template-columns:1fr 1fr;gap:32px}
-body.noise-observing #app #lab-mount.observing-active .control{margin:3px 0;font-size:14px;display:grid;grid-template-columns:1fr auto;gap:2px 12px}
-body.noise-observing #app #lab-mount.observing-active .control output{float:none}
-body.noise-observing #app #lab-mount.observing-active .control input{grid-column:1/-1;width:100%;margin:0;min-height:28px}
-body.noise-observing #app #lab-mount.observing-active .control small{font-size:12px;line-height:1.5}
-body.noise-observing #app #lab-mount.observing-active input{accent-color:var(--no-current);min-height:34px}
-body.noise-observing #app #lab-mount.observing-active .observing-identity{font-size:13px;margin:3px 0 8px;line-height:1.8}
-body.noise-observing #app #lab-mount.observing-active .observing-tasks{display:flex;flex-wrap:wrap;gap:0 32px;border-top:1px solid var(--no-line)}
-body.noise-observing #app #lab-mount.observing-active .observing-tasks details[open]{width:100%;order:2}
-body.noise-observing #app #lab-mount.observing-active [data-observing-conditions]{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
-body.noise-observing #app #lab-mount.observing-active [data-observing-conditions]>:is(button,details){grid-column:1/-1}
-body.noise-observing #app #lab-mount.observing-active [data-observing-close]{justify-self:end}
-body.noise-observing #app #lab-mount.observing-active .light-advanced{border:0;padding:0}
-body.noise-observing #app #lab-mount.observing-active .light-advanced>div{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
-body.noise-observing #app #lab-mount.observing-active .light-advanced>div>.note{grid-column:1/-1}
-body.noise-observing #app #lab-mount.observing-active .light-presets,body.noise-observing #app #lab-mount.observing-active .light-actions{display:flex;flex-wrap:wrap;gap:8px}
-body.noise-observing #app #lab-mount.observing-active .observing-boundary,body.noise-observing #app #lab-mount.observing-active .light-feedback{font-size:12px;color:var(--no-muted);line-height:1.8;margin:0;padding:3px 0}
-body.noise-observing #app #lab-mount.observing-active :is([data-observing-sample],.observing-info){padding:0 64px 12px}
-body.noise-observing #app #lab-mount.observing-active .light-auxiliary{margin:0;border-top:1px solid var(--no-line);padding:0}
-body.noise-observing #app #lab-mount.observing-active #light-aux{height:270px;aspect-ratio:auto;display:block;width:100%}
-body.noise-observing #app #lab-mount.observing-active .observing-sample-note{display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:13px;line-height:1.8}
-body.noise-observing #app #lab-mount.observing-active .observing-sample-note p{margin:0}
-body.noise-observing #app #lab-mount.observing-active .observing-sample-note p:first-child{color:#ebc77e}
-body.noise-observing #app #lab-mount.observing-active [data-observing-info]{border-top:1px solid var(--no-line);line-height:1.9}
-body.noise-observing #app #lab-mount.observing-active [data-observing-info]>button{float:right}
-body.noise-observing #app #lab-mount.observing-active .light-question{display:block;padding:0}
-body.noise-observing #app #lab-mount.observing-active .light-question h2{font-size:18px}
-body.noise-observing #app #lab-mount.observing-active .metrics{display:flex;flex-wrap:wrap;gap:24px;border:0}
-body.noise-observing #app #lab-mount.observing-active .c-focus{background:var(--no-bg);color:var(--no-ink);--bg:var(--no-bg)}
-body.noise-observing #app #lab-mount.observing-active .c-focus .light-visual{padding:0}
-@media(min-width:701px) and (max-height:650px){body.noise-observing #app #lab-mount.observing-active #light-plot{height:220px;min-height:220px}body.noise-observing #app #lab-mount.observing-active .observing-head{padding-top:5px;padding-bottom:0;line-height:1.6}}
+#app #lab-mount.observing-active .observing-shell .light-workbench{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:36px}
+#app #lab-mount.observing-active .observing-shell .observing-head>p:first-child{font-size:var(--al-label);color:var(--al-muted)}
+#app #lab-mount.observing-active .observing-shell .observing-current{font:400 var(--al-readout)/1.5 var(--al-numeric);margin:8px 0}
+#app #lab-mount.observing-active .observing-shell .observing-key{font-size:var(--al-tick);color:var(--al-muted)}
+#app #lab-mount.observing-active .observing-shell #light-plot{height:400px}
+#app #lab-mount.observing-active .observing-shell .observing-identity{font:400 var(--al-tick)/1.8 var(--al-numeric)}
+#app #lab-mount.observing-active .observing-shell .observing-tasks details>div{padding:12px 0 24px}
+#app #lab-mount.observing-active .observing-shell .observing-boundary{font-size:var(--al-tick);color:var(--al-muted)}
+#app #lab-mount.observing-active .observing-shell [data-observing-sample]{margin-top:28px;border-top:1px solid var(--al-line)}
+#app #lab-mount.observing-active .observing-shell .light-auxiliary>summary{font:600 var(--al-label)/1.7 var(--al-font);min-height:var(--al-touch-target);display:flex;align-items:center;cursor:pointer}
+#app #lab-mount.observing-active .observing-shell .observing-sample-note{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap;align-items:center;font-size:var(--al-tick);margin:8px 0 16px}
+#app #lab-mount.observing-active .observing-shell [data-observing-seed]{font-family:var(--al-numeric)}
+#app #lab-mount.observing-active .observing-shell .observing-sample-note p{margin:0;max-width:64ch;color:var(--al-muted)}
+#app #lab-mount.observing-active .observing-shell #light-aux{height:280px}
+@media(max-width:700px){#app #lab-mount.observing-active .observing-shell .light-workbench{display:flex;flex-direction:column;gap:18px}#app #lab-mount.observing-active .observing-shell .light-controls{order:-1}#app #lab-mount.observing-active .observing-shell .observing-primary{display:grid;grid-template-columns:1fr 1fr;gap:16px}#app #lab-mount.observing-active .observing-shell #light-plot{height:330px}#app #lab-mount.observing-active .observing-shell .observing-current{font-size:1.3rem}#app #lab-mount.observing-active .observing-shell .observing-sample-note{gap:12px}}
 @media(max-width:700px){
- body.noise-observing #app #lab-mount.observing-active .observing-header{padding:8px 14px;gap:14px}
- body.noise-observing #app #lab-mount.observing-active .observing-header h1{font-size:19px}
- body.noise-observing #app #lab-mount.observing-active .light-visual{padding:0 3px}
- body.noise-observing #app #lab-mount.observing-active .observing-head{padding:10px 16px;font-size:12px}
- body.noise-observing #app #lab-mount.observing-active .observing-current{font-size:16px}
- body.noise-observing #app #lab-mount.observing-active #light-plot{height:320px;min-height:320px}
- body.noise-observing #app #lab-mount.observing-active .light-controls{padding:0 20px!important}
- body.noise-observing #app #lab-mount.observing-active :is(.observing-primary,.observing-tasks,[data-observing-conditions],.light-advanced>div){display:block}
- body.noise-observing #app #lab-mount.observing-active .observing-tasks summary{border-bottom:1px solid var(--no-line)}
- body.noise-observing #app #lab-mount.observing-active :is([data-observing-sample],.observing-info){padding:0 20px 20px}
+ #app #lab-mount.observing-active .observing-shell :is(.light-visual,.light-controls,.observing-dock){display:contents}
+ #app #lab-mount.observing-active .observing-shell .observing-primary{order:0}
+ #app #lab-mount.observing-active .observing-shell .observing-head{order:1}
+ #app #lab-mount.observing-active .observing-shell #light-plot{order:2}
+ #app #lab-mount.observing-active .observing-shell .observing-identity{order:3}
+ #app #lab-mount.observing-active .observing-shell .observing-tasks{order:4}
+ #app #lab-mount.observing-active .observing-shell .observing-boundary{order:5}
+ #app #lab-mount.observing-active .observing-shell .light-feedback{order:6}
 }
-@media(max-width:700px) and (max-height:550px){body.noise-observing #app #lab-mount.observing-active #light-plot{height:210px;min-height:210px}body.noise-observing #app #lab-mount.observing-active .observing-head{padding-top:4px;padding-bottom:0;line-height:1.5}}

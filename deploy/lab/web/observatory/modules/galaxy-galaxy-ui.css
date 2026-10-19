@@ -1,98 +1,55 @@
-/* Local presentation tokens; original point colors, physics and renderer are unchanged. */
-body.galaxy-space-observing{--gs-bg:#0b1420;--gs-ink:#c5d5e2;--gs-muted:#93a9ba;--gs-line:#263645;--gs-gold:#f3c764;--gs-focus:#76c7ce;background:var(--gs-bg);color:var(--gs-ink);scrollbar-color:var(--gs-muted) var(--gs-bg)}
-body.galaxy-space-observing #site-navigation,body.galaxy-space-observing #app>.tool-heading,body.galaxy-space-observing #mode-context,body.galaxy-space-observing .site-footer{display:none}
-body.tool-site.editorial.galaxy-space-observing #app[data-page=lab]{max-width:none;margin:0;padding:0}
-#lab-mount.galaxy-space-active>:not(body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell):not(link){display:none!important}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active{color:var(--gs-ink);--text:var(--gs-ink);--muted:var(--gs-muted);--line:var(--gs-line);--gold:var(--gs-gold);--teal:var(--gs-focus);font-family:"Microsoft YaHei",system-ui,sans-serif;font-variant-numeric:tabular-nums}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active [hidden]{display:none!important}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell{font-size:14px;line-height:1.7}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell :is(button,summary,a,input){font:inherit;color:inherit}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell :is(button,summary,a){cursor:pointer}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell :is(button,summary,a):hover{color:var(--gs-focus)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell :is(button,summary,a,input,canvas):focus-visible{outline:2px solid var(--gs-focus);outline-offset:3px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell button{border:1px solid var(--gs-line);border-radius:0;background:transparent;box-shadow:none;min-height:42px;padding:8px 12px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-header{display:flex;align-items:center;gap:25px;border-bottom:1px solid var(--gs-line);padding:0 32px;min-height:62px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-header h1{font:500 23px Georgia,"SimSun",serif;margin:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-header a{font-size:13px;text-decoration:none;color:var(--gs-muted)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-modes{margin-left:auto;position:relative}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell summary{list-style:none;display:flex;align-items:center;min-height:44px;font-size:14px;padding:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell summary::-webkit-details-marker{display:none}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell [data-galaxy-space-modes],body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell [data-galaxy-space-views]{position:absolute;z-index:3;right:0;top:100%;width:min(320px,85vw);background:var(--gs-bg);border:1px solid var(--gs-line);padding:14px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell :is([data-galaxy-space-modes],[data-galaxy-space-views]) .button-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0;border:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell [aria-pressed=true]{color:var(--gs-focus);border-color:var(--gs-focus)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-reset-note{font-size:12px;line-height:1.8;color:var(--gs-muted);margin:10px 0 0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-body{max-width:1344px;margin:auto;padding:12px 24px 24px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-viewline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-viewline span{font-size:13px;color:var(--gs-focus)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-viewline p{font-size:12px;color:var(--gs-muted);margin:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-views{position:relative}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-view-buttons{gap:8px;margin:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-scene{display:block;width:100%;height:clamp(340px,56vh,560px);min-height:0;background:#080d15;position:relative}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-scene canvas{display:block;width:100%;height:100%}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-observer{display:flex;justify-content:space-between;gap:22px;margin:10px 0 8px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-observer p{margin:0;font-size:13px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell [data-galaxy-space-observer]{color:var(--gs-focus)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell [data-galaxy-space-hint]{color:var(--gs-muted);max-width:500px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-primary{padding:4px 0 8px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-direction-controls{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .control{display:block;font-size:14px;margin:8px 0 0;padding:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .control output{color:var(--gs-gold)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .control input[type=range]{display:block;width:100%;height:30px;accent-color:var(--gs-focus);cursor:pointer;margin:4px 0 0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .control small{display:block;font-size:12px;color:var(--gs-muted)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell :is(.galaxy-space-conditions,.galaxy-space-integral,.galaxy-space-plates,.galaxy-space-info){border-top:1px solid var(--gs-line)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-disclosure{padding:8px 0 18px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-disclosure>button{margin-bottom:6px;font-size:13px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-disclosure h2{font-weight:400;font-size:15px;color:var(--gs-focus);margin:12px 0 4px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-disclosure p{font-size:13px;line-height:1.8;margin:8px 0;color:var(--gs-muted)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-disclosure>p.galaxy-space-plate-identity{color:var(--gs-ink)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-structural-controls{max-width:650px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-presets{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-advanced{max-width:1000px;margin-top:14px;border-top:1px solid var(--gs-line)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-advanced{display:grid;gap:14px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .control-row{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .control-row label{display:flex;align-items:center;gap:7px;min-height:36px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell input[type=checkbox]{accent-color:var(--gs-focus)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-metrics{display:flex;gap:16px 28px;flex-wrap:wrap;padding:10px 0 0;margin:6px 0 0;border:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-metrics>div{display:flex;gap:8px;align-items:baseline;flex:initial;min-width:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-metrics small{font-size:12px;color:var(--gs-muted)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-metrics strong{font:400 15px "Microsoft YaHei",system-ui,sans-serif;color:var(--gs-gold);margin:0;overflow-wrap:anywhere}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-brightness{display:block;width:100%;height:250px!important}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell.galaxy-space-relating #galaxy-scene{height:340px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell.galaxy-space-relating .galaxy-space-relation{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:28px;align-items:start}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell.galaxy-space-relating .galaxy-direction-controls{grid-template-columns:1fr;gap:8px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell.galaxy-space-relating #galaxy-metrics{display:grid;gap:4px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-wave-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-observation-pair{display:grid;grid-template-columns:1fr;gap:24px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-observation-pair.comparing{grid-template-columns:1fr 1fr}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell figure{min-width:0;margin:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-map{display:block;object-fit:contain;width:100%;height:320px;background:#080d15}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell figcaption{font-size:14px;color:var(--gs-ink);line-height:1.8;margin-top:10px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-image-state{display:flex;align-items:center;justify-content:center;min-height:320px;background:#080d15;padding:24px;color:var(--gs-gold)!important}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-caution{font-size:13px;line-height:1.8;color:var(--gs-ink);margin:12px 0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-captions{margin-top:12px;border-top:1px solid var(--gs-line)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell :is(.note,.galaxy-caption,.lab-copy){font-size:13px;line-height:1.8;color:var(--gs-muted)}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-head h2{font-size:19px;font-weight:400;color:var(--gs-ink);margin:10px 0 6px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-head p{font-size:14px;color:var(--gs-muted);margin:0}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-overlay{position:static;white-space:pre-line;font-size:13px;line-height:1.8;margin:8px 0;color:var(--gs-muted);text-shadow:none}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-more{border-top:1px solid var(--gs-line);padding-top:10px;margin-top:14px}
-body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-feedback{min-height:0;font-size:12px;color:var(--gs-muted);margin:8px 0 0}
-@media(min-width:701px) and (max-height:720px){body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-scene{height:340px}}
+/* Galaxy scene: the scientific point-cloud palette remains with its renderer. */
+#lab-mount.galaxy-space-active>:not(.galaxy-space-shell):not(link){display:none!important}
+body.galaxy-space-observing #app #lab-mount.galaxy-space-active{--text:var(--al-text);--muted:var(--al-muted);--line:var(--al-line);color:var(--al-text)}
+#app #lab-mount.galaxy-space-active .galaxy-space-shell{max-width:1440px;margin:auto;padding:0 32px 40px;font:400 var(--al-body)/var(--al-leading) var(--al-font);background:var(--al-page);color:var(--al-text)}
+#app #lab-mount.galaxy-space-active [hidden]{display:none!important}
+#app #lab-mount.galaxy-space-active .galaxy-space-header h2{font:600 var(--al-title-tool)/1.4 var(--al-font);margin:24px 0 12px}
+#app #lab-mount.galaxy-space-active .galaxy-space-body{min-width:0}
+#app #lab-mount.galaxy-space-active .galaxy-space-viewline{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:12px}
+#app #lab-mount.galaxy-space-active .galaxy-space-viewline p{margin:4px 0;color:var(--al-muted);font-size:var(--al-tick)}
+#app #lab-mount.galaxy-space-active .galaxy-space-viewline span{font-size:var(--al-label)}
+#app #lab-mount.galaxy-space-active :is(.galaxy-space-modes,.galaxy-space-views){position:relative}
+#app #lab-mount.galaxy-space-active :is([data-galaxy-space-modes],[data-galaxy-space-views]){position:absolute;top:100%;left:0;z-index:5;width:min(330px,80vw);padding:16px;background:var(--al-page);border:1px solid var(--al-control-border);border-radius:var(--al-radius-layer)}
+#app #lab-mount.galaxy-space-active [data-galaxy-space-views]{left:auto;right:0}
+#app #lab-mount.galaxy-space-active button{font:400 var(--al-label)/1.5 var(--al-font);color:var(--al-text);background:transparent;border:1px solid var(--al-control-border);border-radius:var(--al-radius-control);min-height:var(--al-touch-target);padding:8px 12px;cursor:pointer}
+#app #lab-mount.galaxy-space-active button:is(.active,[aria-pressed=true]){background:var(--al-surface);border-color:var(--al-action);color:var(--al-text)}
+#app #lab-mount.galaxy-space-active .button-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+#app #lab-mount.galaxy-space-active #galaxy-scene{display:block;position:relative;width:100%;height:clamp(340px,54vh,600px);min-height:0;background:var(--al-page)}
+#app #lab-mount.galaxy-space-active #galaxy-scene canvas{display:block;width:100%;height:100%}
+#app #lab-mount.galaxy-space-active .galaxy-space-observer{display:flex;justify-content:space-between;gap:24px;margin:12px 0 18px}
+#app #lab-mount.galaxy-space-active .galaxy-space-observer p{margin:0;font:400 var(--al-tick)/1.7 var(--al-font)}
+#app #lab-mount.galaxy-space-active [data-galaxy-space-observer]{font-family:var(--al-numeric)}
+#app #lab-mount.galaxy-space-active [data-galaxy-space-hint]{color:var(--al-muted);max-width:48ch}
+#app #lab-mount.galaxy-space-active .galaxy-direction-controls{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+#app #lab-mount.galaxy-space-active .control{display:block;margin:12px 0;padding:0;font:400 var(--al-label)/1.7 var(--al-font)}
+#app #lab-mount.galaxy-space-active .control output{font-family:var(--al-numeric);color:var(--al-text)}
+#app #lab-mount.galaxy-space-active input[type=range]{display:block;width:100%;min-height:var(--al-touch-target);accent-color:var(--al-action)}
+#app #lab-mount.galaxy-space-active .control small{display:block;font-size:var(--al-tick);color:var(--al-muted)}
+#app #lab-mount.galaxy-space-active .galaxy-space-primary{padding:8px 0 20px}
+#app #lab-mount.galaxy-space-active .galaxy-space-disclosure{padding:12px 0 24px}
+#app #lab-mount.galaxy-space-active .galaxy-space-disclosure h2{font-size:var(--al-label)}
+#app #lab-mount.galaxy-space-active .galaxy-readouts{display:flex;flex-wrap:wrap;gap:20px 36px;margin:16px 0}
+#app #lab-mount.galaxy-space-active .galaxy-readouts>div{min-width:0;background:transparent;border:0;padding:0}
+#app #lab-mount.galaxy-space-active .galaxy-readouts :is(small,strong){display:block;color:var(--al-text)}
+#app #lab-mount.galaxy-space-active .galaxy-readouts strong{font:400 var(--al-readout)/1.4 var(--al-numeric)}
+#app #lab-mount.galaxy-space-active #galaxy-brightness{display:block;width:100%;height:280px!important}
+#app #lab-mount.galaxy-space-active .galaxy-observation-pair{display:grid;grid-template-columns:1fr;gap:16px}
+#app #lab-mount.galaxy-space-active .galaxy-observation-pair:has([data-comparison]:not([hidden])){grid-template-columns:1fr 1fr}
+#app #lab-mount.galaxy-space-active .galaxy-observation-pair figure{margin:0;min-width:0}
+#app #lab-mount.galaxy-space-active .galaxy-map{display:block;width:100%;height:auto;max-height:480px;object-fit:contain;background:var(--al-page)}
+#app #lab-mount.galaxy-space-active :is(.galaxy-caution,.galaxy-caption,.galaxy-space-reset-note,.galaxy-space-coefficient,.note,.lab-copy,figcaption){font:400 var(--al-tick)/1.8 var(--al-font);color:var(--al-muted)}
+#app #lab-mount.galaxy-space-active .lab-copy{max-width:80ch}
+#app #lab-mount.galaxy-space-active .galaxy-advanced .control-row{display:flex;gap:20px;flex-wrap:wrap}
+#app #lab-mount.galaxy-space-active #galaxy-overlay{position:static;white-space:pre-line;text-shadow:none;font-size:var(--al-tick)}
+#app #lab-mount.galaxy-space-active :is(button,summary,a,input,canvas):focus-visible{outline:3px solid var(--al-focus);outline-offset:3px}
+#app #lab-mount.galaxy-space-active .galaxy-space-image-state[role=alert]{color:var(--al-error)}
 @media(max-width:700px){
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-header{padding:0 14px;gap:14px;min-height:58px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-header h1{font-size:19px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-body{padding:8px 12px 20px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-viewline{gap:12px;align-items:start}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-viewline>div{max-width:210px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-scene{height:350px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-observer{display:block}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-observer p{font-size:12px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell [data-galaxy-space-hint]{margin-top:5px!important}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-direction-controls{grid-template-columns:1fr;gap:8px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-metrics{gap:4px 16px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-observation-pair.comparing{grid-template-columns:1fr}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-map,body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-space-image-state{height:200px;min-height:200px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell #galaxy-brightness{height:250px!important}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell .galaxy-wave-buttons button{font-size:13px;padding:8px 10px}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell.galaxy-space-relating .galaxy-space-relation{display:block}
- body.galaxy-space-observing #app #lab-mount.galaxy-space-active .galaxy-space-shell.galaxy-space-relating #galaxy-scene{height:350px}
+ #app #lab-mount.galaxy-space-active .galaxy-space-shell{padding:0 16px 28px}
+ #app #lab-mount.galaxy-space-active .galaxy-space-header h2{margin-top:20px}
+ #app #lab-mount.galaxy-space-active .galaxy-space-viewline{align-items:start}
+ #app #lab-mount.galaxy-space-active .galaxy-space-observer{display:block}
+ #app #lab-mount.galaxy-space-active .galaxy-space-observer p+p{margin-top:8px}
+ #app #lab-mount.galaxy-space-active #galaxy-scene{height:360px}
+ #app #lab-mount.galaxy-space-active .galaxy-direction-controls{grid-template-columns:1fr;gap:8px}
+ #app #lab-mount.galaxy-space-active .galaxy-observation-pair:has([data-comparison]:not([hidden])){grid-template-columns:1fr}
 }

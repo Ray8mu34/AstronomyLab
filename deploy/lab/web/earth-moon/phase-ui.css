@@ -1,154 +1,50 @@
-/* Approved B-reduced phase presentation. Tokens are scoped; sibling modes retain style.css. */
-body.reduced{--bg:#080e16;--ink:#eef3f7;--muted:#9daab8;--line:#334353;--accent:#b7ced8;--overlay:#101924;--gold:#b7ced8;--teal:#b7ced8;font-family:"Microsoft YaHei",system-ui,sans-serif;scrollbar-color:#617486 #101924;scrollbar-width:thin}
-body.reduced{background:var(--bg);min-height:100dvh}
-.reduced .legacy-hidden,.reduced #annual-inset,.reduced #shadow-panel,.reduced #playback{display:none!important}
-.reduced main{max-width:none;padding:0;margin:0;min-height:100dvh}
-.reduced .experiment-workspace,.reduced .views{display:block;position:static}
-.reduced .views>section{border:0;background:transparent}
-.reduced .views>.space-view{display:block}
-.reduced.presenting .controls{display:block}
-.reduced .observer-view{position:absolute;inset:0 240px 0 0;z-index:0;pointer-events:none}
-.reduced #observed{width:100%;height:100dvh;min-height:0;background:transparent}
-.reduced #north-label{top:90px;right:38px;color:var(--muted);font-size:12px}
-.reduced #moon-render{height:100%;width:100%}
-.reduced .space-view{position:absolute;right:32px;bottom:133px;width:370px;z-index:3}
-.reduced .space-view .view-title{border:0;padding:0 8px 7px;font-size:13px;min-height:32px;display:flex;justify-content:space-between;background:transparent}
-.reduced .space-view .view-title small{color:var(--muted);font-size:12px}
-.reduced #space{height:clamp(170px,calc(100dvh - 470px),250px);min-height:170px;border:1px solid #283544;background:var(--bg)}
-.reduced .body-label{font-size:15px;background:var(--bg);padding:2px 4px;line-height:1.4}.reduced .body-label b{display:none}
-.reduced #sun-label{display:none!important}
-.reduced #plane-note,.reduced .scene-caption{position:static;border:0;min-height:0;padding:8px 0;line-height:1.6;font-size:13px;color:var(--muted)}
-.solar-reference{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-.solar-reference line,.solar-reference path{stroke:#e7c889;stroke-width:1.4;fill:none}
-.solar-reference text{fill:#f2d69d;font:15px "Microsoft YaHei",system-ui,sans-serif;paint-order:stroke;stroke:var(--bg);stroke-width:5px;stroke-linejoin:round}
-.solar-reference circle{fill:#e7c889;stroke:var(--bg);stroke-width:2}
-.reduced-header{position:absolute;top:24px;left:32px;right:32px;display:flex;gap:26px;align-items:center;z-index:5}
-.reduced-brand{font-size:14px;letter-spacing:.02em}.reduced-brand span{color:var(--muted);font-size:12px;margin-left:8px}
-.reduced button{background:transparent;border:0;border-radius:0;min-height:42px;padding:8px 10px;line-height:1.4;color:var(--ink);font-weight:400}
-.reduced button{cursor:pointer}.reduced summary{cursor:pointer}
-.reduced button:hover,.reduced button[aria-expanded=true]{color:white;background:#182533}
-.reduced button:focus-visible,.reduced summary:focus-visible,.reduced select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.reduced #condition-entry{margin-left:auto;color:var(--muted);font-size:14px}
-.reduced #mode-entry{font-size:16px}.reduced #mode-entry span{margin-left:9px;color:var(--muted)}
-.subject-caption{position:absolute;left:48px;bottom:160px;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-.caption-label{color:var(--muted);font-size:12px;line-height:1.5}
-.reduced #phase-entry{font-size:32px;padding:0;min-height:52px;letter-spacing:.03em}
-.small-chevron{color:var(--muted);font-size:18px;margin-left:17px}
-.reduced-boundary{position:absolute;left:48px;bottom:117px;margin:0;color:var(--muted);font-size:12px;z-index:3}
-.reduced-transport{position:absolute;bottom:29px;left:48px;right:48px;z-index:5;display:grid;grid-template-columns:90px 1fr 64px;gap:7px 20px;align-items:center}
-.reduced #play{color:var(--ink);border:1px solid #455768;min-height:42px;font-size:14px;padding:7px 10px}
-.reduced .time-label{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
-.time-rate{margin-left:20px;white-space:nowrap}
-.reduced .time-label strong{font-size:14px;font-weight:400;color:var(--ink);margin:0 4px}
-.reduced #reset{font-size:13px;color:var(--muted)}
-.reduced #day{grid-column:1/-1;width:100%;height:17px;margin:0;accent-color:var(--accent)}
-.clock-hint{grid-column:1/-1;display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);line-height:1.5;font-variant-numeric:tabular-nums}
-.overlay{position:fixed;margin:0;padding:18px 20px;max-height:calc(100dvh - 130px);overflow:auto;background:var(--overlay);color:var(--ink);border:1px solid var(--line);box-shadow:none;border-radius:0;z-index:30}
-.overlay::backdrop{background:transparent}
-.overlay-label{font-size:12px;color:var(--muted);margin:0 0 10px}
-.overlay-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.overlay-heading strong{font-size:16px;font-weight:400}
-.reduced .close-control{padding:0;width:42px;color:var(--muted);font-size:22px}
-.mode-menu{top:77px;left:252px;width:198px;padding:8px}
-.reduced .experiments{display:flex;flex-direction:column;border:0;gap:0}
-.reduced .experiments button{text-align:left;width:100%;font-size:14px;padding:10px 16px;box-shadow:none}
-.reduced .experiments button[aria-pressed=true]{color:var(--accent)}
-.phase-menu{left:48px;bottom:272px;width:215px}
-.reduced .guide-actions{display:flex;flex-direction:column;gap:0}
-.reduced .guide-actions button{text-align:left;padding:10px 4px;font-size:14px}
-.condition-menu{top:82px;left:auto;right:32px;width:370px;padding:10px 18px 16px;max-height:max(154px,calc(100dvh - 510px));scrollbar-gutter:stable}
-.condition-menu .overlay-heading{margin-bottom:8px;position:sticky;top:-10px;z-index:1;background:var(--overlay)}.condition-menu .overlay-heading strong{font-size:15px}
-.reduced .condition-menu .metrics{grid-template-columns:1fr 1fr;gap:12px}
-.reduced .condition-menu .controls label{margin:8px 0}
-.reduced.comparing .condition-menu{left:32px;right:auto;width:calc(50% - 56px);max-height:154px}
-.reduced.comparing .condition-menu .controls{display:grid;grid-template-columns:1fr 1fr;column-gap:22px}
-.reduced.comparing .condition-menu .metrics{grid-template-columns:1fr 1fr;gap:20px}
-.reduced.comparing .condition-menu #geometry-settings{grid-column:1/-1}
-.reduced.comparing .condition-menu .geometry{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.reduced .controls{display:block;border:0;padding:0}
-.reduced .metrics{display:grid;grid-template-columns:1fr;padding:0 0 12px;border:0;border-bottom:1px solid var(--line);gap:8px}
-.reduced .metrics>div{display:flex;align-items:baseline;justify-content:space-between}
-.reduced .metrics span,.reduced .metrics strong{font-size:12px;font-weight:400;color:var(--muted)}
-.reduced .metrics>div:last-child{display:none}
-.reduced .controls details{border-top:1px solid var(--line);margin-top:12px}
-.reduced .controls summary{font-size:13px;padding:12px 0;color:var(--ink)}
-.reduced #geometry-settings{border:0;margin:0}.reduced #geometry-settings>summary{display:none}
-.reduced .controls label{font-size:14px;margin:12px 0;color:var(--muted)}
-.reduced .controls label output{color:var(--ink);font-size:12px;float:right}
-.reduced input[type=range]{accent-color:var(--accent)}
-.reduced .speed-label{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.reduced select{border:1px solid var(--line);border-radius:0;font-size:12px;max-width:160px}
-.reduced .view-tools{display:flex;flex-direction:column;align-items:flex-start;float:none}
-.reduced .view-tools button{font-size:13px;text-align:left;width:100%}
-.reduced #sources{font-size:13px;color:var(--muted);padding:12px 0;margin-top:8px}
-.reduced #source-dialog{z-index:40}.reduced .interpretation article{font-size:13px}
-.reduced #startup-error{position:absolute;top:110px;left:32px;max-width:500px;z-index:50;background:var(--overlay)}
-.reduced .phase-status{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.pointer-marker{display:none;position:fixed;width:10px;height:10px;border:1px solid #c8d6df;border-radius:50%;margin:-5px 0 0 -5px;pointer-events:none;z-index:100;background:#c8d6df55}
-.capture .pointer-marker{display:block}
-.pointer-marker.held{width:17px;height:17px;margin:-8.5px 0 0 -8.5px;background:#c8d6df33}
-.reduced.comparing .space-view{left:32px;right:auto;top:258px;bottom:auto;width:calc(50% - 56px)}
-.reduced.comparing #space{height:calc(100dvh - 445px);min-height:160px}
-.reduced.comparing .observer-view{left:50%;right:20px;top:95px;bottom:123px}
-.reduced.comparing #observed{height:calc(100dvh - 240px);min-height:300px}
-.reduced.comparing #north-label{top:0;right:16px}
-.reduced.comparing .subject-caption{left:calc(50% + 30px);bottom:140px;gap:3px}
-.reduced.comparing #phase-entry{font-size:24px;min-height:40px}
-.reduced.comparing .reduced-boundary{left:calc(50% + 30px);bottom:115px}
-@media(max-width:800px){
- .reduced-header{top:12px;left:16px;right:16px;gap:12px}.reduced-brand{font-size:12px}.reduced-brand span{display:none}.reduced #mode-entry{font-size:14px}
- .reduced #observed{height:64dvh;min-height:320px}.reduced .observer-view{top:48px;bottom:auto;right:0}
- .reduced #north-label{top:30px;right:16px;font-size:11px}
- .subject-caption{top:calc(64dvh - 24px);left:20px;bottom:auto;gap:2px}.reduced #phase-entry{font-size:24px;min-height:38px}
- .reduced .space-view{position:relative;top:calc(64dvh + 118px);right:auto;bottom:auto;left:20px;width:calc(100% - 40px);padding-bottom:155px}
- .reduced #space{height:250px;min-height:250px}.reduced-boundary{top:calc(64dvh + 81px);bottom:auto;left:20px}
- .reduced-transport{position:fixed;background:var(--bg);bottom:0;left:0;right:0;padding:10px 20px;gap:4px 10px;grid-template-columns:78px 1fr 50px}
- .condition-menu,.reduced.comparing .condition-menu{top:auto;bottom:136px;left:16px;right:auto;width:calc(100vw - 32px);max-height:30dvh}
- .reduced.comparing .condition-menu .controls,.reduced.comparing .condition-menu .geometry,.reduced.comparing .condition-menu .metrics{display:block}
- .clock-hint{font-size:11px;flex-wrap:wrap}.clock-hint .clock-basis{order:1;width:100%;text-align:center}.time-rate{margin-left:0;font-size:12px}
- .mode-menu{top:60px;left:140px;width:180px}.phase-menu{left:20px;bottom:auto;top:calc(64dvh - 230px)}
- .reduced.comparing .space-view{position:relative;left:20px;top:calc(64dvh + 118px);width:calc(100% - 40px);bottom:auto}
- .reduced.comparing #space{height:300px;min-height:300px}
- .reduced.comparing .observer-view{inset:48px 0 auto}.reduced.comparing #observed{height:64dvh;min-height:320px}
- .reduced.comparing .subject-caption{left:20px;top:calc(64dvh - 24px);bottom:auto}.reduced.comparing .reduced-boundary{left:20px;top:calc(64dvh + 81px);bottom:auto}
-}
-@media(forced-colors:active){body.reduced{scrollbar-color:auto}.solar-reference text{fill:CanvasText;stroke:Canvas}.solar-reference line,.solar-reference path{stroke:CanvasText}.solar-reference circle{fill:CanvasText}}
-@media(prefers-reduced-motion:reduce){.reduced *{scroll-behavior:auto}}
-
-.reduced-brand{color:var(--ink);text-decoration:none}
+/* Moon atlas composition. Shared presentation owns typography and UI colour. */
+body.reduced{--bg:var(--al-page);--ink:var(--al-text);--muted:var(--al-muted);--line:var(--al-line);--accent:var(--al-action);--overlay:var(--al-surface);background:var(--al-page);color:var(--al-text);font-family:var(--al-font)}
+.reduced .legacy-hidden,.reduced #playback,.reduced>.phase-original-main{display:none!important}
 #phase-ui[hidden]{display:none!important}
-.reduced [data-stage-view]{color:inherit}
-.reduced .view-switch{display:flex;flex-wrap:wrap;padding:0;gap:0}
-.reduced .view-switch button{font-size:13px}
-.reduced[data-stage-view="space"] .space-view{left:32px;top:95px;bottom:125px;width:calc(100% - 64px)}
-.reduced[data-stage-view="space"] #space{height:calc(100dvh - 265px)}
-.reduced[data-stage-view="space"] .subject-caption,.reduced[data-stage-view="space"] .reduced-boundary{display:none}
-.reduced[data-stage-view="observer"] .observer-view{right:0}
-@media(max-width:800px){.reduced[data-stage-view="space"] .space-view{position:relative;top:100px;left:20px;width:calc(100% - 40px)}.reduced[data-stage-view="space"] #space{height:calc(100dvh - 300px)}}
-
-/* The phone document owns both views; the fixed clock owns only its reserved
-   footer. Expanded comparison spends the available height on both observations. */
-@media(max-width:800px){
- body.reduced{--phase-transport-height:130px;--phase-comparison-moon:clamp(120px,calc((100dvh - var(--phase-transport-height) - 177px)*.44),260px);scroll-padding-bottom:calc(var(--phase-transport-height) + 16px)}
- .reduced main{padding:54px 0 calc(var(--phase-transport-height) + 24px)}
- .reduced .views{display:flex;flex-direction:column;gap:0}
- .reduced .observer-view,.reduced.comparing .observer-view{position:relative;inset:auto;width:100%;order:0}
- .reduced .subject-caption,.reduced.comparing .subject-caption{position:static;order:1;margin:0 20px;gap:2px}
- .reduced .reduced-boundary,.reduced.comparing .reduced-boundary{position:static;order:2;margin:16px 20px 18px}
- .reduced .space-view,.reduced.comparing .space-view,.reduced[data-stage-view="space"] .space-view{position:relative;inset:auto;order:3;margin:0 20px;width:calc(100% - 40px);padding-bottom:0}
- .reduced #space{scroll-margin-bottom:calc(var(--phase-transport-height) + 16px)}
- .reduced-transport{padding-bottom:calc(10px + env(safe-area-inset-bottom))}
- .condition-menu,.reduced.comparing .condition-menu{bottom:calc(var(--phase-transport-height) + 6px)}
- .phase-menu{top:auto;bottom:calc(var(--phase-transport-height) + 20px);max-height:calc(100dvh - var(--phase-transport-height) - 80px)}
- .reduced.comparing #observed{height:var(--phase-comparison-moon);min-height:0}
- .reduced.comparing #north-label{top:4px;font-size:10px}
- .reduced.comparing .subject-caption{display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 8px}
- .reduced.comparing .subject-caption .caption-label:first-child{grid-column:1;grid-row:1}
- .reduced.comparing #phase-entry{grid-column:2;grid-row:1;font-size:21px;min-height:38px}
- .reduced.comparing .subject-caption .caption-label:last-child{grid-column:1/-1;grid-row:2;font-size:11px;line-height:16px}
- .reduced.comparing .space-view{order:2;margin-top:4px}
- .reduced.comparing .reduced-boundary{order:3;margin-top:12px}
- .reduced.comparing #space{height:clamp(156px,calc(100dvh - var(--phase-transport-height) - var(--phase-comparison-moon) - 177px),300px);min-height:156px}
- .reduced[data-stage-view="space"] #space{height:calc(100dvh - var(--phase-transport-height) - 120px);min-height:170px}
- .reduced[data-stage-view="observer"] .space-view,.reduced[data-stage-view="observer"] .reduced-boundary{display:none}
+.reduced:not(.atlas-eclipse) .phase-stage>#shadow-panel{display:none!important}
+.reduced #phase-ui{height:100dvh}.phase-introduction h1{flex-shrink:0}.reduced #observer-label{display:none}.reduced.atlas-eclipse #observer-label{display:block}.reduced:not(.atlas-phase) .subject-caption{flex-wrap:wrap}.reduced:not(.atlas-phase) .metrics{flex-basis:100%}.reduced.atlas-period[data-stage-view=reference] .observer-view{display:flex}.reduced.atlas-eclipse[data-stage-view=paired] #shadow-panel[hidden]{display:block!important}
+.reduced:not(.atlas-model-ready) .body-label,.reduced:not(.atlas-model-ready) .solar-reference{visibility:hidden}
+.reduced .phase-stage{position:relative}.reduced #startup-error:not([hidden]){position:absolute;z-index:20;left:0;right:0;top:0;margin:0;background:var(--al-surface);color:var(--al-text);border:1px solid var(--al-error);padding:20px}
+.reduced #phase-ui{margin:0;padding:0 36px;max-width:none;min-height:100dvh;display:grid;grid-template-rows:auto auto minmax(340px,1fr) auto auto}
+.phase-navigation{display:block;min-height:64px}.phase-navigation .experiments{border:0;box-shadow:none;justify-content:center}.phase-navigation .experiments button{font-size:15px;box-shadow:none}
+.reduced #condition-entry{font-size:14px;white-space:nowrap}.phase-introduction{display:flex;gap:24px;align-items:baseline;padding:10px 0 18px}.phase-introduction h1{font-size:var(--al-title-tool);line-height:1.3;margin:0;font-weight:600}.phase-introduction p{font-size:18px;line-height:1.6;margin:0;color:var(--al-muted)}
+.phase-stage{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(290px,.8fr);gap:28px;align-items:stretch;min-height:0;padding-bottom:18px}.phase-moon-zone{min-height:0;display:flex;flex-direction:column;position:relative}
+.reduced .observer-view{position:relative;inset:auto;flex:1;min-height:0;background:transparent;border:0;pointer-events:none}.reduced .observer-view>.view-title,.reduced .observer-caption{display:none}.reduced #observed{position:relative;width:100%;height:100%;min-height:0;background:transparent}.reduced #moon-render,.reduced #moon-render>canvas{width:100%;height:100%}.reduced #north-label{top:8px;right:12px;font:400 var(--al-tick)/1.5 var(--al-font);color:var(--al-muted)}
+.subject-caption{display:flex;align-items:center;justify-content:center;gap:20px;min-height:68px;flex-wrap:wrap;padding:8px 0}.subject-caption .caption-label{color:var(--al-muted);font-size:var(--al-tick);line-height:1.5}.phase-observer-label{display:flex;flex-direction:column;gap:3px}.reduced #phase-entry{background:transparent;border:0;padding:0 6px;min-height:44px;border-radius:var(--al-radius-control);color:var(--al-text);font:600 28px/1.3 var(--al-font);white-space:nowrap}.small-chevron{color:var(--al-action);font-size:16px;margin-left:12px}.phase-illumination{color:var(--al-muted);font:400 var(--al-label)/1.5 var(--al-font)}.phase-illumination strong{color:var(--al-text);font-family:var(--al-numeric);font-weight:400;font-size:23px;margin-right:4px}
+.phase-geometry-zone{display:flex;flex-direction:column;justify-content:center;min-height:0;padding:16px 0}.reduced .space-view{position:relative;inset:auto;width:100%;background:transparent;border:0;min-width:0}.reduced .space-view>.view-title{display:flex;justify-content:space-between;align-items:center;gap:10px;border:0;min-height:44px;padding:0;font-size:var(--al-label);color:var(--al-text);background:transparent}.reduced #compare-entry{font:400 13px/1.4 var(--al-font);color:var(--al-action);padding:8px;min-height:44px;background:transparent;border:0;border-radius:var(--al-radius-control);white-space:nowrap}
+.reduced #space{height:clamp(230px,36dvh,390px);min-height:230px;border:0;background:transparent;position:relative;touch-action:none}.reduced .body-label{font:400 var(--al-tick)/1.4 var(--al-font);background:var(--al-page);color:var(--al-text);padding:3px 5px;text-shadow:none}.reduced .body-label b{display:none}.reduced #sun-label{display:none!important}
+.solar-reference{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}.solar-reference line,.solar-reference path{stroke:var(--al-action);stroke-width:1.5;fill:none}.solar-reference circle{fill:var(--al-action);stroke:var(--al-page);stroke-width:2}.solar-reference text{fill:var(--al-action);font:400 var(--al-tick)/1.4 var(--al-font);paint-order:stroke;stroke:var(--al-page);stroke-width:5px;stroke-linejoin:round}
+.reduced #scene-caption{position:static;padding:8px 0 0;min-height:0;border:0;color:var(--al-muted);font-size:13px;line-height:1.6}.phase-geometric-note{font-size:14px;line-height:1.7;color:var(--al-muted);margin:12px 0 0}
+.reduced-transport{position:relative;inset:auto;display:grid;grid-template-columns:104px minmax(180px,1fr) auto 72px;column-gap:20px;row-gap:2px;align-items:center;padding:14px 0 max(16px,env(safe-area-inset-bottom));border-top:1px solid var(--al-line);background:var(--al-page)}
+.reduced .time-label{display:flex;align-items:baseline;gap:7px;white-space:normal;font:400 14px/1.5 var(--al-font);color:var(--al-muted);flex-wrap:wrap}.reduced .time-label strong{font:400 23px/1.4 var(--al-numeric);color:var(--al-text)}.reduced .speed-label{font:400 14px/1.4 var(--al-font);color:var(--al-muted);display:flex;gap:8px;align-items:center}.reduced .speed-label select{font:400 13px/1.4 var(--al-font);max-width:150px;min-height:44px;border-radius:var(--al-radius-control);background:var(--al-surface);color:var(--al-text);border:1px solid var(--al-line)}
+.reduced #day{grid-column:1/-1;margin:0;width:100%;height:34px;min-height:34px;accent-color:var(--al-action)}.clock-hint{display:flex;justify-content:space-between;grid-column:1/-1;font:400 12px/1.6 var(--al-font);color:var(--al-muted);gap:12px}.clock-basis{text-align:center}.reduced .phase-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.phase-rate{display:none}
+.reduced.comparing .phase-stage{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.reduced.atlas-phase.comparing #space{height:clamp(250px,48dvh,500px)}
+.reduced[data-stage-view=space] .phase-moon-zone,.reduced[data-stage-view=observer] .phase-geometry-zone{display:none}.reduced[data-stage-view=space] .phase-stage,.reduced[data-stage-view=observer] .phase-stage{grid-template-columns:1fr}.reduced[data-stage-view=space] #space{height:calc(100dvh - 320px)}
+.reduced .overlay{position:fixed;margin:0;background:var(--al-surface);color:var(--al-text);border:1px solid var(--al-line);border-radius:var(--al-radius-layer);box-shadow:none;overflow:auto;z-index:30;padding:18px 22px;max-height:calc(100dvh - 180px)}.reduced .overlay::backdrop{background:transparent}.overlay-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px}.overlay-heading h2{font:600 20px/1.5 var(--al-font);margin:0}.reduced .close-control{font-size:16px;min-height:44px;padding:8px}.reduced .condition-menu{top:82px;right:28px;left:auto;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 260px);scrollbar-gutter:stable}.reduced .phase-menu{left:36px;bottom:145px;width:240px;max-height:calc(100dvh - 200px)}.overlay-label{font-size:14px;color:var(--al-muted);margin:0 0 8px}
+.reduced .guide-actions{display:flex;flex-direction:column;gap:4px}.reduced .guide-actions button{font-size:16px;min-height:44px;text-align:left}.reduced .controls{display:block;padding:0;border:0}.reduced .controls label{font-size:15px;line-height:1.6;margin:14px 0;color:var(--al-muted)}.reduced .controls output{color:var(--al-text);font-family:var(--al-numeric);font-size:13px}.reduced .controls details{border-top:1px solid var(--al-line);margin-top:12px}.reduced .controls summary{font:400 15px/1.5 var(--al-font);color:var(--al-text);padding:14px 0}.reduced .view-tools,.reduced .view-switch{display:flex;gap:6px;flex-wrap:wrap;float:none;margin:0}.reduced .view-tools button,.reduced .view-switch button{font:400 14px/1.4 var(--al-font);min-height:44px}.reduced #geometry-settings{border:0;margin-top:0}.reduced #geometry-settings>summary{display:none}.reduced #plane-note{position:static;padding:8px 0;border:0;color:var(--al-muted);font-size:13px;line-height:1.6}.reduced #sources{margin-top:12px;font-size:14px;min-height:44px}.reduced .metrics{display:none}.reduced .interpretation article{font-size:15px;line-height:1.8}
+.reduced #startup-error{position:fixed;inset:90px 24px auto;max-width:620px;background:var(--al-surface);color:var(--al-text);border:1px solid var(--al-error);z-index:50;padding:20px}.reduced button:focus-visible,.reduced summary:focus-visible,.reduced input:focus-visible{outline:3px solid var(--al-focus);outline-offset:3px}
+@media(max-width:900px){
+ .reduced #phase-ui{padding:0 20px;grid-template-rows:auto auto minmax(400px,1fr) auto}.phase-navigation{min-height:64px;padding:0}.phase-navigation .experiments{justify-content:space-between;gap:0}.phase-navigation .experiments button{flex:1;font-size:14px;padding:8px 6px}.reduced #condition-entry{min-height:38px}
+ .phase-introduction{padding:12px 0 8px;gap:16px}.phase-introduction h1{font-size:26px}.phase-introduction p{font-size:15px}.phase-stage,.reduced.comparing .phase-stage{grid-template-columns:1fr;grid-template-rows:minmax(190px,1.15fr) minmax(210px,.85fr);height:calc(100dvh - var(--phase-chrome-height,260px));min-height:400px;gap:0;padding:0}
+ .subject-caption{min-height:46px;padding:0;gap:12px;justify-content:space-between;flex-wrap:nowrap}.subject-caption .phase-observer-label{display:none}.reduced #phase-entry{font-size:23px}.phase-illumination{font-size:13px}.phase-illumination strong{font-size:20px}.reduced #north-label{top:0;right:4px;font-size:13px}.phase-geometry-zone{padding:0;justify-content:stretch}.reduced .space-view{display:flex;flex-direction:column;flex:1;min-height:0}.reduced .space-view>.view-title{min-height:36px;font-size:14px}.reduced #compare-entry{min-height:36px;font-size:13px;padding:6px}.reduced .space-body{flex:1;min-height:0}.reduced #space,.reduced.atlas-phase.comparing #space{height:100%;min-height:0}.reduced #scene-caption{padding:2px 0 0;font-size:12px;line-height:1.4;min-height:19px}.phase-geometric-note{display:none}
+ .reduced-transport{grid-template-columns:88px minmax(110px,1fr) 54px;column-gap:8px;padding-top:8px;padding-bottom:max(10px,env(safe-area-inset-bottom));margin-top:6px}.reduced .time-label{font-size:12px;gap:4px}.reduced .time-label strong{font-size:19px}.reduced .speed-label{grid-column:1/-1;grid-row:4;justify-content:center;font-size:12px;margin:2px 0 0}.reduced .speed-label select{min-height:34px;font-size:12px;max-width:145px;padding:4px}.reduced #reset{grid-column:3;grid-row:1;padding:8px 0;font-size:14px;min-height:44px}.reduced #day{height:30px;min-height:30px}.clock-hint{font-size:11px;line-height:1.5;gap:6px}.clock-basis{overflow-wrap:anywhere}
+ .reduced .condition-menu{top:auto;bottom:calc(var(--phase-transport-height,150px) + 8px);right:16px;max-height:40dvh;padding:12px 16px}.reduced .phase-menu{left:20px;bottom:calc(var(--phase-transport-height,150px) + 8px)}.reduced.comparing .phase-stage{grid-template-rows:minmax(150px,.8fr) minmax(200px,1.2fr)}.reduced[data-stage-view=space] .phase-stage,.reduced[data-stage-view=observer] .phase-stage{grid-template-rows:1fr}.reduced[data-stage-view=space] #space{height:100%}
+ .phase-rate{display:block;width:100%;font-size:12px;line-height:1.4}.reduced #day{height:44px;min-height:44px}
 }
+@media(min-width:901px) and (max-height:700px){.reduced #phase-ui{grid-template-rows:auto auto minmax(240px,1fr) auto auto}.phase-navigation{min-height:62px}.phase-introduction{padding:4px 0 10px}.phase-geometry-zone{padding:0}.reduced #space,.reduced.atlas-phase.comparing #space{height:180px;min-height:160px}.phase-geometric-note{display:none}.subject-caption{min-height:58px}.phase-stage{padding-bottom:8px}.reduced #scene-caption{font-size:12px}}
+@media(max-width:360px){.reduced #phase-ui{padding:0 16px}.phase-introduction{gap:10px}.phase-introduction h1{font-size:24px}.phase-introduction p{font-size:14px}.reduced #phase-entry{font-size:21px}.phase-illumination strong{font-size:18px}}
+@media(forced-colors:active){.solar-reference text{fill:CanvasText;stroke:Canvas}.solar-reference line,.solar-reference path{stroke:CanvasText}.solar-reference circle{fill:CanvasText}}
+.atlas-period-zone{display:none;min-width:0;min-height:0}.atlas-observer-context{font:400 var(--al-tick)/1.5 var(--al-font);color:var(--al-muted);margin:0 0 8px}.atlas-observer-context[hidden]{display:none}.reduced:not(.atlas-phase) .subject-caption{min-height:104px;gap:12px}.reduced:not(.atlas-phase) .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:12px;padding:0;background:none;border:0}.reduced .metrics[hidden]{display:none}.reduced .metrics div{border:0;padding:0;background:none;min-width:0}.reduced .metrics span{font:400 12px/1.5 var(--al-font);color:var(--al-muted)}.reduced .metrics strong{font:400 var(--al-tick)/1.5 var(--al-numeric);color:var(--al-text);display:block;white-space:nowrap}.reduced #observe-toggle{font:400 var(--al-tick)/1.5 var(--al-font);color:var(--al-action);background:transparent;min-height:44px;border:0;padding:6px}
+.atlas-spin .phase-stage{grid-template-columns:minmax(0,1.4fr) minmax(260px,.8fr)}.atlas-spin .phase-geometry-zone{order:0}.atlas-spin .phase-moon-zone{order:1}.atlas-spin #space{height:clamp(260px,53dvh,540px)}.atlas-spin .phase-geometric-note{display:block}.atlas-spin .phase-illumination{display:none}.atlas-spin .phase-observer-label span:last-child{display:none}
+.atlas-period[data-stage-view=reference] .atlas-period-zone{display:flex;flex-direction:column;order:0}.atlas-period[data-stage-view=reference] .phase-geometry-zone{display:none}.atlas-period[data-stage-view=reference] .phase-moon-zone{order:1}.reduced #annual-inset{border:0;background:none;display:flex;flex-direction:column;height:100%;min-height:0}.reduced #annual-inset[hidden]{display:none}.reduced #annual-inset .view-title{font:400 var(--al-label)/1.5 var(--al-font);padding:0;min-height:32px;background:none;border:0}.reduced #year-orbit{display:block;flex:1;min-height:0;width:100%;height:100%;background:transparent}.reduced .reference-readout{font:400 var(--al-tick)/1.5 var(--al-font);color:var(--al-muted);display:flex;gap:16px;flex-wrap:wrap;padding:0}.atlas-endpoints{padding:8px 0 12px}.atlas-endpoints[hidden]{display:none}.atlas-endpoints .period-actions{display:flex;gap:16px;flex-wrap:wrap}.atlas-endpoints button{font:400 var(--al-label)/1.5 var(--al-font);min-height:44px;padding:6px 14px;background:var(--al-surface);color:var(--al-action);border:1px solid var(--al-line);border-radius:var(--al-radius-control)}.atlas-endpoints .period-bars{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}.atlas-endpoints .period-bars>div{display:grid;grid-template-columns:auto minmax(40px,1fr) auto;gap:8px;align-items:center;font:400 var(--al-tick)/1.5 var(--al-font)}.atlas-endpoints .period-bars i{height:2px;background:var(--al-line)}.atlas-endpoints .period-bars b{display:block;height:2px;background:var(--al-action)}.atlas-endpoints output{font-family:var(--al-numeric)}
+.atlas-eclipse .phase-geometry-zone{justify-content:center}.atlas-eclipse #space{height:clamp(170px,28dvh,300px);min-height:170px}.atlas-eclipse .phase-geometric-note{display:none}.atlas-eclipse .phase-observer-label{display:none}.reduced #shadow-panel{border:0;background:none;margin:10px 0 0;min-width:0}.atlas-eclipse[data-stage-view=paired] #shadow-panel[hidden]{display:block}.reduced #shadow-panel>.view-title{font:400 var(--al-tick)/1.5 var(--al-font);padding:0;min-height:24px;border:0}.reduced .shadow-heading{padding:0;font:400 12px/1.5 var(--al-font);color:var(--al-muted)}.reduced #shadow-svg{display:block;width:100%;height:100px;background:transparent}.reduced #shadow-svg text{font-family:var(--al-font)}.reduced .shadow-legend{font:400 12px/1.5 var(--al-font);gap:14px;padding:0;flex-wrap:wrap}.reduced #shadow-panel>.fineprint{font:400 12px/1.5 var(--al-font);color:var(--al-muted);margin:4px 0 0}.atlas-eclipse[data-stage-view=shadow] .phase-moon-zone{display:none}.atlas-eclipse[data-stage-view=shadow] .phase-stage{grid-template-columns:1fr}.atlas-eclipse[data-stage-view=shadow] #shadow-svg{height:40dvh;min-height:220px}.atlas-eclipse #local-time{grid-column:1/-1;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px;font:400 var(--al-tick)/1.5 var(--al-font);color:var(--al-muted);margin:0}.atlas-eclipse #eclipse-time{grid-column:1/-1;width:100%;min-height:44px;accent-color:var(--al-action)}.atlas-eclipse #local-time output{font-family:var(--al-numeric)}
+@media(max-width:900px){.reduced:not(.atlas-phase) .subject-caption{min-height:78px;gap:4px 10px}.reduced .metrics{gap:6px!important}.reduced .metrics span{font-size:11px}.reduced .metrics strong{font-size:12px}.atlas-spin .phase-stage{grid-template-columns:1fr;grid-template-rows:minmax(210px,1fr) minmax(190px,1fr)}.atlas-spin .phase-geometric-note{font-size:12px;line-height:1.4;margin:2px 0 0}.atlas-spin .phase-geometry-zone{order:0}.atlas-spin .phase-moon-zone{order:1}.atlas-spin #space{height:100%;min-height:0}.atlas-spin .subject-caption .phase-observer-label{display:none}.atlas-period .phase-stage,.atlas-period.comparing .phase-stage{grid-template-rows:minmax(240px,1.3fr) minmax(160px,.7fr);min-height:400px}.atlas-period .phase-moon-zone{order:1}.atlas-period .reference-readout{font-size:11px;gap:0}.atlas-period .reference-readout #period-event{display:none}.atlas-period #annual-inset>.view-title{min-height:20px;font-size:13px}.atlas-endpoints{padding:4px 0 6px}.atlas-endpoints .period-actions{gap:6px}.atlas-endpoints button{min-height:38px;font-size:13px;flex:1;padding:4px}.atlas-endpoints .period-bars{gap:10px;margin-top:4px}.atlas-endpoints .period-bars>div{font-size:11px;gap:4px}.atlas-endpoints .period-bars output{font-size:11px}.atlas-eclipse .phase-stage,.atlas-eclipse.comparing .phase-stage{grid-template-rows:minmax(170px,1fr) minmax(260px,1fr);min-height:430px}.atlas-eclipse .atlas-observer-context{font-size:11px;line-height:1.4;margin-bottom:2px}.atlas-eclipse .phase-moon-zone{min-height:170px}.atlas-eclipse .subject-caption{min-height:72px}.atlas-eclipse #space{height:100%;min-height:90px}.atlas-eclipse #shadow-panel{margin-top:2px}.atlas-eclipse #shadow-svg{height:66px}.atlas-eclipse .shadow-heading{font-size:10px}.atlas-eclipse .shadow-legend{font-size:11px}.atlas-eclipse #shadow-panel>.fineprint{font-size:10px;line-height:1.3}.atlas-eclipse #local-time{font-size:11px;gap:0}.atlas-eclipse #eclipse-time{min-height:36px}.atlas-eclipse[data-stage-view=shadow] .phase-stage{grid-template-rows:1fr}.atlas-eclipse[data-stage-view=shadow] #shadow-svg{height:220px}}
+
+@media(min-width:901px) and (max-height:700px){.atlas-spin #space{height:210px;min-height:180px}.reduced:not(.atlas-phase) .subject-caption{min-height:90px}.atlas-eclipse #space{height:125px;min-height:110px}.atlas-eclipse #shadow-svg{height:66px}.atlas-eclipse #shadow-panel>.fineprint{display:none}.atlas-endpoints{padding:4px 0}.atlas-endpoints .period-bars{margin-top:4px}.atlas-endpoints .period-actions button{min-height:38px}}
+@media(max-width:900px){.atlas-period .phase-stage{position:relative;grid-template-rows:minmax(260px,1fr);min-height:260px}.atlas-period .atlas-period-zone{width:100%;height:100%}.atlas-period[data-stage-view=reference]:not(.comparing) .phase-moon-zone{position:absolute;right:0;top:25px;width:84px;height:130px;min-height:0}.atlas-period[data-stage-view=reference]:not(.comparing) .subject-caption{min-height:34px;justify-content:center}.atlas-period[data-stage-view=reference]:not(.comparing) #phase-entry{font-size:12px;min-height:34px}.atlas-period[data-stage-view=reference]:not(.comparing) .phase-illumination,.atlas-period .metrics{display:none!important}.atlas-period.comparing .phase-stage{grid-template-rows:minmax(190px,1.1fr) minmax(130px,.9fr);min-height:320px}.atlas-period.comparing .phase-moon-zone{position:relative;inset:auto;width:100%;height:auto;min-height:0}.atlas-period.comparing .subject-caption{min-height:40px}.atlas-period #annual-inset .view-title{justify-content:space-between;flex-wrap:nowrap}.atlas-eclipse .phase-stage{min-height:430px}.atlas-eclipse .phase-moon-zone{min-height:170px}.atlas-eclipse #observe-toggle{white-space:nowrap;min-width:60px}.atlas-eclipse .phase-illumination{display:none}.atlas-eclipse .subject-caption{min-height:72px}.atlas-eclipse .phase-geometry-zone{min-height:260px}.atlas-eclipse .space-view{min-height:120px}.atlas-eclipse #shadow-panel{flex-shrink:0}.atlas-eclipse #shadow-panel>.fineprint{display:none}}
+@media(max-width:900px){.atlas-eclipse .phase-stage,.atlas-eclipse.comparing .phase-stage{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(200px,1fr) 138px;gap:0 10px;min-height:338px}.atlas-eclipse .phase-moon-zone{min-height:0;grid-column:1;grid-row:1}.atlas-eclipse .phase-geometry-zone{min-height:0;grid-column:2;grid-row:1;padding:0}.atlas-eclipse .phase-geometry-zone>.space-view{min-height:0}.atlas-eclipse #space{min-height:0}.atlas-eclipse .phase-geometry-zone .view-title{font-size:12px;min-height:36px}.atlas-eclipse #compare-entry{font-size:0;padding:0;min-width:24px}.atlas-eclipse #compare-entry:after{content:'↗';font-size:15px}.atlas-eclipse .phase-stage>#shadow-panel{grid-column:1/-1;grid-row:2;margin:0;min-height:0}.atlas-eclipse #shadow-panel .view-title{min-height:20px;font-size:12px}.atlas-eclipse #shadow-svg{height:70px}.atlas-eclipse #shadow-panel .shadow-heading{font-size:11px;line-height:1.4}.atlas-eclipse #shadow-panel .shadow-legend{font-size:11px;line-height:1.4}.atlas-eclipse .subject-caption{min-height:65px;gap:0}.atlas-eclipse #phase-entry{font-size:18px;padding:0}.atlas-eclipse #observe-toggle{font-size:12px;min-height:32px;padding:0;min-width:0;margin:0}.atlas-eclipse .subject-caption .metrics{display:none!important}.atlas-eclipse .atlas-observer-context{font-size:11px}.atlas-eclipse #north-label{display:none}.atlas-eclipse #local-time{margin:0}.atlas-eclipse #scene-caption{font-size:11px;line-height:1.3}.atlas-eclipse[data-stage-view=shadow] .phase-stage{grid-template-columns:1fr;grid-template-rows:1fr}.atlas-eclipse[data-stage-view=shadow] #shadow-panel{grid-row:1}.atlas-eclipse[data-stage-view=shadow] #shadow-svg{height:220px}.atlas-eclipse[data-stage-view=observer] .phase-stage{grid-template-columns:1fr;grid-template-rows:1fr}.atlas-eclipse[data-stage-view=observer] .phase-stage>#shadow-panel{display:none!important}.atlas-eclipse[data-stage-view=space] .phase-stage{grid-template-columns:1fr;grid-template-rows:1fr}.atlas-eclipse[data-stage-view=space] .phase-geometry-zone{grid-column:1}.atlas-eclipse[data-stage-view=space] .phase-stage>#shadow-panel{display:none!important}.atlas-period .atlas-endpoints .period-bars{display:flex;gap:6px;flex-wrap:wrap}.atlas-period .atlas-endpoints .period-bars>div{flex:1;min-width:100px}.atlas-period #phase-entry{white-space:nowrap}.atlas-period .phase-introduction p{font-size:13px}.atlas-period .phase-stage{min-height:230px}.atlas-period .atlas-endpoints .period-actions{gap:4px}.atlas-period .atlas-endpoints button{font-size:12px;padding:4px 2px}.atlas-spin .phase-introduction p{font-size:14px}.atlas-eclipse .phase-introduction p{font-size:14px}}
+@media(max-width:900px){.reduced #phase-ui{grid-template-rows:auto auto minmax(0,1fr) auto auto}.atlas-period .phase-stage{min-height:230px}.atlas-period.comparing .phase-stage{min-height:300px;grid-template-rows:minmax(170px,1.1fr) minmax(130px,.9fr)}}
+.reduced #shadow-svg{height:110px}.reduced #shadow-svg text{font-size:12px}.reduced #shadow-panel>.fineprint{font-size:12px;line-height:1.4}@media(max-width:900px){.atlas-eclipse .phase-stage,.atlas-eclipse.comparing .phase-stage{grid-template-rows:minmax(150px,1fr) 178px;min-height:328px}.atlas-eclipse #shadow-svg{height:110px}.atlas-eclipse #shadow-svg text{font-size:11px}.atlas-eclipse .shadow-heading{font-size:11px}.atlas-eclipse .phase-stage>#shadow-panel{overflow:hidden}}
+@media(min-width:901px) and (max-height:700px){.atlas-eclipse .phase-stage,.atlas-eclipse.comparing .phase-stage{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.1fr);gap:22px}.atlas-eclipse .phase-moon-zone{grid-column:1}.atlas-eclipse .phase-geometry-zone{grid-column:2;min-height:0}.atlas-eclipse .phase-stage>#shadow-panel{grid-column:3;align-self:center;margin:0;min-height:0}.atlas-eclipse #space{height:185px;min-height:0}.atlas-eclipse #shadow-svg{height:110px}.atlas-eclipse .phase-geometry-zone .view-title{font-size:13px}.atlas-eclipse .phase-geometry-zone .view-title #compare-entry{font-size:12px;padding:4px}.atlas-eclipse[data-stage-view=shadow] .phase-stage{grid-template-columns:1fr}.atlas-eclipse[data-stage-view=shadow] .phase-stage>#shadow-panel{grid-column:1}.atlas-eclipse[data-stage-view=observer] .phase-stage{grid-template-columns:1fr}.atlas-eclipse[data-stage-view=space] .phase-stage{grid-template-columns:1fr}.atlas-eclipse[data-stage-view=space] .phase-geometry-zone{grid-column:1}}

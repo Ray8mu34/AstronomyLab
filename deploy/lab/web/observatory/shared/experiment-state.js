@@ -38,6 +38,19 @@ export function validateExperimentModel(slug,mode,value){
   bounds={height:[100,5000],speed:[0,16],totalHours:[.01,876000],rateHours:[.00001,1000000],elapsed:[0,876000*3600]};
   if(!['whole','near'].includes(value.view)||value.elapsed>value.totalHours*3600)return null;
  }else if(slug==='measure'&&mode==='jupiter'&&value.kind==='jupiter-mass')bounds={a:[300000,550000],period:[1.3,2.5],errorA:[0,5],errorP:[0,2],phase:[0,2*Math.PI]};
+ else if(slug==='galaxy'&&confirmedModes.galaxy.includes(mode)&&value.kind==='galactic-direction')bounds={longitude:[-180,180],latitude:[-90,90]};
+ else if(slug==='light'&&mode==='observing'&&value.kind==='light-sample'){
+  if(!Number.isInteger(value.seed))return null;
+  bounds={seed:[0,0xffffffff]};
+ }
+ else if(slug==='alignments'&&confirmedModes.alignments.includes(mode)&&value.kind==='planet-alignments'){
+  if(value.mode!==mode)return null;
+  bounds={day:mode==='mars'?[-190,190]:[0,583.9236487922877]};
+ }
+ else if(slug==='sky'&&confirmedModes.sky.includes(mode)&&value.kind==='sky-conditions'){
+  if(value.mode!==mode)return null;
+  bounds={obliquity:[0,45]};
+ }
  else return null;
  const result={version:1,kind:value.kind};
  for(const [key,[min,max]]of Object.entries(bounds)){
@@ -45,11 +58,16 @@ export function validateExperimentModel(slug,mode,value){
   result[key]=value[key];
  }
  if(value.kind==='orbit-conics')result.view=value.view;
+ if(['planet-alignments','sky-conditions'].includes(value.kind))result.mode=mode;
  return result;
 }
 const modelControls={
  'orbit-conics':new Set(['conic:height','conic:speed','conic:totalHours','conic:rateHours','conic:progress']),
  'jupiter-mass':new Set(['a','period','errorA','errorP']),
+ 'galactic-direction':new Set(['longitude','latitude']),
+ 'light-sample':new Set(),
+ 'planet-alignments':new Set(['day']),
+ 'sky-conditions':new Set(['obliquity']),
 };
 const adapterFor=slug=>own(experimentAdapters,slug)?experimentAdapters[slug]:null;
 const entryValid=value=>typeof value==='string'&&/^[A-Za-z0-9_-]{1,128}$/.test(value);

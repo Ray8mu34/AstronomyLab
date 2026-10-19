@@ -39,7 +39,7 @@ export const modeContexts=Object.freeze({
  optics:Object.freeze({
   imaging:context('光路与成像','接收面偏离最佳像面，星点会怎样改变？','保持折射式结构，拖动像面偏移，再回到起点。','金色接收面偏离青色最佳面，波动像实际离焦；光路说明传播顺序。','采用单色近轴与瞳面模型；三维图展示光学结构和传播顺序。',[step('[data-key="focus"]',.04,'接收面移动且像点展宽'),step('[data-key="focus"]',0,'回到最佳像面')],click('[data-type="sct"]','结构示意不等于具体曲面追迹')),
   resolution:context('收光与分辨','口径增大后，收光与双星可分性是否总同时改善？','点只看衍射，比较100和200毫米；再点大气主导。','瑞利尺度、波动像与面积读数同步，视宁限制不会因口径扩大消失。','采用等亮双星、单色 PSF 与高斯视宁；图像灰度归一，收光量见面积读数。',[click('[data-preset="diffraction"]','视宁与离焦归零'),step('[data-key="aperture"]',100,'100mm基准'),step('[data-key="aperture"]',200,'理想收光面积增为4倍')],click('[data-preset="atmosphere"]','2角秒视宁仍在，口径不能消除大气')),
-  sampling:context('放大与采样','像素网格更细，是否等于天空分辨率提高？','点采样不足，再缩小像元或增加焦距，比较连续像和积分像。','每像素角尺度改变，积分网格更细；连续PSF的天空分辨尺度由口径和视宁决定。','每像素以 4×4 子网格积分；放大显示便于观察采样，细节由原始采样决定。',[click('[data-preset="undersample"]','粗像素采样'),step('[data-key="pixel"]',2,'像元变小细化采样')],step('[data-key="view"]','eyepiece','目镜只改显示角尺度，不缩小天空PSF')),
+  sampling:context('放大与采样','像素网格更细，是否等于天空分辨率提高？','点采样不足，再缩小像元或增加焦距，比较连续像和积分像。','每像素角尺度改变；连续PSF的天空分辨尺度由口径和视宁决定。','每个像元记录其覆盖面积内的积分光量；两图共用天空角尺度。',[click('[data-preset="undersample"]','粗像素采样'),step('[data-key="pixel"]',2,'像元变小细化采样')],step('[data-key="view"]','eyepiece','目镜只改显示角尺度，不缩小天空PSF')),
  }),
  light:Object.freeze({
   thermal:context('黑体连续谱','温度变化会移动峰位，还是改变整条谱的幅度？','比较3000K和10000K；保留基线后切换峰值归一。','Bλ峰位向短波移动；归一前后的曲线分别保留或移除幅度差。','曲线为每单位波长的黑体辐射 Bλ；温度决定谱形，半径决定整星光度。',[click('[data-preset="cold"]','3000K连续谱'),click('[data-save]','保存低温基线'),click('[data-preset="hot"]','10000K与基线比较')],step('[data-key="normalize"]',true,'峰值归一消除了单位面积发光能力差别')),
