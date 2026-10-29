@@ -1,0 +1,220 @@
+{
+  "edition": "2026-10-25",
+  "chapters": [
+    {
+      "number": 1,
+      "title": "太阳系的结构与形成",
+      "path": "course/01-solar-system/lesson.md",
+      "previous_lessons": [
+        "L01"
+      ],
+      "sha256": "4ed4cfdbf06322ddfbf0eddb9c306192456008448660f9a58c9d168b796028f4"
+    },
+    {
+      "number": 2,
+      "title": "行星的内部、大气与环境",
+      "path": "course/02-planet-comparisons/lesson.md",
+      "previous_lessons": [
+        "L02"
+      ],
+      "sha256": "6bcb9ad659daede79a20c39544d72f3c22ef6ab8ec407fd2bcb1d4198aa13022"
+    },
+    {
+      "number": 3,
+      "title": "月亮的形状、转动与时间",
+      "path": "course/03-moon/lesson.md",
+      "previous_lessons": [
+        "L03"
+      ],
+      "sha256": "fce9d318566f62a0c102438d88846192de9d944f6a4dec21b3d51e0cd6ce52ad"
+    },
+    {
+      "number": 4,
+      "title": "日月食与行星天象",
+      "path": "course/04-eclipses-and-alignments/lesson.md",
+      "previous_lessons": [
+        "L04"
+      ],
+      "sha256": "b427698b2f46c0c7d627ef385781e2a820004cf46cdf55998ed2bbd4043c6e60"
+    },
+    {
+      "number": 5,
+      "title": "日历中的太阳、月亮与季节",
+      "path": "course/05-calendars/lesson.md",
+      "previous_lessons": [
+        "L05"
+      ],
+      "sha256": "4f19d581c19b990e60d293e477de51b9d56ce7312622cc81934b5998bb0ae551"
+    },
+    {
+      "number": 6,
+      "title": "星图上的方向、距离与恒星群体",
+      "path": "course/06-sky-maps/lesson.md",
+      "previous_lessons": [
+        "L06"
+      ],
+      "sha256": "8a155279ec9177aebe8d9c9b4d59a72f114abc6756092f2c92df4523d3458748"
+    },
+    {
+      "number": 7,
+      "title": "天空的参照面与地上的测量仪器",
+      "path": "course/07-reference-circles/lesson.md",
+      "previous_lessons": [
+        "L07"
+      ],
+      "sha256": "2024cad0e60478b014ffb1a0a7372a990edbb475ff8d5433a0128432d01736d0"
+    },
+    {
+      "number": 8,
+      "title": "星光穿过大气与眼睛",
+      "path": "course/08-observing/lesson.md",
+      "previous_lessons": [
+        "L08"
+      ],
+      "sha256": "dd0f51c441dfaa978a55024d52dfb21877e0227154cc778053034b39ed3c6cb6"
+    },
+    {
+      "number": 9,
+      "title": "望远镜怎样形成图像",
+      "path": "course/09-telescopes/lesson.md",
+      "previous_lessons": [
+        "L09"
+      ],
+      "sha256": "b759961afefdd065683c4e66f3f57503b0aa5caa3c94f6e1274a41efc0694777",
+      "revised": "2026-10-28"
+    },
+    {
+      "number": 10,
+      "title": "从星光测量恒星",
+      "path": "course/10-starlight/lesson.md",
+      "previous_lessons": [
+        "L10"
+      ],
+      "sha256": "1aae73eaa633d8c5a2221594c1cb5bba1ab52280d188a5833750c3dff2c5a1b5"
+    },
+    {
+      "number": 11,
+      "title": "天文图像中的光、数字与颜色",
+      "path": "course/11-astronomical-images/lesson.md",
+      "previous_lessons": [
+        "L14"
+      ],
+      "sha256": "90f9b6066f2e4a4e9fbdac946e181d291998068b098963a75e6c07bafad74f12"
+    },
+    {
+      "number": 12,
+      "title": "恒星的能量与演化",
+      "path": "course/12-stellar-evolution/lesson.md",
+      "previous_lessons": [
+        "L11"
+      ],
+      "sha256": "5ecdbea8705f48ccfb47d2d3f3ec512bb86993a840470fc94670afbf4027693e"
+    },
+    {
+      "number": 13,
+      "title": "恒星爆发与超新星遗迹",
+      "path": "course/13-supernovae/lesson.md",
+      "previous_lessons": [
+        "L12"
+      ],
+      "sha256": "dc7f1346d306a0c434cc9007284258c7153908192e292c42f77597d05fb71f0a"
+    },
+    {
+      "number": 14,
+      "title": "潮汐、致密天体与黑洞",
+      "path": "course/14-compact-objects/lesson.md",
+      "previous_lessons": [
+        "L12"
+      ],
+      "sha256": "1759f5f946615352500e70bcd08240907090c7f31d43955049ee79bcbd62917d"
+    },
+    {
+      "number": 15,
+      "title": "银河系与星系的结构和演化",
+      "path": "course/15-galaxies/lesson.md",
+      "previous_lessons": [
+        "L13"
+      ],
+      "sha256": "70f5f87e6546cbef63a1f5690a8b4ad828852b8f67651f3bc06e2b9cfaf73803"
+    },
+    {
+      "number": 16,
+      "title": "宇宙的距离、膨胀与早期光",
+      "path": "course/16-cosmology/lesson.md",
+      "previous_lessons": [
+        "L13"
+      ],
+      "sha256": "4520a8db7e5baf6e931f7fd0a483a54a2df20085c5e62e0e8c9c249df8944898"
+    },
+    {
+      "number": 17,
+      "title": "火箭的入轨、返回与复用",
+      "path": "course/17-spaceflight/lesson.md",
+      "previous_lessons": [
+        "L15"
+      ],
+      "sha256": "da4f3fac6eecb79bbdb61ad825951e4d1e23a158402320d57fd449f5208310fd"
+    },
+    {
+      "number": 18,
+      "title": "从观测建立一座星系的物理图景",
+      "path": "course/18-galaxy-measurements/lesson.md",
+      "previous_lessons": [
+        "L16"
+      ],
+      "sha256": "bd0ee451f820d643f61ff36727962df57e86bbd6b8fcc68b7420cc2a0224ab46"
+    }
+  ],
+  "legacy_reading": {
+    "L01": [
+      1
+    ],
+    "L02": [
+      2
+    ],
+    "L03": [
+      3
+    ],
+    "L04": [
+      4
+    ],
+    "L05": [
+      5
+    ],
+    "L06": [
+      6
+    ],
+    "L07": [
+      7
+    ],
+    "L08": [
+      8
+    ],
+    "L09": [
+      9
+    ],
+    "L10": [
+      10
+    ],
+    "L11": [
+      12
+    ],
+    "L12": [
+      13,
+      14
+    ],
+    "L13": [
+      15,
+      16
+    ],
+    "L14": [
+      11
+    ],
+    "L15": [
+      17
+    ],
+    "L16": [
+      18
+    ]
+  }
+}

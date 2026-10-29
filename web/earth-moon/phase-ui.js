@@ -5,6 +5,7 @@ import {mountWorkspaceNavigation} from '/shared/navigation.js';
 
 export function installPhaseUI(lab){
  if(!lab||document.getElementById('phase-ui'))return;
+ for(const id of ['observed','space','year-orbit','shadow-svg'])document.getElementById(id).dataset.alThemeFixed='dark';
  const $=id=>document.getElementById(id),body=document.body,originalMain=document.querySelector('main');originalMain.classList.add('phase-original-main');
  const ui=document.createElement('main');ui.id='phase-ui';ui.hidden=true;
  ui.innerHTML=`<header class="phase-navigation"><button class="al-button" id="condition-entry" popovertarget="condition-menu">条件与视角</button></header>

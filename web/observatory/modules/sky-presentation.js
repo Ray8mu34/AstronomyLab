@@ -6,7 +6,8 @@ import {mountWorkspaceNavigation} from '../shared/navigation.js';
 export function attachSkyPresentation(root,{state,redraw}){
  const q=selector=>root.querySelector(selector),pilot=q('.sky-atlas'),sceneHost=q('#sky-scene'),points=new Map();
  const names={sky:'太阳路径',stars:'方向与距离',measure:'测影',calendar:'历法',day:'两种一天',precession:'地轴岁差'};
- let current=null,disposed=false,labels=null,pending=false,epoch=0,scene=null;
+ let current=null,disposed=false,labels=null,pending=false,epoch=0,scene=null,instructionSlot=null;
+ function restoreInstruction(){if(instructionSlot){instructionSlot.replaceWith(q('#sky-instruction'));instructionSlot=null;}q('#sky-instruction').hidden=q('[data-action=guide]').getAttribute('aria-expanded')!=='true';q('[data-action=guide]').hidden=false;q('#sky-legend').hidden=false;}
  const modeOf=value=>value.tab==='measure'&&value.measureTask==='calendar'?'calendar':value.tab;
  const disposePresentation=applyPresentation(pilot,{surface:modeOf(state)==='calendar'?'paper':'scene',redraw});
  const disposeNavigation=mountWorkspaceNavigation(pilot,{modeNav:q('.sky-mode-menu'),source:q('.sky-reading a'),label:'天球与时间导航'});
@@ -29,7 +30,9 @@ export function attachSkyPresentation(root,{state,redraw}){
   import('./sky-motion-labels.js').then(({makeMotionLabels})=>{if(disposed||generation!==epoch)return;labels=[makeMotionLabels(sceneHost,scene.camera,()=>specifications('celestial'))];if(current==='sky')labels.push(makeMotionLabels(sceneHost,scene.camera,()=>specifications('directions')));drawLabels();}).finally(()=>{if(generation===epoch)pending=false;});
  }
  function setMode(value){
-  const next=modeOf(value);if(next===current)return;resetLabels();current=next;
+  const next=modeOf(value);if(next===current)return;resetLabels();restoreInstruction();current=next;
+  if(next==='calendar'){const instruction=q('#sky-instruction');instructionSlot=document.createComment('calendar instruction return');instruction.before(instructionSlot);q('.sky-explanation').append(instruction);instruction.hidden=false;q('[data-action=guide]').hidden=true;q('#sky-legend').hidden=true;}
+  if(next==='stars')q('#sky-plot').dataset.alThemeFixed='dark';else delete q('#sky-plot').dataset.alThemeFixed;
   const surface=next==='calendar'?'paper':'scene';pilot.dataset.alSurface=surface;root.dataset.alSurface=surface;
   const url=new URL(location.href);url.searchParams.set('mode',next);globalThis.AstronomyLabPresentationRoutes?.apply(url.href);
   q('.sky-mode-menu>summary').textContent=names[next]+' ⌄';
@@ -47,5 +50,5 @@ export function attachSkyPresentation(root,{state,redraw}){
  const click=event=>{if(event.target.closest('[data-navigation-mode]')){const menu=q('.sky-mode-menu');menu.open=false;if(event.isTrusted)menu.querySelector('summary').focus({preventScroll:true});}};
  const toggle=event=>{if(event.target===q('#sky-chart')&&event.target.open)redraw();};
  const observer=new ResizeObserver(drawLabels);observer.observe(sceneHost);pilot.addEventListener('click',click);pilot.addEventListener('toggle',toggle,true);setMode(state);
- return{setMode,render,label(sprite,text,color){if(['sky','measure'].includes(current))points.set(text,{sprite,text,color:color||'#cbd5dd',visible:sprite.visible});},dispose(){disposed=true;resetLabels();observer.disconnect();scene?.controls.removeEventListener('change',drawLabels);pilot.removeEventListener('click',click);pilot.removeEventListener('toggle',toggle,true);disposeDisclosures();disposeNavigation();disposePresentation();}};
+ return{setMode,render,label(sprite,text,color){if(['sky','measure'].includes(current))points.set(text,{sprite,text,color:color||'#cbd5dd',visible:sprite.visible});},dispose(){disposed=true;restoreInstruction();resetLabels();observer.disconnect();scene?.controls.removeEventListener('change',drawLabels);pilot.removeEventListener('click',click);pilot.removeEventListener('toggle',toggle,true);disposeDisclosures();disposeNavigation();disposePresentation();}};
 }

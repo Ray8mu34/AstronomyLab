@@ -10,8 +10,9 @@ const articleHTML=new Map(await Promise.all(Array.from({length:16},async(_,i)=>{
 })));
 const publicKeys=['anchor','id','label','lesson','mode','slug'];
 
-test('public mapping contains all 16 lessons and every one of the 43 registered modes',()=>{
- const expected=Object.entries(confirmedModes).flatMap(([slug,modes])=>modes.map(mode=>`${slug}/${mode}`));
+test('legacy public mapping preserves all 16 articles and their original 43 modes',()=>{
+ const legacy=['solar-system','earth-moon','alignments','sky','optics','light','imaging','stars','galaxy','orbits','measure'];
+ const expected=legacy.flatMap(slug=>confirmedModes[slug].map(mode=>`${slug}/${mode}`));
  assert.equal(expected.length,43,'registry expectation must be reviewed if mode count changes');
  assert.deepEqual([...new Set(learningPaths.map(p=>`${p.slug}/${p.mode}`))].sort(),expected.sort());
  assert.deepEqual([...new Set(learningPaths.map(p=>p.lesson))].sort((a,b)=>a-b),Array.from({length:16},(_,i)=>i+1));

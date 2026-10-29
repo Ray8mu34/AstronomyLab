@@ -1,0 +1,10 @@
+{
+  "model": "spherical Earth, circular orbit; no rotation or atmosphere",
+  "mu_m3_s2": 398600000000000.0,
+  "earth_radius_m": 6371000.0,
+  "height_m": 200000.0,
+  "speed_m_s": 7788.483668677207,
+  "period_min": 88.35012566806259,
+  "kinetic_MJ_kg": 30.330238928625782,
+  "potential_change_MJ_kg": 1.9042686503610604
+}

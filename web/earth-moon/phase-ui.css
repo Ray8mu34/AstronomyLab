@@ -1,5 +1,16 @@
 /* Moon atlas composition. Shared presentation owns typography and UI colour. */
-body.reduced{--bg:var(--al-page);--ink:var(--al-text);--muted:var(--al-muted);--line:var(--al-line);--accent:var(--al-action);--overlay:var(--al-surface);background:var(--al-page);color:var(--al-text);font-family:var(--al-font)}
+body.reduced{--bg:var(--al-page);--ink:var(--al-text);--muted:var(--al-muted);--line:var(--al-line);--accent:var(--al-action);--gold:var(--al-action);--teal:var(--al-reference);--overlay:var(--al-surface);background:var(--al-page);color:var(--al-text);font-family:var(--al-font)}
+/* Keep the lunar image and colour-keyed spatial diagrams on a dark field. */
+.reduced :is(#space,#observed,#year-orbit,#shadow-svg)[data-al-theme-fixed]{background:var(--al-page);color:var(--al-text)}
+.reduced .controls button,.reduced .guide-actions button{background:var(--al-surface);color:var(--al-text);border-color:var(--al-control-border)}
+.reduced .controls button:is(:hover,[aria-pressed=true]),.reduced .guide-actions button:is(:hover,[aria-pressed=true]){border-color:var(--al-action);color:var(--al-action)}
+.reduced .dialog-bar{background:var(--al-page);color:var(--al-text)}
+.reduced .interpretation p{color:var(--al-text)}
+@media(max-width:900px){
+ .atlas-period[data-stage-view=reference]:not(.comparing) .subject-caption{background:var(--al-black)}
+ .atlas-period[data-stage-view=reference]:not(.comparing) #phase-entry{color:var(--al-paper)}
+ .atlas-period[data-stage-view=reference]:not(.comparing) #phase-entry .small-chevron{color:var(--al-brass)}
+}
 .reduced .legacy-hidden,.reduced #playback,.reduced>.phase-original-main{display:none!important}
 #phase-ui[hidden]{display:none!important}
 .reduced:not(.atlas-eclipse) .phase-stage>#shadow-panel{display:none!important}

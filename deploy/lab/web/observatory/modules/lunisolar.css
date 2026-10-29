@@ -1,0 +1,35 @@
+.lunisolar-lab{max-width:1440px;margin:0 auto;padding:0 28px 32px;color:var(--al-text)}
+.lunisolar-lab [hidden]{display:none!important}
+.lunisolar-heading{display:flex;align-items:baseline;gap:14px 26px;flex-wrap:wrap;margin:24px 0}
+.lunisolar-heading h1{font-size:var(--al-title-tool);line-height:1.4;margin:0}
+.lunisolar-heading>span{color:var(--al-muted);font-size:var(--al-label)}
+.lunisolar-lab .al-parameter{display:grid;gap:5px;min-width:0;font-size:var(--al-label)}
+.lunisolar-lab .al-parameter>span{display:flex;justify-content:space-between;gap:16px}
+.lunisolar-lab output,.lunisolar-lab b{font-family:var(--al-numeric);font-weight:400}
+.lunisolar-lab input,.lunisolar-lab select{min-width:0;width:100%;margin:0}
+.lunisolar-year-control{display:grid;grid-template-columns:minmax(0,600px) auto;align-items:end;gap:22px;max-width:760px;margin-bottom:18px}
+.lunisolar-year-control>button{margin-bottom:5px}
+.lunisolar-calendar-figures{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:32px}
+.lunisolar-lab figure{margin:0;min-width:0}
+.lunisolar-lab figcaption{font-size:var(--al-label);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 20px}
+.lunisolar-lab canvas{display:block;width:100%}
+.lunisolar-lab [data-ls-ring],.lunisolar-lab [data-ls-drift]{height:390px}
+.lunisolar-readings{display:flex;flex-wrap:wrap;gap:12px 36px;margin:18px 0 26px;font-size:var(--al-label)}
+.lunisolar-readings b{font-size:20px;margin-left:7px}
+.lunisolar-metonic{display:flex;flex-wrap:wrap;gap:14px 40px;border-top:1px solid var(--al-line);padding:19px 0;font-size:var(--al-label);color:var(--al-muted)}
+.lunisolar-metonic b{color:var(--al-text);margin-left:8px;white-space:nowrap}
+.lunisolar-case-control{display:flex;align-items:center;flex-wrap:wrap;gap:24px;margin-bottom:27px}
+.lunisolar-case-control .al-parameter{width:min(100%,290px)}
+.lunisolar-count{font-size:var(--al-readout)}
+.lunisolar-legend{display:flex;gap:18px;font-size:var(--al-tick);color:var(--al-muted)}
+.lunisolar-lab [data-ls-overview]{height:225px;cursor:crosshair;touch-action:pan-y}
+.lunisolar-selection{display:flex;align-items:center;flex-wrap:wrap;gap:24px 40px;border-top:1px solid var(--al-line);padding-top:22px;margin:12px 0 20px}
+.lunisolar-selection .al-parameter{width:210px}
+.lunisolar-month-read{display:grid;gap:5px}
+.lunisolar-month-read strong{font-size:24px;font-weight:600}
+.lunisolar-month-read span{font-family:var(--al-numeric);font-size:var(--al-tick);color:var(--al-muted)}
+.lunisolar-lab [data-ls-detail]{height:235px}
+.lunisolar-method{margin-top:24px}
+.lunisolar-method p{max-width:920px}
+@media(max-width:850px){.lunisolar-calendar-figures{grid-template-columns:1fr;gap:28px}.lunisolar-lab [data-ls-ring]{height:340px}.lunisolar-lab [data-ls-drift]{height:360px}}
+@media(max-width:600px){.lunisolar-lab{padding:0 16px 24px}.lunisolar-heading{margin:18px 0;gap:5px 16px}.lunisolar-year-control{gap:16px;grid-template-columns:minmax(0,1fr) auto}.lunisolar-lab [data-ls-ring]{height:300px}.lunisolar-lab [data-ls-drift]{height:360px}.lunisolar-case-control{gap:15px;margin-bottom:23px}.lunisolar-count{font-size:24px}.lunisolar-case-control .al-parameter{width:100%}.lunisolar-legend{gap:16px}.lunisolar-selection{gap:16px}.lunisolar-selection .al-parameter{width:100%}.lunisolar-lab [data-ls-detail]{height:250px}.lunisolar-readings{gap:12px 22px}.lunisolar-readings b{font-size:18px}.lunisolar-metonic{display:grid;gap:14px}.lunisolar-metonic span{display:flex;justify-content:space-between;gap:8px}}

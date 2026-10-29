@@ -25,7 +25,7 @@ test('synchronous presentation declarations match the scientific registry and it
 test('invalid, default, classic and non-tool routes resolve without inventing scientific modes',()=>{
  for(const[slug,declaration]of Object.entries(api.declarations)){
   for(const suffix of ['', '?mode=not-a-mode'])assert.equal(api.resolve('http://local.invalid/lab/'+slug+suffix).mode,declaration.defaultMode);
-  for(const mode of declaration.knownModes){const classic=api.resolve(`http://local.invalid/lab/${slug}?mode=${mode}&ui=classic`);assert.equal(classic.layout,'standard');assert.equal(classic.mode,mode);}
+  for(const mode of declaration.knownModes){const classic=api.resolve(`http://local.invalid/lab/${slug}?mode=${mode}&ui=classic`);assert.equal(classic.layout,declaration.classicAvailable?'standard':'workspace');assert.equal(classic.mode,mode);}
  }
  for(const url of ['/','/sources','/lab/unknown','/labs/earth-moon/?mode=phase'])assert.equal(api.resolve('http://local.invalid'+url).layout,'standard');
 });

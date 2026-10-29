@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="849.6pt" height="295.2pt" viewBox="0 0 849.6 295.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-25T13:18:50.822602</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 295.2 
+L 849.6 295.2 
+L 849.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 51.810429 254.63952 
+L 372.686143 254.63952 
+L 372.686143 225.70992 
+L 51.810429 225.70992 
+z
+" clip-path="url(#pd6a3c39020)" style="fill: #dbe5df; stroke: #dbe5df; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #344a40" x="212.248286" y="243.479407" transform="rotate(-0 212.248286 243.479407)">地表</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: start; fill: #636b73" x="51.810429" y="29.400367" transform="rotate(-0 51.810429 29.400367)">太空</text>
+   </g>
+   <g id="patch_3">
+    <path d="M 112.420286 36.774462 
+Q 112.420286 128.79504 112.420286 217.908729 
+" style="fill: none; stroke: #b97a16; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 115.820286 211.108729 
+L 112.420286 217.908729 
+L 109.020286 211.108729 
+z
+" style="fill: #b97a16; stroke: #b97a16; stroke-width: 2.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: start; fill: #b97a16" x="126.681429" y="132.375838" transform="rotate(-0 126.681429 132.375838)">Q</text>
+   </g>
+   <g id="patch_4">
+    <path d="M 265.727571 220.817058 
+Q 265.727571 128.79648 265.727571 39.682791 
+" style="fill: none; stroke: #bc4e36; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 262.327571 46.482791 
+L 265.727571 39.682791 
+L 269.127571 46.482791 
+z
+" style="fill: #bc4e36; stroke: #bc4e36; stroke-width: 2.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: start; fill: #bc4e36" x="279.988714" y="132.375838" transform="rotate(-0 279.988714 132.375838)">Q</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_5">
+    <path d="M 493.905857 133.1352 
+L 814.781571 133.1352 
+L 814.781571 104.2056 
+L 493.905857 104.2056 
+z
+" clip-path="url(#p4105caeb3f)" style="fill: #d9e8f3; stroke: #d9e8f3; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 493.905857 254.63952 
+L 814.781571 254.63952 
+L 814.781571 225.70992 
+L 493.905857 225.70992 
+z
+" clip-path="url(#p4105caeb3f)" style="fill: #dbe5df; stroke: #dbe5df; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #344a40" x="654.343714" y="243.479407" transform="rotate(-0 654.343714 243.479407)">地表</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: start; fill: #636b73" x="493.905857" y="29.400367" transform="rotate(-0 493.905857 29.400367)">太空</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 554.515714 36.774462 
+Q 554.515714 128.79504 554.515714 217.908729 
+" style="fill: none; stroke: #b97a16; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 557.915714 211.108729 
+L 554.515714 217.908729 
+L 551.115714 211.108729 
+z
+" style="fill: #b97a16; stroke: #b97a16; stroke-width: 2.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: start; fill: #b97a16" x="568.776857" y="132.375838" transform="rotate(-0 568.776857 132.375838)">Q</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #2c536d" x="713.170929" y="121.975088" transform="rotate(-0 713.170929 121.975088)">大气层</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 647.213143 220.817279 
+Q 647.213143 179.422811 647.213143 140.935231 
+" style="fill: none; stroke: #bc4e36; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 643.813143 147.735231 
+L 647.213143 140.935231 
+L 650.613143 147.735231 
+z
+" style="fill: #bc4e36; stroke: #bc4e36; stroke-width: 2.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: start; fill: #bc4e36" x="661.474286" y="183.002638" transform="rotate(-0 661.474286 183.002638)">2Q</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 725.649429 99.310487 
+Q 725.649429 68.04105 725.649429 39.678501 
+" style="fill: none; stroke: #bc4e36; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 722.249429 46.478501 
+L 725.649429 39.678501 
+L 729.049429 46.478501 
+z
+" style="fill: #bc4e36; stroke: #bc4e36; stroke-width: 2.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: start; fill: #bc4e36" x="739.910571" y="71.623678" transform="rotate(-0 739.910571 71.623678)">Q</text>
+   </g>
+   <g id="patch_10">
+    <path d="M 768.432857 138.027841 
+Q 768.432857 179.422309 768.432857 217.909889 
+" style="fill: none; stroke: #bc4e36; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 771.832857 211.109889 
+L 768.432857 217.909889 
+L 765.032857 211.109889 
+z
+" style="fill: #bc4e36; stroke: #bc4e36; stroke-width: 2.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: start; fill: #bc4e36" x="782.694" y="183.002638" transform="rotate(-0 782.694 183.002638)">Q</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pd6a3c39020">
+   <rect x="33.984" y="2.952" width="356.528571" height="289.296"/>
+  </clipPath>
+  <clipPath id="p4105caeb3f">
+   <rect x="476.079429" y="2.952" width="356.528571" height="289.296"/>
+  </clipPath>
+ </defs>
+</svg>

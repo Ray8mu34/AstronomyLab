@@ -39,13 +39,23 @@ omitted:
 
 辨识度来自同一个对象随着操作显出关系：月面对应同刻照明几何，星像位置不变而像元尺度改变，光谱与残差用同一频率对应。首页采用黑场月面接明亮工具目录；工具是产品工作区，以可观察对象和第一反馈为先，保持准确的中文与安静的控制。科学主体承担视觉表现，不使用装饰星空、霓虹仪表盘、玻璃卡片或虚构播放。
 
+2026-10-28 用户在最新前端完成后授权增加银河与 M33、宇宙膨胀、地月潮汐和行星环境。原 11 工具 43 模式的 ID、入口、模型与控件继续保留；首批新增后为 15 工具 53 模式。2026-10-30 继续补充阴阳合历、图像校准与测光、恒星内部及超新星光变的 9 个模式，当前为 19 工具 62 模式。新增内容在原站点运行，复用本文件约定的呈现和状态所有者。
+
+本批四组的主体分别为太阳年与朔望月时间轴、同一标尺下的像元与孔径、恒星受力与能量曲线、衰变供能与逃逸光度。paper 表面、原生 range/select/checkbox、模式导航、披露、精确参数与历史恢复均沿用既有所有者。历表日期与合成 CCD 身份明确保留；推导、模型条件和来源在原生披露中。320px 图形按可用宽度重排或统一缩放同组矢量，不裁掉刻度、单位或力箭头。
+
+讲义与实验对应属于外置阅读资产：`course/experiments.json`拥有18篇与实验的关系，`tools/export-experiment-map.mjs`验证现存章节标题和工具注册后生成可折叠的阅读页。阅读页沿用`article-reading.css`与原生details/form；按需展开每篇入口，file模式可设置实验室地址，HTTP模式使用当前服务。运行包不载入课程映射、不增加课程依赖。
+
 第一科学包的模型、独立数值预算、精确状态、像元积分、共享角坐标、速度参考系与FIRAS产品验证继续有效。图形美化允许改变镜头、笔触和构图，不改变物理量、轴方向、数据身份、许可结论或发布权限。工程、独立视觉审查、科学核查、真人使用和实体设备分别记录。
 
 ## Colors
 
 唯一运行时值源是 `web/observatory/shared/presentation-tokens.css`。采用runtime canonical的Model B：该文件→CSS语义变量→原生呈现及`getGraphicStyle()`→Canvas/SVG；本文frontmatter镜像已经接受的值与用途。不能在模块复制另一套界面palette。
 
-`data-al-surface="paper"`用于目录、热谱、FIRAS与量距图版；`scene`和`image`用于空间、月面与图像主体；`hr`保留承托星色的深底。它们是任务表面，不是新增主题切换器。浅底正文用深墨，次文字用灰蓝；金色只做深底操作强调，不承担浅底小字。科学色标由科学绘图器拥有，不为配合界面改染。
+2026-10-30 用户授权全站白天/黑夜切换，并明确保留首页黑场月面与明亮目录的对比配色。`shared/theme.js`在三个文档的样式之前读取`astronomy-lab-theme`；未选择时跟随系统，手动选择后以用户选择为准。工具和公共来源页面的`data-al-theme-scope="tools"`消费全局`light/dark`语义色；首页`home`保持原配色与布局，不增加主题按钮。刷新、跨工具、历史返回与同源标签页都保留选择，主题不进入科学状态或URL。
+
+`data-al-surface="paper/scene/image/hr"`继续表达任务表面及历史默认值；工具内的普通界面与曲线现由全局主题决定明暗。`data-al-theme-fixed="dark/light"`只标记需要保留自身底色的科学画布及其必要叠加内容，例如照片、星色图和空间沙盘；不可用它锁住整个工具页面。M33速度场仅圆盘与色标底层保留浅底，外围留白与坐标随主题。照片RGB、星体颜色、科学色标和物理参数保持，不用CSS滤镜反色。浅色正文深墨、深色正文浅灰；金色操作强调只用于深底。
+
+普通图表系列使用共同的主题色：`series-gold`白天`#875d18`/黑夜`#ebc77e`，`series-teal`为`#246574`/`#71c8c7`，`series-blue`为`#426a92`/`#8baaca`，`series-green`为`#23734b`/`#82c3a0`，`series-warm`为`#ad4a38`/`#ef9e88`，`series-purple`为`#765792`/`#a796d0`。值只在`presentation-tokens.css`拥有；getGraphicStyle返回对应字段给Canvas，SVG与图例消费相同变量。系列保留色相和身份，通过深浅适配底色；真实科学颜色不走这些主题系列。
 
 必要控件边界使用`--al-control-border`（paper `#6b7c89`、深底 `#758a9b`），与图网格/分隔线`--al-line`分开，不能通过提亮全部网格来补控件可辨识度。
 
@@ -74,7 +84,8 @@ Canvas/SVG从`getGraphicStyle(element)`读取font字符串、字号与笔触；`
 | 能力 | Canonical owner | 契约与变体 | 验证 |
 | --- | --- | --- | --- |
 | Token与字体 | `shared/presentation-tokens.css`、`shared/fonts/font-faces.css` | paper/scene/image/hr；字体核心/扩展按字加载 | computed值、字体网络字节、缺字/失败回退 |
-| 全局/紧凑工作区导航 | `shared/navigation.js`、`navigation.css`、共享presentation CSS | 原路由、四主题11工具、原生details、Escape归summary；`mountWorkspaceNavigation`为单一紧凑变体 | 键盘、窄屏展开/关闭、历史导航、只有一个活动导航owner |
+| 白天/黑夜与选择记忆 | `shared/theme.js`、`shared/theme-control.js` | 原生按钮接入共享导航；localStorage显式选择优先，首次跟随系统；首页固定配色；科学画布局部fixed | 双主题全模式、键盘/触屏、刷新/历史/跨标签页、存储拒绝、首页基线与原图像素 |
+| 全局/紧凑工作区导航 | `shared/navigation.js`、`navigation.css`、共享presentation CSS | 原路由、四主题15工具、原生details、Escape归summary；`mountWorkspaceNavigation`为单一紧凑变体 | 键盘、窄屏展开/关闭、历史导航、只有一个活动导航owner |
 | 路由初始呈现 | `shared/route-presentation.js`、共享presentation CSS | 小型同步声明仅登记已迁移模式；app消费同一resolve/apply/clear；声明默认与ID以测试对registry校验 | 直接URL/未知mode/经典入口/前进后退/来源页与错误退出；真实FCP/LCP/CLS |
 | 工具header与模式选择 | `app.js`的`.tool-heading`、原模块mode按钮 | `.al-mode-nav`只管文字选择组呈现，不复制mode事件 | mode ID/URL与实际选择一致 |
 | 参数与选项 | `shared/core-controls.js`及原模块事件 | `.al-parameter`、原生range/select/number；`.al-button/.al-action` | 步长、上下界、可信拖动与键盘 |
@@ -84,7 +95,7 @@ Canvas/SVG从`getGraphicStyle(element)`读取font字符串、字号与笔触；`
 | 科学状态与历史 | 原模块getState/applyState、`shared/experiment-state.js` | 第一包精确model为权威，UI展开和渲染状态分离 | capture/刷新/前进后退与坏快照 |
 | Scrollbar/焦点/减少动效 | `shared/presentation.css`及tokens | 全document滚动条；focus-visible；reduced-motion只关非必要位移 | computed/键盘/高对比/真实偏好 |
 
-公共呈现入口`/shared/presentation.css`在原全局样式之后加载；各文档body使用`al-app`。`applyPresentation(root,{surface,redraw})`仅设置视觉scope/字体观察，返回dispose并归还原属性。它不保存科学值、不创建时钟、不接管路由。`plot()`保留`width/height/toPixel`，额外返回`bounds/style/xTicks/yTicks`，支持显式刻度及离散点/虚线；两幅图使用相同margins即可保持同轴。
+公共呈现入口`/shared/presentation.css`在原全局样式之后加载；各文档body使用`al-app`。`applyPresentation(root,{surface,redraw})`设置视觉scope并登记字体/主题重绘，返回dispose并归还原属性。`al-theme-change`复用同一合帧回调重画完整图层；回调只重绘，不能重建相机、复位模型或重新抽取随机样本。它不保存科学值、不创建时钟、不接管路由。`plot()`保留`width/height/toPixel`，额外返回`bounds/style/xTicks/yTicks`，支持显式刻度及离散点/虚线；两幅图使用相同margins即可保持同轴。
 
 `mountWorkspaceNavigation(container,{modeNav,actions,source,label})`移动原生模式/动作/来源节点而不复制事件，品牌返回由shared navigation生成；临时隐藏全局nav与工具heading并在dispose后原位归还，移动时保留可见焦点。手机两行和桌面一行是同一业务紧凑变体，各模式不再自造平行header。`bindDisclosures(root)`关闭当前最近披露并归还summary，range内Escape可关闭所在披露；文本/日期等编辑器、select和原生dialog保留自身Escape处理。旧editorial CSS只在`editorial-legacy`标记下生效，呈现owner进入即退出旧层，离开可归还；`applyEditorial`不再重排已接新owner的工作区。迁移时同时退役旧hide和重复header。
 
@@ -100,7 +111,13 @@ Canvas/SVG从`getGraphicStyle(element)`读取font字符串、字号与笔触；`
 
 在plot之后追加误差条/选点等图层的模块，通过根呈现owner的`redraw`重画完整图层；或提供`onFontReady`完整回调。`onFontReady:false`可明确表示归根owner管理。共享plot绝不默认自行回放底图，避免擦掉科学标记。
 
+新增四组采用 paper 图版。M33 的周光关系、倾斜速度场和旋转曲线分别决定构图；宇宙膨胀用同一尺度的星系间距、光波与距离曲线；潮汐将形变和力矩与同刻曲线相连；行星环境以能流宽度和速率分布表示关系。界面保留单位、数据身份和必要图例，推导与条件收进原生披露。每个工作区保留一个可见 h1，含 output 的 range 标签通过 for/id 明确关联输入，点击文字与键盘操作一致。
+
+四组模式与状态均接入 `tool-registry.js`、`mode-entry.js` 和 `experiment-state.js`。非动画参数由原生控件回放；潮汐使用版本化 `tidal-evolution` 模型保存两模式参数及精确时间，恢复时暂停。所有模式的参数节点保持在 DOM，隐藏只影响呈现。绘图仍使用既有 token 与字体，不建立第二套控件或配色。四个新工具只有这一套工作区呈现，沿旧链接携带 `ui=classic` 时也加载其必要样式；原 43 模式的 classic 分支不变。FIRAS 的窄屏 info 以频率标签左缘定位，沿用共享披露行为。
+
 ## Do's and Don'ts
+
+2026-10-28 起，界面文案遵循根目录 AGENTS.md 的“前端信息层级与文案原则”。短操作提示复用原生 details/summary 与共享 `bindDisclosures`：`.al-info-tip` 提供具名info入口与浮层，点击/键盘展开，Escape收起并归焦；长观察建议进入已有资料披露。同日四组新增工具整合时已验证键盘、触屏、窄屏边界与邻接模式恢复，并修复 FIRAS 浮层越界；实测范围与证据见主交接顶部。
 
 界面只放观察对象、操作、现象、单位、数据身份、必要科学条件和来源。开发备注、版本/验收进度、自证或防御性解释只进内部交接，不展示给学习者。加载失败说明当前状态和恢复办法；不把未加载数据藏在一条漂亮理论曲线后。
 

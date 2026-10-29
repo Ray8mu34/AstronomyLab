@@ -1,0 +1,295 @@
+{
+  "version": 1,
+  "updated": "2026-10-30",
+  "title": "讲义与实验对应",
+  "chapters": [
+    {
+      "number": 1,
+      "title": "太阳系的结构与形成",
+      "path": "course/01-solar-system/lesson.md",
+      "question": "太阳系的尺度、轨道和物质分布怎样联系到共同的形成过程？",
+      "experiments": [
+        {"slug":"solar-system","mode":"explore","label":"太阳系沙盘","section":"一个由太阳主导的引力系统","purpose":"从整体轨道进入所选天体，比较行星与小天体带的位置。"},
+        {"slug":"solar-system","mode":"distance","label":"统一距离标尺","section":"把尺寸和距离放到同一把尺上","purpose":"按共同距离比例比较内外行星的间隔与太阳光行时。"},
+        {"slug":"solar-system","mode":"sizes","label":"行星尺寸","section":"把尺寸和距离放到同一把尺上","purpose":"在共同半径标尺上比较八颗行星。"}
+      ],
+      "remaining": [
+        {"topic":"盘内温度、凝结与行星增长的连续过程","format":"static","priority":"optional"},
+        {"topic":"会合位置与共振扰动的长期积累","format":"interactive","priority":"optional"}
+      ]
+    },
+    {
+      "number": 2,
+      "title": "行星的内部、大气与环境",
+      "path": "course/02-planet-comparisons/lesson.md",
+      "question": "质量、组成和能量收支怎样共同决定行星的环境？",
+      "experiments": [
+        {"slug":"solar-system","mode":"compare","label":"行星共同指标","section":"从半径、质量到密度","purpose":"切换半径、质量和密度，比较同一组行星在不同量上的差异。"},
+        {"slug":"measure","mode":"jupiter","label":"用轨道称木星","section":"用卫星运动测量行星质量","purpose":"改变卫星轨道尺度和周期，追踪动力学质量及输入误差的影响。"},
+        {"slug":"planet-environments","mode":"escape","label":"热运动与逃逸","section":"引力束缚与大气的去向","purpose":"比较分子速率分布、指定高度的逃逸速度与越过阈值的瞬时比例。"},
+        {"slug":"planet-environments","mode":"balance","label":"行星辐射平衡","section":"阳光如何变成行星温度","purpose":"用日距和反照率联动吸收能流、热辐射与平衡温度。"},
+        {"slug":"planet-environments","mode":"atmosphere","label":"大气红外交换","section":"大气中的红外辐射交换","purpose":"在单层灰体大气中比较上下行红外能流和地表温度。"},
+        {"slug":"solar-system","mode":"axes","label":"自转轴","section":"自转轴决定阳光怎样分配","purpose":"对照行星自转轴与轨道法线，比较倾角和逆行自转。"}
+      ],
+      "remaining": [
+        {"topic":"材料组成、压缩与行星内部密度分布","format":"data","priority":"optional"},
+        {"topic":"水、岩石与大气的长期演化","format":"static","priority":"optional"}
+      ]
+    },
+    {
+      "number": 3,
+      "title": "月亮的形状、转动与时间",
+      "path": "course/03-moon/lesson.md",
+      "question": "月相、月周期和同步自转怎样由照明、相对运动与潮汐作用产生？",
+      "experiments": [
+        {"slug":"earth-moon","mode":"phase","label":"月相","section":"受光半球怎样成为天空中的月相","purpose":"把同一时刻的日地月几何与地球所见月面亮区对应起来。"},
+        {"slug":"earth-moon","mode":"period","label":"两种月周期","section":"恒星月与朔望月","purpose":"从共同起点推进，分别定位恒星方向和太阳方向的回归。"},
+        {"slug":"earth-moon","mode":"spin","label":"同步自转与天平动","section":"月面标记追踪的同步自转","purpose":"追踪固定月面标记，比较同步与固定空间方向，并可开启偏心公转。"},
+        {"slug":"tides","mode":"locking","label":"潮汐同步","section":"差异引力、形变与潮汐力矩","purpose":"在圆轨道耗散模型中联动形变、力矩、自转速率与能量变化。"},
+        {"slug":"tides","mode":"earth-moon","label":"地月角动量交换","section":"角动量怎样从地球自转进入月球轨道","purpose":"追踪地球自转与轨道角动量的交换，并比较快、慢自转初态。"},
+        {"slug":"measure","mode":"shadow","label":"月面影长测高","section":"从月面照明测量地形","purpose":"用影长与太阳高度角推算峰高，比较两种输入误差。"}
+      ],
+      "remaining": [
+        {"topic":"月球激光测距的往返时刻与长期距离记录","format":"data","priority":"optional"}
+      ]
+    },
+    {
+      "number": 4,
+      "title": "日月食与行星天象",
+      "path": "course/04-eclipses-and-alignments/lesson.md",
+      "question": "天体的大小、距离与轨道位置怎样决定遮挡、相位和视运动？",
+      "experiments": [
+        {"slug":"earth-moon","mode":"eclipse","label":"日月食","section":"有限光源形成的影锥","purpose":"改变月球距离、倾角与交点，联动影锥和同刻观测圆面的遮挡。"},
+        {"slug":"alignments","mode":"venus","label":"金星相位","section":"最大距角与金星的相位","purpose":"在下合、最大距角和上合之间比较受光面、距离与地心方向。"},
+        {"slug":"alignments","mode":"mars","label":"火星视逆行","section":"地球追越火星时的视逆行","purpose":"把同向公转与地球所见的黄经、黄纬轨迹对应起来。"},
+        {"slug":"alignments","mode":"transit","label":"凌星光变","section":"从凌日的黑点到凌星的光变","purpose":"改变半径比、冲击参数和投影位置，比较均匀圆盘的遮挡面积与通量。"}
+      ],
+      "remaining": [
+        {"topic":"交点长期变化与食季复现","format":"interactive","priority":"optional"},
+        {"topic":"临边昏暗、跨波段凌星与大气透射光谱","format":"data","priority":"optional"}
+      ]
+    },
+    {
+      "number": 5,
+      "title": "日历中的太阳、月亮与季节",
+      "path": "course/05-calendars/lesson.md",
+      "question": "连续的日、月、年周期怎样安排成跟随季节的整数日期？",
+      "experiments": [
+        {"slug":"sky","mode":"sky","label":"太阳路径与季节","section":"季节给一年确定了返回的目标","purpose":"比较纬度、季节和轴倾角对太阳日轨迹及昼长的影响。"},
+        {"slug":"sky","mode":"day","label":"两种一天","section":"一天的长度来自两种转动","purpose":"分别以远星和太阳为参照，观察同一地面经线回归的时刻。"},
+        {"slug":"sky","mode":"calendar","label":"年长累计","section":"把小数日安排成闰日","purpose":"在固定季节年参照下比较365日年、四年一闰和公历的累计偏差。"},
+        {"slug":"lunisolar","mode":"calendar","label":"月份与季节","section":"月相怎样落进整数日期","purpose":"用平均周期比较12朔望月年相对季节的移动，以及19年235个月的近似配合。"},
+        {"slug":"lunisolar","mode":"intercalation","label":"中气与闰月","section":"闰月把月份重新接到季节上","purpose":"在实际朔日、中气和冬至的共同时间轴上观察月序与闰月安排。"}
+      ],
+      "remaining": [
+        {"topic":"更多实际年份和中气、朔同日的历法实例","format":"data","priority":"optional"}
+      ]
+    },
+    {
+      "number": 6,
+      "title": "星图上的方向、距离与恒星群体",
+      "path": "course/06-sky-maps/lesson.md",
+      "question": "天空中相邻的星点怎样获得距离，并成为可研究的恒星群体？",
+      "experiments": [
+        {"slug":"sky","mode":"stars","label":"方向、距离与自行","section":"距离和运动共同识别恒星群体","purpose":"比较北斗与毕宿的星表样本，在方向壳层、目录距离和自行箭头之间切换。"},
+        {"slug":"measure","mode":"distance","label":"视差距离","section":"用地球轨道测出第三个维度","purpose":"从正视差推算几何距离，观察距离与假定测量误差的关系。"}
+      ],
+      "remaining": [
+        {"topic":"自行平面、空间位置与群体成员的关联选择","format":"data","priority":"optional"},
+        {"topic":"按地点和日期查找具体恒星的完整星图","format":"interactive","priority":"optional"}
+      ]
+    },
+    {
+      "number": 7,
+      "title": "天空的参照面与地上的测量仪器",
+      "path": "course/07-reference-circles/lesson.md",
+      "question": "怎样用参照面、角度与影长把天空方向变成可重复的测量？",
+      "experiments": [
+        {"slug":"sky","mode":"sky","label":"天球参照与太阳路径","section":"黄道把太阳的位置与季节相连","purpose":"对照天赤道、黄道等参照与地方地平，比较太阳位置和昼长。"},
+        {"slug":"galaxy","mode":"galaxy","label":"银河坐标与视线","section":"沿银河盘选取坐标","purpose":"在盘内视角改变银经、银纬，对照视线方向和沿途亮度积分。"},
+        {"slug":"sky","mode":"measure","label":"圭表测影","section":"太阳高度怎样变成一条影长","purpose":"改变地点、日期与日内时刻，联动太阳、竖表和地面影端。"},
+        {"slug":"sky","mode":"precession","label":"地轴岁差","section":"地轴的长期变化进入观测结果","purpose":"分别观察快速自转与缓慢轴向进动，追踪天极相对恒星方向的变化。"}
+      ],
+      "remaining": [
+        {"topic":"两地同时测影与地球尺度","format":"interactive","priority":"next"},
+        {"topic":"浑仪与简仪的瞄准、参照圈和读角","format":"static","priority":"optional"}
+      ]
+    },
+    {
+      "number": 8,
+      "title": "星光穿过大气与眼睛",
+      "path": "course/08-observing/lesson.md",
+      "question": "同一目标经过大气并进入接收器后，哪些条件决定信号能否被分辨？",
+      "experiments": [
+        {"slug":"light","mode":"observing","label":"观测与噪声","section":"天空背景怎样进入视线","purpose":"在相机孔径计数模型中比较高度、天空背景、曝光与读出次数对信噪比的影响。"},
+        {"slug":"optics","mode":"resolution","label":"视宁与分辨","section":"湍流、闪烁与视宁度","purpose":"比较衍射和高斯视宁对双星光斑及可分性的共同作用。"}
+      ],
+      "remaining": [
+        {"topic":"目视暗适应、红光与扩展目标对比度","format":"static","priority":"optional"},
+        {"topic":"点源闪烁与扩展源平均","format":"interactive","priority":"optional"}
+      ]
+    },
+    {
+      "number": 9,
+      "title": "望远镜怎样形成图像",
+      "path": "course/09-telescopes/lesson.md",
+      "question": "光路、口径、焦距和探测器怎样共同形成可测量的图像？",
+      "experiments": [
+        {"slug":"optics","mode":"imaging","label":"光路与像面","section":"光线会聚与三种基本光路","purpose":"比较折射式、牛顿式和施密特卡塞格林结构，并移动接收面观察离焦。"},
+        {"slug":"optics","mode":"resolution","label":"收光与分辨","section":"有限口径怎样限制方向分辨","purpose":"联动口径、波长与视宁，比较收光面积、衍射尺度和双星光斑。"},
+        {"slug":"optics","mode":"sampling","label":"连续像与像素采样","section":"像素怎样记录连续的图像","purpose":"在共同天空角尺度上改变焦距与像元大小，对照连续PSF和像元积分。"}
+      ],
+      "remaining": [
+        {"topic":"法兰基准、接环与感光面的安装尺寸图","format":"static","priority":"next"},
+        {"topic":"出瞳与扩展目标的视网膜照度","format":"interactive","priority":"optional"},
+        {"topic":"离轴像差、校正镜与AO波前校正","format":"static","priority":"optional"}
+      ]
+    },
+    {
+      "number": 10,
+      "title": "从星光测量恒星",
+      "path": "course/10-starlight/lesson.md",
+      "question": "怎样从收到的光通量、谱形和谱线位置推得恒星性质？",
+      "experiments": [
+        {"slug":"light","mode":"magnitude","label":"通量与传播","section":"距离把接收亮度变成恒星光度","purpose":"比较距离、温度与波长相关消光对两个教学通带的影响。"},
+        {"slug":"light","mode":"thermal","label":"黑体连续谱","section":"连续谱的形状与温度","purpose":"改变温度与半径，比较谱峰、单位面积辐射和整星光度。"},
+        {"slug":"stars","mode":"hr","label":"温度、光度与半径","section":"从温度和光度得到半径","purpose":"在赫罗图上比较同温度或同光度的点，追踪对应的半径关系。"},
+        {"slug":"light","mode":"motion","label":"谱线位移与展宽","section":"谱线的位置与恒星运动","purpose":"分别改变径向速度、自转和倾角，比较线中心位移与轮廓宽度。"}
+      ],
+      "remaining": [
+        {"topic":"能级、激发与电离对谱线强弱的影响","format":"interactive","priority":"optional"},
+        {"topic":"同一波长轴上的真实恒星光谱序列","format":"data","priority":"next"}
+      ]
+    },
+    {
+      "number": 11,
+      "title": "天文图像中的光、数字与颜色",
+      "path": "course/11-astronomical-images/lesson.md",
+      "question": "光子计数经过校准和显示后，怎样形成既能观看又能测量的图像？",
+      "experiments": [
+        {"slug":"imaging","mode":"teaching","label":"教学计数与显示","section":"探测器把光积累成数值","purpose":"固定随机样本比较曝光、背景、饱和与显示拉伸。"},
+        {"slug":"image-calibration","mode":"calibration","label":"偏置、暗场与平场","section":"校准分离仪器响应与天空信号","purpose":"在同一合成星场上逐项扣除偏置和暗信号、校正像素响应，并比较原始与校准计数。"},
+        {"slug":"image-calibration","mode":"photometry","label":"孔径测光","section":"校准分离仪器响应与天空信号","purpose":"选定合成星源，改变孔径并从邻近环区估计背景，观察净通量与增长曲线。"},
+        {"slug":"light","mode":"observing","label":"曝光与信噪比","section":"长曝光积累信号，也积累背景的涨落","purpose":"比较总曝光和分帧方案对源计数、背景涨落与读出方差的影响。"},
+        {"slug":"imaging","mode":"real","label":"M17通道赋色","section":"用颜色比较不同谱线","purpose":"选取同一真实源像素，比较通道赋色、拉伸和冻结对照。"}
+      ],
+      "remaining": [
+        {"topic":"有原始帧与校准帧的真实观测测光案例","format":"data","priority":"optional"},
+        {"topic":"可见光、红外与射电的配准图版","format":"data","priority":"optional"}
+      ]
+    },
+    {
+      "number": 12,
+      "title": "恒星的能量与演化",
+      "path": "course/12-stellar-evolution/lesson.md",
+      "question": "恒星的支撑、产能和输运怎样相互调节，并随组成改变而演化？",
+      "experiments": [
+        {"slug":"stellar-interior","mode":"thermostat","label":"收缩与产能调节","section":"收缩释放能量，聚变维持长期发光","purpose":"在单区同源模型中追踪收缩升温、核产能变化与半径回归，比较两种温度敏感度。"},
+        {"slug":"stellar-interior","mode":"equilibrium","label":"引力与压力支撑","section":"一层层的支撑，一层层的能量输运","purpose":"在均匀密度理想气体球中选择薄层，比较压力梯度与引力；改变半径追踪维里能量和温度。"},
+        {"slug":"stellar-interior","mode":"transport","label":"辐射与对流条件","section":"一层层的支撑，一层层的能量输运","purpose":"改变不透明度和能流，比较辐射试探梯度与绝热气团的温度、密度和浮力。"},
+        {"slug":"stars","mode":"evolution","label":"MIST演化轨迹","section":"核心组成改变后的内外响应","purpose":"沿1、3、15太阳质量模型的演化阶段，联动表面参数、年龄与核心组成。"},
+        {"slug":"stars","mode":"hr","label":"赫罗图中的恒星","section":"用恒星群和太阳内部信号检验演化","purpose":"对照主序、巨星与白矮星的大致位置，比较温度、光度和半径。"}
+      ],
+      "remaining": [
+        {"topic":"白矮星冷却轨迹与观测族群","format":"data","priority":"optional"},
+        {"topic":"红巨星核心—壳层—包层的连续结构演化","format":"interactive","priority":"optional"}
+      ]
+    },
+    {
+      "number": 13,
+      "title": "恒星爆发与超新星遗迹",
+      "path": "course/13-supernovae/lesson.md",
+      "question": "短时间释放的能量怎样成为持续数周的光变，并留下长期活动的遗迹？",
+      "experiments": [
+        {"slug":"stars","mode":"collapse","label":"核心与外层","section":"从向内坍缩到向外抛射","purpose":"推进坍缩示意，比较核心收缩与外层推出的不同去向。"},
+        {"slug":"supernova-light","mode":"radioactivity","label":"镍钴衰变供能","section":"抛出物膨胀时，光怎样走出来","purpose":"追踪镍—钴—铁的核素数量与局地沉积功率随时间的变化。"},
+        {"slug":"supernova-light","mode":"diffusion","label":"辐射扩散与光变","section":"抛出物膨胀时，光怎样走出来","purpose":"改变抛出物质量、不透明度和速度，在单区膨胀模型中比较供能、储能、逸出与做功。"},
+        {"slug":"stars","mode":"pulsar","label":"脉冲星扫束","section":"蟹状星云：持续运转的遗迹","purpose":"比较磁轴、双锥束和观察方向，联动自转与收到的脉冲。"}
+      ],
+      "remaining": [
+        {"topic":"白矮星简并压力与热核失控过程","format":"interactive","priority":"optional"},
+        {"topic":"超新星光谱分类与SN1987A多信号时间轴","format":"data","priority":"optional"}
+      ]
+    },
+    {
+      "number": 14,
+      "title": "潮汐、致密天体与黑洞",
+      "path": "course/14-compact-objects/lesson.md",
+      "question": "轨道和差异引力怎样约束致密天体的质量与尺度？",
+      "experiments": [
+        {"slug":"measure","mode":"s2","label":"S2与银心质量","section":"用恒星轨道测量银河中心","purpose":"从角轨道、距离和周期推算中心质量，比较采用距离变化的影响。"},
+        {"slug":"stars","mode":"collapse","label":"视界与潮汐","section":"视界尺度上的潮汐","purpose":"进入“潮汐”子任务，改变黑洞质量和以视界半径表示的距离，比较径向差异加速度。"}
+      ],
+      "remaining": [
+        {"topic":"潮汐与自引力、材料强度在洛希极限附近的竞争","format":"interactive","priority":"optional"},
+        {"topic":"吸积能量、近视界光线与引力波观测","format":"data","priority":"optional"}
+      ]
+    },
+    {
+      "number": 15,
+      "title": "银河系与星系的结构和演化",
+      "path": "course/15-galaxies/lesson.md",
+      "question": "视线、运动与恒星群怎样共同揭示星系的结构和历史？",
+      "experiments": [
+        {"slug":"galaxy","mode":"galaxy","label":"银河内外","section":"从盘内望向银河","purpose":"切换盘内外视角与波段，比较空间结构、尘埃和视线亮度积分。"},
+        {"slug":"galaxy-measurements","mode":"rotation","label":"倾斜盘的速度场","section":"旋转揭示质量的分布","purpose":"用M33尺度的解析盘模型比较圆周速度与视向投影。"},
+        {"slug":"galaxy-measurements","mode":"mass","label":"旋转与质量分布","section":"旋转揭示质量的分布","purpose":"比较恒星、气体、暗晕的速度贡献与球对称等效动力学质量。"}
+      ],
+      "remaining": [
+        {"topic":"差异旋转、旋臂与气体运动","format":"interactive","priority":"optional"},
+        {"topic":"并合及不同年龄恒星群的空间分布","format":"data","priority":"optional"}
+      ]
+    },
+    {
+      "number": 16,
+      "title": "宇宙的距离、膨胀与早期光",
+      "path": "course/16-cosmology/lesson.md",
+      "question": "怎样把距离测量、红移和早期辐射接成宇宙膨胀历史？",
+      "experiments": [
+        {"slug":"measure","mode":"distance","label":"几何与测光距离","section":"从几何距离建立远处的光度标尺","purpose":"比较视差、距离模数与光度标尺对距离推断的作用。"},
+        {"slug":"stars","mode":"ia","label":"Ia光变标准化","section":"Ia超新星的标准化测距","purpose":"对同一组合成光变样本比较宽度、颜色校正前后的峰值散布。"},
+        {"slug":"cosmology","mode":"expansion","label":"尺度因子与红移","section":"红移给距离加上一条时间线","purpose":"联动星系间距、退行速度与波长，并切换参考星系。"},
+        {"slug":"cosmology","mode":"distance","label":"距离与膨胀历史","section":"光度距离与膨胀历史","purpose":"在相同红移和H₀下比较平直宇宙模型的光度距离、距离模数和通量。"},
+        {"slug":"galaxy","mode":"cmb-spectrum","label":"FIRAS平均谱","section":"在频谱中读出热宇宙","purpose":"在共同频率轴上对照FIRAS发布谱、黑体参考与实测残差。"},
+        {"slug":"galaxy","mode":"cmb","label":"CMB全天方向","section":"从温度花纹到角功率谱","purpose":"在Planck发布图上选取方向，对照平面投影与球面中的同一天区。"}
+      ],
+      "remaining": [
+        {"topic":"角尺度、角功率谱与声学峰的对应","format":"data","priority":"next"},
+        {"topic":"复合、退耦与最后散射的时间关系","format":"static","priority":"optional"}
+      ]
+    },
+    {
+      "number": 17,
+      "title": "火箭的入轨、返回与复用",
+      "path": "course/17-spaceflight/lesson.md",
+      "question": "速度、推进剂和能量预算怎样连接入轨、转移与返回？",
+      "experiments": [
+        {"slug":"orbits","mode":"orbit","label":"速度与轨道","section":"把货物送到一条轨道上","purpose":"固定释放高度，比较下落、圆轨道、椭圆和逃逸的速度与能量条件。"},
+        {"slug":"orbits","mode":"transfer","label":"两次点火升轨","section":"把货物送到一条轨道上","purpose":"在同一时刻比较远地点第二次点火与未点火时的后续轨迹。"},
+        {"slug":"orbits","mode":"staging","label":"分级质量与速度","section":"分级之后，两段箭体走向不同的终点","purpose":"联动剩余连接质量和累计速度增量，比较分离空一级的作用。"},
+        {"slug":"orbits","mode":"landing","label":"点火与着陆","section":"在有限高度内完成减速和着陆","purpose":"在一维变质量模型中追踪高度、速度与剩余推进剂，比较不同点火时机。"}
+      ],
+      "remaining": [
+        {"topic":"再入的大气阻力、能量转移与气动加热","format":"interactive","priority":"optional"},
+        {"topic":"复用飞行之间的检修与成本条件","format":"static","priority":"optional"}
+      ]
+    },
+    {
+      "number": 18,
+      "title": "从观测建立一座星系的物理图景",
+      "path": "course/18-galaxy-measurements/lesson.md",
+      "question": "怎样从同一座星系的图像、变星和光谱逐步推得距离、尺度与质量？",
+      "experiments": [
+        {"slug":"image-calibration","mode":"photometry","label":"从像素估计星源通量","section":"从照片建立第一组观测量","purpose":"先在合成星场中观察孔径与背景环区怎样共同给出净计数，作为后续测光的计算示例。"},
+        {"slug":"galaxy-measurements","mode":"distance","label":"M33造父测距","section":"造父变星把周期接到距离","purpose":"拟合合成造父样本，联动距离模数、角尺度换算和光度。"},
+        {"slug":"light","mode":"motion","label":"谱线与视向速度","section":"光谱把旋涡图案接到运动","purpose":"用单条谱线的教学模型观察波长位移与视向速度的关系。"},
+        {"slug":"galaxy-measurements","mode":"rotation","label":"M33速度投影","section":"光谱把旋涡图案接到运动","purpose":"在解析盘上选取半径和方位，联动倾角、投影形状与视向速度。"},
+        {"slug":"galaxy-measurements","mode":"mass","label":"M33质量与距离依赖","section":"距离在整幅物理图景中的作用","purpose":"固定光谱速度和角尺度比较距离的一次方、平方关系，并调整发光物质与暗晕的模型贡献。"}
+      ],
+      "remaining": [
+        {"topic":"具有标定和不确定度的M33测光、谱线与速度数据","format":"data","priority":"next"},
+        {"topic":"颜色—星等图、检出概率与恒星形成历史","format":"data","priority":"optional"}
+      ]
+    }
+  ]
+}

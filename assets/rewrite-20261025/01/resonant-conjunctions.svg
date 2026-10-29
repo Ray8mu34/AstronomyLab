@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="907.2pt" height="259.2pt" viewBox="0 0 907.2 259.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-25T13:18:58.930013</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 259.2 
+L 907.2 259.2 
+L 907.2 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 152.475181 237.224348 
+C 177.580459 237.224348 201.66087 227.249915 219.412983 209.497802 
+C 237.165096 191.74569 247.139529 167.665279 247.139529 142.56 
+C 247.139529 117.454721 237.165096 93.37431 219.412983 75.622198 
+C 201.66087 57.870085 177.580459 47.895652 152.475181 47.895652 
+C 127.369902 47.895652 103.289491 57.870085 85.537378 75.622198 
+C 67.785266 93.37431 57.810833 117.454721 57.810833 142.56 
+C 57.810833 167.665279 67.785266 191.74569 85.537378 209.497802 
+C 103.289491 227.249915 127.369902 237.224348 152.475181 237.224348 
+L 152.475181 237.224348 
+z
+" clip-path="url(#p310cbcd970)" style="fill: none; stroke: #b6bdc5; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 152.475181 188.069872 
+C 164.54454 188.069872 176.121194 183.274664 184.65552 174.740339 
+C 193.189845 166.206013 197.985052 154.629359 197.985052 142.56 
+C 197.985052 130.490641 193.189845 118.913987 184.65552 110.379661 
+C 176.121194 101.845336 164.54454 97.050128 152.475181 97.050128 
+C 140.405822 97.050128 128.829167 101.845336 120.294842 110.379661 
+C 111.760516 118.913987 106.965309 130.490641 106.965309 142.56 
+C 106.965309 154.629359 111.760516 166.206013 120.294842 174.740339 
+C 128.829167 183.274664 140.405822 188.069872 152.475181 188.069872 
+L 152.475181 188.069872 
+z
+" clip-path="url(#p310cbcd970)" style="fill: none; stroke: #b6bdc5; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 152.475181 142.56 
+L 247.139529 142.56 
+" clip-path="url(#p310cbcd970)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #555d65"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #4b4f54" x="152.475181" y="161.49287" transform="rotate(-0 152.475181 161.49287)">太阳</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #247b9e" x="197.985052" y="127.413704" transform="rotate(-0 197.985052 127.413704)">小行星</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #a35021" x="247.139529" y="161.49287" transform="rotate(-0 247.139529 161.49287)">木星</text>
+   </g>
+   <g id="text_4">
+    <!-- $t=0$ -->
+    <g transform="translate(136.655181 29.696)">
+     <text>
+      <tspan x="0" y="-0.609375" style="font-style: oblique; font-size: 14px; font-family: 'DejaVu Sans'">t</tspan>
+      <tspan x="8.216797" y="-0.609375" style="font-size: 14px; font-family: 'DejaVu Sans'">=</tspan>
+      <tspan x="22.674805" y="-0.609375" style="font-size: 14px; font-family: 'DejaVu Sans'">0</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m94c7f30671" d="M 0 6.020797 
+C 1.596734 6.020797 3.128285 5.386408 4.257347 4.257347 
+C 5.386408 3.128285 6.020797 1.596734 6.020797 0 
+C 6.020797 -1.596734 5.386408 -3.128285 4.257347 -4.257347 
+C 3.128285 -5.386408 1.596734 -6.020797 0 -6.020797 
+C -1.596734 -6.020797 -3.128285 -5.386408 -4.257347 -4.257347 
+C -5.386408 -3.128285 -6.020797 -1.596734 -6.020797 0 
+C -6.020797 1.596734 -5.386408 3.128285 -4.257347 4.257347 
+C -3.128285 5.386408 -1.596734 6.020797 0 6.020797 
+z
+" style="stroke: #ebc13e"/>
+    </defs>
+    <g clip-path="url(#p310cbcd970)">
+     <use xlink:href="#m94c7f30671" x="152.475181" y="142.56" style="fill: #ebc13e; stroke: #ebc13e"/>
+    </g>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="m58c7e6dfd5" d="M 0 3.872983 
+C 1.027127 3.872983 2.012324 3.464901 2.738613 2.738613 
+C 3.464901 2.012324 3.872983 1.027127 3.872983 0 
+C 3.872983 -1.027127 3.464901 -2.012324 2.738613 -2.738613 
+C 2.012324 -3.464901 1.027127 -3.872983 0 -3.872983 
+C -1.027127 -3.872983 -2.012324 -3.464901 -2.738613 -2.738613 
+C -3.464901 -2.012324 -3.872983 -1.027127 -3.872983 0 
+C -3.872983 1.027127 -3.464901 2.012324 -2.738613 2.738613 
+C -2.012324 3.464901 -1.027127 3.872983 0 3.872983 
+z
+" style="stroke: #247b9e"/>
+    </defs>
+    <g clip-path="url(#p310cbcd970)">
+     <use xlink:href="#m58c7e6dfd5" x="197.985052" y="142.56" style="fill: #247b9e; stroke: #247b9e"/>
+    </g>
+   </g>
+   <g id="PathCollection_3">
+    <defs>
+     <path id="mfd91cc736c" d="M 0 5.809475 
+C 1.540691 5.809475 3.018486 5.197352 4.107919 4.107919 
+C 5.197352 3.018486 5.809475 1.540691 5.809475 0 
+C 5.809475 -1.540691 5.197352 -3.018486 4.107919 -4.107919 
+C 3.018486 -5.197352 1.540691 -5.809475 0 -5.809475 
+C -1.540691 -5.809475 -3.018486 -5.197352 -4.107919 -4.107919 
+C -5.197352 -3.018486 -5.809475 -1.540691 -5.809475 0 
+C -5.809475 1.540691 -5.197352 3.018486 -4.107919 4.107919 
+C -3.018486 5.197352 -1.540691 5.809475 0 5.809475 
+z
+" style="stroke: #b56430"/>
+    </defs>
+    <g clip-path="url(#p310cbcd970)">
+     <use xlink:href="#mfd91cc736c" x="247.139529" y="142.56" style="fill: #b56430; stroke: #b56430"/>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_4">
+    <path d="M 453.6 237.224348 
+C 478.705279 237.224348 502.78569 227.249915 520.537802 209.497802 
+C 538.289915 191.74569 548.264348 167.665279 548.264348 142.56 
+C 548.264348 117.454721 538.289915 93.37431 520.537802 75.622198 
+C 502.78569 57.870085 478.705279 47.895652 453.6 47.895652 
+C 428.494721 47.895652 404.41431 57.870085 386.662198 75.622198 
+C 368.910085 93.37431 358.935652 117.454721 358.935652 142.56 
+C 358.935652 167.665279 368.910085 191.74569 386.662198 209.497802 
+C 404.41431 227.249915 428.494721 237.224348 453.6 237.224348 
+L 453.6 237.224348 
+z
+" clip-path="url(#p42a5e2fd76)" style="fill: none; stroke: #b6bdc5; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 453.6 188.069872 
+C 465.669359 188.069872 477.246013 183.274664 485.780339 174.740339 
+C 494.314664 166.206013 499.109872 154.629359 499.109872 142.56 
+C 499.109872 130.490641 494.314664 118.913987 485.780339 110.379661 
+C 477.246013 101.845336 465.669359 97.050128 453.6 97.050128 
+C 441.530641 97.050128 429.953987 101.845336 421.419661 110.379661 
+C 412.885336 118.913987 408.090128 130.490641 408.090128 142.56 
+C 408.090128 154.629359 412.885336 166.206013 421.419661 174.740339 
+C 429.953987 183.274664 441.530641 188.069872 453.6 188.069872 
+L 453.6 188.069872 
+z
+" clip-path="url(#p42a5e2fd76)" style="fill: none; stroke: #b6bdc5; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 453.6 142.56 
+L 358.935652 142.56 
+" clip-path="url(#p42a5e2fd76)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #555d65"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #4b4f54" x="453.6" y="161.49287" transform="rotate(-0 453.6 161.49287)">太阳</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #247b9e" x="408.090128" y="127.413704" transform="rotate(-0 408.090128 127.413704)">小行星</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #a35021" x="358.935652" y="161.49287" transform="rotate(-0 358.935652 161.49287)">木星</text>
+   </g>
+   <g id="text_8">
+    <!-- $t=P_{\mathrm{J}}/2$ -->
+    <g transform="translate(429.8 29.356)">
+     <text>
+      <tspan x="0" y="-0.609375" style="font-style: oblique; font-size: 14px; font-family: 'DejaVu Sans'">t</tspan>
+      <tspan x="22.674805" y="-0.609375" style="font-style: oblique; font-size: 14px; font-family: 'DejaVu Sans'">P</tspan>
+      <tspan x="8.216797" y="-0.609375" style="font-size: 14px; font-family: 'DejaVu Sans'">=</tspan>
+      <tspan x="34.390234" y="-0.609375" style="font-size: 14px; font-family: 'DejaVu Sans'">/</tspan>
+      <tspan x="38.607031" y="-0.609375" style="font-size: 14px; font-family: 'DejaVu Sans'">2</tspan>
+      <tspan x="31.117188" y="1.6875" style="font-size: 9.8px; font-family: 'DejaVu Sans'">J</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#p42a5e2fd76)">
+     <use xlink:href="#m94c7f30671" x="453.6" y="142.56" style="fill: #ebc13e; stroke: #ebc13e"/>
+    </g>
+   </g>
+   <g id="PathCollection_5">
+    <g clip-path="url(#p42a5e2fd76)">
+     <use xlink:href="#m58c7e6dfd5" x="408.090128" y="142.56" style="fill: #247b9e; stroke: #247b9e"/>
+    </g>
+   </g>
+   <g id="PathCollection_6">
+    <g clip-path="url(#p42a5e2fd76)">
+     <use xlink:href="#mfd91cc736c" x="358.935652" y="142.56" style="fill: #b56430; stroke: #b56430"/>
+    </g>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_6">
+    <path d="M 754.724819 237.224348 
+C 779.830098 237.224348 803.910509 227.249915 821.662622 209.497802 
+C 839.414734 191.74569 849.389167 167.665279 849.389167 142.56 
+C 849.389167 117.454721 839.414734 93.37431 821.662622 75.622198 
+C 803.910509 57.870085 779.830098 47.895652 754.724819 47.895652 
+C 729.619541 47.895652 705.53913 57.870085 687.787017 75.622198 
+C 670.034904 93.37431 660.060471 117.454721 660.060471 142.56 
+C 660.060471 167.665279 670.034904 191.74569 687.787017 209.497802 
+C 705.53913 227.249915 729.619541 237.224348 754.724819 237.224348 
+L 754.724819 237.224348 
+z
+" clip-path="url(#p6872192c23)" style="fill: none; stroke: #b6bdc5; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 754.724819 188.069872 
+C 766.794178 188.069872 778.370833 183.274664 786.905158 174.740339 
+C 795.439484 166.206013 800.234691 154.629359 800.234691 142.56 
+C 800.234691 130.490641 795.439484 118.913987 786.905158 110.379661 
+C 778.370833 101.845336 766.794178 97.050128 754.724819 97.050128 
+C 742.65546 97.050128 731.078806 101.845336 722.54448 110.379661 
+C 714.010155 118.913987 709.214948 130.490641 709.214948 142.56 
+C 709.214948 154.629359 714.010155 166.206013 722.54448 174.740339 
+C 731.078806 183.274664 742.65546 188.069872 754.724819 188.069872 
+L 754.724819 188.069872 
+z
+" clip-path="url(#p6872192c23)" style="fill: none; stroke: #b6bdc5; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 754.724819 142.56 
+L 849.389167 142.56 
+" clip-path="url(#p6872192c23)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #555d65"/>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #4b4f54" x="754.724819" y="161.49287" transform="rotate(-0 754.724819 161.49287)">太阳</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #247b9e" x="800.234691" y="127.413704" transform="rotate(-0 800.234691 127.413704)">小行星</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'SimHei', sans-serif; text-anchor: middle; fill: #a35021" x="849.389167" y="161.49287" transform="rotate(-0 849.389167 161.49287)">木星</text>
+   </g>
+   <g id="text_12">
+    <!-- $t=P_{\mathrm{J}}$ -->
+    <g transform="translate(737.504819 29.356)">
+     <text>
+      <tspan x="0" y="-0.796875" style="font-style: oblique; font-size: 14px; font-family: 'DejaVu Sans'">t</tspan>
+      <tspan x="22.674805" y="-0.796875" style="font-style: oblique; font-size: 14px; font-family: 'DejaVu Sans'">P</tspan>
+      <tspan x="8.216797" y="-0.796875" style="font-size: 14px; font-family: 'DejaVu Sans'">=</tspan>
+      <tspan x="31.117188" y="1.5" style="font-size: 9.8px; font-family: 'DejaVu Sans'">J</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="PathCollection_7">
+    <g clip-path="url(#p6872192c23)">
+     <use xlink:href="#m94c7f30671" x="754.724819" y="142.56" style="fill: #ebc13e; stroke: #ebc13e"/>
+    </g>
+   </g>
+   <g id="PathCollection_8">
+    <g clip-path="url(#p6872192c23)">
+     <use xlink:href="#m58c7e6dfd5" x="800.234691" y="142.56" style="fill: #247b9e; stroke: #247b9e"/>
+    </g>
+   </g>
+   <g id="PathCollection_9">
+    <g clip-path="url(#p6872192c23)">
+     <use xlink:href="#mfd91cc736c" x="849.389167" y="142.56" style="fill: #b56430; stroke: #b56430"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p310cbcd970">
+   <rect x="29.411529" y="33.696" width="246.127304" height="217.728"/>
+  </clipPath>
+  <clipPath id="p42a5e2fd76">
+   <rect x="330.536348" y="33.696" width="246.127304" height="217.728"/>
+  </clipPath>
+  <clipPath id="p6872192c23">
+   <rect x="631.661167" y="33.696" width="246.127304" height="217.728"/>
+  </clipPath>
+ </defs>
+</svg>

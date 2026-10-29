@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600"><rect width="100%" height="100%" fill="white"/>
+<text x="600" y="38" font-family="Microsoft YaHei" font-size="32" fill="#18334c" text-anchor="middle" dominant-baseline="central">折射式</text>
+<line x1="70" y1="320" x2="1140" y2="320" stroke="#aaaaaa" stroke-width="3" stroke-dasharray="10 7"/>
+<line x1="260" y1="160" x2="260" y2="480" stroke="#285d80" stroke-width="10"/>
+<text x="260" y="120" font-family="Microsoft YaHei" font-size="28" fill="#18334c" text-anchor="middle" dominant-baseline="central">物镜透镜</text>
+<line x1="890" y1="240" x2="890" y2="400" stroke="#285d80" stroke-width="8"/>
+<text x="910" y="440" font-family="Microsoft YaHei" font-size="28" fill="#18334c" text-anchor="middle" dominant-baseline="central">目镜</text>
+<line x1="70" y1="210" x2="260" y2="210" stroke="#285d80" stroke-width="3"/>
+<polygon points="260,210 245.26302409595382,216.2306934769384 245.26302409595382,203.7693065230616" fill="#285d80" stroke="#285d80"/>
+<line x1="260" y1="210" x2="810" y2="320" stroke="#285d80" stroke-width="3"/>
+<line x1="810" y1="320" x2="890" y2="336.0" stroke="#285d80" stroke-width="3"/>
+<line x1="890" y1="336.0" x2="1130" y2="336.0" stroke="#285d80" stroke-width="3"/>
+<polygon points="1130,336.0 1115.2630240959538,342.2306934769384 1115.2630240959538,329.7693065230616" fill="#285d80" stroke="#285d80"/>
+<line x1="70" y1="430" x2="260" y2="430" stroke="#285d80" stroke-width="3"/>
+<polygon points="260,430 245.26302409595382,436.2306934769384 245.26302409595382,423.7693065230616" fill="#285d80" stroke="#285d80"/>
+<line x1="260" y1="430" x2="810" y2="320" stroke="#285d80" stroke-width="3"/>
+<line x1="810" y1="320" x2="890" y2="304.0" stroke="#285d80" stroke-width="3"/>
+<line x1="890" y1="304.0" x2="1130" y2="304.0" stroke="#285d80" stroke-width="3"/>
+<polygon points="1130,304.0 1115.2630240959538,310.2306934769384 1115.2630240959538,297.7693065230616" fill="#285d80" stroke="#285d80"/>
+<circle cx="810" cy="320" r="7" fill="#bc3446" stroke="#285d80" stroke-width="3"/>
+<text x="770" y="375" font-family="Microsoft YaHei" font-size="26" fill="#18334c" text-anchor="middle" dominant-baseline="central">实像焦平面</text>
+<line x1="260" y1="510" x2="810" y2="510" stroke="#285d80" stroke-width="3"/>
+<polygon points="810,510 795.2630240959538,516.2306934769384 795.2630240959538,503.7693065230616" fill="#285d80" stroke="#285d80"/>
+<text x="535" y="555" font-family="Microsoft YaHei" font-size="28" fill="#18334c" text-anchor="middle" dominant-baseline="central">物镜焦距 F</text>
+<line x1="220" y1="160" x2="220" y2="480" stroke="#285d80" stroke-width="3"/>
+<text x="125" y="475" font-family="Microsoft YaHei" font-size="26" fill="#18334c" text-anchor="middle" dominant-baseline="central">口径 D</text></svg>

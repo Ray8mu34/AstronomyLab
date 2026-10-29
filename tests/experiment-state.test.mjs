@@ -47,10 +47,33 @@ function rootForMode(slug,mode,win=new MockWindow()){
  return root;
 }
 
-test('all eleven experiments and 43 modes have explicit public-control adapters',()=>{
+test('all nineteen experiments and 62 modes have explicit public-control adapters',()=>{
  assert.deepEqual(Object.keys(experimentAdapters).sort(),Object.keys(confirmedModes).sort());
  let count=0;for(const [slug,modes]of Object.entries(confirmedModes)){for(const mode of modes){assert.equal(currentExperimentMode(slug,rootForMode(slug,mode)),mode);count++;}const names=experimentAdapters[slug].controls.map(c=>c.name);assert.equal(new Set(names).size,names.length,slug);}
- assert.equal(count,43);
+ assert.equal(count,62);
+});
+
+test('tidal history preserves both exact clocks and restores a paused model without range rounding',async()=>{
+ const {defaultTideState,validateTideState,createTideTrajectory}=await import('../web/observatory/modules/tides-physics.mjs');
+ for(const mode of confirmedModes.tides){
+  const model={...defaultTideState(mode),lockTime:83.123456789,earthTime:473.987654321};
+  assert.deepEqual(validateExperimentModel('tides',mode,model),validateTideState(mode,model));
+  const win=new MockWindow(),source=rootForMode('tides',mode,win);
+  range(source,'lockTime','83.1','0','240','.1');range(source,'earthTime','474','0','1200','.1');
+  registerExperimentModel(source,{getState:()=>model});captureExperiment('tides',source);
+  const target=rootForMode('tides',mode,win);let restored;
+  range(target,'lockTime','0','0','240','.1',()=>assert.fail('model clock must remain exact'));
+  range(target,'earthTime','0','0','1200','.1',()=>assert.fail('inactive model clock must remain exact'));
+  const play=target.add('[data-play]',{type:'button',attrs:{'aria-pressed':'true'},onApply:(_,node)=>node.setAttribute('aria-pressed','false')});
+  registerExperimentModel(target,{applyState:value=>{restored=value;return true;}});
+  assert.equal(await restoreExperiment('tides',target),true);assert.deepEqual(restored,model);assert.equal(play.getAttribute('aria-pressed'),'false');
+  const prefix=mode==='locking'?'lock':'earth';
+  const trajectory=createTideTrajectory(mode,model[prefix+'Spin'],model[prefix+'Coupling']);
+  assert.deepEqual(trajectory.at(restored[prefix+'Time']),trajectory.at(model[prefix+'Time']));
+  for(const bad of [{mode:mode==='locking'?'earth-moon':'locking'},{earthTime:1201},{lockTime:NaN},{lockCoupling:0},{earthSpin:'27.3'},{kind:'other'}]){
+   const value={...model,...bad};assert.equal(validateExperimentModel('tides',mode,value),null);assert.equal(validateTideState(mode,value),null);
+  }
+ }
 });
 test('scientific snapshots retain circular/escape inputs at all four heights independently of rounded native values',async()=>{
  for(const height of [100,200,1200,5000])for(const preset of ['vc','escape']){

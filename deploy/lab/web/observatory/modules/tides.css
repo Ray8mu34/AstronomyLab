@@ -1,0 +1,52 @@
+.tides-lab{max-width:1440px;margin:0 auto;padding:0 clamp(16px,3.5vw,52px) 44px;color:var(--al-text);font-family:var(--al-font)}
+.tides-lab [hidden]{display:none!important}
+.tides-lab figure{min-width:0;margin:0}
+.tides-lab canvas{display:block;width:100%;max-width:100%}
+.tides-lab .tides-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:28px 0 18px}
+.tides-heading h1{font-size:var(--al-title-tool);line-height:1.4;margin:0;font-weight:600}
+.tides-heading .tides-identity{font-size:var(--al-label);color:var(--al-muted);margin:0 0 4px}
+.tides-initial{display:flex;gap:24px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.tides-initial>.al-parameter{width:min(460px,52%);flex:1}
+.tides-presets{display:flex;gap:8px;flex-wrap:wrap}
+.tides-observation{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(18px,3vw,48px);align-items:center}
+.tides-geometry [data-scene]{height:356px}
+.tides-geometry figcaption{display:flex;flex-wrap:wrap;justify-content:space-around;gap:12px;color:var(--al-muted);font-size:var(--al-label);padding:12px 0}
+.tides-geometry figcaption span{display:flex;align-items:baseline;gap:10px}
+.tides-geometry output{font-family:var(--al-numeric);font-size:var(--al-readout);color:var(--al-text)}
+.tides-relations{min-width:0}
+.tides-relations canvas{height:246px}
+.tides-relations figure+figure{margin-top:8px}
+.tides-timeline{padding:18px 0 4px;border-top:1px solid var(--al-line)}
+.tides-current{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px 26px;margin:6px 0 24px;font-size:var(--al-label);color:var(--al-muted)}
+.tides-current output{font-family:var(--al-numeric);color:var(--al-text);margin-left:8px}
+.tides-unit{margin-left:8px}
+.tides-method{margin-top:12px}
+.tides-method p{max-width:85ch;font-size:var(--al-label);line-height:1.8}
+.tides-condition-controls{max-width:420px;margin:6px 0 20px}
+.tides-equations{font-family:var(--al-numeric);font-size:var(--al-label);line-height:2.1;overflow-wrap:anywhere}
+.tides-lab .tides-play{min-width:100px}
+@media(max-width:900px){
+ .tides-observation{grid-template-columns:minmax(0,1fr)}
+ .tides-geometry{max-width:680px;width:100%;margin:auto!important}
+ .tides-geometry [data-scene]{height:330px}
+ .tides-relations{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+ .tides-relations figure+figure{margin-top:0}
+ .tides-initial{align-items:flex-start;gap:16px}
+ .tides-current{justify-content:flex-start}
+}
+@media(max-width:600px){
+ .tides-lab{padding-inline:16px}
+ .tides-lab .tides-heading{margin-top:22px;margin-bottom:16px}
+ .tides-initial{display:block}
+ .tides-initial>.al-parameter{width:100%}
+ .tides-presets{margin:4px 0 12px;gap:6px}
+ .tides-presets .al-button{padding-inline:10px}
+ .tides-geometry [data-scene]{height:302px}
+ .tides-geometry figcaption{justify-content:space-between;gap:10px}
+ .tides-geometry output{font-size:1.25rem}
+ .tides-relations{display:block}
+ .tides-relations canvas{height:254px}
+ .tides-relations figure+figure{margin-top:12px}
+ .tides-current{gap:8px 18px}
+ .tides-timeline{padding-top:12px}
+}

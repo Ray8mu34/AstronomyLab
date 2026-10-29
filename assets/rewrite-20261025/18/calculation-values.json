@@ -1,0 +1,16 @@
+{
+  "rotation_model": {
+    "thin_circular_ring": true,
+    "vc_km_s": 120.0,
+    "inclination_deg": 55.0,
+    "vlos_peak_km_s": 98.29824531467902
+  },
+  "distance_modulus": 24.622,
+  "distance_pc": 840233.5139076924,
+  "adopted_distance_kpc": 840.0,
+  "pc_per_arcsec": 4.072434921320102,
+  "field_width_kpc_68_01_arcmin": 16.61797793993881,
+  "example_luminosity_W": 8.442470010284902e+30,
+  "example_spherical_mass_Msun": 50220878865.38014,
+  "example_orbit_period_yr": 511970810.0616016
+}

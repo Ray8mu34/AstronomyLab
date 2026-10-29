@@ -6,6 +6,9 @@ import {positionAt,orbitPoints,mapPosition,displayRadius,lightSeconds,DAY_MS,rad
 const $=id=>document.getElementById(id);
 // Keep the literal <body> entry used by the unified server's navigation injection.
 document.body.classList.add('solar-module');
+// Keep the astronomical scene and its colour-keyed comparisons on their
+// established dark field while the surrounding controls follow the theme.
+document.querySelector('.universe').dataset.alThemeFixed='dark';
 const stage=$('stage'), labels=$('labels');
 const state={mode:'explore',selected:null,topic:'system',tab:'overview',readingExpanded:false,ms:Date.parse('2026-10-03T00:00:00Z'),playing:!matchMedia('(prefers-reduced-motion: reduce)').matches,speed:10,orbits:true,belts:true,comparisonMetric:'radius',comparisonScale:'linear',preset:null};
 const metricsNumber=(v,d=2)=>v.toLocaleString('zh-CN',{maximumFractionDigits:d});
@@ -98,7 +101,7 @@ function renderContent(){
  const item=current();
  document.querySelector('.universe').classList.toggle('has-selection',Boolean(state.selected));
  $('object-type').textContent=item.type;
- $('object-header').innerHTML=`<h2>${item.name.replaceAll('\n','<br>')}</h2><p class="lead">${item.lead}</p>`;
+ $('object-header').innerHTML=`<h2>${item.name.replaceAll('\n','<br>')}</h2>${!state.selected&&state.topic==='system'?'':`<p class="lead">${item.lead}</p>`}`;
  $('clear-selection').hidden=!state.selected&&state.topic==='system';
  renderMetrics();
  let html='';

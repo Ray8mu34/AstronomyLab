@@ -1,0 +1,35 @@
+.si-shell{max-width:1440px;margin:auto;padding:0 clamp(16px,3.5vw,50px) 32px;color:var(--al-text)}
+.si-shell [hidden]{display:none!important}
+.si-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px 24px;margin:28px 0 24px}
+.si-heading h1{margin:0;font-size:var(--al-title-tool);line-height:1.4}
+.si-heading>span{color:var(--al-muted);font-size:var(--al-label)}
+.si-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.si-shell figure{min-width:0;margin:0}
+.si-shell figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:var(--al-label)}
+.si-shell figcaption span{font-size:var(--al-tick);color:var(--al-muted)}
+.si-shell canvas{display:block;width:100%;height:365px}
+.si-local-read{display:flex;gap:10px 20px;flex-wrap:wrap;justify-content:space-between;min-height:32px;font:400 var(--al-tick)/1.6 var(--al-numeric)}
+.si-controls{display:grid;gap:18px 26px;margin:24px 0 8px}
+.si-controls-four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.si-controls-three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.si-thermal-controls{grid-template-columns:minmax(0,2fr) minmax(160px,1fr);max-width:850px}
+.si-shell .si-parameter{display:block;min-width:0;margin:0;font-size:var(--al-label)}
+.si-parameter>span{display:flex;gap:10px;justify-content:space-between;align-items:baseline}
+.si-parameter output{font-family:var(--al-numeric)}
+.si-shell .si-parameter input,.si-shell .si-parameter select{display:block;width:100%;min-width:0;min-height:44px;margin:7px 0 0}
+.si-presets{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 22px}
+.si-presets button{min-height:44px;padding:8px 14px;border:1px solid var(--al-control-border);border-radius:var(--al-radius-control);background:transparent;color:var(--al-text);font-size:var(--al-label);cursor:pointer}
+.si-presets button:hover{background:var(--al-page);border-color:var(--al-text)}
+.si-energy{border-top:1px solid var(--al-line);padding-top:18px;max-width:760px}
+.si-shell .si-energy canvas{height:290px}
+.si-shell [data-si-feedback]{height:440px}
+.si-thermal-plots{display:grid;gap:20px}
+.si-thermal-plots canvas{height:235px}
+.si-time{border-top:1px solid var(--al-line);padding-top:16px;margin-top:14px}
+.si-source{margin-top:26px}
+.si-method{max-width:900px}
+.si-method p{margin:14px 0}
+.si-equation{font-family:var(--al-numeric);overflow-wrap:anywhere}
+@media(max-width:900px){.si-controls-four{grid-template-columns:repeat(2,minmax(0,1fr))}.si-two{gap:18px}.si-shell canvas{height:325px}.si-shell [data-si-feedback]{height:410px}}
+@media(max-width:650px){.si-two{grid-template-columns:1fr;gap:22px}.si-controls-four,.si-controls-three{grid-template-columns:repeat(2,minmax(0,1fr))}.si-controls-three>.si-parameter:last-child{grid-column:1/-1}.si-shell canvas{height:310px}.si-shell [data-si-feedback]{height:310px}.si-thermal-plots{grid-template-columns:1fr}.si-thermal-plots canvas{height:245px}.si-thermal-controls{grid-template-columns:1fr}.si-heading{margin:20px 0;gap:6px}.si-local-read{justify-content:flex-start}.si-shell [data-si-parcel]{height:340px}}
+@media(max-width:400px){.si-controls-four,.si-controls-three{grid-template-columns:1fr}.si-heading h1{font-size:24px}.si-heading>span{font-size:13px}.si-shell [data-si-gradient]{height:345px}.si-presets button{font-size:14px;padding:8px 11px}.si-shell .si-energy canvas{height:345px}}

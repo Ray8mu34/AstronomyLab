@@ -8,9 +8,9 @@ import {learningPaths} from '../web/observatory/shared/learning-paths.js';
 import {experimentAdapters} from '../web/observatory/shared/experiment-state.js';
 import {bindControls,syncControls,assetURL,startVisibleLoop} from '../web/observatory/shared/core-controls.js';
 
-test('independent registry preserves eleven tools, 43 stable modes and direct URLs',()=>{
- assert.equal(labs.length,11);assert.equal(Object.values(confirmedModes).flat().length,43);
- assert.equal(new Set(labs.map(tool=>tool.id)).size,11);
+test('independent registry includes nineteen tools, 62 modes and direct URLs',()=>{
+ assert.equal(labs.length,19);assert.equal(Object.values(confirmedModes).flat().length,62);
+ assert.equal(new Set(labs.map(tool=>tool.id)).size,19);
  for(const tool of labs){
   assert.equal(tool.id,tool.slug);assert.ok(topics.some(topic=>topic.key===tool.topic));
   assert.equal(tool.entry,labURL(tool.id));assert.deepEqual(tool.modes,confirmedModes[tool.id]);
@@ -28,7 +28,7 @@ test('legacy content remains isolated and keeps sixteen entries and 45 paragraph
  for(const path of learningPaths)assert.ok(confirmedModes[path.slug].includes(path.mode));
 });
 test('each mode has concrete independent context, operation and boundary evidence recipe',()=>{
- const coverage=modeCoverage();assert.equal(coverage.length,43);assert.equal(new Set(coverage.map(row=>row.slug+'/'+row.mode)).size,43);
+ const coverage=modeCoverage();assert.equal(coverage.length,62);assert.equal(new Set(coverage.map(row=>row.slug+'/'+row.mode)).size,62);
  for(const row of coverage){
   assert.equal(row.depth,'基础适配');
   for(const field of ['title','question','action','observe','boundary'])assert.ok(typeof row[field]==='string'&&row[field].length>=(field==='title'?2:6),row.slug+'/'+row.mode+':'+field);
@@ -40,7 +40,7 @@ test('each mode has concrete independent context, operation and boundary evidenc
   }
  }
  assert.equal(getModeContext('__proto__','constructor'),null);assert.equal(getModeContext('light','unknown'),null);
- assert.equal(Object.values(modeContexts).flatMap(Object.values).length,43);
+ assert.equal(Object.values(modeContexts).flatMap(Object.values).length,62);
 });
 test('state adapters use the neutral registry and preserve a teaching image noise seed',async()=>{
  assert.deepEqual(Object.keys(experimentAdapters).sort(),Object.keys(confirmedModes).sort());

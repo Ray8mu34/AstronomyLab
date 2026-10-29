@@ -36,12 +36,19 @@ function graph(entries){
 }
 
 test('R1 keeps all eleven public tool IDs, all 43 mode IDs and ordinary mode URLs',()=>{
- assert.deepEqual(Object.keys(confirmedModes).sort(),Object.keys(expected).sort());
+ assert(Object.keys(expected).every(slug=>Object.hasOwn(confirmedModes,slug)));
  for(const [slug,modes] of Object.entries(expected)){
   assert.deepEqual([...confirmedModes[slug]].sort(),[...modes].sort(),slug);
   for(const mode of modes){const url=new URL(experimentURL(slug,mode),'http://local.test');assert.equal(url.searchParams.get('mode'),mode);assert.match(url.pathname,new RegExp('^/(?:labs?)/'+slug+'/?$'));}
  }
- assert.equal(Object.values(confirmedModes).flat().length,43);
+ assert.equal(Object.keys(expected).flatMap(slug=>confirmedModes[slug]).length,43);
+});
+
+test('eight additive tools expose the nineteen requested scientific modes',()=>{
+ const added={'galaxy-measurements':['distance','rotation','mass'],cosmology:['expansion','distance'],tides:['locking','earth-moon'],'planet-environments':['balance','atmosphere','escape'],lunisolar:['calendar','intercalation'],'image-calibration':['calibration','photometry'],'stellar-interior':['equilibrium','thermostat','transport'],'supernova-light':['diffusion','radioactivity']};
+ assert.deepEqual(Object.keys(confirmedModes).sort(),[...Object.keys(expected),...Object.keys(added)].sort());
+ for(const [slug,modes] of Object.entries(added))assert.deepEqual(confirmedModes[slug],modes);
+ assert.equal(Object.values(confirmedModes).flat().length,62);
 });
 
 test('tool registry has no course numbers, lesson paths or article mapping fields',()=>{
@@ -52,7 +59,7 @@ test('tool registry has no course numbers, lesson paths or article mapping field
 
 test('tool entry and every mounted module stay outside the isolated reader import graph',()=>{
  const entry=path.join(root,'web/observatory/app.js');
- const mounted=Object.keys(expected).filter(slug=>!['solar-system','earth-moon'].includes(slug)).map(slug=>path.join(root,'web/observatory/modules',slug+'.js'));
+ const mounted=Object.keys(confirmedModes).filter(slug=>!['solar-system','earth-moon'].includes(slug)).map(slug=>path.join(root,'web/observatory/modules',slug+'.js'));
  const files=graph([entry,...mounted,path.join(root,'web/observatory/shared/navigation.js'),path.join(root,'web/observatory/shared/tool-start.js'),path.join(root,'web/solar-system/app.js'),path.join(root,'web/earth-moon/app.js')]);
  assert.deepEqual(files.filter(file=>forbidden.test('/'+file)),[],'Course dependencies are still transitively loaded by tools');
  for(const file of files.filter(file=>!file.includes('/vendor/'))){

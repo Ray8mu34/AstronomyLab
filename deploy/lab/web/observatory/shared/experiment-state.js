@@ -16,6 +16,14 @@ const extra=(name,selector,event='input')=>({name,selector,event});
 const choice=(name,attribute,values,stage='after')=>({name,attribute,values:values.split(' '),stage});
 const modeChoice=attribute=>({attribute});
 export const experimentAdapters={
+ lunisolar:{mode:modeChoice('data-mode'),controls:keys('years cycle leapMonth commonMonth'),choices:[],pause:[]},
+ 'image-calibration':{mode:modeChoice('data-mode'),controls:keys('exposure sky darkRate flatStrength masterFrames noise seed subtractBias subtractDark divideFlat star aperture pixelX pixelY white'),choices:[],pause:[]},
+ 'stellar-interior':{mode:modeChoice('data-mode'),controls:keys('mass radius shell support initialRadius reaction thermalTime opacity flux displacement'),choices:[],pause:[]},
+ 'supernova-light':{mode:modeChoice('data-mode'),controls:keys('nickelMass ejectaMass opacity velocity day'),choices:[],pause:[]},
+ 'galaxy-measurements':{mode:modeChoice('data-mode'),controls:keys('mu cepheid inclination azimuth theta stellarScale haloScale'),choices:[],pause:[]},
+ cosmology:{mode:modeChoice('data-mode'),controls:keys('scale observer redshift hubble omegaMatter'),choices:[],pause:[]},
+ tides:{mode:modeChoice('data-mode'),controls:keys('lockSpin lockCoupling lockTime earthSpin earthCoupling earthTime'),choices:[],pause:[{selector:'[data-play]'}]},
+ 'planet-environments':{mode:modeChoice('data-mode'),controls:keys('distance albedo emissivity gas temperature mass radius altitude speedScale'),choices:[],pause:[]},
  'solar-system':{mode:modeChoice('data-mode'),controls:[extra('date','#date','change'),extra('speed','#speed','change'),extra('metric','#comparison-metric','change'),extra('scale','#comparison-scale','change'),extra('orbits','#orbits-toggle','change'),extra('belts','#belts-toggle','change')],choices:[choice('body','data-body','sun mercury venus earth mars jupiter saturn uranus neptune'),choice('topic','data-topic','asteroids kuiper'),choice('tab','data-tab','overview deep data')],pause:[{selector:'#play'}]},
  'earth-moon':{mode:modeChoice('data-mode'),controls:[extra('inclination','#inclination'),extra('node','#node'),extra('distance','#distance'),extra('east','#east'),extra('north','#north'),extra('libration','#libration','change'),extra('red','#red','change'),extra('speed','#speed','change'),extra('day','#day')],choices:[choice('spin','data-spin','sync fixed'),{name:'trueScale',selector:'#scale',toggle:true},{name:'observe',selector:'#observe-toggle',values:['moon','sun'],read:root=>root.querySelector('#solar-disc')?.hidden===false?'sun':'moon',toggle:true}],pause:[{selector:'#play'}]},
  alignments:{mode:modeChoice('data-mode'),controls:keys('inclination node day radius impact position'),choices:[],pause:[{selector:'#alignment-play'}]},
@@ -51,6 +59,10 @@ export function validateExperimentModel(slug,mode,value){
   if(value.mode!==mode)return null;
   bounds={obliquity:[0,45]};
  }
+ else if(slug==='tides'&&confirmedModes.tides.includes(mode)&&value.kind==='tidal-evolution'){
+  if(value.mode!==mode)return null;
+  bounds={lockSpin:[0,4],lockCoupling:[.01,.08],lockTime:[0,240],earthSpin:[.2,40],earthCoupling:[.01,.08],earthTime:[0,1200]};
+ }
  else return null;
  const result={version:1,kind:value.kind};
  for(const [key,[min,max]]of Object.entries(bounds)){
@@ -58,10 +70,11 @@ export function validateExperimentModel(slug,mode,value){
   result[key]=value[key];
  }
  if(value.kind==='orbit-conics')result.view=value.view;
- if(['planet-alignments','sky-conditions'].includes(value.kind))result.mode=mode;
+ if(['planet-alignments','sky-conditions','tidal-evolution'].includes(value.kind))result.mode=mode;
  return result;
 }
 const modelControls={
+ 'tidal-evolution':new Set(['lockSpin','lockCoupling','lockTime','earthSpin','earthCoupling','earthTime']),
  'orbit-conics':new Set(['conic:height','conic:speed','conic:totalHours','conic:rateHours','conic:progress']),
  'jupiter-mass':new Set(['a','period','errorA','errorP']),
  'galactic-direction':new Set(['longitude','latitude']),

@@ -20,7 +20,7 @@ const retiredModules=new Set([
  'sky-precession-ui.js','sky-precession-ui.css','sky-pilot.css',
 ]);
 directory('web/observatory/modules','/modules',{filter:f=>/\.(m?js|css)$/.test(f)&&!retiredModules.has(f)});
-for(const slug of ['alignments','sky','optics','light','imaging','stars','galaxy','orbits','measure','sky-motion','orbit-conics','landing-staging-sources'])add('web/observatory/sources/'+slug+'.md','/sources/'+slug+'.md','source-record');
+for(const slug of ['alignments','sky','optics','light','imaging','stars','galaxy','orbits','measure','galaxy-measurements','cosmology','tides','planet-environments','lunisolar','image-calibration','stellar-interior','supernova-light','sky-motion','orbit-conics','landing-staging-sources'])add('web/observatory/sources/'+slug+'.md','/sources/'+slug+'.md','source-record');
 for(const d of ['sky/stars.json','sky/hip2-subset.tsv','sky/hip2-ReadMe.txt','sky/hip1-ReadMe.txt','sky/vizier-license.html','stars/tracks.json','stars/interpolator-source.html','stars/interpolator-result.html','galaxy/planck-equirectangular.jpg','galaxy/2mass-allsky.jpg','galaxy/firas_monopole_spec_v1.txt','galaxy/manifest.json','imaging/502-linear.f32','imaging/656-linear.f32','imaging/673-linear.f32','imaging/m17-metadata.json','orbits/parameters.json','measure/parameters.json'])add('web/observatory/data/'+d,'/data/'+d,'science-data-or-record');
 for(const file of ['moon-first-quarter-640.webp','moon-first-quarter-1024.webp','pillars-640.webp','assets.json'])add('web/observatory/data/home/'+file,'/data/home/'+file,'entry-image-or-attribution');
 for(const slug of ['solar-system','earth-moon']){

@@ -18,10 +18,12 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 from datetime import datetime, timezone
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
 import zipfile
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 QA = ROOT / 'build/qa/lab-refactor/lectures'
@@ -35,6 +37,35 @@ def digest(path):
 def write_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+def lecture_catalog():
+    catalog = json.loads((ROOT / 'course/chapters.json').read_text(encoding='utf-8'))
+    chapters = catalog['chapters']
+    if [c['number'] for c in chapters] != list(range(1, len(chapters) + 1)):
+        raise ValueError('Chapter numbers must be unique and consecutive')
+    paths = [(ROOT / c['path']).resolve() for c in chapters]
+    if len(set(paths)) != len(paths) or any(not p.is_relative_to(ROOT / 'course') or p.name != 'lesson.md' or not p.is_file() for p in paths):
+        raise ValueError('Catalog has duplicate, missing or out-of-scope chapter paths')
+    if set(paths) != {p.resolve() for p in (ROOT / 'course').glob('*/lesson.md')}:
+        raise ValueError('Catalog and actual chapter sources differ')
+    return catalog, paths
+
+def approved_digests(baseline_hashes):
+    """Keep the original baseline and apply only individually authorized endpoints."""
+    approved = dict(baseline_hashes)
+    file = ROOT / 'source-protection-amendments.json'
+    changes = json.loads(file.read_text(encoding='utf-8'))['changes'] if file.is_file() else []
+    for change in changes:
+        target = change.get('currentPath', change['path'])
+        if baseline_hashes.get(change['path']) != change['before']:
+            raise ValueError('Amendment original digest differs: ' + change['path'])
+        if not change.get('task') or not change.get('reason') or not re.fullmatch('[a-f0-9]{64}', change['after']):
+            raise ValueError('Incomplete authorization: ' + change['path'])
+        resolved = (ROOT / target).resolve()
+        if not resolved.is_relative_to(ROOT):
+            raise ValueError('Amendment target outside project')
+        approved[target] = change['after']
+    return approved
 
 def css_links(text):
     urls = re.findall(r'url\(\s*[\"\x27]?([^\)\"\x27]+)[\"\x27]?\s*\)', text, flags=re.I)
@@ -109,7 +140,7 @@ class Collector:
             return 'non-public-content'
         if path.suffix.lower() in ('.pem', '.key', '.pfx', '.zip', '.fits', '.fit', '.eep', '.py', '.ps1', '.cmd', '.bat'):
             return 'non-public-maintenance-or-raw-archive'
-        if path in self.lectures or rel == 'THIRD_PARTY.md':
+        if path in self.lectures or rel in ('THIRD_PARTY.md', 'course/README.md', 'course/chapters.json', 'course/experiments.json', 'course/experiments.md'):
             return None
         if parts[0] == 'assets':
             return None
@@ -327,12 +358,31 @@ class RewriteHTML(HTMLParser):
     def handle_comment(self, value): self.output.append('<!--' + value + '-->')
     def handle_decl(self, value): self.output.append('<!' + value + '>')
 
-def render_web(collector, lectures, out):
+def rewrite_svg(text, transform):
+    # SVG is case-sensitive XML: HTMLParser would damage viewBox, clipPath,
+    # gradients and marker sizing. Preserve those names while remapping URLs.
+    ET.register_namespace('', 'http://www.w3.org/2000/svg')
+    ET.register_namespace('xlink', 'http://www.w3.org/1999/xlink')
+    parser = ET.XMLParser(target=ET.TreeBuilder(insert_comments=True))
+    tree = ET.fromstring(text, parser=parser)
+    for node in tree.iter():
+        for name, value in list(node.attrib.items()):
+            if name.rsplit('}', 1)[-1] in ('href', 'src', 'poster', 'data'):
+                node.set(name, transform(value))
+            elif name == 'style' or 'url(' in value:
+                node.set(name, rewrite_css(value, transform))
+        if isinstance(node.tag, str) and node.tag.rsplit('}', 1)[-1] == 'style' and node.text:
+            node.text = rewrite_css(node.text, transform)
+    return ET.tostring(tree, encoding='unicode')
+
+def render_web(collector, lectures, out, catalog):
     owned_output(out)
+    experiment_source = ROOT / 'course/experiments.md'
+    has_experiments = experiment_source.is_file() and (ROOT / 'course/experiments.json').is_file()
     mapping = {}
     lesson_names = {}
     for number, source in enumerate(lectures, 1):
-        mapping[source] = out / f'reading/L{number:02}.html'
+        mapping[source] = out / f'chapters/{number:02}.html'
         _, ast, _ = collector.builder.ast(source)
         lesson_names[number] = next((existing.plain(n) for n in ast['blocks'] if n['t'] == 'Header'), f'L{number:02}')
     for rel in collector.files:
@@ -340,8 +390,14 @@ def render_web(collector, lectures, out):
         mapping.setdefault(source, out / ('linked/' + rel) if source.suffix.lower() == '.md' else out / rel)
         if source.suffix.lower() == '.md' and source not in lectures:
             mapping[source] = mapping[source].with_suffix('.html')
+    if has_experiments:
+        mapping[experiment_source.resolve()] = out / 'experiments.html'
     errors, warnings, normalizations = [], [], []
     def rewrite(url, source, destination):
+        # An SVG <use> must keep a local fragment; an external self-reference
+        # is suppressed when browsers load SVG through an image element.
+        if url.startswith('#'):
+            return url
         loc = collector.resolve(url, source)
         if loc is None:
             return url
@@ -354,6 +410,8 @@ def render_web(collector, lectures, out):
         return urlunsplit(('', '', quote(Path(os.path.relpath(dest, destination.parent)).as_posix(), safe='/:'), query, fragment))
     for source, destination in mapping.items():
         destination.parent.mkdir(parents=True, exist_ok=True)
+        if has_experiments and source == experiment_source.resolve():
+            continue  # The structured mapping generates this companion below.
         transform = lambda value, source=source, destination=destination: rewrite(value, source, destination)
         if source.suffix.lower() == '.md':
             _, ast, _ = collector.builder.ast(source)
@@ -373,16 +431,23 @@ def render_web(collector, lectures, out):
                     node['c'][1] = normalized
             title = next((existing.plain(n) for n in ast['blocks'] if n['t'] == 'Header'), source.stem)
             stylesheet = Path(os.path.relpath(out / 'article-reading.css', destination.parent)).as_posix()
-            result = subprocess.run([str(existing.PANDOC), '--from=json', '--to=html5', '--standalone', '--mathml', '--toc', '--toc-depth=2',
+            result = subprocess.run([str(existing.PANDOC), '--from=json', '--to=html5', '--standalone', '--math-method=mathml', '--toc', '--toc-depth=2',
                                      '--section-divs', '--wrap=none', '--css=' + stylesheet, '--metadata=lang:en', '--variable=lang:zh-CN',
                                      '--metadata=toc-title:目录', '--metadata=pagetitle:' + title], input=json.dumps(ast, ensure_ascii=False), capture_output=True, text=True, encoding='utf-8')
             if result.returncode or 'Could not convert TeX math' in result.stderr:
                 errors.append({'source': collector.rel(source), 'error': result.stderr})
             if result.stderr.strip(): warnings.append({'source': collector.rel(source), 'stderr': result.stderr.strip()})
             home = Path(os.path.relpath(out / 'index.html', destination.parent)).as_posix()
-            nav = '<nav class="reading-nav" aria-label="阅读导航"><a href="' + home + '">文章目录</a><span>独立静态阅读副本 · 原文维护源为 lesson.md</span></nav>'
+            related = ''
+            if has_experiments and source in lectures:
+                number = lectures.index(source) + 1
+                target = Path(os.path.relpath(out / 'experiments.html', destination.parent)).as_posix()
+                related = f'<a href="{target}#chapter-{number:02}">配套实验</a>'
+            nav = '<nav class="reading-nav" aria-label="阅读导航"><a href="' + home + '">文章目录</a>' + related + '</nav>'
             destination.write_text(result.stdout.replace('<body>', '<body>\n' + nav, 1), encoding='utf-8')
-        elif source.suffix.lower() in ('.html', '.htm', '.svg'):
+        elif source.suffix.lower() == '.svg':
+            destination.write_text(rewrite_svg(source.read_text(encoding='utf-8-sig'), transform), encoding='utf-8')
+        elif source.suffix.lower() in ('.html', '.htm'):
             parser = RewriteHTML(transform)
             parser.feed(source.read_text(encoding='utf-8-sig'))
             destination.write_text(''.join(parser.output), encoding='utf-8')
@@ -391,10 +456,26 @@ def render_web(collector, lectures, out):
         else:
             shutil.copy2(source, destination)
     shutil.copy2(ROOT / 'tools/article-reading.css', out / 'article-reading.css')
-    rows = ''.join(f'<li><a href="reading/L{n:02}.html">{html.escape(lesson_names[n])}</a></li>' for n in range(1, 17))
-    (out / 'index.html').write_text('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>天文学文章资料</title><link rel="stylesheet" href="article-reading.css"></head><body><h1>天文学文章资料</h1><p>十六篇独立文章的静态阅读副本。正文维护源保留为原始 Markdown；本副本无 Lab 导航、课程服务或远程公式脚本。</p><p>本地归档：第三方及原创素材的公开再分发状态尚待确认。人工科学审校、真实试讲与教材对照仍为待进行。</p><ol>' + rows + '</ol><p><a href="manifest.json">生成与依赖清单</a></p></body></html>', encoding='utf-8')
+    if has_experiments:
+        subprocess.run(['node', str(ROOT / 'tools/export-experiment-map.mjs'), '--out', str(out / 'experiments.html')], cwd=ROOT, check=True)
+    rows = ''.join(f'<li><a href="chapters/{n:02}.html">{html.escape(lesson_names[n])}</a></li>' for n in lesson_names)
+    experiment_link = '<p><a href="experiments.html">讲义与实验对应 →</a></p>' if has_experiments else ''
+    (out / 'index.html').write_text('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从试卷讲起的天文学知识入门</title><link rel="stylesheet" href="article-reading.css"></head><body><h1>从试卷讲起的天文学知识入门</h1><p>从附近的天体和天象出发，沿着观测、测量与物理解释，走向恒星、星系和宇宙。</p>' + experiment_link + '<ol>' + rows + '</ol><p><a href="README.md">资料说明</a> · <a href="manifest.json">来源与生成记录</a></p></body></html>', encoding='utf-8')
     (out / 'unavailable.html').write_text('<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>资料范围说明</title><body><h1>此引用未纳入独立资料包</h1><p>原始 Markdown 保留原有引用。本派生副本不携带教师记录、私有 QA、维护程序、凭据或批准范围外的文件。缺失及非公开依赖分别记录在 manifest.json；这不表示引用已完成迁移。</p><a href="index.html">文章目录</a></body></html>', encoding='utf-8')
-    (out / 'README.md').write_text('# 独立静态阅读副本\n\n双击 index.html 可离线阅读；也可由资料兼容服务提供。reading/L01.html 至 L16.html 是旧阅读路由的可选外置目的地。所有原文和来源路径已在构建期改写，包内没有 Lab/SPA 脚本。\n\n这是派生结果，不是第二份正文维护源。公开分发状态 blocked，许可需逐项确认。\n', encoding='utf-8')
+    (out / 'README.md').write_text(f'# 独立静态阅读副本\n\n双击 index.html 可离线阅读全部{len(lectures)}篇。当前篇章位于 chapters/；reading/L01.html 至 L16.html 保留原专题对应关系，拆分篇提供分篇入口。\n\n正文维护源位于项目 course/，此处为派生阅读。配图与来源记录随包保存。公开分发状态 blocked_pending_licenses；真人科学审校、教材对照与真实试讲待进行。\n', encoding='utf-8')
+    legacy_files = set()
+    for old, numbers in catalog.get('legacy_reading', {}).items():
+        if not re.fullmatch(r'L\d{2}', old) or not numbers or any(n not in lesson_names for n in numbers):
+            raise ValueError('Invalid legacy reading mapping')
+        destination = out / f'reading/{old}.html'
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        if len(numbers) == 1:
+            # Both paths have the same depth, so the relative resource links stay valid.
+            shutil.copy2(out / f'chapters/{numbers[0]:02}.html', destination)
+        else:
+            links = ''.join(f'<li><a href="../chapters/{n:02}.html">{html.escape(lesson_names[n])}</a></li>' for n in numbers)
+            destination.write_text('<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>专题阅读</title><link rel="stylesheet" href="../article-reading.css"><body><nav><a href="../index.html">文章目录</a></nav><h1>专题阅读</h1><ol>' + links + '</ol></body></html>', encoding='utf-8')
+        legacy_files.add(destination.relative_to(out).as_posix())
     # Validate after generation, including auto-generated title anchors, in a repository-external copy.
     with tempfile.TemporaryDirectory(prefix='AstronomyLab-reading-') as temp:
         outside = Path(temp) / 'reading'
@@ -420,16 +501,16 @@ def render_web(collector, lectures, out):
                     errors.append({'source': path.relative_to(outside).as_posix(), 'url': url, 'error': 'generated_anchor_missing'})
         standalone = {'copied_outside_repository': True, 'local_references_checked': checked, 'errors': errors, 'passed': not errors}
     manifest = {'exporter': 'tools/export-lectures.py', 'kind': 'derived-static-reading', 'source_maintenance_root': 'course/*/lesson.md',
-                'public_distribution': 'blocked_pending_permissions', 'article_count': 16, 'course_runtime_dependency': False,
+                'public_distribution': 'blocked_pending_permissions', 'article_count': len(lectures), 'edition': catalog['edition'], 'course_runtime_dependency': False,
                 'lab_navigation_or_spa_scripts': False, 'conversion_warnings': warnings, 'math_normalizations_derived_only': normalizations,
                 'standalone_check': standalone, 'browser_visual_review': 'not_run',
                 'files': [{'path': x.relative_to(out).as_posix(), 'sha256': digest(x), 'bytes': x.stat().st_size} for x in sorted(out.rglob('*')) if x.is_file() and x.name != 'manifest.json']}
     write_json(out / 'manifest.json', manifest)
-    check_output_inventory(out, {x.relative_to(out).as_posix() for x in mapping.values()} | {'README.md', 'index.html', 'unavailable.html', 'article-reading.css', 'manifest.json'})
+    check_output_inventory(out, {x.relative_to(out).as_posix() for x in mapping.values()} | legacy_files | {'README.md', 'index.html', 'unavailable.html', 'article-reading.css', 'manifest.json'})
     return {'directory': out.relative_to(ROOT).as_posix(), 'check': standalone, 'zip': make_zip(out)}
 
 def self_test():
-    """Exercise collector boundaries beyond the syntax currently in the sixteen sources."""
+    """Exercise collector boundaries beyond the syntax in the current chapter sources."""
     with tempfile.TemporaryDirectory(prefix='collector-fixture-', dir=QA) as temp:
         root = Path(temp)
         (root / 'course/01-fixture').mkdir(parents=True)
@@ -474,25 +555,27 @@ def main():
     args = parser.parse_args()
     QA.mkdir(parents=True, exist_ok=True)
     if not existing.PANDOC.is_file(): parser.error('Existing Pandoc dependency is missing; no installation performed')
-    lectures = []
-    for number in range(1, 17):
-        found = sorted((ROOT / 'course').glob(f'{number:02}-*/lesson.md'))
-        if len(found) != 1: parser.error(f'Lecture {number:02} has {len(found)} source files; expected one')
-        lectures.append(found[0].resolve())
-    if len(list((ROOT / 'course').glob('*/lesson.md'))) != 16:
-        parser.error('Unexpected extra lesson.md found; clarify scope instead of dropping it')
-    baseline = json.loads((ROOT / 'build/qa/lab-refactor/baseline/manifest.json').read_text(encoding='utf-8'))
-    baseline_hashes = {x['path']: x['sha256'] for x in baseline['files']}
+    catalog, lectures = lecture_catalog()
+    baseline_path = ROOT / 'build/qa/lab-refactor/baseline/manifest.json'
+    if not baseline_path.is_file(): baseline_path = ROOT / 'source-protection.json'
+    baseline = json.loads(baseline_path.read_text(encoding='utf-8'))
+    baseline_hashes = {x['path']: x['sha256'] for x in baseline.get('files', [])}
     baseline_hashes.update({x['path']: x['sha256'] for x in baseline['protectedFiles']})
+    approved = approved_digests(baseline_hashes)
     collector = Collector(ROOT, lectures)
     for source in lectures: collector.collect(source, 'original_lecture')
-    for source in ('assets/ARTICLE_ASSETS.csv', 'assets/ARTICLE_SOURCES.md', 'THIRD_PARTY.md'):
+    for source in ('assets/ARTICLE_ASSETS.csv', 'assets/ARTICLE_SOURCES.md', 'course/README.md', 'course/chapters.json'):
         collector.collect(ROOT / source, 'credits_and_license_record')
+    for source in ('course/experiments.json', 'course/experiments.md'):
+        if (ROOT / source).is_file(): collector.collect(ROOT / source, 'lecture_experiment_mapping')
+    if (ROOT / 'THIRD_PARTY.md').is_file(): collector.collect(ROOT / 'THIRD_PARTY.md', 'credits_and_license_record')
     protection = [{'path': path.relative_to(ROOT).as_posix(), 'baseline_sha256': baseline_hashes.get(path.relative_to(ROOT).as_posix()),
-                   'source_sha256': digest(path), 'baseline_equal': baseline_hashes.get(path.relative_to(ROOT).as_posix()) == digest(path)} for path in lectures]
+                   'source_sha256': digest(path), 'baseline_equal': baseline_hashes.get(path.relative_to(ROOT).as_posix()) == digest(path),
+                   'authorized_edition_equal': approved.get(path.relative_to(ROOT).as_posix(), chapter.get('sha256')) == digest(path)} for chapter, path in zip(catalog['chapters'], lectures)]
     dependency_protection = [{'path': record['source'], 'baseline_sha256': baseline_hashes.get(record['source']),
                              'source_sha256': record['sha256'],
-                             'baseline_equal': baseline_hashes[record['source']] == record['sha256'] if record['source'] in baseline_hashes else None}
+                             'baseline_equal': baseline_hashes[record['source']] == record['sha256'] if record['source'] in baseline_hashes else None,
+                             'authorized_edition_equal': approved[record['source']] == record['sha256'] if record['source'] in approved else None}
                             for record in collector.files.values()]
     out = ROOT / 'dist/lectures-source'
     owned_output(out)
@@ -505,29 +588,29 @@ def main():
     pending = [row for row in included_credits if re.search(r'pending|待核|待作者|内部|internal', row['permission_or_license'] + ' ' + row['release_status'], re.I)]
     write_json(out / 'credits/asset-status.json', {'preserved_full_ledger': 'assets/ARTICLE_ASSETS.csv', 'assets': included_credits, 'permission_pending_or_internal_count': len(pending),
                                                 'public_distribution': 'blocked', 'not_legal_or_new_license_verification': True})
-    (out / 'README.md').write_text('# 原始天文学讲义资料包\n\n这是本机当前16份 lesson.md 的发行快照，唯一正文维护源仍是项目 course/*/lesson.md。请勿在此副本另行维护正文。原始文件没有格式化、改写或换行转换，course 与 assets 的相对层级保留。\n\n可在 Markdown 阅读器中打开 course/<原目录>/lesson.md。实际图片、本地来源和资产署名随包携带；manifest.json 分别记录本地依赖、外部来源、缺失/非公开依赖与锚点。外部网站没有被下载，也不属于此归档。\n\n本地资料归档，公开分发 blocked，第三方及原创素材的许可仍按原有记录保留。私有教师记录、原卷、QA、凭据、维护脚本、原始科学压缩包未纳入；原文件中的此类链接保留不动，排除记录见 manifest.json，不声称所有原文链接均公开可达。人工科学审校、真实试讲、教材对照仍待进行。\n', encoding='utf-8')
+    (out / 'README.md').write_text('# 原始天文学讲义资料包\n\n这是本机当前18篇 lesson.md 的发行快照，唯一正文维护源仍是项目 course/*/lesson.md。请勿在此副本另行维护正文。原始文件没有格式化、改写或换行转换，course 与 assets 的相对层级保留。\n\n可在 Markdown 阅读器中打开 course/<原目录>/lesson.md。实际图片、本地来源和资产署名随包携带；manifest.json 分别记录本地依赖、外部来源、缺失/非公开依赖与锚点。外部网站没有被下载，也不属于此归档。\n\n本地资料归档，公开分发 blocked，第三方及原创素材的许可仍按原有记录保留。私有教师记录、原卷、QA、凭据、维护脚本、原始科学压缩包未纳入；原文件中的此类链接保留不动，排除记录见 manifest.json，不声称所有原文链接均公开可达。人工科学审校、真实试讲、教材对照仍待进行。\n', encoding='utf-8')
     outside = collector.outside_check(out)
     missing = [x for x in collector.issues if x['kind'] in ('missing_dependency', 'missing_anchor')]
     manifest = {'exporter': 'tools/export-lectures.py', 'kind': 'original-markdown-and-local-dependencies', 'created_at': datetime.now(timezone.utc).isoformat(),
-                'baseline_git_head': baseline['head'], 'baseline_workspace_is_git': baseline['workspaceIsGit'], 'maintenance_source': 'actual local workspace bytes; not reset to Git checkout',
+                'baseline_git_head': baseline.get('head'), 'baseline_workspace_is_git': baseline.get('workspaceIsGit', True), 'edition': catalog['edition'], 'maintenance_source': 'actual local workspace bytes; not reset to Git checkout',
                 'lecture_count': len(lectures), 'files': list(collector.files.values()), 'references': collector.references, 'external_sources': collector.external,
                 'dependency_cycles': collector.cycles, 'issues': collector.issues, 'source_protection': protection,
                 'dependency_source_protection': dependency_protection, 'outside_repository_check': outside,
                 'all_required_local_images_and_sources_present': not missing, 'all_original_links_resolvable_in_package': not collector.issues,
-                'public_distribution': 'blocked_pending_permissions', 'known_global_pending': 'THIRD_PARTY.md (MIST, M17 FITS derivatives, third-party Moon composite remain pending)',
-                'included_pending_or_internal_asset_count': len(pending), 'approval_scope': '16 exact lecture paths; assets/; THIRD_PARTY.md; final symlink destination checked; private and raw archives excluded',
+                'public_distribution': 'blocked_pending_permissions', 'known_global_pending': 'Existing asset source ledgers retain pending permissions (including MIST, M17 FITS derivatives and third-party Moon composite)',
+                'included_pending_or_internal_asset_count': len(pending), 'approval_scope': f'{len(lectures)} catalogued lecture paths; assets/; course index; final symlink destination checked; private and raw archives excluded',
                 'scientific_review': 'not_performed_by_exporter', 'human_review': 'pending', 'classroom_trial': 'pending'}
     write_json(out / 'manifest.json', manifest)
     check_output_inventory(out, set(collector.files) | {'README.md', 'manifest.json', 'credits/asset-status.json'})
-    report = {'command': 'conda run -n dl_env python tools/export-lectures.py' + (' --web' if args.web else '') + (' --self-test' if args.self_test else ''),
-              'source_directory': out.relative_to(ROOT).as_posix(), 'source_zip': make_zip(out), 'lecture_count': 16, 'file_count': len(collector.files),
+    report = {'command': subprocess.list2cmdline(sys.orig_argv),
+              'source_directory': out.relative_to(ROOT).as_posix(), 'source_zip': make_zip(out), 'lecture_count': len(lectures), 'file_count': len(collector.files),
               'dependency_issue_counts': {kind: sum(x['kind'] == kind for x in collector.issues) for kind in ('missing_dependency', 'missing_anchor', 'non_public_dependency')},
               'outside_repository_check': outside, 'protection': protection, 'dependency_source_protection': dependency_protection, 'public_distribution': 'blocked_pending_permissions',
-              'passed_required_dependencies_and_source_protection': not missing and outside['passed'] and all(x['baseline_equal'] for x in protection)
-                  and not any(x['baseline_equal'] is False for x in dependency_protection),
+              'passed_required_dependencies_and_source_protection': not missing and outside['passed'] and all(x['authorized_edition_equal'] for x in protection)
+                  and not any(x['authorized_edition_equal'] is False for x in dependency_protection),
               'parser_reuse': 'Builder.ast and walk from tools/build-articles-v02.py; extended Tags HTML parser; old builder run() never called'}
     if args.self_test: report['collector_self_test'] = self_test()
-    if args.web: report['web'] = render_web(collector, lectures, ROOT / 'dist/lectures-web')
+    if args.web: report['web'] = render_web(collector, lectures, ROOT / 'dist/lectures-web', catalog)
     current_changes = [r['source'] for r in collector.files.values() if digest(ROOT / r['source']) != r['sha256']]
     report['sources_changed_during_export'] = current_changes
     report['passed'] = report['passed_required_dependencies_and_source_protection'] and not current_changes and (not args.web or report['web']['check']['passed'])

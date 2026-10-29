@@ -49,7 +49,7 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
   el.querySelector('#measure-controls').innerHTML=html;unBind=bindControls(el.querySelector('#measure-controls'),state,()=>{refresh();feedback('输入已更新；读数和图形同步。');});
  }
  function camera(extent,target=[0,0,0]){extent*=Math.max(1,1.35/view.camera.aspect);view.controls.target.set(...target);view.camera.position.set(target[0]+extent*.7,target[1]+extent*.7,target[2]+extent*1.1);view.controls.update();}
- function band(curve,sigma){const style=getGraphicStyle(el),paper=state.mode==='distance',curveColor=paper?style.accent:'#71c8c7',errorColor=paper?style.muted:'#6c819c';return [{points:curve,color:curveColor,label:'推算值'},{points:curve.map(([x,y])=>[x,y+sigma(x,y)]),color:errorColor,label:'+1σ（假设）'},{points:curve.map(([x,y])=>[x,Math.max(0,y-sigma(x,y))]),color:errorColor,label:'−1σ（假设）'}];}
+ function band(curve,sigma){const style=getGraphicStyle(el),paper=state.mode==='distance',curveColor=paper?style.accent:style.teal,errorColor=style.muted;return [{points:curve,color:curveColor,label:'推算值'},{points:curve.map(([x,y])=>[x,y+sigma(x,y)]),color:errorColor,label:'+1σ（假设）'},{points:curve.map(([x,y])=>[x,Math.max(0,y-sigma(x,y))]),color:errorColor,label:'−1σ（假设）'}];}
  function refresh(){clear();const s=state,sceneHost=el.querySelector('#measure-scene'),ladder=el.querySelector('#measure-ladder');sceneHost.hidden=['distance','shadow'].includes(s.mode);ladder.hidden=s.mode!=='distance';el.querySelector('#measure-shadow').hidden=s.mode!=='shadow';
   for(const b of el.querySelectorAll('[data-mode]')){b.classList.toggle('active',b.dataset.mode===s.mode);b.setAttribute('aria-pressed',String(b.dataset.mode===s.mode));}el.querySelector('#measure-copy').innerHTML=content[s.mode];el.querySelector('#measure-play').hidden=!['jupiter','s2'].includes(s.mode);
   let metrics='',legend='',title='',chartTitle='',plotOptions,figure='';
@@ -81,11 +81,12 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
   el.querySelector('#measure-title').textContent=title;el.querySelector('#measure-plot-title').textContent=chartTitle;el.querySelector('#measure-metrics').innerHTML=metrics;el.querySelector('#measure-legend').textContent=legend;el.querySelector('#measure-figure').innerHTML=figure;
   // 当前输入以金点接回扫描曲线；曲线是敏感度实验，不冒充观测。
   const selected={shadow:[s.alpha,current.height],jupiter:[s.a/1000,current.mass/1e27],s2:[s.distance,current.solar/1e6],distance:[s.p,current.parallax?.distance]}[s.mode];
-  plotOptions.series.push({points:[selected],color:s.mode==='distance'?getGraphicStyle(el).text:'#ebc77e',dots:true,label:'当前输入'});
+  plotOptions.series.push({points:[selected],color:s.mode==='distance'?getGraphicStyle(el).text:getGraphicStyle(el).gold,dots:true,label:'当前输入'});
   if(s.mode==='shadow')plotOptions.series.forEach((line,i)=>{line.label=['h(α)','+1σ','−1σ','当前α'][i];});
   if(s.mode==='distance')plotOptions.series.forEach((line,i)=>{line.label=['d(p)','+1σ','−1σ','当前p'][i];});
-  lastPlot=plotOptions;plot(el.querySelector('#measure-plot'),plotOptions);position();renderUI();
+  lastPlot=plotOptions;paintPlot();position();renderUI();
  }
+ function paintPlot(){if(!lastPlot)return;const style=getGraphicStyle(el),paper=state.mode==='distance';lastPlot.series=lastPlot.series.map((series,i)=>({...series,color:i===0?(paper?style.accent:style.teal):i<3?style.muted:paper?style.text:style.gold}));plot(el.querySelector('#measure-plot'),lastPlot);}
  function feedback(text){el.querySelector('#measure-feedback').textContent=text;}
  function headline(){const s=state,q=current;if(s.mode==='shadow')return `影长 ${F(s.length,1)} km · 高度 ${F(q.height,3)} ± ${F(q.sigma,3)} km`;
   if(s.mode==='jupiter')return `a ${F(s.a,0)} km · P ${s.period} 日 · 质量 ${q.mass.toExponential(4)} kg`;
@@ -120,13 +121,13 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
    <text x="24" y="27" class="measure-svg-note">合成测影几何</text><text x="24" y="59">俯视：从山脚量到影尖</text>
    <path d="M60 120 L340 137 L340 147 L60 165 Z" fill="#030508" stroke="#7a8895"/><circle cx="60" cy="142" r="18" fill="#798b98"/><text x="28" y="105">山脚</text><text x="318" y="105">影尖</text>
    <line x1="60" y1="180" x2="620" y2="180" stroke="#7f93a5"/>${Array.from({length:21},(_,i)=>`<line x1="${60+i*28}" y1="180" x2="${60+i*28}" y2="${i%5?188:194}" stroke="#7f93a5"/>${i%5?'':`<text x="${60+i*28}" y="215" text-anchor="middle">${i} km</text>`}`).join('')}
-   <line x1="60" y1="235" x2="${x}" y2="235" stroke="#ebc77e" stroke-width="3"/><text x="340" y="265" text-anchor="middle">量得 l = ${F(state.length,1)} km</text>
-   <g data-shadow-handle tabindex="0" role="slider" aria-label="影长测量端点（公里）" aria-valuemin="1" aria-valuemax="20" aria-valuenow="${state.length}"><rect x="${x-44}" y="111" width="88" height="143" fill="transparent"/><line x1="${x}" y1="116" x2="${x}" y2="246" stroke="#ebc77e" stroke-width="3"/><circle cx="${x}" cy="235" r="12" fill="#ebc77e"/><path d="M${x-5} 230 L${x+5} 235 L${x-5} 240" fill="none" stroke="#080d15" stroke-width="2"/></g>
+   <line x1="60" y1="235" x2="${x}" y2="235" stroke="var(--al-series-gold)" stroke-width="3"/><text x="340" y="265" text-anchor="middle">量得 l = ${F(state.length,1)} km</text>
+   <g data-shadow-handle tabindex="0" role="slider" aria-label="影长测量端点（公里）" aria-valuemin="1" aria-valuemax="20" aria-valuenow="${state.length}"><rect x="${x-44}" y="111" width="88" height="143" fill="transparent"/><line x1="${x}" y1="116" x2="${x}" y2="246" stroke="var(--al-series-gold)" stroke-width="3"/><circle cx="${x}" cy="235" r="12" fill="var(--al-series-gold)"/><path d="M${x-5} 230 L${x+5} 235 L${x-5} 240" fill="none" stroke="var(--al-page)" stroke-width="2"/></g>
 
   </svg>`;
  }
  function geometrySVG(){const h=current.height,scale=Math.min(250/state.length,60/Math.max(h,.001)),x=60+state.length*scale,y=105-h*scale;
-  return `<svg viewBox="0 0 680 140" role="img" aria-label="当前影长、太阳高度角与推算高度的同尺度直角三角形"><text x="24" y="28">侧视推断 · 同比例直角三角形</text><path d="M60 105 L60 ${y} L${x} 105 Z" fill="#172b38" stroke="#71c8c7" stroke-width="2"/><line x1="60" y1="105" x2="${x}" y2="105" stroke="#ebc77e" stroke-width="3"/><text x="365" y="62">α = ${F(state.alpha,1)}°</text><text x="365" y="92">h = l tanα = ${F(h,3)} km</text><text x="365" y="123">α是独立输入，非图上测角</text></svg>`;
+  return `<svg viewBox="0 0 680 140" role="img" aria-label="当前影长、太阳高度角与推算高度的同尺度直角三角形"><text x="24" y="28">侧视推断 · 同比例直角三角形</text><path d="M60 105 L60 ${y} L${x} 105 Z" fill="var(--al-surface)" stroke="var(--al-series-teal)" stroke-width="2"/><line x1="60" y1="105" x2="${x}" y2="105" stroke="var(--al-series-gold)" stroke-width="3"/><text x="365" y="62">α = ${F(state.alpha,1)}°</text><text x="365" y="92">h = l tanα = ${F(h,3)} km</text><text x="365" y="123">α是独立输入，非图上测角</text></svg>`;
  }
 
  function setShadowLength(value){state.length=Math.round(Math.max(1,Math.min(20,value))*10)/10;refresh();}
@@ -143,7 +144,7 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
   if(state.mode==='s2'){const M=state.phase%(Math.PI*2);for(let i=0;i<12;i++)E-=(E-.88*Math.sin(E)-M)/(1-.88*Math.cos(E));orbiter.position.set(3*(Math.cos(E)-.88),0,3*Math.sqrt(1-.88**2)*Math.sin(E));}
  }
  const click=async e=>{const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.mode){const request=++modeRequest;if(['jupiter','s2'].includes(b.dataset.mode)&&!view){el.dataset.modeLoading=b.dataset.mode;try{await ensureScene();}catch(error){feedback('三维轨道视图无法初始化：'+error.message+'。影长和距离二维工具仍可使用。');return;}finally{delete el.dataset.modeLoading;}}if(disposed||request!==modeRequest)return;state.mode=b.dataset.mode;state.phase=0;state.play=false;comparison=null;controls();refresh();feedback('已切换实验；可直接操作主控。');el.dispatchEvent(new Event('change',{bubbles:true}));}
+  if(b.dataset.mode){const request=++modeRequest;if(['jupiter','s2'].includes(b.dataset.mode)&&!view){el.dataset.modeLoading=b.dataset.mode;try{await ensureScene();}catch(error){feedback('三维轨道视图无法初始化：'+error.message+'。影长和距离二维工具仍可使用。');return;}finally{delete el.dataset.modeLoading;}}if(disposed||request!==modeRequest)return;state.mode=b.dataset.mode;state.phase=0;state.play=false;comparison=null;controls();refresh();feedback('');el.dispatchEvent(new Event('change',{bubbles:true}));}
   if(b.id==='measure-play'){state.play=!state.play;renderUI();}
   if(b.id==='measure-compare'){comparison=headline();renderUI();feedback('已保存此刻读数；改变参数可在这里对照。');}
   if(b.id==='measure-clear'){comparison=null;renderUI();feedback('已清除对照。');}
@@ -152,8 +153,8 @@ view=makeScene(el.querySelector('#measure-scene'),{position:[10,8,12],target:[0,
  };
  if(['shadow','jupiter','s2','distance'].includes(requestedMode))state.mode=requestedMode;if(['jupiter','s2'].includes(state.mode))await ensureScene();
  el.addEventListener('click',click);controls();refresh();
- const observer=new ResizeObserver(()=>{if(lastPlot)plot(el.querySelector('#measure-plot'),lastPlot);});observer.observe(el.querySelector('#measure-plot'));
- measureUI=attachMeasureAtlas(el,{redraw:refresh});
+ const observer=new ResizeObserver(paintPlot);observer.observe(el.querySelector('#measure-plot'));
+ measureUI=attachMeasureAtlas(el,{redraw:refresh,repaint:paintPlot});
  const unregisterModel=registerExperimentModel(el,{getState:mode=>mode==='jupiter'?getState():null,applyState});
  return ()=>{unregisterModel();disposed=true;modeRequest++;measureUI.dispose();unBind();shadowHost.removeEventListener('pointerdown',pointerDown);shadowHost.removeEventListener('pointermove',pointerMove);shadowHost.removeEventListener('pointerup',pointerUp);shadowHost.removeEventListener('pointercancel',pointerUp);shadowHost.removeEventListener('keydown',keydown);el.removeEventListener('click',click);observer.disconnect();clear();jupiterTexture?.dispose();view?.dispose();if(window.__lab===api)delete window.__lab;};
 }

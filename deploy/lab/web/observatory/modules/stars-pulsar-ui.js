@@ -1,4 +1,5 @@
 import {startStarsPresentation} from './stars-atlas-ui.js';
+import {getGraphicStyle} from '../shared/presentation.js';
 // Local presentation only. Native controls, pulsarSignal, clock and baseline remain owned by stars.js.
 export function attachPulsarUI(root,{redraw,getScene}){
  const q=s=>root.querySelector(s),slots=new Map(),texts=new Map(),sprites=new Map();let active=false,ready=false,disposed=false,drawing=null,frame=0,releasePresentation=()=>{};
@@ -37,7 +38,7 @@ export function attachPulsarUI(root,{redraw,getScene}){
   caption.textContent=`金：当前几何 α ${state.alpha}° / ζ ${state.zeta}° / ρ ${state.width}°${b('.pulsar-compare').open?'　蓝灰：保存的基线':''}　·　青：当前相位与信号　｜　真实周期 ${Number(state.period).toFixed(3)} s · ${(1/Number(state.period)).toFixed(2)} Hz`;
   b('[data-pulsar-baseline]').textContent=`保存的基线：α ${baseline.alpha}° / ζ ${baseline.zeta}° / ρ ${baseline.width}°；P ${Number(baseline.period).toFixed(3)} s，φ ${Number(baseline.phase).toFixed(3)} 周。`;
   q('[data-plot]').setAttribute('aria-label','一周几何相对强度，横轴为相位零到一周；点击或拖动曲线设置相位，也可使用下方相位滑块');
-  if(drawing){const [x,y]=drawing.toPixel(state.phase,result.intensity),c=q('[data-plot]').getContext('2d');c.save();c.fillStyle='#71c8c7';c.strokeStyle='#0b1420';c.lineWidth=2;c.beginPath();c.arc(x,y,5,0,Math.PI*2);c.fill();c.stroke();c.restore();}
+  if(drawing){const [x,y]=drawing.toPixel(state.phase,result.intensity),c=q('[data-plot]').getContext('2d');const graphic=getGraphicStyle(q('[data-plot]'));c.save();c.fillStyle=graphic.teal;c.strokeStyle=graphic.background;c.lineWidth=2;c.beginPath();c.arc(x,y,5,0,Math.PI*2);c.fill();c.stroke();c.restore();}
  }
  const close=detail=>{if(detail?.open){detail.open=false;detail.querySelector('summary')?.focus({preventScroll:true});}};
  const click=e=>{if(e.target.closest('[data-pulsar-close]'))close(e.target.closest('details'));if(e.target.closest('[data-mode]'))close(s('.pulsar-modes'));};

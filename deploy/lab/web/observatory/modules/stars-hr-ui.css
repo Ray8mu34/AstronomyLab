@@ -1,10 +1,10 @@
 /* HR composes the scientific plate; shared presentation owns type and controls. */
-body.hr-observing{background:var(--al-black);color:var(--al-paper)}
+body.hr-observing{background:var(--al-page);color:var(--al-text)}
 body.hr-observing :is(#mode-context,.site-footer){display:none}
 body.tool-site.editorial.hr-observing #app[data-page=lab]{max-width:none;padding:0;margin:0}
 #lab-mount.hr-active>:not(.hr-shell):not(link){display:none!important}
 #lab-mount.hr-active .hr-shell[hidden]{display:none!important}
-#lab-mount.hr-active .hr-shell{--hr-a:#ebc77e;--hr-b:#71c8c7;--text:var(--al-text);--muted:var(--al-muted);--line:var(--al-line);display:block;min-height:100svh;max-width:1600px;margin:auto;padding:0 32px 20px;box-sizing:border-box;color:var(--al-text);font:400 var(--al-body)/1.65 var(--al-font)}
+#lab-mount.hr-active .hr-shell{--hr-a:var(--al-series-gold);--hr-b:var(--al-series-teal);--text:var(--al-text);--muted:var(--al-muted);--line:var(--al-line);display:block;min-height:100svh;max-width:1600px;margin:auto;padding:0 32px 20px;box-sizing:border-box;color:var(--al-text);font:400 var(--al-body)/1.65 var(--al-font)}
 body.hr-observing #app #lab-mount.hr-active .hr-shell *{box-sizing:border-box}
 body.hr-observing #app #lab-mount.hr-active .hr-shell :is(button,select,summary){font:inherit;color:inherit;cursor:pointer}
 body.hr-observing #app #lab-mount.hr-active .hr-shell :is(button,select){box-shadow:none}
@@ -43,7 +43,7 @@ body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info .stars-actions bu
 body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info .metrics{display:block}
 body.hr-observing #app #lab-mount.hr-active .hr-shell .hr-info .metrics>div{margin:10px 0}
 body.hr-observing #app #lab-mount.hr-active .hr-stage{position:relative}
-body.hr-observing #app #lab-mount.hr-active .hr-canvas-area{position:relative;width:100%;height:max(490px,calc(100svh - 285px))}
+body.hr-observing #app #lab-mount.hr-active .hr-canvas-area{--hr-a:var(--al-series-gold);--hr-b:var(--al-series-teal);background:var(--al-page);color:var(--al-text);position:relative;width:100%;height:max(490px,calc(100svh - 285px))}
 body.hr-observing #app #lab-mount.hr-active .hr-canvas-area .stars-chart-panel{margin:0;padding:0;border:0;background:none;width:100%;height:100%}
 body.hr-observing #app #lab-mount.hr-active .hr-canvas-area :is(.panel-title,.legend){display:none!important}
 body.hr-observing #app #lab-mount.hr-active .hr-canvas-area canvas{display:block;width:100%;height:100%;aspect-ratio:auto}

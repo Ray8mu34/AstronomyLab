@@ -53,6 +53,7 @@ export function getGraphicStyle(element){
  const fontFamily=value('font'),numericFamily=value('numeric'),fontSize=size('body'),labelSize=size('label'),tickSize=size('tick'),readoutSize=size('readout');
  return {
   background:value('page'),text:value('text'),muted:value('muted'),grid:value('line'),accent:value('reference'),focus:value('focus'),error:value('error'),
+  gold:value('series-gold'),teal:value('series-teal'),blue:value('series-blue'),green:value('series-green'),warm:value('series-warm'),purple:value('series-purple'),
   fontFamily,numericFamily,fontSize,labelSize,tickSize,readoutSize,
   bodyFont:`400 ${fontSize}px ${fontFamily}`,labelFont:`400 ${labelSize}px ${fontFamily}`,tickFont:`400 ${tickSize}px ${numericFamily}`,readoutFont:`400 ${readoutSize}px ${numericFamily}`,
   lineWidth:Number(value('plot-line-width')),referenceWidth:Number(value('plot-reference-width')),pointRadius:Number(value('plot-point-radius')),
@@ -67,6 +68,7 @@ function documentObserver(doc){
  });};
  const entry={refs,refresh};documents.set(doc,entry);
  doc.fonts?.addEventListener('loadingdone',refresh);
+ doc.defaultView.addEventListener('al-theme-change',refresh);
  doc.fonts?.ready.then(refresh);
  return entry;
 }

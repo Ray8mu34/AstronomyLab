@@ -1,0 +1,8 @@
+{
+  "source": "assets/08/v02/create_batch_b_assets.py",
+  "original_sha256": {
+    "assets\\08\\v02\\background-contrast.png": "ceb628f3f3955ace85df33399d71aecc7f3a3c32e69d13a13852e32eeea6aeb7",
+    "assets\\08\\v02\\background-contrast.svg": "71c4ae5b71ae892d465864bd52d95fab5d6d9b14c8961504de6528c67ca32d04"
+  },
+  "change": "Removed explanatory heading and repeated contrast values; retained source, background and axes."
+}

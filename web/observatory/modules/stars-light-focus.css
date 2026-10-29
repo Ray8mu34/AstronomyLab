@@ -1,9 +1,9 @@
-.light-pilot .c-focus,.stars-pilot .c-focus{width:min(1200px,96vw);max-width:96vw;height:auto;max-height:94dvh;padding:14px 17px;border:1px solid var(--line);background:var(--bg);color:var(--text);overflow:auto}
+.light-pilot .c-focus,.stars-pilot .c-focus{width:min(1200px,96vw);max-width:96vw;height:auto;max-height:94dvh;padding:14px 17px;border:1px solid var(--al-line);background:var(--al-page);color:var(--al-text);overflow:auto}
 .light-pilot .c-focus::backdrop,.stars-pilot .c-focus::backdrop{background:#000d}
 .light-pilot .c-focus-head,.stars-pilot .c-focus-head{display:flex;justify-content:space-between;align-items:start;gap:12px}
 .light-pilot .c-focus-head h2,.stars-pilot .c-focus-head h2{font-size:21px;margin:0;line-height:1.5}
 .light-pilot .c-focus-head button,.stars-pilot .c-focus-head button{white-space:nowrap;padding:5px 9px;font-size:13px}
-.light-pilot .c-focus-note,.stars-pilot .c-focus-note{font-size:12px;color:var(--muted);margin:5px 0 12px;line-height:1.6}
+.light-pilot .c-focus-note,.stars-pilot .c-focus-note{font-size:12px;color:var(--al-muted);margin:5px 0 12px;line-height:1.6}
 .light-pilot .light-focus-button,.stars-pilot .stars-focus-button{margin-left:auto;padding:5px 9px;font-size:12px}
 .stars-pilot .c-focus .stars-detailed{margin-bottom:0}
 @media(max-width:700px){

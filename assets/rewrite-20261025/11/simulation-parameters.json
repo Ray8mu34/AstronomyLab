@@ -1,0 +1,22 @@
+{
+  "type": "synthetic, not observational",
+  "seed": 1025,
+  "shape": [
+    120,
+    160
+  ],
+  "exposure_seconds": [
+    100,
+    400
+  ],
+  "sky_rate_e_per_s_per_pixel": 9.0,
+  "dark_rate_e_per_s_per_pixel": 0.02,
+  "bias_e": 100.0,
+  "read_noise_e_rms_per_read": 3.0,
+  "flat_assumed_exact_for_calibration": true,
+  "background_assumed_known": true,
+  "asinh_linear_width_e_per_s_per_pixel": 0.5,
+  "common_display_max_e_per_s_per_pixel": 40,
+  "raw_model": "bias + Poisson(t*(flat*(scene+sky)+dark)) + Normal(0,read)",
+  "calibration": "(raw-bias-dark*t)/(flat*t)-sky"
+}

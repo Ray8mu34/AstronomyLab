@@ -1,5 +1,5 @@
 import {attachTransferUI} from './orbits-transfer-ui.js';
-import {applyPresentation,bindDisclosures} from '../shared/presentation.js';
+import {applyPresentation,bindDisclosures,getGraphicStyle} from '../shared/presentation.js';
 import {mountWorkspaceNavigation} from '../shared/navigation.js';
 let THREE;
 import {assetURL,bindControls,syncControls} from '../shared/core-controls.js';
@@ -31,7 +31,7 @@ export async function mount(el,{mode:requestedMode}={}){
  const state={mode:'orbit',height:200,speed:7.79,target:35786,progress:0,secondBurn:true,prop1:80,dry1:10,prop2:25,dry2:3,payload:2,ve:3,reserve:0,landingHeight:125,fallSpeed:50,twr:2,play:false};
  el.innerHTML=`<link rel="stylesheet" href="/modules/orbits-pilot.css"><div class="orbits-pilot"><div class="lab-tabs" aria-label="航天实验选择"><button data-mode="orbit">横速入轨</button><button data-mode="transfer">点火升轨</button><button data-mode="staging">分级预算</button><button data-mode="landing">着陆减速</button></div>
  <div class="orbits-guide"><h2 id="orbit-question"></h2><p id="orbit-instruction"></p></div>
- <div class="lab-grid orbits-workspace"><section class="viz-panel"><div class="panel-title" id="orbit-title">真空中的持续下落</div><div class="scene-host" id="orbit-scene" aria-label="可旋转的轨道或火箭教学模型"></div><div class="button-row orbits-transport"><button id="orbit-play">播放</button><button id="orbit-reset">重置</button></div><div class="orbits-outcomes" id="orbit-outcomes"></div></section>
+ <div class="lab-grid orbits-workspace"><section class="viz-panel"><div class="panel-title" id="orbit-title">真空中的持续下落</div><div class="scene-host" data-al-theme-fixed="dark" id="orbit-scene" aria-label="可旋转的轨道或火箭教学模型"></div><div class="button-row orbits-transport"><button id="orbit-play">播放</button><button id="orbit-reset">重置</button></div><div class="orbits-outcomes" id="orbit-outcomes"></div></section>
  <aside class="orbits-desk"><section class="lab-controls" id="orbit-controls" aria-label="当前实验主控"></section><div class="button-row"><button id="orbit-compare">记下当前读数</button><button id="orbit-clear" hidden>清除对照</button></div><p id="orbit-feedback" class="orbits-feedback" role="status"></p><div id="orbit-comparison" class="orbits-comparison" hidden></div></aside></div>
  <div class="legend" id="orbit-legend"></div><details class="orbits-analysis"><summary>展开关系曲线与完整读数</summary><div class="panel-title" id="orbit-plot-title"></div><canvas class="plot-canvas" id="orbit-plot" aria-label="当前实验的速度或预算关系曲线"></canvas><div class="metrics" id="orbit-metrics"></div></details><article class="lab-copy" id="orbit-copy"></article><div class="lab-copy"><h3>模型资料与观测证据</h3><p><a href="/sources/orbits.md">计算方法与来源</a> · <a href="/lab/measure">用轨道反过来称量天体</a></p><figure><img loading="lazy" style="width:100%;max-width:850px" src="${assetURL('assets/15/v02/orbit-energy.png')}" alt="200 km圆轨道速度与能量量级"><figcaption>200 km 圆轨道的速度与能量计算。</figcaption></figure></div></div>`;
  const pilot=el.querySelector('.orbits-pilot');
@@ -76,8 +76,9 @@ export async function mount(el,{mode:requestedMode}={}){
  }
  function camera(extent,target=[0,0,0]){extent*=Math.max(1,1.6/view.camera.aspect);view.controls.target.set(...target);view.camera.position.set(target[0]+extent*.65,target[1]+extent*.8,target[2]+extent*1.2);view.controls.update();}
  function rocket(radius,length,color){const m=new THREE.Mesh(new THREE.CylinderGeometry(radius,radius,length,24),new THREE.MeshStandardMaterial({color,roughness:.4}));group.add(m);return m;}
+ function paintPlot(){if(!lastPlot||state.mode!=='transfer')return;const style=getGraphicStyle(el);lastPlot.series=lastPlot.series.map(series=>({...series,color:series.themeTone?style[series.themeTone]:series.color}));plot(el.querySelector('#orbit-plot'),lastPlot);}
  function refresh(){
-  const surface=['landing','staging'].includes(state.mode)?'paper':'scene';if(surface!==presentationSurface){stopPresentation?.();presentationSurface=surface;stopPresentation=applyPresentation(pilot,{surface,redraw:()=>{if(lastPlot&&state.mode==='transfer')plot(el.querySelector('#orbit-plot'),lastPlot);}});}
+  const surface=['landing','staging'].includes(state.mode)?'paper':'scene';if(surface!==presentationSurface){stopPresentation?.();presentationSurface=surface;stopPresentation=applyPresentation(pilot,{surface,redraw:paintPlot});}
   // Return shared navigation before the incoming presentation acquires it.
   if(landingStaging&&state.mode!=='landing'&&state.mode!=='staging'){landingStaging.destroy();landingStaging=null;}
   transferUI?.beforeMode(state.mode);transferUI?.setMode(state.mode);
@@ -107,7 +108,7 @@ export async function mount(el,{mode:requestedMode}={}){
    line(pts.map(p=>[p.x/EARTH.radius,0,p.y/EARTH.radius]),0xe8c677);circle((EARTH.radius+state.height)/EARTH.radius,0x405569);
    const q=current.info;metrics=metric('轨道判断',q.kind)+metric('圆轨道速度',N(q.vc,3)+' km/s')+metric('逃逸速度',N(q.escape,3)+' km/s')+metric('初始比机械能',N(q.energy)+' MJ/kg')+metric('近地点距地表',N(q.peri-EARTH.radius,0)+' km')+metric('已绘时间',N(current.seconds/60,1)+' min');
    legend=`地球与轨道同尺度；飞行器为放大标记。${current.impact?'轨迹止于首次触地。':current.truncated?'轨迹到视域18个地球半径或时间上限截断，仍会继续。':'显示一周或最多6.7小时。'} 真空模型不计算大气阻力。`;
-   plotOptions={series:[{points:pts.filter((_,i)=>i%8===0||i===pts.length-1).map(p=>[p.t/60,p.v]),color:'#ebc77e',label:'速率'}],xDomain:[0,Math.max(1,current.seconds/60)],yDomain:[0,Math.max(1,...pts.map(p=>p.v))*1.1],xLabel:'经过时间 / min',yLabel:'速率 / km·s⁻¹'};
+   plotOptions={series:[{points:pts.filter((_,i)=>i%8===0||i===pts.length-1).map(p=>[p.t/60,p.v]),color:getGraphicStyle(el).gold,themeTone:'gold',label:'速率'}],xDomain:[0,Math.max(1,current.seconds/60)],yDomain:[0,Math.max(1,...pts.map(p=>p.v))*1.1],xLabel:'经过时间 / min',yLabel:'速率 / km·s⁻¹'};
   } else if(state.mode==='transfer'){
    current=hohmann(state.height,state.target);group.add(earth,marker);ghost=new THREE.Mesh(new THREE.SphereGeometry(.33,14,10),new THREE.MeshBasicMaterial({color:0x71c8c7,wireframe:true}));group.add(ghost);const q=current,scale=EARTH.radius;circle(q.r1/scale,0x628aad);circle(q.r2/scale,0x71c8c7);
    line(Array.from({length:401},(_,i)=>{const p=transferDemoPoint(state.height,state.target,i/200,false);return[p[0]/scale,0,p[1]/scale];}),0xebc77e);
@@ -117,11 +118,11 @@ export async function mount(el,{mode:requestedMode}={}){
    legend='蓝：原圆轨道 · 金：完整转移椭圆 · 青：目标圆轨道。实心金点：当前开关；空心青点：相反开关，同一经过时间。标记放大，不代表飞行器尺寸。100%到远地点，200%为两倍单程转移时间；圆化后尚未必绕完高轨一周。共面瞬时点火，真空两体。';
    const returning=Array.from({length:201},(_,i)=>{const f=i/100,p=transferDemoPoint(state.height,state.target,f,false),r=Math.hypot(...p);return[f*q.seconds/3600,Math.sqrt(EARTH.mu*(2/r-1/q.a))];});
    const circular=[...returning.slice(0,101),[q.seconds/3600,q.v2],[q.seconds*2/3600,q.v2]];
-   plotOptions={series:[{points:returning,color:'#ebc77e',label:'关闭：椭圆返回'},{points:circular,color:'#71c8c7',label:'开启：远地点圆化'}],xDomain:[0,2*q.seconds/3600],yDomain:[0,q.vp*1.12],xLabel:'第一次点火后时间 / h',yLabel:'速率 / km·s⁻¹'};
+   plotOptions={series:[{points:returning,color:getGraphicStyle(el).gold,themeTone:'gold',label:'关闭：椭圆返回'},{points:circular,color:getGraphicStyle(el).teal,themeTone:'teal',label:'开启：远地点圆化'}],xDomain:[0,2*q.seconds/3600],yDomain:[0,q.vp*1.12],xLabel:'第一次点火后时间 / h',yLabel:'速率 / km·s⁻¹'};
   } else if(state.mode==='staging'){
    current=staging(state);const first=rocket(.24,1.7,0x6688a3),second=rocket(.18,.9,0x71c8c7),tip=new THREE.Mesh(new THREE.ConeGeometry(.18,.35,24),new THREE.MeshStandardMaterial({color:0xebc77e}));first.name='stage-first';second.name='stage-second';tip.name='stage-tip';group.add(tip);grid.visible=true;camera(3.8,[0,1.1,0]);
    metrics=metric('一级上升 Δv',N(current.dv1,3)+' km/s')+metric('二级 Δv',N(current.dv2,3)+' km/s')+metric('分级总 Δv',N(current.total,3)+' km/s')+metric('始终不分离对照',N(current.unseparated,3)+' km/s')+metric('分级收益',N(current.gain,3)+' km/s')+metric('初始总质量',N(current.initial,1)+' t');legend='箭体示意各级结构；干质量包括空贮箱、发动机等。';
-   plotOptions={series:[{points:Array.from({length:41},(_,i)=>[i*.375,staging({...state,reserve:i*.375}).total]),color:'#71c8c7',label:'保留一级回收储备后的总Δv'}],xDomain:[0,15],yDomain:[0,staging({...state,reserve:0}).total*1.15],xLabel:'一级保留推进剂 / t',yLabel:'理想总 Δv / km·s⁻¹'};
+   plotOptions={series:[{points:Array.from({length:41},(_,i)=>[i*.375,staging({...state,reserve:i*.375}).total]),color:getGraphicStyle(el).teal,themeTone:'teal',label:'保留一级回收储备后的总Δv'}],xDomain:[0,15],yDomain:[0,staging({...state,reserve:0}).total*1.15],xLabel:'一级保留推进剂 / t',yLabel:'理想总 Δv / km·s⁻¹'};
   } else {
    current=landing(state.landingHeight,state.fallSpeed,state.twr);const q=current;
    const tEnd=q.acceleration>0&&q.stopDistance<=state.landingHeight?state.fallSpeed/q.acceleration:(q.acceleration===0?state.landingHeight/state.fallSpeed:2*state.landingHeight/(state.fallSpeed+q.impactSpeed));current.seconds=tEnd;
@@ -129,7 +130,7 @@ export async function mount(el,{mode:requestedMode}={}){
    const body=rocket(.1,.5,0xebc77e);body.name='landing-body';grid.visible=false;camera(3.2);
    metrics=metric('模型结果',q.status)+metric('向上净加速度',N(q.acceleration)+' m/s²')+metric('所需停止距离',N(q.stopDistance,1)+' m')+metric('触地速率',q.stopDistance<=state.landingHeight?'尚未触地':N(q.impactSpeed,1)+' m/s')+metric('首次停住高度',q.stopDistance<=state.landingHeight?N(q.stopHeight,1)+' m':'不能在地面前停住')+metric('演示持续时间',N(tEnd,2)+' s');
    legend='竖直一维、质量恒定、推力恒定；高度按当前点火高度归一化。止于第一次停住或触地。';
-   plotOptions={series:[{points:Array.from({length:101},(_,i)=>{const t=i/100*tEnd;return[t,Math.max(0,state.landingHeight-state.fallSpeed*t+.5*q.acceleration*t*t)];}),color:'#ebc77e',label:'距地表高度'}],xDomain:[0,Math.max(1,tEnd)],yDomain:[0,state.landingHeight*1.1],xLabel:'点火后时间 / s',yLabel:'高度 / m'};
+   plotOptions={series:[{points:Array.from({length:101},(_,i)=>{const t=i/100*tEnd;return[t,Math.max(0,state.landingHeight-state.fallSpeed*t+.5*q.acceleration*t*t)];}),color:getGraphicStyle(el).gold,themeTone:'gold',label:'距地表高度'}],xDomain:[0,Math.max(1,tEnd)],yDomain:[0,state.landingHeight*1.1],xLabel:'点火后时间 / s',yLabel:'高度 / m'};
   }
   el.querySelector('#orbit-metrics').innerHTML=metrics;el.querySelector('#orbit-legend').textContent=legend;
   el.querySelector('#orbit-title').textContent={orbit:'同高度，不同横向速度',transfer:'原轨道 → 转移椭圆 → 目标轨道',staging:'两段箭体，各有自己的质量预算',landing:'停止位置由高度、速度与净加速度共同决定'}[state.mode];
@@ -173,7 +174,7 @@ export async function mount(el,{mode:requestedMode}={}){
  el.addEventListener('click',click);controls();refresh();
  transferUI=attachTransferUI(el,{redraw:()=>{if(state.mode==='transfer')refresh();},read:()=>state});
  const unregisterModel=registerExperimentModel(el,{getState:mode=>mode==='orbit'?conics.getState():null,applyState:saved=>state.mode==='orbit'&&conics.applyState(saved)});
- const resize=new ResizeObserver(()=>{if(lastPlot)plot(el.querySelector('#orbit-plot'),lastPlot);});resize.observe(el.querySelector('#orbit-plot'));
+ const resize=new ResizeObserver(paintPlot);resize.observe(el.querySelector('#orbit-plot'));
  return ()=>{unregisterModel();stopDisclosures();stopNavigation();stopPresentation?.();transferUI.dispose();disposed=true;modeRequest++;landingStaging?.destroy();conics.dispose();unBind();el.removeEventListener('click',click);resize.disconnect();clear();if(view){earth.geometry.dispose();earth.material.dispose();earthTexture.dispose();marker.geometry.dispose();marker.material.dispose();view.dispose();}if(window.__lab===api)delete window.__lab;};
 }
 

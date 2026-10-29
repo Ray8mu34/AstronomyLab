@@ -4,7 +4,7 @@
 
 R1 与后续分批 UI 改造保留原 Git 历史；2026-10-13 用户授权提交、推送与部署当前状态。发布结果、备份与回滚信息统一维护在 [重构交接](docs/LAB-REFACTOR-2026-10-05.md) 与 [部署记录](docs/DEPLOYMENT.md)。
 
-16 篇原始 Markdown 是独立内容资产；Lab 是无需先读讲义的天文演示与工具集合。11 工具、43 模式保留原 ID 与入口，UI 按已批准样板分批改造。自动冻结与人工批准分别记录；解析轨道、木星测量、S2 和星表仍保留明确停止项，不能称为全模式视觉验收完成。保护太阳系沙盘及原科学数据、模型与来源。
+讲义是独立内容资产，2026-10-25 按用户批准的结构重写为18篇，[阅读目录](course/README.md)与[篇章清单](course/chapters.json)是当前入口；旧16篇已在项目外完整备份，记录见主交接顶部。Lab 是无需先读讲义的天文演示与工具集合。原 11 工具、43 模式保留 ID 与入口；2026-10-28 增加 M33 距离与质量、宇宙膨胀、地月潮汐、行星环境四组；2026-10-30 继续增加阴阳合历、图像校准与测光、恒星内部、超新星光变，当前为 **19 工具、62 模式**。[讲义与实验对应](course/experiments.md)记录18篇可用入口及延伸方向。最新前端约定见根目录 AGENTS.md 与 [DESIGN.md](DESIGN.md)，原科学数据、模型、来源及太阳系沙盘继续保留。工程检查与人工批准分别记录，最新验证和待验范围以主交接顶部为准。
 
 后续独立视觉阶段的三个异质样板现已人工批准并冻结：`earth-moon/phase`（空间动态）、Imaging 两模式（二维图像）、`stars/hr`（二维坐标）。[UI Design System / Design Direction v1](ASTRONOMYLAB-UI-DESIGN-DIRECTION.md) 是后续 Codex 的稳定设计规则；[DESIGN.md](DESIGN.md) 记录批准证据与运行时所有者。规则不授权批量改造其他模式，其他页面的 R1 基础适配仍不等于视觉批准。
 
@@ -18,6 +18,8 @@ npm start -- --port 4189
 ```
 
 访问命令实际指定端口（如 http://127.0.0.1:4189/）。开发服务直接读取 `web/`，修改 UI 时不应编辑运行包。端口被占用时选择空闲端口，不结束其他项目进程。新增运行资源后需要重新构建资源白名单，并重新启动自己的本地预览。
+
+工具顶部的“白天 / 黑夜”按钮切换全站界面主题，并记住用户选择；首次使用跟随系统配色。首页保留原有黑白对比，天文图像、星体颜色与科学色标保持原貌。
 
 ## 构建运行包
 
@@ -34,9 +36,9 @@ node deploy/lab/web/observatory/server.mjs --port 4188
 | 路径 | 职责 |
 | --- | --- |
 | `.git/` | 原 GitHub 仓库的提交历史与配置 |
-| `web/` | 唯一网站源码，含 11 工具、共享代码、数据及来源 |
+| `web/` | 唯一网站源码，含 19 工具、共享代码、数据及来源 |
 | `tools/`、`tests/` | 构建、维护与回归源码 |
-| `course/*/lesson.md`、`assets/` | 16 篇原始正文及本地图片、来源依赖 |
+| `course/*/lesson.md`、`assets/` | 18篇当前正文及本地图片、来源依赖；顺序见 `course/chapters.json` |
 | `docs/` | 开发手册及持续维护的交接记录 |
 | `deploy/lab/` | 从源码生成的独立运行包；不要手工修改 |
 | `dist/` | 本地资料包与派生阅读导出；Git 忽略 |
@@ -50,13 +52,13 @@ node deploy/lab/web/observatory/server.mjs --port 4188
 
 `source-protection.json` 是可随源码保存的 256 项保护子集；21 项内部 QA 被排除在 Git 发布之外，其原哈希仍记录在清单中，本机文件保持。完整 W0 记录包含 334 项，存在时边界检查优先使用完整记录。`distribution-manifest.json` 是当前 Git 可见源码及运行包文件清单；实际 HTTP 资源白名单是 `web/observatory/runtime-assets.json`。
 
-## 原始讲义
+## 讲义与离线阅读
 
 ```powershell
 npm run export:lectures
 ```
 
-使用既有 Conda `dl_env` 与 Pandoc；本机 `tools/vendor` 被 Git 忽略，其他机器可以用 `PANDOC` 指向已有程序。导出不改写原始 Markdown。依赖见 [tools/dependencies.md](tools/dependencies.md)。原始资料为 `dist/lectures-source/`，派生静态阅读为 `dist/lectures-web/`；可选外置阅读通过服务的 `--lectures` 接入。正式旧阅读迁移地址仍待确定。
+使用既有 Conda `dl_env` 与本机 Pandoc；本机 `tools/vendor` 被 Git 忽略。导出保留当前 Markdown 字节，依赖见 [tools/dependencies.md](tools/dependencies.md)。正文资料包为 `dist/lectures-source/`，离线阅读入口为 `dist/lectures-web/index.html`，当前18篇位于 `chapters/`；每篇导航的“配套实验”进入 `experiments.html`，数据维护于 `course/experiments.json`。`reading/L01.html` 至 `L16.html` 保留旧专题的对应入口，拆分篇展示分篇链接。可选外置阅读通过服务的 `--lectures` 接入，网站运行不依赖此资料包。
 
 ## 验证与边界
 

@@ -16,6 +16,136 @@
       "after": "e1697837d5ef4005ef704d13f14a91c87b54ac3b0584499a7409877e027057db",
       "task": "AstronomyLab_01_Science_Package/01_scientific_integrity/CODEX_PROMPT.txt (2026-10-19)",
       "reason": "Science package task F: validate the fixed NASA FIRAS product structure, units, row order, finite values and positive sigma."
+    },
+    {
+      "path": "course/01-solar-system/lesson.md",
+      "before": "d2e41055c8c94da5429b75e68ad364b0871026940de687cfa19a8f8180b9486b",
+      "after": "4ed4cfdbf06322ddfbf0eddb9c306192456008448660f9a58c9d168b796028f4",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 01 maps to current chapter 01. Original bytes and all original assets are preserved in the external pre-edit backup."
+    },
+    {
+      "path": "course/02-planet-comparisons/lesson.md",
+      "before": "f34c6e092fdf98f2d4205a458fc463b5bfa87d0d63133f651433888fe45c8c84",
+      "after": "6bcb9ad659daede79a20c39544d72f3c22ef6ab8ec407fd2bcb1d4198aa13022",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 02 maps to current chapter 02. Original bytes and all original assets are preserved in the external pre-edit backup."
+    },
+    {
+      "path": "course/03-moon/lesson.md",
+      "before": "41cc6ca795611a0fc8f31a43f4aa6e29f7a866c55b73605ed4a48c8f9ae10571",
+      "after": "fce9d318566f62a0c102438d88846192de9d944f6a4dec21b3d51e0cd6ce52ad",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 03 maps to current chapter 03. Original bytes and all original assets are preserved in the external pre-edit backup."
+    },
+    {
+      "path": "course/04-eclipses-and-alignments/lesson.md",
+      "before": "94a8252adce2faf1ff1fd9a539d3df2217ae9d6483846e1c4ac98c1e7290644d",
+      "after": "b427698b2f46c0c7d627ef385781e2a820004cf46cdf55998ed2bbd4043c6e60",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 04 maps to current chapter 04. Original bytes and all original assets are preserved in the external pre-edit backup."
+    },
+    {
+      "path": "course/05-calendars/lesson.md",
+      "before": "debfebbd14f7e0a71ff92452c558f4158bb6eb1a66e8da4f387c0ddaf6182ab0",
+      "after": "4f19d581c19b990e60d293e477de51b9d56ce7312622cc81934b5998bb0ae551",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 05 maps to current chapter 05. Original bytes and all original assets are preserved in the external pre-edit backup."
+    },
+    {
+      "path": "course/06-sky-maps/lesson.md",
+      "before": "f6062da47a0f4226a805063720b3c8174061fdf7542c8fa66f280af556eeb5f4",
+      "after": "8a155279ec9177aebe8d9c9b4d59a72f114abc6756092f2c92df4523d3458748",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 06 maps to current chapter 06. Original bytes and all original assets are preserved in the external pre-edit backup."
+    },
+    {
+      "path": "course/07-reference-circles/lesson.md",
+      "before": "7c57c22d03828cb0a66236701871eb5150557c4f80c09e953983198151346069",
+      "after": "2024cad0e60478b014ffb1a0a7372a990edbb475ff8d5433a0128432d01736d0",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 07 maps to current chapter 07. Original bytes and all original assets are preserved in the external pre-edit backup."
+    },
+    {
+      "path": "course/08-observing/lesson.md",
+      "before": "d02544505df6f62e1085ec1f5955bd1cf30cdc8aa0fec5c068d6cbaec1df89ab",
+      "after": "dd0f51c441dfaa978a55024d52dfb21877e0227154cc778053034b39ed3c6cb6",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 08 maps to current chapter 08. Original bytes and all original assets are preserved in the external pre-edit backup."
+    },
+    {
+      "path": "course/09-telescopes/lesson.md",
+      "before": "2c94bc0e74c47f6f4b102ca4683c042d497d582f91e6571efd657cc3c4e8eb8f",
+      "after": "b759961afefdd065683c4e66f3f57503b0aa5caa3c94f6e1274a41efc0694777",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing; 2026-10-28 user-requested flange-distance addition",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 09 maps to current chapter 09. Original bytes and all original assets are preserved in the external pre-edit backup. Two paragraphs define the flange reference and sensor planes, distinguish effective focal length, and explain the specified corrector-to-sensor spacing with a sourced 55 mm assembly example.",
+      "subsequentRevisions": [
+        {
+          "date": "2026-10-28",
+          "before": "056140be4bcd54fb799f2b5fdd3eb356a16d79da177146908fb94af7b5797b27",
+          "after": "b759961afefdd065683c4e66f3f57503b0aa5caa3c94f6e1274a41efc0694777",
+          "authorization": "User requested adding flange distance in the appropriate place; other previously identified gaps are out of scope."
+        }
+      ]
+    },
+    {
+      "path": "course/10-starlight/lesson.md",
+      "before": "045bdf724d042fce2a31cd87e5eb725d0374062fb49f0e5fcd4f54b785f1fb95",
+      "after": "1aae73eaa633d8c5a2221594c1cb5bba1ab52280d188a5833750c3dff2c5a1b5",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 10 maps to current chapter 10. Original bytes and all original assets are preserved in the external pre-edit backup."
+    },
+    {
+      "path": "course/11-stellar-evolution/lesson.md",
+      "before": "7ce9b041a1c8b9846df526edc84ffa3185ad1eea9031f323d718b3db54e068d8",
+      "after": "5ecdbea8705f48ccfb47d2d3f3ec512bb86993a840470fc94670afbf4027693e",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 11 maps to current chapter 12. Original bytes and all original assets are preserved in the external pre-edit backup.",
+      "currentPath": "course/12-stellar-evolution/lesson.md"
+    },
+    {
+      "path": "course/12-gravity-and-supernovae/lesson.md",
+      "before": "53fb5988a6bd5a2c25c3ce465d394ecb047b954f9e4c3aa44f8f9ce56da2d482",
+      "after": "1759f5f946615352500e70bcd08240907090c7f31d43955049ee79bcbd62917d",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 12 maps to current chapter 14. Original bytes and all original assets are preserved in the external pre-edit backup.",
+      "currentPath": "course/14-compact-objects/lesson.md"
+    },
+    {
+      "path": "course/13-galaxies-and-cmb/lesson.md",
+      "before": "97e600abb6738f3c6f5711e4ef501104b5cce8b68015aabc630be622bc62d24e",
+      "after": "70f5f87e6546cbef63a1f5690a8b4ad828852b8f67651f3bc06e2b9cfaf73803",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 13 maps to current chapter 15. Original bytes and all original assets are preserved in the external pre-edit backup.",
+      "currentPath": "course/15-galaxies/lesson.md"
+    },
+    {
+      "path": "course/14-astronomical-images/lesson.md",
+      "before": "d3e685b8b5e455b4cece5a8ecd6a9b7915307f59cdd22d7d770c257177877458",
+      "after": "90f9b6066f2e4a4e9fbdac946e181d291998068b098963a75e6c07bafad74f12",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 14 maps to current chapter 11. Original bytes and all original assets are preserved in the external pre-edit backup.",
+      "currentPath": "course/11-astronomical-images/lesson.md"
+    },
+    {
+      "path": "course/15-news-and-explanation/lesson.md",
+      "before": "7b6a9609ed16c50426f38c7569bb168a8dcd518ab18ca0e91f08432580bf993d",
+      "after": "da4f3fac6eecb79bbdb61ad825951e4d1e23a158402320d57fd449f5208310fd",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 15 maps to current chapter 17. Original bytes and all original assets are preserved in the external pre-edit backup.",
+      "currentPath": "course/17-spaceflight/lesson.md"
+    },
+    {
+      "path": "course/16-integration/lesson.md",
+      "before": "8b0043083f4d3f4a2a8fa26f815cce158750774aa58c55beaad569c2c76c0957",
+      "after": "bd0ee451f820d643f61ff36727962df57e86bbd6b8fcc68b7420cc2a0224ab46",
+      "task": "2026-10-25 user-approved 18-chapter lecture rewrite with expository-writing",
+      "reason": "Explicitly authorized prose and reasoning reconstruction; old chapter 16 maps to current chapter 18. Original bytes and all original assets are preserved in the external pre-edit backup.",
+      "currentPath": "course/18-galaxy-measurements/lesson.md"
     }
-  ]
+  ],
+  "lectureAuthorization": {
+    "date": "2026-10-25",
+    "scope": "18 current lecture chapters; current chapter hashes in course/chapters.json; original model-source approvals unchanged"
+  }
 }

@@ -1,0 +1,21 @@
+{
+  "original_sha256": {
+    "assets\\09\\refractor.png": "f14d662a02e6875cca04efec3bb36f2697c6916e4e273b32ff03780f26721d86",
+    "assets\\09\\refractor.svg": "2a73e5ae6a4e33a590487456390d0ab8b6e3ffd22343914cc82048095747913f",
+    "assets\\09\\newtonian.png": "9cf843624bc07e5c5f9362c73930f224c36f1495a6cee9f4e044299cbf017cbc",
+    "assets\\09\\newtonian.svg": "d4c07523534c034bc67601d5b3dd1822d768fc48d0e356d9a034acfbd9b4fe33",
+    "assets\\09\\v02\\focal-plane.png": "cd8fe0b26b888b29f5c38240b6b1d38243317c957556e53a2af19c85e02d8043",
+    "assets\\09\\v02\\focal-plane.svg": "677507e7a3a2998483fb37c42e2c9182e57196231f7cdb4b9d54b3ce1b48a9b7",
+    "assets\\09\\v02\\resolution-and-seeing.png": "4dd85e3a59252caabf02c4dc9449b4030112566c43532d49e3fb263bd51c96e6",
+    "assets\\09\\v02\\resolution-and-seeing.svg": "030a21a775600362b07c4fffdc1478145c8aa0fc3b40b07d379823ca625ce0d6",
+    "assets\\09\\v02\\schmidt-cassegrain.png": "761e687e0c8143b584d83268297236f2f78f8212b3c257556b86866918ba631d",
+    "assets\\09\\v02\\schmidt-cassegrain.svg": "f7c34b4736e601f1c12cf970b6f567778f28dc862fda8dd8c8bea8dd39cc23c7"
+  },
+  "sources": [
+    "assets/09/refractor.svg",
+    "assets/09/newtonian.svg",
+    "assets/08/v02/create_batch_b_assets.py",
+    "assets/09/v02/draw_sct.py"
+  ],
+  "change": "Removed explanatory headings, repeated formulas and the SCT reading instruction; kept geometry, axes, units and curve/object labels."
+}

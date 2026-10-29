@@ -1,8 +1,16 @@
 // Small synchronous shell declaration. The science registry remains authoritative;
 // integration checks each declaration's IDs/default against tool-registry.js.
 (() => {
-  const declare=(defaultMode,knownModes,surfaces,styles)=>Object.freeze({defaultMode,knownModes:Object.freeze(knownModes),surfaces:Object.freeze(surfaces),styles:Object.freeze(styles.map(file=>'/modules/'+file))});
+  const declare=(defaultMode,knownModes,surfaces,styles,classicAvailable=true)=>Object.freeze({defaultMode,knownModes:Object.freeze(knownModes),surfaces:Object.freeze(surfaces),styles:Object.freeze(styles.map(file=>'/modules/'+file)),classicAvailable});
   const declarations=Object.freeze({
+    lunisolar:declare('calendar',['calendar','intercalation'],{calendar:'paper',intercalation:'paper'},['lunisolar.css'],false),
+    'image-calibration':declare('calibration',['calibration','photometry'],{calibration:'paper',photometry:'paper'},['image-calibration.css'],false),
+    'stellar-interior':declare('equilibrium',['equilibrium','thermostat','transport'],{equilibrium:'paper',thermostat:'paper',transport:'paper'},['stellar-interior.css'],false),
+    'supernova-light':declare('diffusion',['diffusion','radioactivity'],{diffusion:'paper',radioactivity:'paper'},['supernova-light.css'],false),
+    'galaxy-measurements':declare('distance',['distance','rotation','mass'],{distance:'paper',rotation:'paper',mass:'paper'},['galaxy-measurements.css'],false),
+    cosmology:declare('expansion',['expansion','distance'],{expansion:'paper',distance:'paper'},['cosmology.css'],false),
+    tides:declare('locking',['locking','earth-moon'],{locking:'paper','earth-moon':'paper'},['tides.css'],false),
+    'planet-environments':declare('balance',['balance','atmosphere','escape'],{balance:'paper',atmosphere:'paper',escape:'paper'},['planet-environments.css'],false),
     alignments:declare('venus',['venus','mars','transit'],{venus:'scene',mars:'scene',transit:'scene'},['alignments-atlas-ui.css']),
     sky:declare('sky',['sky','stars','measure','calendar','day','precession'],{sky:'scene',stars:'scene',measure:'scene',calendar:'paper',day:'scene',precession:'scene'},['sky-presentation.css']),
     optics:declare('imaging',['imaging','resolution','sampling'],{imaging:'image',resolution:'image',sampling:'image'},['optics-pilot.css','optics-sampling-ui.css']),
@@ -19,10 +27,11 @@
     const match=/^\/lab\/([a-z-]+)$/.exec(url.pathname),slug=match?.[1],declaration=declarations[slug];
     const requested=url.searchParams.get('mode');
     const mode=declaration?(declaration.knownModes.includes(requested)?requested:declaration.defaultMode):null;
-    const surface=url.searchParams.get('ui')!=='classic'&&declaration?.surfaces[mode];
+    const surface=(url.searchParams.get('ui')!=='classic'||declaration?.classicAvailable===false)&&declaration?.surfaces[mode];
     return {layout:surface?'workspace':'standard',surface:surface||'paper',slug:slug||null,mode};
   }
   function apply(href,doc=globalThis.document){
+    globalThis.AstronomyLabTheme?.syncRoute(href);
     const result=resolve(href);
     if(doc){doc.documentElement.dataset.alRouteLayout=result.layout;doc.documentElement.dataset.alSurface=result.surface;if(doc.body)doc.body.dataset.alSurface=result.surface;}
     return result;

@@ -7,7 +7,7 @@ body #app #lab-mount.measure-atlas-active{--text:var(--al-text);--muted:var(--al
 body #app .measure-atlas-active>:not(.measure-atlas):not(link){display:none!important}
 body #app .measure-atlas-active [hidden]{display:none!important}
 body #app .measure-atlas{display:block;background:var(--al-page);min-width:0}
-.measure-atlas-heading{padding:24px 0 18px}.measure-atlas-heading>p{margin:0 0 6px;color:var(--al-muted);font-size:14px}.measure-atlas-heading h1{font:600 var(--al-title-tool)/1.45 var(--al-font);margin:0 0 8px}.measure-atlas-heading>[data-measure-action]{font-size:16px;margin:10px 0 0;color:var(--al-text)}
+.measure-atlas-heading{padding:24px 0 18px}.measure-atlas-heading>p{margin:0 0 6px;color:var(--al-muted);font-size:14px}.measure-atlas-heading h1{font:600 var(--al-title-tool)/1.45 var(--al-font);margin:0 0 8px}
 body #app .measure-atlas-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px 36px;margin:0 0 24px;max-width:1200px}
 body #app .measure-atlas label.control{display:grid;grid-template-columns:1fr auto;gap:5px 14px;padding:0;margin:0;border:0;background:transparent;color:var(--al-text);font-size:15px;line-height:1.7;min-width:0}
 body #app .measure-atlas label.control>span{display:flex;justify-content:space-between;gap:12px;grid-column:1/-1}
@@ -57,7 +57,7 @@ body #app .measure-atlas-active[data-measure-atlas=distance] .measure-atlas-inpu
 body #app .measure-atlas-active[data-measure-atlas=distance] .measure-atlas-current{font-size:20px}
 @media(max-width:1000px){body #app #lab-mount.measure-atlas-active{padding:0 20px 24px}body #app .measure-atlas-observation{gap:20px}body #app .measure-atlas #measure-scene{height:360px}body #app .measure-atlas #measure-plot{height:340px}}
 @media(max-width:600px){
- body #app #lab-mount.measure-atlas-active{padding:0 12px 20px}.measure-atlas-heading{padding:16px 0}.measure-atlas-heading h1{font-size:25px}.measure-atlas-heading>[data-measure-action]{font-size:15px}
+ body #app #lab-mount.measure-atlas-active{padding:0 12px 20px}.measure-atlas-heading{padding:16px 0}.measure-atlas-heading h1{font-size:25px}
  body #app .measure-atlas-inputs{grid-template-columns:1fr;gap:12px;margin-bottom:14px}
  body #app .measure-atlas-observation{display:flex;flex-direction:column;gap:18px}body #app .measure-atlas-observation>section{width:100%}
  body #app .measure-atlas #measure-scene{height:300px}body #app .measure-atlas #measure-plot,body #app .measure-atlas-active[data-measure-atlas=distance] #measure-plot{height:340px}
@@ -67,3 +67,5 @@ body #app .measure-atlas-active[data-measure-atlas=distance] .measure-atlas-curr
  body #app .measure-atlas-tools{display:block}body #app .measure-atlas-tools details{width:100%}
 }
 @media(max-width:360px){body #app .measure-atlas #measure-shadow text{font-size:32px}body #app .measure-atlas #measure-shadow .measure-svg-note{font-size:30px}}
+
+.measure-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.measure-title-row h1{min-width:0}.measure-title-row .al-info-tip{align-self:flex-start}

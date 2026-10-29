@@ -11,7 +11,7 @@ export function mountConics(slot){
  const defaults={...state};let active=true,info,frame,last=0,lastPaint=0,result,background=[],viewport;
  slot.innerHTML=`<link rel="stylesheet" href="/modules/orbit-conics.css"><section class="conics-lab">
  <div class="conic-heading"><div><h1>轨道与速度</h1><strong data-conic-kind></strong><span data-conic-class></span></div><div class="conic-views" aria-label="轨道视角"><button data-conic-view="whole">整体轨道</button><button data-conic-view="near">近地点</button></div></div>
- <div class="conic-workbench"><div class="conic-visual"><canvas class="conic-canvas" aria-label="地球位于焦点的解析轨道；虚线为完整轨道，亮线为已走轨迹"></canvas>
+ <div class="conic-workbench"><div class="conic-visual"><canvas data-al-theme-fixed="dark" class="conic-canvas" aria-label="地球位于焦点的解析轨道；虚线为完整轨道，亮线为已走轨迹"></canvas>
  <div class="conic-transport"><button data-conic-action="play" class="conic-play">▶ 播放</button><button data-conic-action="reset">↺ 重置</button><output data-conic-time></output></div>
  <label class="conic-timeline"><span>经过时间 <output data-conic-value="progress"></output></span><input type="range" min="0" max="1" step=".0001" value="0" data-conic-key="progress" aria-label="拖动经过时间"></label>
  <p class="conic-caption" data-conic-caption></p></div>
@@ -69,7 +69,7 @@ export function mountConics(slot){
   if(!info||!active||!canvas.clientWidth)return;
   const w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(2,devicePixelRatio||1);
   if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}
-  const style=getGraphicStyle(slot);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);ctx.fillStyle=style.background;ctx.fillRect(0,0,w,h);
+  const style=getGraphicStyle(canvas);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);ctx.fillStyle=style.background;ctx.fillRect(0,0,w,h);
   const v=viewport,pad=32,scale=Math.min((w-2*pad)/Math.max(v.xmax-v.xmin,EARTH.radius*2),(h-2*pad)/(v.ymax*2));
   const cx=w/2-(v.xmin+v.xmax)/2*scale,cy=h/2;
   const screen=p=>[cx+p.x*scale,cy-p.y*scale];

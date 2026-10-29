@@ -26,7 +26,11 @@
   --al-plot-reference-width: 1.25;
   --al-plot-point-radius: 3.5;
 }
-:root, [data-al-surface="paper"] {
+:root, [data-al-surface="paper"],
+html[data-al-theme="light"][data-al-theme-scope="tools"],
+html[data-al-theme="light"][data-al-theme-scope="tools"] :where(body,[data-al-surface]),
+html[data-al-theme][data-al-theme-scope="tools"] [data-al-theme-fixed="light"],
+html[data-al-theme][data-al-theme-scope="tools"] [data-al-theme-fixed="light"] [data-al-surface] {
   color-scheme: light;
   --al-page: var(--al-paper);
   --al-surface: #ffffff;
@@ -39,11 +43,21 @@
   --al-focus: #285a80;
   --al-error: #962f2f;
   --al-reference: #246574;
+  --al-series-gold: #875d18;
+  --al-series-teal: #246574;
+  --al-series-blue: #426a92;
+  --al-series-green: #23734b;
+  --al-series-warm: #ad4a38;
+  --al-series-purple: #765792;
   --al-scroll-thumb: #697986;
   --al-scroll-track: var(--al-paper);
 }
 [data-al-surface="scene"], [data-al-surface="image"], [data-al-surface="hr"],
-html:has(> body[data-al-surface="scene"]), html:has(> body[data-al-surface="image"]), html:has(> body[data-al-surface="hr"]) {
+html:has(> body[data-al-surface="scene"]), html:has(> body[data-al-surface="image"]), html:has(> body[data-al-surface="hr"]),
+html[data-al-theme="dark"][data-al-theme-scope="tools"],
+html[data-al-theme="dark"][data-al-theme-scope="tools"] :where(body,[data-al-surface]),
+html[data-al-theme][data-al-theme-scope="tools"] [data-al-theme-fixed="dark"],
+html[data-al-theme][data-al-theme-scope="tools"] [data-al-theme-fixed="dark"] [data-al-surface] {
   color-scheme: dark;
   --al-page: var(--al-black);
   --al-surface: var(--al-slate);
@@ -56,6 +70,12 @@ html:has(> body[data-al-surface="scene"]), html:has(> body[data-al-surface="imag
   --al-focus: #b7d9ff;
   --al-error: #f1aba5;
   --al-reference: #85c8d6;
+  --al-series-gold: #ebc77e;
+  --al-series-teal: #71c8c7;
+  --al-series-blue: #8baaca;
+  --al-series-green: #82c3a0;
+  --al-series-warm: #ef9e88;
+  --al-series-purple: #a796d0;
   --al-scroll-thumb: #8b9dac;
   --al-scroll-track: var(--al-black);
 }

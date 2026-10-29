@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="440" viewBox="0 0 1100 440" role="img" aria-labelledby="title desc">
+<title id="title">本影、半影与伪本影</title>
+<desc id="desc">有限大小光源的边缘光线经过遮挡天体后围出本影、半影以及本影顶点之后的伪本影。</desc>
+<!-- Original vector source. Paraxial construction:
+     Sun (100,220), radius 70; blocker (450,220), radius 25.
+     Inner slopes +/-45/350; outer slopes +/-95/350.
+     Umbra tip x=644.444444. All dimensions schematic. -->
+<rect width="1100" height="440" fill="#fbfaf6"/>
+<polygon points="450,195 1035,36.214286 1035,403.785714 450,245" fill="#e4e1d5"/>
+<polygon points="450,195 644.444444,220 450,245" fill="#63747e"/>
+<polygon points="644.444444,220 1035,169.785714 1035,270.214286" fill="#b9a78b"/>
+<g fill="none" stroke-width="1.8">
+<path d="M100 150L1035 270.214286 M100 290L1035 169.785714" stroke="#8d733a"/>
+<path d="M100 150L1035 403.785714 M100 290L1035 36.214286" stroke="#b58b3a"/>
+</g>
+<path d="M170 220H1050" stroke="#8c969b" stroke-dasharray="5 5" stroke-width="1"/>
+<circle cx="100" cy="220" r="70" fill="#efc76f" stroke="#bf9341" stroke-width="2"/>
+<circle cx="450" cy="220" r="25" fill="#46545b" stroke="#20343e" stroke-width="2"/>
+<circle cx="644.444444" cy="220" r="3.5" fill="#20343e"/>
+<path d="M644.444444 224V318M523 211V133" stroke="#63747e" stroke-width="1.2"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#20343e" font-size="22">
+<text x="100" y="326" text-anchor="middle">太阳</text>
+<text x="450" y="291" text-anchor="middle">月球</text>
+<text x="523" y="118" text-anchor="middle">本影</text>
+<text x="644" y="349" text-anchor="middle">本影顶点</text>
+<text x="830" y="215">伪本影</text>
+<text x="886" y="330">半影</text>
+</g>
+</svg>

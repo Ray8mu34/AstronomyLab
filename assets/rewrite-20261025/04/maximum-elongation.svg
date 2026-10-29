@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="800" viewBox="0 0 880 800" role="img" aria-labelledby="title desc">
+<title id="title">内行星最大距角</title>
+<desc id="desc">太阳在同心圆轨道中心，地球位于一AU外圆，金星位于零点七二三AU内圆。地球到金星的视线与内圆相切，金星处为直角。</desc>
+<!-- Original vector source. q=.723, S=(0,0), E=(1,0).
+     Tangent point V=(q^2,q*sqrt(1-q^2)); (V-S).(V-E)=0.
+     Display x=440+320*x, y=400-320*y.
+     V=(607.27328,240.1654); epsilon=asin(.723)=46.3027deg. -->
+<rect width="880" height="800" fill="#fbfaf6"/>
+<circle cx="440" cy="400" r="320" fill="none" stroke="#aac0cd" stroke-width="2"/>
+<circle cx="440" cy="400" r="231.36" fill="none" stroke="#cbb17b" stroke-width="2"/>
+<path d="M440 400L760 400L607.27328 240.1654Z" fill="#dfeaf0" fill-opacity=".5" stroke="#386d85" stroke-width="3"/>
+<path d="M594.2593 252.6013L606.6951 265.6153L619.7091 253.1794" fill="none" stroke="#386d85" stroke-width="1.8"/>
+<path d="M705 400A55 55 0 0 1 722.00336 360.235" fill="none" stroke="#b76a36" stroke-width="2.2"/>
+<circle cx="440" cy="400" r="16" fill="#efc76f" stroke="#bf9341"/>
+<circle cx="760" cy="400" r="11" fill="#377e9a"/>
+<circle cx="607.27328" cy="240.1654" r="10" fill="#b9804a"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" fill="#20343e">
+<text x="432" y="444" text-anchor="end">太阳 S</text>
+<text x="778" y="407">地球 E</text>
+<text x="607" y="214" text-anchor="middle">金星 V</text>
+<text x="494" y="306" fill="#966026">a<tspan baseline-shift="sub" font-size="15">V</tspan></text>
+<text x="589" y="435">a<tspan baseline-shift="sub" font-size="15">⊕</tspan></text>
+<text x="693" y="370" fill="#b76a36">ε<tspan baseline-shift="sub" font-size="15">max</tspan></text>
+</g>
+</svg>

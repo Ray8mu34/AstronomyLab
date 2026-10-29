@@ -1,6 +1,6 @@
 /* Four stellar observations share typography; each keeps its scientific composition. */
-body:is(.evolution-observing,.pulsar-observing,.collapse-observing){background:var(--al-black);color:var(--al-paper)}
-body.ia-observing{background:var(--al-paper);color:var(--al-ink)}
+body:is(.evolution-observing,.pulsar-observing,.collapse-observing){background:var(--al-page);color:var(--al-text)}
+body.ia-observing{background:var(--al-page);color:var(--al-text)}
 body:is(.evolution-observing,.pulsar-observing,.collapse-observing,.ia-observing) :is(#mode-context,.site-footer){display:none}
 body.tool-site #app[data-page=lab]:has(#lab-mount:is(.evolution-active,.pulsar-active,.collapse-active,.ia-active)){max-width:none;margin:0;padding:0}
 body #app #lab-mount.stars-pilot:is(.evolution-active,.pulsar-active,.collapse-active,.ia-active){--text:var(--al-text);--muted:var(--al-muted);--line:var(--al-line);max-width:1600px;margin:auto;padding:0 32px 28px;color:var(--al-text);font:400 var(--al-body)/1.7 var(--al-font)}

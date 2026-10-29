@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>天文学实验室 · 从一个问题开始</title>
   <link rel="icon" href="data:,">
+  <script src="/shared/theme.js"></script>
   <script src="/shared/route-presentation.js"></script>
   <link rel="preload" href="/shared/fonts/ALabSans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/site.css">
@@ -23,7 +24,7 @@
     import('/app.js').catch(()=>{
       document.documentElement.dataset.alRouteLayout='standard';document.documentElement.dataset.alSurface='paper';document.body.dataset.alSurface='paper';
       const host=document.getElementById('app');host.dataset.page='error';host.removeAttribute('aria-busy');
-      host.innerHTML='<section role="alert"><h1>工具界面未能载入</h1><p>请重新加载页面，或返回工具目录。</p><button id="startup-retry">重新加载</button><a href="/">返回工具目录 →</a><a href="/labs/solar-system/">太阳系入口 →</a></section>';
+      host.innerHTML='<section role="alert"><h1>工具界面未能载入</h1><p>请重新加载页面，或返回工具目录。</p><button class="al-button" id="startup-retry">重新加载</button><a href="/">返回工具目录 →</a><a href="/labs/solar-system/">太阳系入口 →</a></section>';
       document.getElementById('startup-retry').onclick=()=>location.reload();
     });
   </script>

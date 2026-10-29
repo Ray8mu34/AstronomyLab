@@ -2,6 +2,14 @@ import {confirmedModes} from './tool-registry.js';
 // Frozen modules retain their own controls and model state. Route entry uses
 // the same public buttons as a learner; it never assigns scientific state.
 const recipes={
+ lunisolar:Object.fromEntries(['calendar','intercalation'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),
+ 'image-calibration':Object.fromEntries(['calibration','photometry'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),
+ 'stellar-interior':Object.fromEntries(['equilibrium','thermostat','transport'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),
+ 'supernova-light':Object.fromEntries(['diffusion','radioactivity'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),
+ 'galaxy-measurements':Object.fromEntries(['distance','rotation','mass'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),
+ cosmology:Object.fromEntries(['expansion','distance'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),
+ tides:Object.fromEntries(['locking','earth-moon'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),
+ 'planet-environments':Object.fromEntries(['balance','atmosphere','escape'].map(mode=>[mode,[`[data-mode="${mode}"]`]])),
  sky:{sky:['[data-tab="sky"]'],stars:['[data-tab="stars"]'],measure:['[data-tab="measure"]','[data-measure-task="shadow"]'],calendar:['[data-navigation-mode="calendar"]'],day:['[data-tab="day"]'],precession:['[data-tab="precession"]']},
  imaging:{real:['[data-dataset="real"]'],teaching:['[data-dataset="teaching"]']},
  optics:Object.fromEntries(['imaging','resolution','sampling'].map(mode=>[mode,[`[data-task="${mode}"]`]])),

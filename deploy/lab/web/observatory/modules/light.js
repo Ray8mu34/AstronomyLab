@@ -128,7 +128,7 @@ export function mount(el){
  function input(e){const k=e.target.dataset.key;if(!k)return;state[k]=e.target.type==='checkbox'?e.target.checked:Number(e.target.value);update();}
  function apply(snapshot){for(const k of keys[state.mode])state[k]=snapshot[k];controls();update();}
  function click(e){const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.mode){state.mode=b.dataset.mode;q('.light-auxiliary').open=false;controls();update();say('已切换模式；比较基线按模式保留。');}
+  if(b.dataset.mode){state.mode=b.dataset.mode;q('.light-auxiliary').open=false;controls();update();say('');}
   else if(b.dataset.preset){Object.assign(state,presets[state.mode][b.dataset.preset]);controls();update();say(`已载入“${presetLabels[b.dataset.preset]}”；保留比较基线。`);}
   else if(b.hasAttribute('data-noise')){state.seed++;update();say(`已更换噪声样本，种子 ${state.seed}。`);}
   else if(b.hasAttribute('data-save')){baselines[state.mode]={...state};update();say('已把当前参数保存为本模式基线；后续操作与此比较。');}
