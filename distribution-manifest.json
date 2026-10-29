@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T17:31:58.397Z",
+  "generated_at": "2026-10-29T17:46:49.884Z",
   "scope": "Git-visible maintainable source and generated deploy/lab; private inputs, credentials and internal QA excluded",
   "baselineHead": "1e8a77642b489c990e917a4791c0eb83851fadd1",
   "publicDistribution": "blocked_pending_licenses",
@@ -2741,8 +2741,8 @@
     },
     {
       "path": "docs/DEPLOYMENT.md",
-      "bytes": 9248,
-      "sha256": "8ddd599d1f71069f6b2a19afa59460d7ae981e5d78b2f2b90e1779a063a91eb6"
+      "bytes": 12221,
+      "sha256": "6a527ff5736fb3f375b43eb2db7c74d43939da8d12f72fcad64660aa6289b414"
     },
     {
       "path": "docs/IMPROVEMENT-2026-10-04.md",
@@ -2751,8 +2751,8 @@
     },
     {
       "path": "docs/LAB-REFACTOR-2026-10-05.md",
-      "bytes": 185979,
-      "sha256": "2a2b95d6cc0aff52390b92764c5643734e11864c4ce4effacc7c5e0d9fd29fbd"
+      "bytes": 189620,
+      "sha256": "a8cdef24ad67cea1cba5d0dea80dca7d1891e86ba8b1e247cef3b523c1fb2910"
     },
     {
       "path": "docs/TECHNICAL-REPORT.md",
@@ -3336,8 +3336,8 @@
     },
     {
       "path": "tests/theme-browser.mjs",
-      "bytes": 17950,
-      "sha256": "8c165644bdc8d6a5901121a3ae1a79c305628661dfdf50eb5e152d7507239a83"
+      "bytes": 18164,
+      "sha256": "db3ae7abe72e827136093dd9f0401b2de3a33cea2db7e61b864d0daf4ac3b542"
     },
     {
       "path": "tests/theme-state.test.mjs",

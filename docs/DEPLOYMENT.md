@@ -1,4 +1,18 @@
-## 2026-10-19 第二轮前端发布结果（当前）
+## 2026-10-30 讲义、实验扩展与明暗主题发布结果（当前）
+
+用户明确授权“推送，再部署”。[lab.zjuaaa.cn](https://lab.zjuaaa.cn/) 已发布运行源码提交 [7a0a1b648f680d87f52f154c3768219a8cb5e8c8](https://github.com/Ray8mu34/AstronomyLab/commit/7a0a1b648f680d87f52f154c3768219a8cb5e8c8)：19工具62模式、全站白天/黑夜选择记忆、保留主页对比配色与科学原色。18篇讲义及实验对应一起进入源码仓库，生产运行仍不依赖或挂载外置讲义包。随后回执提交仅维护文档、源码分发清单和浏览器检查等待器，不改变运行资源。
+
+运行包 `r1-20261005-efa81e0cb927`，273个HTTP资源、261个包文件；manifest SHA256为`4237326230bf326434ef9f5ffba9ba7491bfa7fa4aac6d2192deb0df0b2df5c4`。许可待核状态及署名保留。1034个暂存公开文件扫描无私有路径/凭据命中，教师、raw、QA和连接资料留本机。
+
+部署前服务器HEAD为`da31707300cea5f85bd2a19c68ae82316c0a5b7d`、工作区clean。归档、Git bundle与SHA保存在`/srv/data/astronomy-lab/release-20261030/`；PM2完整快照仅在服务器私有目录。本地备份为`AstronomyLab-backups/release-20261030-013021/`。使用已推送并核实的4.07MB增量bundle传送同一Git对象，未改origin配置。独立候选4181通过Node22.22.1的165项测试、256公开保护（238未变＋18精确授权修订）、261包SHA、273HTTP SHA、62入口、5个404与POST405；经SSH转发的浏览器主题检查14/14通过。
+
+正式服务只重启`astronomy-lab`，最终PID967183，监听127.0.0.1:4180。全部273资源和62入口分别通过直连HTTP与本机TLS反向代理校验；后者仅将域名连接地址指向127.0.0.1，正常验证`lab.zjuaaa.cn`证书和SNI。来自本机的真实公网检查：主题/记忆/错误恢复/原色14/14、太阳系和日地月双主题4/4、首页及12个关键文件SHA均通过，页面异常0。主站PID23405和三份Nginx配置SHA保持，未改代理/证书或全局重启，PM2已保存。
+
+首次激活因服务器绕公网下载全部素材时30秒超时，自动回滚旧版并重新核对健康。诊断显示原有大图单次下载约9—20秒；完整资源校验随后改用本机TLS路径，公网浏览器采用显式120秒等待预算。公网仍有独立实际交互与版本SHA核对，不将本机TLS称为公网传输全量验收。初次候选浏览器在reload瞬间body为null触发等待器错误，改为可选链后14/14；这两项仅检查流程修正，没有为过检查修改科学资源。原失败记录保留在本机`build/qa/release-20261030/`。
+
+回滚时先核对本项目工作区clean，再仅执行`git -C /srv/apps/astronomy-lab switch --detach da31707300cea5f85bd2a19c68ae82316c0a5b7d`、`pm2 restart astronomy-lab`，检查4180和HTTPS。不要恢复整套PM2/Nginx。候选服务4181和本地转发4496已关闭；后续维护回执只快进服务器、不重启运行进程。
+
+## 2026-10-19 第二轮前端发布结果（历史）
 
 用户明确授权推送后部署。生产 [lab.zjuaaa.cn](https://lab.zjuaaa.cn/) 已发布源码提交 [df03eff5faa4bfe30d4bf0251d3bf19d4a60a7a9](https://github.com/Ray8mu34/AstronomyLab/commit/df03eff5faa4bfe30d4bf0251d3bf19d4a60a7a9)，后续回执仅改维护文档。运行包 r1-20261005-ad7992e8d7e2，238资源/226文件，manifest SHA256 b5866a98b611f8c616f1e54e1b4898112bf4f08c2770d31a1dbf9ac4ba4086a6；blocked_pending_licenses及完整署名保持。
 
